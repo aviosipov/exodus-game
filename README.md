@@ -18,7 +18,15 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Font Configuration
+
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load Google Fonts. The following fonts are configured in `src/app/layout.tsx`:
+
+-   **Rubik**: Set as the default sans-serif font for the application via `tailwind.config.ts`. It's available through the CSS variable `--font-rubik`.
+-   **Amatic SC**: Available via the CSS variable `--font-amatic` and the Tailwind utility class `font-amatic`.
+-   **Noto Serif Hebrew**: Available via the CSS variable `--font-noto-serif` and the Tailwind utility class `font-noto-serif`.
+
+The default font is applied globally in `src/app/globals.css` and integrated with Tailwind's base styles in `tailwind.config.ts`.
 
 ## Learn More
 

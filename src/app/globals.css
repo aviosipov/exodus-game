@@ -118,5 +118,15 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-rubik); /* Set Rubik as default */
   }
+}
+
+/* Font utility classes */
+.font-amatic {
+  font-family: var(--font-amatic);
+}
+
+.font-noto-serif {
+  font-family: var(--font-noto-serif);
 }

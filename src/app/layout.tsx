@@ -1,15 +1,27 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Rubik, Amatic_SC, Noto_Serif_Hebrew } from 'next/font/google';
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+// Rubik (variable font)
+const rubik = Rubik({
+  subsets: ['latin', 'hebrew'],
+  variable: '--font-rubik',
+  display: 'swap',
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+// Amatic SC (non-variable font)
+const amaticSC = Amatic_SC({
+  weight: ['400', '700'], // Weights from user request
+  subsets: ['latin', 'hebrew'],
+  variable: '--font-amatic',
+  display: 'swap',
+});
+
+// Noto Serif Hebrew (variable font)
+const notoSerif = Noto_Serif_Hebrew({
+  subsets: ['hebrew', 'latin'],
+  variable: '--font-noto-serif',
+  display: 'swap',
 });
 
 export const metadata: Metadata = {
@@ -23,10 +35,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="en" className={`${rubik.variable} ${amaticSC.variable} ${notoSerif.variable}`}>
+      <body className="antialiased">
         {children}
       </body>
     </html>
