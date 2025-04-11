@@ -1,92 +1,169 @@
-import { DailyTaskManagerProps } from './types';
+import { WorkerTaskManagerProps, Worker, ResourceLabels } from './types';
+import { v4 as uuidv4 } from 'uuid'; // For generating unique worker IDs
 
 // Define a type for the scenario structure, excluding the onComplete function
-type ScenarioData = Omit<DailyTaskManagerProps, 'onComplete'>;
+type ScenarioData = Omit<WorkerTaskManagerProps, 'onComplete'>;
 
-// --- Scenario: Honored Status (Early Stage) ---
-export const honoredStatusScenario: ScenarioData = {
-  title_he: "ניהול צוות: בניית אסמים",
-  initialResources: { energy: 12, time: 10, food: 5, morale: 100, clay: 10 },
-  resourceLabels: { energy: "אנרגיה", time: "זמן", food: "מזון", morale: "מורל צוותי", clay: "חימר" },
-  dailyGoal: { storage_built: 20 },
-  goalLabels: { storage_built: "יחידות אחסון" },
+// --- Helper Function to Create Workers ---
+const createWorker = (name_he: string, energy = 80, hunger = 20, morale = 70): Worker => ({
+  id: uuidv4(),
+  name_he,
+  energy,
+  maxEnergy: 100,
+  hunger, // Lower is better
+  maxHunger: 100,
+  morale, // Higher is better
+  maxMorale: 100,
+  status: 'idle',
+  currentTaskId: null,
+  taskProgress: 0,
+  taskTimeoutId: null,
+});
+
+// --- Shared Resource Labels ---
+const standardResourceLabels: ResourceLabels = {
+  straw: "תבן",
+  food: "אוכל",
+  bricks: "לבנים",
+  clay: "חימר", // Added from old scenario
+  energy: "אנרגיה",
+  hunger: "רעב",
+  morale: "מורל",
+};
+
+// --- Scenario: Brick Making Duty ---
+export const brickMakingScenario: ScenarioData = {
+  title_he: "מנהל עבודה: ייצור לבנים",
+  initialWorkers: [
+    createWorker("ראובן", 75, 30, 65),
+    createWorker("שמעון", 85, 15, 75),
+    createWorker("לוי", 80, 25, 70),
+  ],
+  initialSharedResources: { straw: 15, food: 10, bricks: 0, clay: 20 }, // Added clay based on old task
+  sharedResourceLabels: standardResourceLabels,
+  globalTimeLimit_seconds: 180, // 3 minutes
+  dailyGoal: { bricks: 25 },
+  goalLabels: { bricks: "מכסת לבנים" },
   availableTasks: [
     {
-      id: 'gather_clay',
-      name_he: 'איסוף חימר איכותי',
-      cost: { energy: -2, time: -2 },
+      id: 'gather_straw',
+      name_he: 'איסוף תבן',
+      description_he: "אסוף תבן מהשדות הסמוכים.",
+      duration_seconds: 10,
+      cost: { energy: -15, hunger: +5 }, // Worker cost
+      outcome: { straw: +5 }, // Shared resource outcome
+    },
+     {
+      id: 'gather_clay', // Kept from old scenario
+      name_he: 'איסוף חימר',
+      description_he: "אסוף חימר מהנילוס.",
+      duration_seconds: 12,
+      cost: { energy: -18, hunger: +6 },
       outcome: { clay: +4 },
-      description_he: "אסוף חימר מהנילוס לבניית האסמים."
     },
     {
-      id: 'build_storage_unit',
-      name_he: 'בניית יחידת אחסון',
-      cost: { energy: -4, time: -3, clay: -3 },
-      outcome: { storage_built: +5, morale: +2 },
-      description_he: "בנה יחידת אחסון לאסמי המלך."
+      id: 'make_bricks',
+      name_he: 'ייצור לבנים',
+      description_he: "ערבב חימר ותבן ליצירת לבנים.",
+      duration_seconds: 15,
+      cost: { energy: -25, hunger: +8, morale: -2, straw: -3, clay: -2 }, // Worker & Shared cost
+      outcome: { bricks: +5 }, // Shared resource outcome & Goal progress
+      requirements: { straw: 3, clay: 2 } // Require materials
     },
     {
-      id: 'team_meal',
-      name_he: 'ארוחה משותפת לצוות',
-      cost: { time: -1, food: -3 },
-      outcome: { energy: +2, morale: +5 },
-      description_he: "שפר את מורל הצוות עם ארוחה טובה."
+      id: 'eat_meal',
+      name_he: 'אכול ארוחה',
+      description_he: "תן לעובד לאכול להשבת כוחות.",
+      duration_seconds: 5,
+      cost: { food: -1 }, // Shared resource cost
+      outcome: { hunger: -30, morale: +5 }, // Worker outcome
+      requirements: { food: 1 }
     },
     {
-      id: 'plan_work',
-      name_he: 'תכנון עבודה יעיל',
-      cost: { time: -1 },
-      outcome: { morale: +1 }, // Small morale boost for good planning
-      description_he: "תכנן את המשימות הבאות לשיפור היעילות."
-    }
+      id: 'rest_short',
+      name_he: 'נוח מעט',
+      description_he: "מנוחה קצרה להשבת אנרגיה.",
+      duration_seconds: 8,
+      cost: {}, // No resource cost, just time
+      outcome: { energy: +20, morale: +2 }, // Worker outcome
+    },
   ]
 };
 
 
-// --- Scenario: Hard Slavery (Later Stage) ---
-export const hardSlaveryScenario: ScenarioData = {
-  title_he: "ניהול צוות: מכסת לבנים ללא תבן",
-  initialResources: { energy: 8, time: 8, food: 1, morale: 60, straw: 0 }, // Start with no straw
-  resourceLabels: { energy: "אנרגיה", time: "זמן", food: "מזון", morale: "מורל צוותי", straw: "תבן" },
-  dailyGoal: { bricks: 12 }, // Slightly lower goal due to difficulty
+// --- Scenario: Hardship - No Straw ---
+export const hardshipNoStrawScenario: ScenarioData = {
+  title_he: "מנהל עבודה: אין תבן!",
+  initialWorkers: [
+    createWorker("יהודה", 60, 40, 50),
+    createWorker("יששכר", 70, 35, 55),
+    createWorker("זבולון", 65, 45, 45),
+  ],
+  initialSharedResources: { straw: 0, food: 5, bricks: 0, clay: 10 }, // Start with no straw
+  sharedResourceLabels: standardResourceLabels,
+  globalTimeLimit_seconds: 150, // Shorter time, more pressure
+  dailyGoal: { bricks: 15 }, // Lower goal due to difficulty
   goalLabels: { bricks: "מכסת לבנים" },
   availableTasks: [
     {
       id: 'gather_straw_difficult',
-      name_he: 'איסוף תבן (קשה)',
-      cost: { energy: -3, time: -2 },
-      outcome: { straw: +3, morale: -5 }, // Gathering is hard and demoralizing now
-      description_he: "חפש נואשות אחר תבן בשדות."
+      name_he: 'חפש תבן (קשה)',
+      description_he: "חפש נואשות אחר קש בשדות.",
+      duration_seconds: 12,
+      cost: { energy: -20, hunger: +8, morale: -5 },
+      outcome: { straw: +2 }, // Low yield
+    },
+     {
+      id: 'gather_clay_difficult', // Harder clay gathering
+      name_he: 'איסוף חימר (קשה)',
+      description_he: "אסוף חימר בתנאים קשים.",
+      duration_seconds: 15,
+      cost: { energy: -22, hunger: +10, morale: -3 },
+      outcome: { clay: +3 }, // Low yield
     },
     {
       id: 'make_bricks_with_straw',
       name_he: 'ייצור לבנים (עם תבן)',
-      cost: { energy: -4, time: -3, straw: -2 }, // Consumes gathered straw
-      outcome: { bricks: +4 }, // Slightly less efficient than before maybe
-      description_he: "השתמש בתבן שאספת לייצור לבנים."
+      description_he: "השתמש במעט התבן שאספת.",
+      duration_seconds: 18,
+      cost: { energy: -30, hunger: +10, morale: -3, straw: -1, clay: -2 }, // High cost, low straw use
+      outcome: { bricks: +4 },
+      requirements: { straw: 1, clay: 2 }
     },
-    {
+     {
       id: 'make_bricks_no_straw',
       name_he: 'ייצור לבנים ללא תבן!',
-      cost: { energy: -6, time: -4 }, // Very costly
-      outcome: { bricks: +2, morale: -10 }, // Low output, high morale cost
-      description_he: "עבודה מפרכת לייצר לבנים ללא תבן."
+      description_he: "עבודה מפרכת לייצר לבנים רק מחימר.",
+      duration_seconds: 25, // Very long
+      cost: { energy: -40, hunger: +15, morale: -10, clay: -3 }, // Extremely costly
+      outcome: { bricks: +2 }, // Very low output
+      requirements: { clay: 3 }
     },
     {
-      id: 'rest_team_minimal',
-      name_he: 'מנוחה קצרה לצוות',
-      cost: { time: -1 },
-      outcome: { energy: +1, morale: +2 }, // Minimal rest, small morale boost
-      description_he: "תן לצוות לנוח לרגע קט, תוך סיכון."
+      id: 'eat_scraps',
+      name_he: 'אכול שאריות',
+      description_he: "חפש מעט מזון כדי לשרוד.",
+      duration_seconds: 6,
+      cost: { food: -1 },
+      outcome: { hunger: -15, morale: +1 }, // Less effective than a meal
+      requirements: { food: 1 }
     },
     {
-      id: 'find_scraps',
+      id: 'rest_minimal',
+      name_he: 'נוח לרגע',
+      description_he: "מנוחה חטופה ומסוכנת.",
+      duration_seconds: 10,
+      cost: {},
+      outcome: { energy: +15, morale: -1 }, // Resting might even lower morale slightly if conditions are bad
+    },
+     {
+      id: 'find_scraps_food', // From old scenario
       name_he: 'חיפוש שאריות מזון',
-      cost: { energy: -2, time: -1 },
+      description_he: "חפש מעט מזון כדי לשרוד.",
+      duration_seconds: 8,
+      cost: { energy: -10, hunger: +3 },
       outcome: { food: +1 },
-      description_he: "חפש מעט מזון כדי לשרוד."
     }
-    // Removed haul_stones as focus is on bricks without straw
   ]
 };
 

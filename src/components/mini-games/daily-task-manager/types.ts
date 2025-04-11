@@ -1,51 +1,81 @@
-// Resources structure (energy, time, etc.)
-export interface Resources {
-  [key: string]: number;
-  // Example: energy: 10, time: 8, straw: 5, morale: 100
+// Individual worker structure
+export interface Worker {
+  id: string;
+  name_he: string;
+  energy: number;
+  maxEnergy: number;
+  hunger: number; // Lower is better, increases over time/work
+  maxHunger: number;
+  morale: number; // Higher is better
+  maxMorale: number;
+  status: 'idle' | 'working' | 'resting' | 'eating';
+  currentTaskId: string | null; // ID of the task being performed
+  taskProgress?: number; // Optional: 0-100 for visual progress
+  taskTimeoutId?: NodeJS.Timeout | null; // Optional: Store task timer
 }
 
-// Display names for resources in Hebrew
+// Shared resources structure (materials like straw, food, bricks)
+export interface SharedResources {
+  [key: string]: number;
+  // Example: straw: 10, food: 5, bricks: 0
+}
+
+// Display names for resources and worker stats in Hebrew
 export interface ResourceLabels {
   [key: string]: string;
-  // Example: energy: "אנרגיה", time: "זמן", straw: "תבן", morale: "מורל צוותי"
+  // Example: straw: "תבן", food: "אוכל", bricks: "לבנים", energy: "אנרגיה", hunger: "רעב", morale: "מורל"
 }
 
-// Goal structure
+// Goal structure (remains similar, focuses on production)
 export interface DailyGoal {
   [key: string]: number | string;
-  // Example: bricks: 15, taskmasterSatisfaction: 'neutral'
+  // Example: bricks: 30
 }
 
-// Goal display names in Hebrew
+// Goal display names in Hebrew (remains similar)
 export interface GoalLabels {
   [key: string]: string;
-  // Example: bricks: "מכסת לבנים", taskmasterSatisfaction: "יחס הנוגש"
+  // Example: bricks: "מכסת לבנים"
 }
 
-// Task structure
+// Updated Task structure
 export interface Task {
   id: string;
   name_he: string;
-  cost: Partial<Resources>;
-  outcome: Partial<Resources & DailyGoal>;
   description_he?: string;
-  requirements?: Partial<Resources & DailyGoal>;
+  duration_seconds: number; // Time it takes a worker to complete
+  cost: { // Costs can include worker stats and shared resources
+    energy?: number; // Worker energy cost (negative value)
+    hunger?: number; // Hunger increase (positive value)
+    morale?: number; // Morale change (negative or positive)
+    [sharedResourceKey: string]: number | undefined; // e.g., straw: -2 (material cost)
+  };
+  outcome: { // Outcomes can affect worker stats, shared resources, and goals
+    energy?: number; // Worker energy gain (positive value, e.g., from rest)
+    hunger?: number; // Hunger decrease (negative value, e.g., from eating)
+    morale?: number; // Morale change (positive or negative)
+    [sharedResourceOrGoalKey: string]: number | string | undefined; // e.g., bricks: +5 (material gain), goal_progress_key: +5
+  };
+  requirements?: Partial<SharedResources & DailyGoal>; // Optional requirements (e.g., need certain amount of straw)
 }
 
-// Props for the DailyTaskManager component
-export interface DailyTaskManagerProps {
-  initialResources: Resources;
-  resourceLabels: ResourceLabels;
+// Renamed and updated Props for the WorkerTaskManager component
+export interface WorkerTaskManagerProps {
+  initialWorkers: Worker[];
+  initialSharedResources: SharedResources;
+  sharedResourceLabels: ResourceLabels; // Labels for Straw, Food etc. AND worker stats if needed
   dailyGoal: DailyGoal;
   goalLabels: GoalLabels;
   availableTasks: Task[];
+  globalTimeLimit_seconds: number;
   onComplete: (result: GameResult) => void;
   title_he?: string;
 }
 
-// Game result passed to callback
+// Updated Game result passed to callback
 export interface GameResult {
   success: boolean;
-  finalResources: Resources;
-  goalAchievement: {[key: string]: number | string | boolean};
+  finalSharedResources: SharedResources;
+  finalWorkers?: Worker[]; // Optional: include final worker states
+  goalAchievement: { [key: string]: number | string | boolean }; // Status per goal key
 }
