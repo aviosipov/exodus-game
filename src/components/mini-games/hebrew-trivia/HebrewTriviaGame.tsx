@@ -90,10 +90,10 @@ const HebrewTriviaGame: React.FC<HebrewTriviaGameProps> = ({ questionSet, onGame
         {topic_he && (
           <h2 className="text-5xl font-bold mb-6 font-amatic">{topic_he}</h2>
         )}
-        <p className="text-xl mb-8 font-noto-serif">מוכן להתחיל את משחק הטריוויה?</p>
+        <p className="text-xl mb-8 font-sans">מוכן להתחיל את משחק הטריוויה?</p> {/* Use default font */}
         <button
           onClick={startGame}
-          className="px-10 py-4 bg-yellow-500 text-indigo-900 font-bold rounded-full hover:bg-yellow-400 transition duration-300 text-xl shadow-lg hover:shadow-xl transform hover:scale-105 font-noto-serif"
+          className="px-10 py-4 bg-yellow-500 text-indigo-900 font-bold rounded-full hover:bg-yellow-400 transition duration-300 text-xl shadow-lg hover:shadow-xl transform hover:scale-105 font-sans" // Use default font
         >
           התחל משחק
         </button>
@@ -112,9 +112,9 @@ const HebrewTriviaGame: React.FC<HebrewTriviaGameProps> = ({ questionSet, onGame
     return (
       <div dir="rtl" className="flex flex-col items-center justify-center text-white p-8 rounded-lg shadow-lg text-center max-w-2xl mx-auto bg-black/50 backdrop-blur-sm">
         <h2 className="text-5xl font-bold mb-6 font-amatic">המשחק הסתיים!</h2>
-        <p className="text-2xl mb-8 font-noto-serif">הניקוד הסופי שלך: <span className="font-bold text-yellow-400">{score}</span> מתוך <span className="font-bold">{questionSet.length}</span></p>
+        <p className="text-2xl mb-8 font-sans">הניקוד הסופי שלך: <span className="font-bold text-yellow-400">{score}</span> מתוך <span className="font-bold">{questionSet.length}</span></p> {/* Use default font */}
         {/* Optional: Add a button to restart or close */}
-        {/* <button onClick={() => window.location.reload()} className="px-8 py-3 bg-yellow-500 text-indigo-900 font-bold rounded-lg hover:bg-yellow-400 transition duration-300 text-lg font-noto-serif">
+        {/* <button onClick={() => window.location.reload()} className="px-8 py-3 bg-yellow-500 text-indigo-900 font-bold rounded-lg hover:bg-yellow-400 transition duration-300 text-lg font-sans">
           שחק שוב
         </button> */}
       </div>
@@ -124,7 +124,7 @@ const HebrewTriviaGame: React.FC<HebrewTriviaGameProps> = ({ questionSet, onGame
   // Determine button style based on selection and feedback - Millionaire Style
   const getButtonClass = (answer: string) => {
     // Base style for the answer buttons - lozenge shape, dark background (Single line definition)
-    const baseClass = "relative w-full text-center p-4 my-2 rounded-full border-2 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-900 bg-gradient-to-b from-indigo-700 to-indigo-800 border-indigo-500 hover:border-yellow-400 text-white font-semibold text-lg font-noto-serif shadow-md hover:shadow-lg disabled:opacity-70 disabled:cursor-not-allowed";
+    const baseClass = "relative w-full text-center p-4 my-2 rounded-full border-2 transition duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-900 bg-gradient-to-b from-indigo-700 to-indigo-800 border-indigo-500 hover:border-yellow-400 text-white font-semibold text-lg font-sans shadow-md hover:shadow-lg disabled:opacity-70 disabled:cursor-not-allowed"; // Use default font
     // Add pseudo-elements for the angled ends if possible with Tailwind/CSS, otherwise keep rounded-full
 
     if (!showFeedback) {
@@ -150,20 +150,20 @@ const HebrewTriviaGame: React.FC<HebrewTriviaGameProps> = ({ questionSet, onGame
   };
 
   return (
-    // Main container - Apply noto-serif as base
-    <div dir="rtl" className="p-6 max-w-3xl w-full mx-auto text-white font-noto-serif">
+    // Main container - Apply default font (font-sans/Rubik) as base
+    <div dir="rtl" className="p-6 max-w-3xl w-full mx-auto text-white font-sans">
       {/* Progress/Score Display - Use default Rubik (sans-serif) */}
       <div className="flex justify-between items-center mb-6 text-sm text-indigo-300 px-4 font-sans">
         <span>שאלה {currentQuestionIndex + 1} / {questionSet.length}</span>
         <span>ניקוד: {score}</span>
       </div>
 
-      {/* Question Display Area - Use noto-serif */}
+      {/* Question Display Area - Use default font (font-sans/Rubik) */}
       <div className="mb-8 p-5 bg-gradient-to-b from-indigo-800 to-indigo-900 rounded-xl border-2 border-indigo-600 shadow-lg min-h-[100px] flex items-center justify-center">
-        <p className="text-xl md:text-2xl font-semibold text-center font-noto-serif">{currentQuestion?.question_he}</p>
+        <p className="text-xl md:text-2xl font-semibold text-center font-sans">{currentQuestion?.question_he}</p>
       </div>
 
-      {/* Answer Options Area - Buttons already use noto-serif */}
+      {/* Answer Options Area - Buttons now use default font (font-sans/Rubik) via baseClass */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
         {shuffledAnswers.map((answer, index) => (
           <button
