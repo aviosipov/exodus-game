@@ -2,9 +2,17 @@
 
 import React, { useState } from "react";
 
+// Define character data
+const characters = [
+  { name: "אוהד", imagePath: "/images/ohad_avatar_nobg.png" }, // Ohad
+  { name: "עוזיריס", imagePath: "/images/oziris_avatar_nobg.png" }, // Oziris (using a plausible Hebrew spelling)
+  { name: "יששכר", imagePath: "/images/yishachar_avatar_nobg.png" }, // Yishachar
+  { name: "אחמוס", imagePath: "/images/ahmos_avatar_nobg.png" }, // Ahmos (using a plausible Hebrew spelling)
+];
+
 export default function Home() {
   // State for game elements
-  const [characterName, setCharacterName] = useState("אוהד"); // Ohed in Hebrew
+  const [selectedCharacter, setSelectedCharacter] = useState(characters[0]); // Start with Ohad
   const [dialogue, setDialogue] = useState(
     "ברוכים הבאים לאחוזתי. זו תקופה שלווה במצרים, הלא כן?" // "Welcome to my estate. It is a peaceful time in Egypt, is it not?" in Hebrew
   );
@@ -30,7 +38,7 @@ export default function Home() {
         body: JSON.stringify({
           selectedOption: optionText,
           currentDialogue: dialogue, // Send current context
-          characterName: characterName, // Send current context
+          characterName: selectedCharacter.name, // Send selected character's name
         }),
       });
 
@@ -43,7 +51,11 @@ export default function Home() {
       // Update state with response from API
       setDialogue(data.dialogue);
       setOptions(data.options);
-      setCharacterName(data.characterName); // Update character name if changed by AI
+      // Assuming API might still return characterName if it can change dynamically
+      // If API *only* returns dialogue/options based on input character, this line might need adjustment/removal
+      // For now, find the character object matching the returned name, or default to current if not found/changed
+      const returnedCharacter = characters.find(c => c.name === data.characterName) || selectedCharacter;
+      setSelectedCharacter(returnedCharacter);
     } catch (err) {
       console.error("Interaction failed:", err);
       setError(
@@ -65,6 +77,26 @@ export default function Home() {
         backgroundImage: "url('/images/ancient_egypt_prosperity_bg.webp')",
       }}
     >
+      {/* Character Selection UI (Top Left) */}
+      <div className="absolute top-4 left-4 z-30 bg-black/50 p-2 rounded">
+        <h4 className="text-white text-sm mb-1 text-center">בחר דמות</h4> {/* Select Character */}
+        <div className="flex flex-col space-y-1">
+          {characters.map((char) => (
+            <button
+              key={char.name}
+              onClick={() => setSelectedCharacter(char)}
+              className={`px-2 py-1 text-xs rounded ${
+                selectedCharacter.name === char.name
+                  ? "bg-blue-700 text-white"
+                  : "bg-gray-600 text-gray-200 hover:bg-gray-500"
+              }`}
+            >
+              {char.name}
+            </button>
+          ))}
+        </div>
+      </div>
+
       {/* Character Layer */}
       <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
         {" "}
@@ -74,9 +106,10 @@ export default function Home() {
           {" "}
           {/* Container for image */}
           <img
-            src="/images/ohed_avatar_nobg.png"
-            alt="Character Avatar"
+            src={selectedCharacter.imagePath}
+            alt={`${selectedCharacter.name} Avatar`}
             className="object-contain h-full" // Use object-contain to fit image within height, maintaining aspect ratio
+            key={selectedCharacter.name} // Add key to force re-render on character change
           />
         </div>
       </div>
@@ -87,7 +120,7 @@ export default function Home() {
           <div className="text-right">
             {" "}
             {/* Align text to the right */}
-            <h3 className="font-bold text-lg mb-2">{characterName}</h3>
+            <h3 className="font-bold text-lg mb-2">{selectedCharacter.name}</h3>
             <p className="text-base">{isLoading ? "Thinking..." : dialogue}</p>
             {error && (
               <p className="text-red-500 text-sm mt-2">Error: {error}</p>

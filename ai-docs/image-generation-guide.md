@@ -117,6 +117,12 @@ curl -o public/images/your_image_name.png "IMAGE_URL_HERE"
 
 *   **Background:** `public/images/ancient_egypt_prosperity_bg.webp`
     *   Generated using `black-forest-labs/flux-1.1-pro` with a 16:9 aspect ratio.
-*   **Character Avatar (Ohed):** `public/images/ohed_avatar_nobg.png`
+*   **Character Avatar (Ohed):** `public/images/ohad_avatar_nobg.png`
+    *   Generated using `black-forest-labs/flux-1.1-pro` with a 9:16 aspect ratio.
+    *   Background removed using `lucataco/remove-bg`.
+*   **Character Avatar (Oziris):** `public/images/oziris_avatar_nobg.png`
+    *   Generated using `black-forest-labs/flux-1.1-pro` with a 9:16 aspect ratio.
+    *   Background removed using `lucataco/remove-bg`.
+*   **Character Avatar (Yishachar):** `public/images/yishachar_avatar_nobg.png`
     *   Generated using `black-forest-labs/flux-1.1-pro` with a 9:16 aspect ratio.
     *   Background removed using `lucataco/remove-bg`.
