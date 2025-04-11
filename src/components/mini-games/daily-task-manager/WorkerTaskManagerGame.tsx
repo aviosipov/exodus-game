@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { WorkerTaskManagerProps, Worker, Task, ResourceLabels, GoalLabels } from './types';
+import { WorkerTaskManagerProps } from './types'; // Removed unused Worker, Task, ResourceLabels, GoalLabels
 import { useGameLogic } from './hooks/useGameLogic';
 import { WorkerList } from './components/WorkerList';
 import { SelectedWorkerPanel } from './components/SelectedWorkerPanel';
@@ -10,74 +10,19 @@ import { GoalDisplay } from './components/GoalDisplay';
 import { TimerDisplay } from './components/TimerDisplay';
 import { StartScreen } from './components/StartScreen';
 import { EndScreen } from './components/EndScreen';
-import { Zap, UtensilsCrossed, Smile, Frown, Apple, Bed, Hammer, LucideProps } from 'lucide-react'; // Keep icon imports here
+// Removed unused icon imports: Zap, UtensilsCrossed, Smile, Frown, Apple, Bed, Hammer
+// Import helpers from utils.tsx
+import {
+    getWorkerStatusInfo,
+    getProgressBarColor,
+    formatTime,
+    taskShortName,
+    getCostOutcomeText
+} from './utils';
 
-// --- Helper Functions (Kept inline for now) ---
 
-const getWorkerStatusInfo = (worker: Worker): { icon: React.ReactNode; color: string } => {
-    const energyPercent = (worker.energy / worker.maxEnergy) * 100;
-    const hungerPercent = (worker.hunger / worker.maxHunger) * 100;
-    const moralePercent = (worker.morale / worker.maxMorale) * 100;
-    let color = 'text-green-400';
-    if (energyPercent < 30 || hungerPercent > 70 || moralePercent < 30) color = 'text-red-400';
-    else if (energyPercent < 60 || hungerPercent > 40 || moralePercent < 60) color = 'text-yellow-400';
-    let IconComponent: React.ComponentType<LucideProps> = Smile;
-    switch (worker.status) {
-        case 'working': IconComponent = Hammer; break;
-        case 'resting': IconComponent = Bed; break;
-        case 'eating': IconComponent = Apple; break;
-        default:
-            if (hungerPercent > 70) IconComponent = UtensilsCrossed;
-            else if (energyPercent < 30) IconComponent = Zap;
-            else if (moralePercent < 30) IconComponent = Frown;
-            else IconComponent = Smile;
-            break;
-    }
-    return { icon: <IconComponent size={16} className={`inline-block mr-1 ${color}`} />, color };
-};
-
-const getProgressBarColor = (value: number, max: number, lowerIsBetter = false): string => {
-    const percent = (value / max) * 100;
-    if (lowerIsBetter) {
-        if (percent > 70) return 'bg-red-500';
-        if (percent > 40) return 'bg-yellow-500';
-        return 'bg-green-500';
-    } else {
-        if (percent < 30) return 'bg-red-500';
-        if (percent < 60) return 'bg-yellow-500';
-        return 'bg-green-500';
-    }
-};
-
-const formatTime = (seconds: number): string => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
-};
-
-const taskShortName = (taskId: string | null): string => {
-    if (!taskId) return '';
-    return taskId.split('_').slice(0, 2).join(' ');
-};
-
-const getCostOutcomeText = (task: Task, labels: ResourceLabels, goalLabels: GoalLabels): { costs: string[], outcomes: string[] } => {
-    const costs: string[] = [];
-    const outcomes: string[] = [];
-    Object.entries(task.cost).forEach(([key, value]) => {
-        if (value !== 0 && value !== undefined) costs.push(`${labels[key] || key}: ${value}`);
-    });
-    Object.entries(task.requirements || {}).forEach(([key, value]) => {
-        if (value && value > 0) costs.push(`${labels[key] || key} דרוש: ${value}`);
-    });
-    Object.entries(task.outcome).forEach(([key, value]) => {
-        if (value !== 0 && value !== undefined) {
-            const label = labels[key] || goalLabels[key] || key;
-            const displayValue = typeof value === 'number' ? (value > 0 ? `+${value}` : value) : value;
-            outcomes.push(`${label}: ${displayValue}`);
-        }
-    });
-    return { costs, outcomes };
-};
+// --- Helper Functions (Removed from inline) ---
+// Definitions are now in utils.tsx
 
 
 // --- Main Component ---
@@ -145,8 +90,8 @@ const WorkerTaskManagerGame: React.FC<WorkerTaskManagerProps> = (props) => {
                     workers={workers}
                     selectedWorkerId={selectedWorkerId}
                     onSelectWorker={handleSelectWorker}
-                    getWorkerStatusInfo={getWorkerStatusInfo} // Pass helper
-                    taskShortName={taskShortName} // Pass helper
+                    getWorkerStatusInfo={getWorkerStatusInfo} // Now imported
+                    taskShortName={taskShortName} // Now imported
                 />
 
                 {selectedWorker && (
@@ -158,8 +103,8 @@ const WorkerTaskManagerGame: React.FC<WorkerTaskManagerProps> = (props) => {
                         gameEnded={gameEnded}
                         canAffordTask={(task, worker) => canAffordTask(task, worker)} // Pass down affordability check
                         onPerformTask={handlePerformTask}
-                        getProgressBarColorFunc={getProgressBarColor} // Pass helper
-                        getCostOutcomeTextFunc={getCostOutcomeText} // Pass helper
+                        getProgressBarColorFunc={getProgressBarColor} // Now imported
+                        getCostOutcomeTextFunc={getCostOutcomeText} // Now imported
                     />
                 )}
             </div>
@@ -168,7 +113,7 @@ const WorkerTaskManagerGame: React.FC<WorkerTaskManagerProps> = (props) => {
             <div className="flex-grow space-y-4">
                 <TimerDisplay
                     globalTime={globalTime}
-                    formatTimeFunc={formatTime} // Pass helper
+                    formatTimeFunc={formatTime} // Now imported
                 />
                 <ResourceDisplay
                     sharedResources={sharedResources}

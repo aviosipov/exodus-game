@@ -79,7 +79,7 @@ export const SelectedWorkerPanel: React.FC<SelectedWorkerPanelProps> = ({
                                 }`}
                         >
                             <p className="font-semibold text-yellow-300">
-                                {task.name_he} ({task.duration_seconds} שנ')
+                                {task.name_he} ({task.duration_seconds} שנ&#39;)
                             </p>
                             {task.description_he && (
                                 <p className="text-xs text-gray-300 mb-1">

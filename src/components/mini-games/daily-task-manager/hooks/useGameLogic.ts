@@ -45,7 +45,7 @@ export const useGameLogic = ({
     // --- Child Hooks ---
     const {
         workers,
-        setWorkers, // Keep direct access for now if needed, though ideally managed via actions
+        // setWorkers, // Removed unused setter
         completeWorkerTask,
         startWorkerTaskTimer,
         clearAllWorkerTimeouts,
@@ -58,7 +58,7 @@ export const useGameLogic = ({
         }
     }, [gameEnded]); // Dependency on gameEnded to prevent re-creation if it changes elsewhere
 
-     const { globalTime, setGlobalTime } = useGameTimer({
+     const { globalTime /*, setGlobalTime */ } = useGameTimer({ // Removed unused setter
         timeLimitSeconds: globalTimeLimit_seconds,
         gameStarted,
         gameEnded,
