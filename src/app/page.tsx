@@ -1,150 +1,228 @@
-"use client"; // Add this directive to make it a client component
+"use client"; // Required for useState and useEffect
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-// Define character data
-const characters = [
-  { name: "אוהד", imagePath: "/images/ohad_avatar_nobg.png" }, // Ohad
-  { name: "עוזיריס", imagePath: "/images/oziris_avatar_nobg.png" }, // Oziris (using a plausible Hebrew spelling)
-  { name: "יששכר", imagePath: "/images/yishachar_avatar_nobg.png" }, // Yishachar
-  { name: "אחמוס", imagePath: "/images/ahmos_avatar_nobg.png" }, // Ahmos (using a plausible Hebrew spelling)
+// --- Game Data ---
+const scene = [
+    {
+        id: 'start',
+        speaker: "מספר", // Narrator
+        text: "השמש הקופחת מסתננת בין הענפים. אתה מרגיש את העייפות והכאב מצטברים בכל תנועה...", // "The scorching sun filters through the branches. You feel the fatigue and pain accumulating with every movement..."
+        character_left_img: "/images/ohad_avatar_nobg.png", // Use existing Ohad image
+        character_right_img: "/images/oziris_avatar_nobg.png", // Use existing Osiris image
+        background_img: "/images/ancient_egypt_prosperity_bg.webp" // Use existing background
+    },
+    {
+        speaker: "עוזיריס", // Osiris
+        text: "אוהד, הבא לי כוס מים – אני צמא.", // "Ohad, bring me a cup of water – I am thirsty."
+        character_right_img: "/images/oziris_avatar_nobg.png", // Use existing Osiris image
+        character_left_img: "/images/ohad_avatar_nobg.png", // Use existing Ohad image
+        background_img: "/images/ancient_egypt_prosperity_bg.webp" // Use existing background
+    },
+    {
+        speaker: "אוהד (מחשבות)", // Ohad (Internal)
+        text: "למה אני זוכה לקבל רק את הפקודות הללו? פעם הייתי נערץ, והיום... האם אין בי את הכוח לשנות דבר?", // "Why do I only get these commands? I was once admired, and today... Do I not have the strength to change anything?"
+        character_left_img: "/images/ohad_avatar_nobg.png", // Use existing Ohad image
+        character_right_img: "/images/oziris_avatar_nobg.png", // Use existing Osiris image
+        background_img: "/images/ancient_egypt_prosperity_bg.webp" // Use existing background
+    },
+    {
+        speaker: "מספר", // Narrator
+        text: "כיצד תגיב?", // "How do you respond?"
+        character_left_img: "/images/ohad_avatar_nobg.png", // Use existing Ohad image
+        character_right_img: "/images/oziris_avatar_nobg.png", // Use existing Osiris image
+        background_img: "/images/ancient_egypt_prosperity_bg.webp", // Use existing background
+        choices: [
+            { text: "התנגד קלות: \"אבל אדוני, גם אני צמא...\"", outcome: 'resist' }, // "Resist slightly: \"But sir, I am also thirsty...\""
+            { text: "הגב בשתיקה.", outcome: 'silent' }, // "React silently."
+            { text: "הגב באירוניה: \"נראה שהמים היום כבדים מדי בשבילך, אדוני...\"", outcome: 'irony' } // "React with irony: \"It seems the water today is too heavy for you, sir...\""
+        ]
+    },
+    // --- Outcomes ---
+    {
+        id: 'resist',
+        speaker: "עוזיריס", // Osiris
+        text: "חוצפה! (כעסו מתלקח, אך משהו מתעורר בתוך אוהד... רצון לשינוי).", // "Insolence! (His anger flares, but something stirs within Ohad... a desire for change)."
+        character_right_img: "/images/oziris_avatar_nobg.png", // Use existing Osiris image
+        character_left_img: "/images/ohad_avatar_nobg.png", // Use existing Ohad image
+        background_img: "/images/ancient_egypt_prosperity_bg.webp", // Use existing background
+        next: 'end_scene'
+    },
+    {
+        id: 'silent',
+        speaker: "מספר", // Narrator
+        text: "(אוהד מביא את המים בשקט, סערת רוחו הפנימית חבויה. האוויר נותר כבד.)", // "(Ohad silently fetches the water, his inner turmoil hidden. The air remains heavy.)"
+        character_left_img: "/images/ohad_avatar_nobg.png", // Use existing Ohad image
+        character_right_img: "/images/oziris_avatar_nobg.png", // Use existing Osiris image
+        background_img: "/images/ancient_egypt_prosperity_bg.webp", // Use existing background
+        next: 'end_scene'
+    },
+    {
+        id: 'irony',
+        speaker: "עוזיריס", // Osiris
+        text: "(עוזיריס נראה מבולבל לרגע, אולי הבהוב של הפתעה חוצה את פניו.)", // "(Osiris looks momentarily confused, perhaps a flicker of surprise crosses his face.)"
+        character_right_img: "/images/oziris_avatar_nobg.png", // Use existing Osiris image
+        character_left_img: "/images/ohad_avatar_nobg.png", // Use existing Ohad image
+        background_img: "/images/ancient_egypt_prosperity_bg.webp", // Use existing background
+        next: 'end_scene'
+    },
+    {
+        id: 'end_scene',
+        speaker: "מספר", // Narrator
+        text: "בעוד הכוס מתמלאת, עולה בך שאלה: האם הגיע הזמן לשנות את מהלך חייך, או שעליך להישאר בצל הפחד? כל בחירה נושאת בתוכה ניצוץ שיכול להוביל לגאולה.", // "As the cup is filled, a question arises within you: Is it time to change the course of your life, or must you remain in the shadow of fear? Each choice carries a spark that could lead to redemption."
+        character_left_img: "/images/ohad_avatar_nobg.png", // Use existing Ohad image
+        character_right_img: null, // Osiris fades or is gone
+        background_img: "/images/ancient_egypt_prosperity_bg.webp", // Use existing background
+        end: true
+    }
 ];
 
 export default function Home() {
-  // State for game elements
-  const [selectedCharacter, setSelectedCharacter] = useState(characters[0]); // Start with Ohad
-  const [dialogue, setDialogue] = useState(
-    "ברוכים הבאים לאחוזתי. זו תקופה שלווה במצרים, הלא כן?" // "Welcome to my estate. It is a peaceful time in Egypt, is it not?" in Hebrew
-  );
-  const [options, setOptions] = useState([
-    "התפעל מהאחוזה", // "Admire the estate" in Hebrew
-    "שאל על חייו", // "Ask about his life" in Hebrew
-  ]);
-  const [isLoading, setIsLoading] = useState(false); // Add loading state
-  const [error, setError] = useState<string | null>(null); // Add error state
+    const [currentStepIndex, setCurrentStepIndex] = useState(0);
+    const [currentStepData, setCurrentStepData] = useState(scene[0]);
 
-  // Function to handle option clicks and interact with the API
-  const handleOptionClick = async (optionText: string) => {
-    console.log(`Selected option: ${optionText}`);
-    setIsLoading(true); // Set loading true
-    setError(null); // Clear previous errors
+    // Update currentStepData whenever currentStepIndex changes
+    useEffect(() => {
+        setCurrentStepData(scene[currentStepIndex]);
+    }, [currentStepIndex]);
 
-    try {
-      const response = await fetch("/api/interact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          selectedOption: optionText,
-          currentDialogue: dialogue, // Send current context
-          characterName: selectedCharacter.name, // Send selected character's name
-        }),
-      });
+    const handleChoice = (outcomeId: string) => {
+        const outcomeStepIndex = scene.findIndex(step => step.id === outcomeId);
+        if (outcomeStepIndex !== -1) {
+            setCurrentStepIndex(outcomeStepIndex);
+        } else {
+            console.error(`Outcome step with id "${outcomeId}" not found.`);
+            // Fallback to next sequential step if outcome not found
+            nextStep();
+        }
+    };
 
-      if (!response.ok) {
-        throw new Error(`API request failed with status ${response.status}`);
-      }
+    const nextStep = () => {
+        const currentStep = scene[currentStepIndex];
 
-      const data = await response.json();
+        if (currentStep.end) {
+            console.log("End of scene.");
+            // Optionally reset or show a final message/button
+            // setCurrentStepIndex(0); // Example: Restart scene
+            return;
+        }
 
-      // Update state with response from API
-      setDialogue(data.dialogue);
-      setOptions(data.options);
-      // Assuming API might still return characterName if it can change dynamically
-      // If API *only* returns dialogue/options based on input character, this line might need adjustment/removal
-      // For now, find the character object matching the returned name, or default to current if not found/changed
-      const returnedCharacter = characters.find(c => c.name === data.characterName) || selectedCharacter;
-      setSelectedCharacter(returnedCharacter);
-    } catch (err) {
-      console.error("Interaction failed:", err);
-      setError(
-        err instanceof Error ? err.message : "An unknown error occurred"
-      );
-      // Optionally reset to a safe state or show error message in dialogue
-      setDialogue("An error occurred. Please try again.");
-      setOptions(["Retry Last Action (not implemented)"]);
-    } finally {
-      setIsLoading(false); // Set loading false
-    }
-  };
+        let nextIndex = -1;
 
-  return (
-    <div
-      dir="rtl" // Add RTL direction attribute
-      className="relative w-screen h-screen overflow-hidden bg-cover bg-center bg-no-repeat"
-      style={{
-        backgroundImage: "url('/images/ancient_egypt_prosperity_bg.webp')",
-      }}
-    >
-      {/* Character Selection UI (Top Left) */}
-      <div className="absolute top-4 left-4 z-30 bg-black/50 p-2 rounded">
-        <h4 className="text-white text-sm mb-1 text-center">בחר דמות</h4> {/* Select Character */}
-        <div className="flex flex-col space-y-1">
-          {characters.map((char) => (
-            <button
-              key={char.name}
-              onClick={() => setSelectedCharacter(char)}
-              className={`px-2 py-1 text-xs rounded ${
-                selectedCharacter.name === char.name
-                  ? "bg-blue-700 text-white"
-                  : "bg-gray-600 text-gray-200 hover:bg-gray-500"
-              }`}
-            >
-              {char.name}
-            </button>
-          ))}
+        // If the current step has a specific 'next' id, find and jump to it
+        if (currentStep.next) {
+            nextIndex = scene.findIndex(step => step.id === currentStep.next);
+            if (nextIndex === -1) {
+                console.error(`Next step with id "${currentStep.next}" not found. Proceeding sequentially.`);
+            }
+        }
+
+        // If no specific 'next' or it wasn't found, proceed sequentially
+        if (nextIndex === -1) {
+            nextIndex = currentStepIndex + 1;
+        }
+
+        // Skip over intermediate outcome steps if progressing sequentially
+        while (nextIndex < scene.length && scene[nextIndex].id && !scene[nextIndex].choices && !currentStep.next) {
+             // Only skip if we are moving sequentially (not explicitly jumping via 'next')
+             // and the target step looks like an outcome step (has id, no choices)
+             console.log(`Skipping outcome step ${nextIndex}`);
+             nextIndex++;
+        }
+
+
+        if (nextIndex < scene.length) {
+            setCurrentStepIndex(nextIndex);
+        } else {
+            console.log("End of scene reached.");
+            // Handle end of scene if reached sequentially
+        }
+    };
+
+    // Helper to get image URL or null
+    const getImageUrl = (path: string | null | undefined) => path ? path : null;
+
+    const leftCharImg = getImageUrl(currentStepData.character_left_img);
+    const rightCharImg = getImageUrl(currentStepData.character_right_img);
+    const bgImg = getImageUrl(currentStepData.background_img);
+
+    return (
+        <div
+            dir="rtl" // Right-to-left for Hebrew
+            className="relative w-screen h-screen overflow-hidden bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: bgImg ? `url('${bgImg}')` : 'none', backgroundColor: bgImg ? 'transparent' : '#e0d8c0' }} // Set background image or fallback color
+        >
+            {/* Left Character */}
+            <div
+                className={`character absolute bottom-[170px] left-[50px] h-[60%] w-[30%] bg-contain bg-no-repeat bg-bottom transition-opacity duration-500 ease-in-out ${leftCharImg ? 'opacity-100' : 'opacity-0'}`} // Removed debug background color
+                style={{ backgroundImage: leftCharImg ? `url('${leftCharImg}')` : 'none' }}
+            ></div>
+
+            {/* Right Character */}
+            <div
+                className={`character absolute bottom-[170px] right-[50px] h-[60%] w-[30%] bg-contain bg-no-repeat bg-bottom transition-opacity duration-500 ease-in-out ${rightCharImg ? 'opacity-100' : 'opacity-0'}`} // Removed debug background color
+                style={{ backgroundImage: rightCharImg ? `url('${rightCharImg}')` : 'none' }}
+            ></div>
+
+            {/* Dialogue Box */}
+            <div className="absolute bottom-5 left-5 right-5 h-[150px] z-20">
+                <div className="bg-black/70 text-white rounded-lg p-4 h-full border border-gray-600 flex flex-col justify-between">
+                    {/* Speaker and Text */}
+                    <div className="text-right">
+                        <h3 className="font-bold text-lg mb-2">{currentStepData.speaker || ""}</h3>
+                        <p className="text-base">{currentStepData.text}</p>
+                    </div>
+
+                    {/* Buttons Area */}
+                    <div className="flex justify-start items-center">
+                        {currentStepData.choices ? (
+                            // Render choices if they exist
+                            currentStepData.choices.map((choice, index) => (
+                                <button
+                                    key={index}
+                                    className="ms-2 px-3 py-1 bg-green-600 hover:bg-green-700 rounded text-sm transition duration-300"
+                                    onClick={() => handleChoice(choice.outcome)}
+                                >
+                                    {choice.text}
+                                </button>
+                            ))
+                        ) : !currentStepData.end ? (
+                            // Render "Next" button if no choices and not the end
+                            <button
+                                className="ms-2 px-3 py-1 bg-blue-500 hover:bg-blue-700 rounded text-sm"
+                                onClick={nextStep}
+                            >
+                                המשך {'>'} {/* Next > */}
+                            </button>
+                        ) : (
+                            // Optional: Render something at the end, e.g., a restart button
+                             <button
+                                className="ms-2 px-3 py-1 bg-gray-500 hover:bg-gray-700 rounded text-sm"
+                                onClick={() => setCurrentStepIndex(0)} // Restart
+                            >
+                                התחל מחדש {/* Restart */}
+                            </button>
+                        )}
+                    </div>
+                </div>
+            </div>
+
+             {/* Choices Box (Alternative centered display - kept commented out for now) */}
+             {/*
+             {currentStepData.choices && (
+                <div id="choices-box" className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-gray-800 bg-opacity-90 p-5 rounded-lg flex flex-col gap-2 z-10">
+                    {currentStepData.choices.map((choice, index) => (
+                        <button
+                            key={index}
+                            className='choice-button bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded transition duration-300'
+                            onClick={() => handleChoice(choice.outcome)}
+                        >
+                            {choice.text}
+                        </button>
+                    ))}
+                </div>
+             )}
+             */}
         </div>
-      </div>
-
-      {/* Character Layer */}
-      <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none">
-        {" "}
-        {/* Added pointer-events-none to allow clicks through */}
-        {/* Character avatar */}
-        <div className="w-1/3 h-2/3 flex items-center justify-center overflow-hidden">
-          {" "}
-          {/* Container for image */}
-          <img
-            src={selectedCharacter.imagePath}
-            alt={`${selectedCharacter.name} Avatar`}
-            className="object-contain h-full" // Use object-contain to fit image within height, maintaining aspect ratio
-            key={selectedCharacter.name} // Add key to force re-render on character change
-          />
-        </div>
-      </div>
-
-      {/* UI Layer (Dialogue Box) */}
-      <div className="absolute bottom-0 left-0 right-0 h-1/4 z-20 p-4">
-        <div className="bg-black/70 text-white rounded-lg p-4 h-full border border-gray-600 flex flex-col justify-between">
-          <div className="text-right">
-            {" "}
-            {/* Align text to the right */}
-            <h3 className="font-bold text-lg mb-2">{selectedCharacter.name}</h3>
-            <p className="text-base">{isLoading ? "Thinking..." : dialogue}</p>
-            {error && (
-              <p className="text-red-500 text-sm mt-2">Error: {error}</p>
-            )}
-          </div>
-          {/* Justify buttons to the start (left in RTL), use margin for spacing */}
-          <div className="flex justify-start">
-            {/* Render options dynamically, disable buttons when loading */}
-            {options.map((option, index) => (
-              <button
-                key={index}
-                // Add ms-2 for margin-start (left margin in RTL)
-                className={`ms-2 px-3 py-1 bg-blue-600 hover:bg-blue-700 rounded text-sm ${
-                  isLoading ? "opacity-50 cursor-not-allowed" : ""
-                }`}
-                onClick={() => handleOptionClick(option)}
-                disabled={isLoading}
-              >
-                {option}
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+    );
 }
