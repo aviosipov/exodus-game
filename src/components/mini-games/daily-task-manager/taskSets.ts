@@ -87,6 +87,15 @@ export const brickMakingScenario: ScenarioData = {
       cost: {}, // No resource cost, just time
       outcome: { energy: +20, morale: +2 }, // Worker outcome
     },
+    {
+      id: 'help_friend',
+      name_he: 'עזרה לחבר',
+      description_he: "עזור לחבר במשימתו הקשה לשפר את מצב הרוח.",
+      duration_seconds: 7,
+      cost: { energy: -10, hunger: +2 }, // Costs energy, slightly increases hunger
+      outcome: { morale: +15, energy: +5 }, // Boosts morale significantly, small energy recovery
+      // Availability logic handled in useGameLogic
+    },
   ]
 };
 

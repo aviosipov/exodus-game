@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react'; // Added useMemo
 import { Worker, Task, SharedResources, DailyGoal, GameResult, ResourceLabels } from '../types';
 import { useWorkerManagement } from './useWorkerManagement';
 import { useGameTimer } from './useGameTimer';
@@ -212,6 +212,32 @@ export const useGameLogic = ({
 
     }, [selectedWorkerId, workers, gameEnded, canAffordTask, completeWorkerTask, startWorkerTaskTimer]);
 
+    // --- Filter Available Tasks based on context ---
+    const filteredAvailableTasks = useMemo(() => {
+        if (!selectedWorkerId) return availableTasks; // Return all if no worker selected
+
+        // Check if any *other* worker is doing a resource-affecting task
+        const isAnyOtherWorkerDoingResourceTask = workers.some(worker => {
+            if (worker.id === selectedWorkerId || worker.status !== 'working' || !worker.currentTaskId) {
+                return false;
+            }
+            const task = availableTasks.find(t => t.id === worker.currentTaskId);
+            if (!task) return false;
+
+            // Check if task affects shared resources (cost or outcome)
+            const affectsResources = Object.keys(task.cost).some(key => !['energy', 'hunger', 'morale'].includes(key)) ||
+                                    Object.keys(task.outcome).some(key => !['energy', 'hunger', 'morale'].includes(key) && !(key in dailyGoal));
+            return affectsResources;
+        });
+
+        return availableTasks.filter(task => {
+            if (task.id === 'help_friend') {
+                return isAnyOtherWorkerDoingResourceTask; // Only show if condition met
+            }
+            return true; // Show all other tasks
+        });
+    }, [workers, selectedWorkerId, availableTasks, dailyGoal]);
+
 
     // --- Worker Selection ---
     const handleSelectWorker = useCallback((workerId: string) => {
@@ -233,6 +259,7 @@ export const useGameLogic = ({
         canAffordTask,
         handlePerformTask,
         checkGoalMet, // Expose checkGoalMet
+        filteredAvailableTasks, // Return the filtered list
         // Expose helper functions needed by UI components if utils.ts is not used
         // formatTime, getProgressBarColor, getWorkerStatusInfo etc.
     };

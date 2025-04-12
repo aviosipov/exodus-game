@@ -53,7 +53,8 @@ const WorkerTaskManagerGame: React.FC<WorkerTaskManagerProps> = (props) => {
         handleSelectWorker,
         canAffordTask,
         handlePerformTask,
-        checkGoalMet, // Destructure checkGoalMet
+        checkGoalMet,
+        filteredAvailableTasks, // Destructure filtered tasks
     } = useGameLogic({
         initialWorkers,
         initialSharedResources,
@@ -97,7 +98,7 @@ const WorkerTaskManagerGame: React.FC<WorkerTaskManagerProps> = (props) => {
                 {selectedWorker && (
                     <SelectedWorkerPanel
                         selectedWorker={selectedWorker}
-                        availableTasks={availableTasks}
+                        availableTasks={filteredAvailableTasks} // Pass filtered tasks
                         sharedResourceLabels={sharedResourceLabels}
                         goalLabels={goalLabels}
                         gameEnded={gameEnded}
