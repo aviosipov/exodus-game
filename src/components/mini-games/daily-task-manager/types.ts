@@ -70,6 +70,7 @@ export interface WorkerTaskManagerProps {
   globalTimeLimit_seconds: number;
   onComplete: (result: GameResult) => void;
   title_he?: string;
+  backgroundImageUrl?: string; // Optional: URL for the scenario-specific background
 }
 
 // Updated Game result passed to callback

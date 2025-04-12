@@ -84,8 +84,10 @@ const WorkerTaskManagerGame: React.FC<WorkerTaskManagerProps> = (props) => {
         <div
             dir="rtl"
             className="p-4 md:p-6 max-w-6xl w-full mx-auto text-white bg-black/50 backdrop-blur-sm rounded-lg border border-yellow-800 shadow-xl font-sans flex flex-col md:flex-row gap-4"
+            // Removed background image style - now applied at page level
         >
             {/* Left Panel: Workers & Selected Worker */}
+            {/* Removed panel background - main component background provides contrast */}
             <div className="flex-shrink-0 w-full md:w-1/3 space-y-4">
                 <WorkerList
                     workers={workers}
@@ -111,6 +113,7 @@ const WorkerTaskManagerGame: React.FC<WorkerTaskManagerProps> = (props) => {
             </div>
 
             {/* Right Panel: Resources, Goal, Timer */}
+            {/* Removed panel background - main component background provides contrast */}
             <div className="flex-grow space-y-4">
                 <TimerDisplay
                     globalTime={globalTime}
