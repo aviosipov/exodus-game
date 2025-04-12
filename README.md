@@ -1,44 +1,79 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Exodus Narrative Game (Working Title)
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+## Short Description
+
+An interactive visual novel game built with Next.js and React, exploring the story of the Exodus from slavery to freedom, featuring integrated mini-games based on the narrative of "כיצד תספר" (How You Shall Tell).
+
+## Overview
+
+This project aims to bring the story of the Jewish Exodus from Egypt to life through an engaging, interactive visual novel experience. Based primarily on the narrative structure found in "כיצד תספר מעבדות לחירות", the game follows the journey of the Israelites from their initial honored status, through the hardships of slavery, and towards eventual redemption.
+
+The game combines traditional visual novel elements (dialogue, choices, branching narrative points) with unique mini-games designed to reflect the challenges and themes of each stage of the story. It is developed with the goal of being an educational and thought-provoking experience for families and children, presented primarily in Hebrew.
+
+## Features
+
+* **Interactive Narrative:** Experience the Exodus story through dialogue, character interactions, and player choices.
+* **Visual Novel Format:** Engaging presentation with character sprites (planned), backgrounds, and text.
+* **Integrated Mini-Games:** Gameplay segments tied directly to the narrative stages:
+    * **"השלם את הפסוק / הציווי" (Complete the Verse/Command):** A multiple-choice trivia game testing knowledge related to the story.
+    * **"איסוף וארגון" (Collection and Organization):** A top-down game focused on gathering items while avoiding hazards.
+    * **"ניהול משימות צוות יומי" (Daily Team Task Management):** A light RTS/resource management game where the player manages workers' tasks, needs, and resources to meet quotas under pressure.
+    * *(Planned/Optional) "שמירה על התקווה" (Guarding Hope):* An adapted arcade shooter where players protect positive concepts while fighting negative ones.
+* **Hebrew Language:** The primary language for the game's UI and content.
+* **Adaptive Atmosphere:** Visuals and mini-game difficulty adjust to reflect the narrative stage (e.g., Honored Status vs. Hard Slavery).
+* **(Optional Future Feature):** Potential integration of LLM-based chat for deeper character interaction.
+
+## Technology Stack
+
+* **Framework:** Next.js (App Router)
+* **Language:** TypeScript
+* **UI Library:** React
+* **Styling:** Tailwind CSS
+* **Icons:** Lucide React
+* **Animation (Planned):** Anime.js
+* **(Optional for Mini-Games):** HTML Canvas API or simple JS game libraries (e.g., Kaboom.js, Kontra.js)
 
 ## Getting Started
 
-First, run the development server:
+1.  **Clone the repository:**
+    ```bash
+    git clone [your-repository-url]
+    cd [repository-name]
+    ```
+2.  **Install dependencies:**
+    ```bash
+    npm install
+    # or
+    yarn install
+    # or
+    pnpm install
+    ```
+3.  **Run the development server:**
+    ```bash
+    npm run dev
+    # or
+    yarn dev
+    # or
+    pnpm dev
+    ```
+4.  Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Mini-Game Details
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* **Trivia Game:** Located at `/mini-games/trivia` (example path). Presents multiple-choice questions based on the current narrative context.
+* **Collection Game:** Located at `/mini-games/collection` (example path). Player navigates a top-down area to collect items and avoid obstacles/hazards.
+* **Task Management Game:** Located at `/mini-games/daily-task-manager`. Player manages individual workers (energy, hunger, morale) assigning them tasks to meet daily quotas within a time limit, managing shared resources.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## License
 
-## Font Configuration
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load Google Fonts. The following fonts are configured in `src/app/layout.tsx`:
+## Contributing
 
--   **Rubik**: Set as the default sans-serif font for the application via `tailwind.config.ts`. It's available through the CSS variable `--font-rubik`.
--   **Amatic SC**: Available via the CSS variable `--font-amatic` and the Tailwind utility class `font-amatic`.
--   **Noto Serif Hebrew**: Available via the CSS variable `--font-noto-serif` and the Tailwind utility class `font-noto-serif`.
+*(Optional: Add guidelines here if you want others to contribute. E.g., "Contributions are welcome! Please open an issue first to discuss what you would like to change.")*
 
-The default font is applied globally in `src/app/globals.css` and integrated with Tailwind's base styles in `tailwind.config.ts`.
+## Acknowledgements
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* Inspired by and based on the narrative structure presented in the text "כיצד תספר מעבדות לחירות" by Ariel Fox (אריאל פוקס).
