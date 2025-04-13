@@ -5,8 +5,15 @@ import Link from 'next/link';
 
 export default function MiniGamesHub() {
   return (
-    <div dir="rtl" className="min-h-screen bg-[#e0d8c0] p-8"> {/* Using fallback color from main page */}
-      <h1 className="text-3xl font-bold mb-8 text-center text-gray-800">משחקים מיני</h1> {/* Mini-Games */}
+    <div
+      dir="rtl"
+      // Applied background using ::before pseudo-element
+      className="relative min-h-screen p-8 isolate
+                 before:absolute before:inset-0 before:-z-10
+                 before:bg-[url('/images/mini_games_bg.png')] before:bg-cover before:bg-center before:bg-no-repeat
+                 before:bg-black/50 before:content-['']" // Slightly darker overlay
+    >
+      <h1 className="text-4xl font-bold mb-8 text-center text-white drop-shadow-md">משחקים מיני</h1> {/* Mini-Games - Adjusted size and color */}
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
         {/* Space Invaders Card */}
@@ -34,10 +41,10 @@ export default function MiniGamesHub() {
         />
       </div>
 
-      {/* Back to Story Button */}
+      {/* Back to Main Menu Button */}
       <div className="mt-10 text-center">
-        <Link href="/" className="inline-block bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300">
-          חזרה לסיפור
+        <Link href="/" className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 shadow-md">
+          חזרה לתפריט הראשי {/* Changed text */}
         </Link>
       </div>
     </div>
