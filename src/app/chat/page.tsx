@@ -56,11 +56,11 @@ export default function ChatPage() {
   return (
     <div
       dir="rtl" // Right-to-left for Hebrew
-      className="relative w-screen h-screen overflow-hidden bg-cover bg-center bg-no-repeat flex" // Use flex layout
+      className="relative w-screen h-screen overflow-hidden bg-cover bg-center bg-no-repeat flex items-center" // Changed items-end back to items-center
       style={{ backgroundImage: `url('${BACKGROUND_IMG}')` }}
     >
-      {/* Right Side: Chat UI (Takes 1/3 width, margin added, height adjusted) - Placed first due to RTL */}
-      <div className="w-1/3 max-h-[calc(100vh-2rem)] flex flex-col bg-black/80 border-s-2 border-gray-600 m-4 rounded-lg shadow-lg"> {/* Replaced h-full with max-h calculation */}
+      {/* Right Side: Chat UI (Takes 1/3 width, increased margin, height 80vh, vertically centered) - Placed first due to RTL */}
+      <div className="w-1/3 h-[80vh] flex flex-col bg-black/80 border-s-2 border-gray-600 m-8 rounded-lg shadow-lg"> {/* Changed m-4 to m-8 */}
         {/* Message Display Area */}
         <div className="flex-grow p-4 overflow-y-auto space-y-4">
           {messages.map((msg, index) => (
