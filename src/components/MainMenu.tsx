@@ -29,7 +29,42 @@ const MainMenu: React.FC = () => {
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isAudioOptionsOpen, setIsAudioOptionsOpen] = useState(false); // State for collapsible
-  const contentRef = useRef<HTMLDivElement>(null); // Ref for the collapsible content (can likely be removed now)
+  const contentRef = useRef<HTMLDivElement>(null); // Ref for the collapsible content
+
+  // --- Load state from localStorage on mount ---
+  useEffect(() => {
+    const savedTrackIndex = localStorage.getItem('bgMusicTrackIndex');
+    const savedMuteState = localStorage.getItem('bgMusicMuted');
+
+    if (savedTrackIndex !== null) {
+      const trackIndex = parseInt(savedTrackIndex, 10);
+      // Ensure the index is valid before setting
+      if (!isNaN(trackIndex) && trackIndex >= 0 && trackIndex < audioFiles.length) {
+        setCurrentTrackIndex(trackIndex);
+      }
+    }
+
+    if (savedMuteState !== null) {
+      setIsMuted(savedMuteState === 'true');
+    }
+    // Indicate initial load is complete if needed for other logic, e.g., preventing initial autoplay flicker
+    // setInitialLoadComplete(true); // Example if you add such state
+  }, []); // Empty dependency array ensures this runs only once on mount
+
+  // --- Save state to localStorage on change ---
+  useEffect(() => {
+    // Check if window is defined (runs only on client-side)
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('bgMusicTrackIndex', currentTrackIndex.toString());
+    }
+  }, [currentTrackIndex]);
+
+  useEffect(() => {
+    // Check if window is defined (runs only on client-side)
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('bgMusicMuted', isMuted.toString());
+    }
+  }, [isMuted]);
 
 
   // --- Video Effects ---
@@ -128,28 +163,28 @@ const MainMenu: React.FC = () => {
         onOpenChange={setIsAudioOptionsOpen}
         className="fixed top-4 left-4 z-50 flex flex-col items-start bg-white/80 backdrop-blur-sm p-3 rounded-lg shadow-lg w-max" // Root is the main container now
       >
-        {/* Top Row: Mute Button + Trigger */}
+        {/* Top Row: Trigger + Mute Button */}
         <div className="flex items-center gap-3 w-full">
-          {/* Mute Button (Visually Leftmost in RTL) - Placed first in JSX */}
-          <button
-            onClick={toggleMute}
-            className="p-1 hover:bg-gray-100/50 rounded-full transition-colors" // Removed order-first, rely on JSX order
-          title={isMuted ? "בטל השתקה" : "השתק"}
-        >
-          {isMuted ? (
-            <VolumeX className="w-5 h-5 text-gray-500" /> // Slightly larger icon
-          ) : (
-              <Volume2 className="w-5 h-5 text-blue-600" /> // Active color
-            )}
-          </button>
-
-          {/* Collapsible Trigger Text */}
+          {/* Collapsible Trigger Text (Visually Rightmost in RTL) */}
           <Collapsible.Trigger asChild>
-            <button className="text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors cursor-pointer flex-grow text-right mr-1"> {/* Adjusted text alignment/margin */}
+            <button className="text-sm font-medium text-cyan-900 hover:text-blue-600 transition-colors cursor-pointer flex-grow text-right mr-1">
               פסקול מוזיקה רקע
             </button>
-          </Collapsible.Trigger>
-        </div>
+          </Collapsible.Trigger> {/* Correctly closed Trigger */}
+
+           {/* Mute Button (Visually Leftmost in RTL) */}
+           <button
+            onClick={toggleMute}
+            className="p-1 hover:bg-gray-100/50 rounded-full transition-colors"
+            title={isMuted ? "בטל השתקה" : "השתק"} // Add title back
+           >
+            {isMuted ? (
+              <VolumeX className="w-5 h-5 text-orange-700" /> 
+            ) : (
+              <Volume2 className="w-5 h-5 text-lime-600" /> 
+            )}
+          </button> {/* Correctly closed Mute button */}
+        </div> {/* Correctly closed flex container */}
 
         {/* Collapsible Content Area (Below Trigger, within the main box) */}
         {/* Apply transition classes and use data-state for height/opacity */}
