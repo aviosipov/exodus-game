@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Link from 'next/link';
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"; // Import Avatar components
 
 // Define message structure
 interface Message {
@@ -61,6 +62,17 @@ export default function ChatPage() {
     >
       {/* Right Side: Chat UI (Takes 1/3 width, increased margin, height 80vh, vertically centered) - Placed first due to RTL */}
       <div className="w-1/3 h-[80vh] flex flex-col bg-black/80 border-s-2 border-gray-600 m-8 rounded-lg shadow-lg"> {/* Changed m-4 to m-8 */}
+        {/* Chat Header with Avatar */}
+        <div className="p-4 border-b border-gray-600 flex items-center justify-start gap-3"> {/* Changed justify-end to justify-start for RTL */}
+          <Avatar className="h-12 w-12"> {/* Added size classes */}
+            <AvatarImage src={CHARACTER_IMG} alt={characterName} />
+            <AvatarFallback>{characterName.charAt(0)}</AvatarFallback> {/* Fallback to first initial */}
+          </Avatar>
+          <div className="text-right"> {/* Text group second in code -> visually left of avatar */}
+            <h2 className="text-xl font-semibold text-white">{characterName}</h2>
+            <p className="text-sm text-gray-300">דמות היסטורית מתקופת יציאת מצרים</p> {/* Placeholder Description */}
+          </div>
+        </div>
         {/* Message Display Area */}
         <div className="flex-grow p-4 overflow-y-auto space-y-4">
           {messages.map((msg, index) => (
