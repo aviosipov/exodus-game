@@ -7,6 +7,7 @@ import Link from 'next/link';
 import Button from './ui/Button'; // Import the new Button component
 import Container from './ui/Container'; // Import the Container component
 // Removed audio-related imports: Volume2, VolumeX, Collapsible
+// Removed GameMenu import as it's now in layout
 
 const videoPaths = [
   '/videos/video1.mp4',
@@ -67,8 +68,7 @@ const MainMenu: React.FC = () => {
       // Removed the ::before classes for background image
       className="relative flex flex-col items-center justify-center min-h-screen p-8 text-right isolate"
     >
-      {/* Removed Collapsible Audio Player Controls JSX */}
-      {/* Removed Hidden Audio Element */}
+      {/* Removed GameMenu component as it's now in layout */}
 
       {/* Video Background */}
       <div className="absolute inset-0 w-full h-full -z-10 overflow-hidden">

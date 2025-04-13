@@ -129,7 +129,8 @@ const AudioPlayer: React.FC = () => {
       <Collapsible.Root
         open={isAudioOptionsOpen}
         onOpenChange={setIsAudioOptionsOpen}
-        className="fixed top-4 left-4 z-50 flex flex-col items-start bg-gray-100/90 backdrop-blur-sm p-3 rounded-lg shadow-lg w-max"
+        // Removed fixed positioning classes (fixed top-4 left-4 z-50) - positioning is handled by GameMenu parent
+        className="flex flex-col items-start bg-gray-100/90 backdrop-blur-sm p-3 rounded-lg shadow-lg w-max"
       >
         {/* Top Row: Trigger + Mute Button */}
         {/* Force LTR direction specifically for this row */}
@@ -143,7 +144,8 @@ const AudioPlayer: React.FC = () => {
            {/* Mute Button (Code order 2nd -> Visual order right in LTR) */}
            <button
             onClick={toggleMute}
-            className="p-1 hover:bg-gray-100/50 rounded-full transition-colors border border-gray-400"
+            // Removed border border-gray-400
+            className="p-1 hover:bg-gray-100/50 rounded-full transition-colors"
             title={isMuted ? "בטל השתקה" : "השתק"}
            >
             {isMuted ? (
