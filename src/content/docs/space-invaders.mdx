@@ -6,18 +6,18 @@ This themed Space Invaders variant combines classic arcade mechanics with meanin
 ## File Structure
 
 ### `page.tsx`
-\`\`\`typescript
+```typescript
 // Example page component
-\`\`\`
+```
 - **Purpose**: Entry point that renders game component
 - **Key Features**:
   - Sets up responsive container layout
   - Displays game title above canvas
 
 ### `SpaceInvadersGame.tsx`
-\`\`\`typescript
+```typescript
 // Core game component example
-\`\`\`
+```
 - **Purpose**: Manages game loop, input, and rendering
 - **Key Features**:
   - Uses React hooks (\`useState\`, \`useRef\`) for game state
@@ -26,9 +26,9 @@ This themed Space Invaders variant combines classic arcade mechanics with meanin
   - Handles canvas rendering lifecycle
 
 ### `config.ts`
-\`\`\`typescript
+```typescript
 export const CANVAS_WIDTH = 800;
-\`\`\`
+```
 - **Purpose**: Central configuration store
 - **Key Sections**:
   - Canvas dimensions and styling
@@ -37,9 +37,9 @@ export const CANVAS_WIDTH = 800;
   - Localized UI text (Hebrew/English)
 
 ### `gameLogic.ts`
-\`\`\`typescript
+```typescript
 function collides(rect1, rect2) { /* collision logic */ }
-\`\`\`
+```
 - **Purpose**: Core game rules and state management
 - **Key Systems**:
   - Collision detection (Axis-Aligned Bounding Box)
@@ -115,7 +115,7 @@ function collides(rect1, rect2) { /* collision logic */ }
 - Differential scoring by type
 
 ## Configuration Guide
-\`\`\`typescript
+```typescript
 // Difficulty Tuning
 export const BOX_SPAWN_RATE = 120; // Lower = more frequent
 export const POSITIVE_BOX_RATIO = 0.35; // 35% positive boxes
@@ -123,7 +123,7 @@ export const POSITIVE_BOX_RATIO = 0.35; // 35% positive boxes
 // Visual Customization
 export const POSITIVE_BOX_COLOR = '#2ecc71';
 export const NEGATIVE_WORDS = ['עבודת פרך', 'שעבוד'];
-\`\`\`
+```
 **Common Adjustments**:
 - \`BOX_DESCENT_SPEED\`: Increase for harder difficulty
 - \`SCORE_PENALTY_HIT_POSITIVE\`: Balance risk/reward

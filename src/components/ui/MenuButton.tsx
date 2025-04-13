@@ -14,7 +14,7 @@ interface MenuButtonProps extends Omit<SimpleButtonProps, 'children' | 'variant'
   className?: string;
   titleClassName?: string;
   descriptionClassName?: string;
-  actions?: React.ReactNode; // Add actions prop
+  // Removed actions prop
 }
 
 const MenuButton: React.FC<MenuButtonProps> = ({
@@ -25,7 +25,7 @@ const MenuButton: React.FC<MenuButtonProps> = ({
   className,
   titleClassName,
   descriptionClassName,
-  actions, // Destructure actions
+  // Removed actions destructuring
   ...buttonProps // Pass remaining props like onClick to SimpleButton
 }) => {
   const content = (
@@ -53,12 +53,7 @@ const MenuButton: React.FC<MenuButtonProps> = ({
         </Typography>
       </div>
 
-      {/* Actions area - Render if actions exist */}
-      {actions && (
-        <div className="mt-auto pt-2 w-full flex justify-end"> {/* Push actions to the bottom right */}
-          {actions}
-        </div>
-      )}
+      {/* Removed Actions area */}
     </SimpleButton>
   );
 
@@ -66,43 +61,38 @@ const MenuButton: React.FC<MenuButtonProps> = ({
   // but render the actions outside the Link to avoid nesting.
   if (href) {
     // When href is provided, wrap SimpleButton inside Link > a
+    // Make the Link the relative container
+    // When href is provided, style the Link itself like a button
     return (
-      <div className={cn("relative", className)}> {/* Container for positioning actions */}
-        <Link href={href} className="block h-full"> {/* Make Link a block element */}
-          {/* The SimpleButton now acts as the content of the link */}
-          <SimpleButton
-            variant={variant}
-            // Apply necessary styling for the button itself
-            className={cn("w-full text-right flex flex-col items-start justify-between h-full", className)}
-            {...buttonProps} // Pass button props like onClick
+      <Link
+        href={href}
+        // Apply button styles and layout directly to the Link
+        className={cn(
+          buttonVariants({ variant }), // Apply button variant styles
+          "relative block h-full w-full text-right flex flex-col items-start justify-between p-4", // Base layout, padding added
+           className // Allow overriding classes
+         )}
+         // Removed {...buttonProps} spread as it's invalid for Link/<a>
+       >
+         {/* Main content wrapper (Title and Description only) */}
+        <div>
+          <Typography variant="h3" className={cn("mb-1", titleClassName)}>
+            {title}
+          </Typography>
+          <Typography
+            variant="body2"
+            color="muted"
+            className={cn(
+              variant === 'dark' ? "text-gray-300" : "text-amber-800", // Adjust color based on variant
+              descriptionClassName
+            )}
           >
-            {/* Main content wrapper */}
-            <div>
-              <Typography variant="h3" className={cn("mb-1", titleClassName)}>
-                {title}
-              </Typography>
-              <Typography
-                variant="body2"
-                color="muted"
-                className={cn(
-                  variant === 'dark' ? "text-gray-300" : "text-amber-800",
-                  descriptionClassName
-                )}
-              >
-                {description}
-              </Typography>
-            </div>
-            {/* Placeholder for spacing, actions will be positioned absolutely */}
-             {actions && <div className="mt-auto pt-2 h-6" />} {/* Adjust height as needed */}
-          </SimpleButton>
-        </Link>
-        {/* Render actions outside the Link, positioned absolutely */}
-        {actions && (
-          <div className="absolute bottom-2 right-4 z-10"> {/* Position actions */}
-             {actions}
-          </div>
-        )}
-      </div>
+            {description}
+          </Typography>
+        </div>
+        {/* Removed Placeholder div for actions */}
+      </Link>
+      // Removed absolutely positioned actions div
     );
   }
 

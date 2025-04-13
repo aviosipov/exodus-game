@@ -50,60 +50,81 @@ export default function MiniGamesHub() {
           בחר משחק
         </Typography>
 
-        {/* Grid for game cards, using MenuButton with secondary variant */}
+        {/* Grid for game cards, each item now a container div */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 w-full max-w-3xl"> {/* Adjusted grid cols */}
-          {/* Space Invaders Button */}
-          <MenuButton
-            variant="dark" // Use the new dark variant
-            title="חלליות פולשות"
-            description="הגן על התקווה שלך מול סכנות ומכשולים"
-            href="/mini-games/space-invaders"
-            className="min-h-[8rem]" // Keep height adjustment
-            actions={
-              <a href="/docs/space-invaders" target="_blank" rel="noopener noreferrer" className="text-sm text-blue-400 hover:text-blue-300 hover:underline">
-                [תיעוד]
-              </a>
-            }
-          />
+          {/* Space Invaders Button Container */}
+          <div className="flex flex-col items-start"> {/* Container for button + link */}
+            <MenuButton
+              variant="dark"
+              title="חלליות פולשות"
+              description="הגן על התקווה שלך מול סכנות ומכשולים"
+              href="/mini-games/space-invaders"
+              className="min-h-[8rem] w-full" // Ensure button takes full width of container
+              // Removed actions prop
+            />
+            {/* Documentation Link - Placed outside MenuButton */}
+            <a
+              href="/docs/space-invaders"
+              rel="noopener noreferrer"
+              className="mt-2 text-sm text-gray-900 hover:text-black hover:underline font-light self-start bg-yellow-300/70 px-1 rounded-sm" // Added bg opacity, padding, rounded corners, adjusted text color
+            >
+              [תיעוד]
+            </a>
+          </div>
 
-          {/* Daily Task Manager Button */}
-          <MenuButton
-            variant="dark" // Use the new dark variant
-            title="ניהול משימות צוות יומי"
-            description="נהל את המשימות היומיות של העובדים והמשאבים לעמידה ביעדים"
-            href="/mini-games/daily-task-manager"
-            className="min-h-[8rem]" // Keep height adjustment
-            actions={
-              <a href="/docs/daily-task-manager" target="_blank" rel="noopener noreferrer" className="text-sm text-blue-400 hover:text-blue-300 hover:underline">
-                [תיעוד]
-              </a>
-            }
-          />
+          {/* Daily Task Manager Button Container */}
+          <div className="flex flex-col items-start"> {/* Container for button + link */}
+            <MenuButton
+              variant="dark"
+              title="ניהול משימות צוות יומי"
+              description="נהל את המשימות היומיות של העובדים והמשאבים לעמידה ביעדים"
+              href="/mini-games/daily-task-manager"
+              className="min-h-[8rem] w-full" // Ensure button takes full width of container
+              // Removed actions prop
+            />
+            {/* Documentation Link - Placed outside MenuButton */}
+            <a
+              href="/docs/daily-task-manager"
+              rel="noopener noreferrer"
+              className="mt-2 text-sm text-gray-900 hover:text-black hover:underline font-light self-start bg-yellow-300/70 px-1 rounded-sm" // Added bg opacity, padding, rounded corners, adjusted text color
+            >
+              [תיעוד]
+            </a>
+          </div>
 
-          {/* Hebrew Trivia Button */}
-          <MenuButton
-            variant="dark" // Use the new dark variant
-            title="טריוויה עברית"
-            description="השלם את הפסוק והציווי במשחק ידע מרתק"
-            href="/mini-games/hebrew-trivia"
-            className="min-h-[8rem]" // Keep height adjustment
-            actions={
-              <a href="/docs/hebrew-trivia" target="_blank" rel="noopener noreferrer" className="text-sm text-blue-400 hover:text-blue-300 hover:underline">
-                [תיעוד]
-              </a>
-            }
-          />
+          {/* Hebrew Trivia Button Container */}
+          <div className="flex flex-col items-start"> {/* Container for button + link */}
+            <MenuButton
+              variant="dark"
+              title="טריוויה עברית"
+              description="השלם את הפסוק והציווי במשחק ידע מרתק"
+              href="/mini-games/hebrew-trivia"
+              className="min-h-[8rem] w-full" // Ensure button takes full width of container
+              // Removed actions prop
+            />
+            {/* Documentation Link - Placed outside MenuButton */}
+            <a
+              href="/docs/hebrew-trivia"
+              rel="noopener noreferrer"
+              className="mt-2 text-sm text-gray-900 hover:text-black hover:underline font-light self-start bg-yellow-300/70 px-1 rounded-sm" // Added bg opacity, padding, rounded corners, adjusted text color
+            >
+              [תיעוד]
+            </a>
+          </div>
 
           {/* Placeholder for potential 4th button */}
-           <MenuButton
-            variant="dark" // Use the new dark variant
-            title="בקרוב..."
-            description="משחקים נוספים יתווספו בהמשך."
-            // Keep only the page-specific layout adjustment
-            className="min-h-[8rem]"
-            // Removed titleClassName and descriptionClassName overrides
-            disabled // Disable the button
-          />
+          <div className="flex flex-col items-start"> {/* Container for consistency */}
+            <MenuButton
+              variant="dark" // Use the new dark variant
+              title="בקרוב..."
+              description="משחקים נוספים יתווספו בהמשך."
+              // Keep only the page-specific layout adjustment
+              className="min-h-[8rem] w-full" // Ensure button takes full width
+              // Removed titleClassName and descriptionClassName overrides
+              disabled // Disable the button
+            />
+            {/* No documentation link for placeholder */}
+          </div>
         </div> {/* Closing Grid */}
 
         {/* Removed Back Button Section */}
