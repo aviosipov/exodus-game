@@ -99,24 +99,24 @@ const MainMenu: React.FC = () => {
         {/* Primary Actions */}
         {/* Primary Actions - Using Button component */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 w-full max-w-3xl">
-          {/* Button 1: Adventure */}
-          <Link href="/adventure" passHref legacyBehavior>
+          {/* Button 1: Adventure - Updated Link */}
+          <Link href="/adventure">
             <Button variant="secondary" className="w-full h-full flex flex-col items-center justify-center p-6 text-right"> {/* Changed text-center to text-right */}
               <h2 className="text-2xl font-semibold mb-2">הרפתקה</h2> {/* Kept font-semibold here */}
               <p>צאו למסע אינטראקטיבי בעקבות סיפור יציאת מצרים, פרק אחר פרק.</p>
             </Button>
           </Link>
 
-          {/* Button 2: Mini-games */}
-          <Link href="/mini-games" passHref legacyBehavior>
+          {/* Button 2: Mini-games - Updated Link */}
+          <Link href="/mini-games">
             <Button variant="secondary" className="w-full h-full flex flex-col items-center justify-center p-6 text-right"> {/* Changed text-center to text-right */}
               <h2 className="text-2xl font-semibold mb-2">מיני-משחקים</h2> {/* Kept font-semibold here */}
               <p>בדקו את הידע והכישורים שלכם עם משחקים קצרים המבוססים על הסיפור.</p>
             </Button>
           </Link>
 
-          {/* Button 3: Chat */}
-          <Link href="/chat" passHref legacyBehavior>
+          {/* Button 3: Chat - Updated Link */}
+          <Link href="/chat">
             <Button variant="secondary" className="w-full h-full flex flex-col items-center justify-center p-6 text-right"> {/* Changed text-center to text-right */}
               <h2 className="text-2xl font-semibold mb-2">שיחה עם דמות</h2> {/* Kept font-semibold here */}
               <p>שוחחו עם דמויות מהסיפור באמצעות בינה מלאכותית ולמדו את נקודת מבטן.</p>
@@ -139,17 +139,17 @@ const MainMenu: React.FC = () => {
           variant="dialog"
           className="mt-8 w-full max-w-3xl flex flex-wrap justify-center items-center gap-4 text-sm" // Apply variant and keep layout styles
         >
-          <Link href="/docs/about" passHref>
-            <span className="text-amber-100 hover:text-white cursor-pointer">אודות</span>
-          </Link>
-          {/* Use slightly different text color for better contrast on dark bg if needed */}
-          <span className="text-gray-400">|</span>
-          <Link href="/docs/content-editing" passHref>
-            <span className="text-amber-100 hover:text-white cursor-pointer">עריכת תוכן</span>
+          {/* Updated Footer Links */}
+          <Link href="/docs/about" className="text-amber-100 hover:text-white cursor-pointer">
+            אודות
           </Link>
           <span className="text-gray-400">|</span>
-          <Link href="/docs/dev-guide" passHref>
-            <span className="text-amber-100 hover:text-white cursor-pointer">מדריכים למפתחים</span>
+          <Link href="/docs/content-editing" className="text-amber-100 hover:text-white cursor-pointer">
+            עריכת תוכן
+          </Link>
+          <span className="text-gray-400">|</span>
+          <Link href="/docs/dev-guide" className="text-amber-100 hover:text-white cursor-pointer">
+            מדריכים למפתחים
           </Link>
         </Container> {/* Closing Secondary Actions Container */}
       </div> {/* Closing Content container */}

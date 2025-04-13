@@ -1,0 +1,141 @@
+# Space Invaders: Guarding Hope - Game Documentation
+
+## Overview
+This themed Space Invaders variant combines classic arcade mechanics with meaningful Hebrew vocabulary. Players defend against descending \"negative\" concepts while collecting \"positive\" ones, aligned with the theme of maintaining hope (\"שמירה על התקווה\"). Built with React/TypeScript and Canvas API.
+
+## File Structure
+
+### `page.tsx`
+\`\`\`typescript
+// Example page component
+\`\`\`
+- **Purpose**: Entry point that renders game component
+- **Key Features**:
+  - Sets up responsive container layout
+  - Displays game title above canvas
+
+### `SpaceInvadersGame.tsx`
+\`\`\`typescript
+// Core game component example
+\`\`\`
+- **Purpose**: Manages game loop, input, and rendering
+- **Key Features**:
+  - Uses React hooks (\`useState\`, \`useRef\`) for game state
+  - Implements keyboard input handling
+  - Coordinates game loop with \`requestAnimationFrame\`
+  - Handles canvas rendering lifecycle
+
+### `config.ts`
+\`\`\`typescript
+export const CANVAS_WIDTH = 800;
+\`\`\`
+- **Purpose**: Central configuration store
+- **Key Sections**:
+  - Canvas dimensions and styling
+  - Player/Enemy visual parameters
+  - Game balance settings (scoring, speeds)
+  - Localized UI text (Hebrew/English)
+
+### `gameLogic.ts`
+\`\`\`typescript
+function collides(rect1, rect2) { /* collision logic */ }
+\`\`\`
+- **Purpose**: Core game rules and state management
+- **Key Systems**:
+  - Collision detection (Axis-Aligned Bounding Box)
+  - Score/lives calculation
+  - Enemy spawning logic
+  - Game over conditions
+
+### Class Files (player.ts, bullet.ts, enemy.ts)
+{/* Removed problematic code block example due to persistent MDX parsing errors */}
+- **Purpose**: Object-oriented entity management
+- **Key Patterns**:
+  - Separation of state (properties) and behavior (methods)
+  - \`update()\` for position calculations
+  - \`draw()\` for canvas rendering
+
+## Key Concepts
+
+### Game Loop Architecture
+{/* Code block removed due to MDX parsing issues */}
+- **Implementation**:
+  1. Input processing
+  2. State update via \`updateGameLogic\`
+  3. Canvas redraw
+  4. Repeat with \`requestAnimationFrame\`
+
+- **Optimizations**:
+  - Uses \`useRef\` for input state to avoid render dependencies
+  - Batches state updates with React's setState
+
+### State Management
+{/* Code block removed due to MDX parsing issues */}
+- **Strategy**:
+  - Single source of truth in React state
+  - Immutable updates via spread operator
+  - Derived state calculated each frame
+
+### Rendering Pipeline
+{/* Code block removed due to MDX parsing issues */}
+- **Process**:
+  1. Clear canvas with background color
+  2. Draw player, bullets, and boxes
+  3. Render UI overlays (score, lives)
+  4. Handle game over screen
+
+### Input Handling
+{/* Code block removed due to MDX parsing issues */}
+- **Mechanics**:
+  - Keyboard event listeners
+  - State stored in \`useRef\` for frame-accurate access
+  - Prevent default spacebar behavior
+
+### Collision System
+{/* Code block removed due to MDX parsing issues */}
+- **Detection Types**:
+  1. Bullet vs Box
+  2. Player vs Box
+  3. Screen edge checks
+
+### Entity Classes
+**Player**:
+- Movement constrained to canvas bounds
+- Shooting cooldown system
+- Lives management
+
+**Bullet**:
+- Time-to-live (TTL) system (Note: TTL logic seems removed in provided code, relies on off-screen check)
+- Vertical movement only
+- Pool management (active/inactive)
+
+**Box (Enemy)**:
+- Random spawning with type ratios
+- Themed word display
+- Differential scoring by type
+
+## Configuration Guide
+\`\`\`typescript
+// Difficulty Tuning
+export const BOX_SPAWN_RATE = 120; // Lower = more frequent
+export const POSITIVE_BOX_RATIO = 0.35; // 35% positive boxes
+
+// Visual Customization
+export const POSITIVE_BOX_COLOR = '#2ecc71';
+export const NEGATIVE_WORDS = ['עבודת פרך', 'שעבוד'];
+\`\`\`
+**Common Adjustments**:
+- \`BOX_DESCENT_SPEED\`: Increase for harder difficulty
+- \`SCORE_PENALTY_HIT_POSITIVE\`: Balance risk/reward
+- \`POSITIVE_WORDS\`: Add new vocabulary terms
+
+## Extension Ideas
+1. **Power-Up System**: Add temporary shields/speed boosts
+2. **Wave System**: Progressive difficulty levels
+3. **Audio Feedback**: Sound effects for hits/misses
+4. **Local Storage**: High score persistence
+5. **Mobile Support**: Touch input handling
+
+{/* Code block removed due to MDX parsing issues */}
+
+This architecture demonstrates modern React patterns combined with classic game development techniques. The separation of concerns between React components and game logic makes it maintainable while keeping performance-sensitive operations in the canvas rendering loop.

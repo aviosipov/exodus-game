@@ -1,0 +1,68 @@
+# Hebrew Trivia Game Documentation
+
+This React/TypeScript trivia game component helps users learn Hebrew biblical history through interactive quizzes. It features dynamic question handling, score tracking, and visual feedback.
+
+**Key Files & Structure:**
+1. **`types.ts`**
+   {/* Code block removed due to potential MDX parsing issues */}
+   Defines TypeScript interfaces for questions and game props, ensuring type safety.
+
+2. **`questionSets.ts`**
+   {/* Code block removed due to potential MDX parsing issues */}
+   Contains pre-defined Hebrew question/answer sets organized by historical periods.
+
+3. **`HebrewTriviaGame.tsx`**
+   Main component handling game logic and UI. Uses React hooks for state management.
+
+---
+
+**Game Flow:**
+
+| Stage          | Key Features                                                                 |
+|----------------|-----------------------------------------------------------------------------|
+| **Start**      | Displays topic and start button using `gameStarted` state                   |
+| **Question**   | Shows progress (3/10) and shuffles answers using Fisher-Yates algorithm      |
+| **Answer**     | Disables buttons after selection, shows color-coded feedback for 1.5 seconds|
+| **Transition** | Automatically advances after feedback using `setTimeout`                    |
+| **End**        | Shows final score and triggers `onGameComplete` callback                     |
+
+---
+
+**State Management:**
+{/* Code block removed due to potential MDX parsing issues */}
+- **`useState`** manages 7 state variables for game progression
+- **`useEffect`** reshuffles answers when question changes
+- **`useMemo`** caches current question to prevent unnecessary rerenders
+- **`useCallback`** memoizes answer handler to maintain reference equality
+
+---
+
+**Answer Handling:**
+{/* Code block removed due to potential MDX parsing issues */}
+- Combines correct/incorrect answers
+- Randomizes order each question
+- Prevents pattern memorization
+
+---
+
+**UI Styling Approach:**
+1. **Tailwind CSS** for utility-first styling
+2. Dynamic class generation:
+   {/* Code block removed due to potential MDX parsing issues */}
+3. Planned \"Millionaire\" theming:
+- Gradient backgrounds
+- Animated transitions
+- Score progress indicators
+
+---
+
+**Question Set Structure:**
+{/* Code block removed due to potential MDX parsing issues */}
+- Hebrew UTF-8 text support
+- Grouped by historical chapters
+- Easy to extend with new sets
+
+**Usage Example:**
+{/* Code block removed due to potential MDX parsing issues */}
+
+This component demonstrates modern React patterns with TypeScript type safety, making it easy to maintain and extend while providing an engaging learning experience.

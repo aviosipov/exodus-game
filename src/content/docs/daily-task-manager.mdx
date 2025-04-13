@@ -1,0 +1,112 @@
+# Daily Task Manager Game Documentation
+
+## Overview
+A resource management simulation game where players assign tasks to workers while balancing individual needs and shared resources. Built with React/TypeScript using custom hooks for clean separation of concerns.
+
+## Key File Structure
+\`\`\`markdown
+src/components/mini-games/daily-task-manager/
+├── types.ts          # Core data structures and interfaces
+├── taskSets.ts       # Scenario definitions and preset configurations
+├── hooks/            # Custom hook implementations
+│   ├── useGameLogic.ts       # Main game flow controller
+│   ├── useWorkerManagement.ts # Worker state and task execution
+│   └── useGameTimer.ts       # Global timer system
+├── utils.tsx         # Helper functions and UI utilities
+└── WorkerTaskManagerGame.tsx # Main component & UI composition
+\`\`\`
+
+## Scenario System (\`taskSets.ts\`)
+### Scenario Structure
+{/* Code block removed due to MDX parsing issues */}
+
+### Example Scenarios
+1. **Brick Making**
+   - Workers start with limited straw/clay
+   - Goal: Produce 25 bricks
+   - Tasks: Gather materials, eat, rest
+
+2. **Pyramid Construction**
+   - Focus on stone hauling/placement
+   - Complex resource chain (water → energy → stones)
+   - Team management challenge with 4 workers
+
+### Task Definition
+{/* Code block removed due to MDX parsing issues */}
+
+## Custom Hook Architecture
+### \`useGameLogic\` (Central Controller)
+- Manages game state transitions (start/end)
+- Coordinates worker/resource updates
+- Handles task validation/execution flow
+- Exposes core game state to UI components
+
+### \`useWorkerManagement\` (Worker System)
+{/* Code block removed due to potential MDX parsing issues */}
+- **Key Features**:
+  1. Worker state management
+  2. Automatic needs depletion (hunger/morale)
+  3. Task timer handling
+  4. Bulk state updates
+  5. Task completion effects
+- **Core Methods**: \`startWorkerTaskTimer()\`, \`completeWorkerTask()\`, \`updateWorkerState()\`
+
+### \`useGameTimer\` (Time Management)
+- Tracks global countdown
+- Handles timer start/stop/reset
+- Triggers game end on timeout
+- Syncs with UI refresh rate
+
+## State Management Patterns
+### Modular Hook-based State
+*(Imagine: Hook-specific state containers with controlled interactions)*
+
+### Key State Containers
+1. **Worker State**
+   - Managed in \`useWorkerManagement\`
+   - Individual worker stats and statuses
+
+2. **Shared Resources**
+   - Managed in \`useGameLogic\` via useState
+   - Centralized material storage
+
+3. **Goal Progress**
+   - Tracked in \`useGameLogic\`
+   - Compared against dailyGoal requirements
+
+## Task Execution Flow
+1. Player selects worker → task
+2. System checks affordability (\`canAffordTask()\`)
+3. If valid: Starts task timer (\`startWorkerTaskTimer\`)
+4. On timer completion (\`completeWorkerTask\`):
+   - Applies outcomes to worker/resources
+   - Updates goal progress
+   - Refreshes UI state
+
+## Worker Stats & Resource System
+### Stat Effects Example
+{/* Code block removed due to MDX parsing issues */}
+**Translation:** Worker spends 25 energy, becomes 8% hungrier, loses 2 morale. Consumes 3 straw & 2 clay → produces 5 bricks.
+
+### Resource Types
+| Category       | Examples            | Management              |
+|----------------|---------------------|-------------------------|
+| Materials      | Straw, Clay, Bricks | Shared pool             |
+| Worker Needs   | Energy, Morale      | Individual per worker   |
+| Consumables    | Food, Water         | Shared but replenishable |
+
+## AI Tool Integration (Cline Example)
+**Prompt Suggestions:**
+\`\`\`markdown
+\"Create a new maintenance task that lets workers repair tools. Cost: 2 bricks, 1 straw. Outcome: +10 morale, +5 energy. Duration: 20 seconds.\"
+
+\"Generate a crisis scenario where food is scarce and workers need to prioritize foraging over construction.\"
+\`\`\`
+
+**Suggested Code Structure:**
+{/* Code block removed due to MDX parsing issues */}
+
+## Best Practices for Modding
+1. **Balance Tasks**: Keep cost/outcome ratios proportional to duration.
+2. **Scenario Design**: Create competing priorities (e.g., food vs. materials).
+3. **UI Considerations**: Match resource colors, use clear icons.

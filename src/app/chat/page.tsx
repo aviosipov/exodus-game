@@ -74,29 +74,31 @@ export default function ChatPage() {
   return (
     <div
       dir="rtl" // Right-to-left for Hebrew
-      className="relative w-screen h-screen overflow-hidden bg-cover bg-center bg-no-repeat flex items-center"
+      className="relative w-screen h-screen overflow-hidden bg-cover bg-center bg-no-repeat flex items-center justify-between" // Added justify-between
       style={{ backgroundImage: `url('${BACKGROUND_IMG}')` }}
     >
-      {/* Character Selection UI - Top Right */}
-      <div className="absolute top-4 right-4 z-10 flex space-x-2 space-x-reverse"> {/* Use space-x-reverse for RTL */}
-        {availableCharacters.map((char) => (
-          <Avatar
-            key={char.name}
-            className={`h-16 w-16 cursor-pointer border-2 ${currentCharacter.name === char.name ? 'border-blue-500' : 'border-transparent'} hover:border-blue-300`} // Increased size h-16 w-16
-            onClick={() => setCurrentCharacter(char)}
-            title={char.name} // Tooltip for character name
-          >
-            <AvatarImage src={char.imagePath} alt={char.name} />
-            <AvatarFallback>{char.name.charAt(0)}</AvatarFallback>
-          </Avatar>
-        ))}
-      </div>
+      {/* Right Side Wrapper (Chat + Selection) */}
+      <div className="w-1/3 h-[90vh] flex flex-col items-center m-8"> {/* Wrapper for chat and selection, centered items */}
+        {/* Character Selection UI - Above Chat, Centered */}
+        <div className="flex space-x-2 space-x-reverse mb-4"> {/* Added margin-bottom */}
+          {availableCharacters.map((char) => (
+            <Avatar
+              key={char.name}
+              className={`h-16 w-16 cursor-pointer border-2 ${currentCharacter.name === char.name ? 'border-blue-500' : 'border-transparent'} hover:border-blue-300`}
+              onClick={() => setCurrentCharacter(char)}
+              title={char.name} // Tooltip for character name
+            >
+              <AvatarImage src={char.imagePath} alt={char.name} />
+              <AvatarFallback>{char.name.charAt(0)}</AvatarFallback>
+            </Avatar>
+          ))}
+        </div>
 
-      {/* Right Side: Chat UI - Using Container */}
-      <Container
-        variant="dialog"
-        className="w-1/3 h-[80vh] flex flex-col m-8 shadow-lg !p-0" // Use variant, add layout, remove padding override
-      >
+        {/* Chat UI Container */}
+        <Container
+          variant="dialog"
+          className="w-full h-full flex flex-col shadow-lg !p-0" // Adjusted width/height to fill wrapper, removed margin
+        >
         {/* Chat Header with Avatar - Keep padding here */}
         <div className="p-4 border-b border-gray-600 flex items-center justify-start gap-3"> {/* Keep internal padding */}
           <Avatar className="h-12 w-12">
@@ -146,7 +148,9 @@ export default function ChatPage() {
           </Button>
         </div>
          {/* Removed Back to Main Menu Button */}
-      </Container> {/* Close Container */}
+      </Container> {/* Close Chat UI Container */}
+      </div> {/* Close Right Side Wrapper */}
+
 
       {/* Left Side: Character Display (Takes 2/3 width) - Placed second due to RTL */}
       <div className="w-2/3 h-full flex items-end justify-center p-10 relative"> {/* Keep width 2/3 */}
