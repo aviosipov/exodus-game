@@ -130,11 +130,11 @@ const AudioPlayer: React.FC = () => {
         open={isAudioOptionsOpen}
         onOpenChange={setIsAudioOptionsOpen}
         // Removed fixed positioning classes (fixed top-4 left-4 z-50) - positioning is handled by GameMenu parent
-        className="flex flex-col items-start bg-gray-100/90 backdrop-blur-sm p-3 rounded-lg shadow-lg w-max"
+        className="flex flex-col items-start bg-gray-100/90 backdrop-blur-sm p-2 rounded-lg shadow-lg w-max"
       >
         {/* Top Row: Trigger + Mute Button */}
         {/* Force LTR direction specifically for this row */}
-        <div className="flex items-center gap-3 w-full" dir="ltr">
+        <div className="flex items-center gap-2 w-full" dir="ltr">
           {/* Collapsible Trigger Text (Code order 1st -> Visual order left in LTR) */}
           <Collapsible.Trigger asChild>
             <button className="text-sm font-medium text-cyan-900 hover:text-blue-600 transition-colors cursor-pointer flex-grow text-left ml-1"> {/* Adjusted text alignment/margin for LTR */}

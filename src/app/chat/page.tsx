@@ -1,10 +1,27 @@
 "use client"; // Required for useState, useEffect, event handlers
 
 import React, { useState, useEffect, useRef } from "react";
-import Link from 'next/link';
+// Removed unused Link import
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"; // Import Avatar components
 import Container from "@/components/ui/Container"; // Import Container
 import Button from "@/components/ui/Button"; // Import Button
+
+// Define character structure
+interface Character {
+  name: string;
+  imagePath: string;
+  description: string;
+}
+
+// Define available characters
+const availableCharacters: Character[] = [
+  { name: 'אוהד', imagePath: '/images/ohad_avatar_nobg.png', description: 'דמות היסטורית מתקופת יציאת מצרים' },
+  { name: 'אחמוס', imagePath: '/images/ahmos_avatar_nobg.png', description: 'פרעה מצרי קדום' },
+  { name: 'אוזיריס', imagePath: '/images/oziris_avatar_nobg.png', description: 'אל מצרי קדום' },
+  { name: 'יששכר', imagePath: '/images/yishachar_avatar_nobg.png', description: 'דמות מקראית' },
+  // Add other characters as needed, ensure image paths are correct
+];
+
 
 // Define message structure
 interface Message {
@@ -12,23 +29,21 @@ interface Message {
   text: string;
 }
 
-// Default character and background
-const CHARACTER_IMG = "/images/ohad_avatar_nobg.png"; // Using Ohad as default
+// Default background
 const BACKGROUND_IMG = "/images/ancient_egypt_prosperity_bg.webp"; // Using adventure background
 
 export default function ChatPage() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputValue] = useState('');
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- Character selection not yet implemented
-  const [characterName, _setCharacterName] = useState('אוהד'); // Default character name, silence unused setter
+  const [currentCharacter, setCurrentCharacter] = useState<Character>(availableCharacters[0]); // Default to the first character
   const messagesEndRef = useRef<HTMLDivElement>(null); // Ref for scrolling
 
-  // Placeholder for initial greeting or loading state
+  // Update greeting when character changes
   useEffect(() => {
     setMessages([
-      { sender: 'ai', text: `שלום! אני ${characterName}. מה תרצה לשאול אותי?` } // Initial greeting
+      { sender: 'ai', text: `שלום! אני ${currentCharacter.name}. מה תרצה לשאול אותי?` } // Initial greeting based on selected character
     ]);
-  }, [characterName]);
+  }, [currentCharacter]);
 
   // Scroll to bottom when messages change
   useEffect(() => {
@@ -59,9 +74,24 @@ export default function ChatPage() {
   return (
     <div
       dir="rtl" // Right-to-left for Hebrew
-      className="relative w-screen h-screen overflow-hidden bg-cover bg-center bg-no-repeat flex items-center" // Changed items-end back to items-center
+      className="relative w-screen h-screen overflow-hidden bg-cover bg-center bg-no-repeat flex items-center"
       style={{ backgroundImage: `url('${BACKGROUND_IMG}')` }}
     >
+      {/* Character Selection UI - Top Right */}
+      <div className="absolute top-4 right-4 z-10 flex space-x-2 space-x-reverse"> {/* Use space-x-reverse for RTL */}
+        {availableCharacters.map((char) => (
+          <Avatar
+            key={char.name}
+            className={`h-16 w-16 cursor-pointer border-2 ${currentCharacter.name === char.name ? 'border-blue-500' : 'border-transparent'} hover:border-blue-300`} // Increased size h-16 w-16
+            onClick={() => setCurrentCharacter(char)}
+            title={char.name} // Tooltip for character name
+          >
+            <AvatarImage src={char.imagePath} alt={char.name} />
+            <AvatarFallback>{char.name.charAt(0)}</AvatarFallback>
+          </Avatar>
+        ))}
+      </div>
+
       {/* Right Side: Chat UI - Using Container */}
       <Container
         variant="dialog"
@@ -70,12 +100,12 @@ export default function ChatPage() {
         {/* Chat Header with Avatar - Keep padding here */}
         <div className="p-4 border-b border-gray-600 flex items-center justify-start gap-3"> {/* Keep internal padding */}
           <Avatar className="h-12 w-12">
-            <AvatarImage src={CHARACTER_IMG} alt={characterName} />
-            <AvatarFallback>{characterName.charAt(0)}</AvatarFallback> {/* Fallback to first initial */}
+            <AvatarImage src={currentCharacter.imagePath} alt={currentCharacter.name} />
+            <AvatarFallback>{currentCharacter.name.charAt(0)}</AvatarFallback> {/* Fallback to first initial */}
           </Avatar>
           <div className="text-right"> {/* Text group second in code -> visually left of avatar */}
-            <h2 className="text-xl font-semibold text-white">{characterName}</h2>
-            <p className="text-sm text-gray-300">דמות היסטורית מתקופת יציאת מצרים</p> {/* Placeholder Description */}
+            <h2 className="text-xl font-semibold text-white">{currentCharacter.name}</h2>
+            <p className="text-sm text-gray-300">{currentCharacter.description}</p> {/* Use character description */}
           </div>
         </div>
         {/* Message Display Area */}
@@ -115,25 +145,18 @@ export default function ChatPage() {
             שלח {/* Send */}
           </Button>
         </div>
-         {/* Back to Main Menu Button - Reverted to simple Link */}
-         <div className="p-2 text-center border-t border-gray-600">
-            <Link href="/" className="text-sm text-blue-400 hover:text-blue-300">
-              חזרה לתפריט הראשי
-            </Link>
-        </div>
+         {/* Removed Back to Main Menu Button */}
       </Container> {/* Close Container */}
 
       {/* Left Side: Character Display (Takes 2/3 width) - Placed second due to RTL */}
       <div className="w-2/3 h-full flex items-end justify-center p-10 relative"> {/* Keep width 2/3 */}
-         {/* Character Image */}
+         {/* Character Image - Updated to use state */}
          <div
+            key={currentCharacter.name} // Add key to force re-render on character change if needed for transitions
             className={`character h-[80%] w-full bg-contain bg-no-repeat bg-bottom transition-opacity duration-500 ease-in-out opacity-100`}
-            style={{ backgroundImage: `url('${CHARACTER_IMG}')` }}
+            style={{ backgroundImage: `url('${currentCharacter.imagePath}')` }}
          ></div>
-         {/* Optional: Character Name Display */}
-         <div className="absolute top-10 left-10 bg-black/50 text-white p-2 rounded">
-            {characterName}
-         </div>
+         {/* Removed Character Name Display from top-left */}
       </div>
     </div>
   );
