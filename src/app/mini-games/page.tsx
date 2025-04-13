@@ -1,105 +1,119 @@
-"use client"; // For client-side interactions
+"use client"; // Required for hooks and client-side interactions
 
-import Link from 'next/link';
-import Container from '@/components/ui/Container'; // Import Container
-import Button from '@/components/ui/Button'; // Import Button
+import React, { useState, useEffect } from 'react'; // Removed useRef
+// Removed duplicate import line
+import Link from 'next/link'; // Re-import Link
+// Removed Container and Button imports
+import { Typography } from '@/components/ui/Typography'; // Import Typography
+import MenuButton from '@/components/ui/MenuButton'; // Import MenuButton
+
+// Array of new background image paths
+const backgroundImages = [
+  '/images/mini-games-bg/games_toys_1.png',
+  '/images/mini-games-bg/childrens_room_1.png',
+  '/images/mini-games-bg/childrens_room_2.png',
+  '/images/mini-games-bg/games_toys_2.png',
+];
 
 export default function MiniGamesHub() {
+  // State for the selected background image
+  const [backgroundImage, setBackgroundImage] = useState('');
+
+  // Effect to select a random background image on mount
+  useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * backgroundImages.length);
+    setBackgroundImage(backgroundImages[randomIndex]);
+  }, []); // Empty dependency array ensures this runs only once on mount
+
   return (
     <div
       dir="rtl"
-      // Applied background using ::before pseudo-element
-      className="relative min-h-screen p-8 isolate
-                 before:absolute before:inset-0 before:-z-10
-                 before:bg-[url('/images/mini_games_bg.png')] before:bg-cover before:bg-center before:bg-no-repeat
-                 before:bg-black/50 before:content-['']" // Slightly darker overlay
+      // Apply background image via inline style, keep other layout classes
+      className="relative flex flex-col items-center justify-center min-h-screen p-8 text-right isolate bg-cover bg-center"
+      style={{ backgroundImage: backgroundImage ? `url(${backgroundImage})` : 'none' }}
     >
-      <h1 className="text-4xl font-bold mb-8 text-center text-white drop-shadow-md">משחקים מיני</h1> {/* Mini-Games - Adjusted size and color */}
+      {/* Removed Video Background Section */}
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-        {/* Space Invaders Card */}
-        <GameCard
-          title="חלליות פולשות"
-          description="הגן על התקווה שלך מול סכנות ומכשולים"
-          href="/mini-games/space-invaders"
-          imageUrl="/images/space_invaders_placeholder.png" // Placeholder - update if you have an image
-          docsHref="/docs/space-invaders" // Corrected path based on MDX structure
-        />
+      {/* Keep Dark Overlay */}
+      <div className="absolute inset-0 w-full h-full bg-black/50 -z-10"></div> {/* Slightly darker overlay */}
 
-        {/* Daily Task Manager Card */}
-        <GameCard
-          title="ניהול משימות צוות יומי"
-          description="נהל את המשימות היומיות של העובדים והמשאבים לעמידה ביעדים"
-          href="/mini-games/daily-task-manager"
-          imageUrl="/images/task_manager_placeholder.png" // Placeholder - update if you have an image
-          docsHref="/docs/daily-task-manager" // Corrected path based on MDX structure
-        />
+      {/* Content container from MainMenu */}
+      <div className="relative z-0 flex flex-col items-center w-full">
+        {/* Title using Typography, styled like MainMenu */}
+        <Typography variant="h1" color="indigo-glow" className="mb-2">
+          מיני-משחקים
+        </Typography>
+        {/* Subtitle using Typography */}
+        <Typography variant="lead" color="secondary" className="mb-10 drop-shadow-md text-gray-200"> {/* Reduced margin bottom back to mb-10 */}
+          בדקו את הידע והכישורים שלכם עם משחקים קצרים המבוססים על הסיפור.
+        </Typography>
 
-        {/* Hebrew Trivia Card */}
-        <GameCard
-          title="טריוויה עברית"
-          description="השלם את הפסוק והציווי במשחק ידע מרתק"
-          href="/mini-games/hebrew-trivia"
-          imageUrl="/images/trivia_placeholder.png" // Placeholder - update if you have an image
-          docsHref="/docs/hebrew-trivia" // Corrected path based on MDX structure
-        />
-      </div>
+        {/* Title for the button grid - Added like MainMenu */}
+        <Typography variant="h4" className="mb-6 drop-shadow-lg text-white">
+          בחר משחק
+        </Typography>
 
+        {/* Grid for game cards, using MenuButton with secondary variant */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 w-full max-w-3xl"> {/* Adjusted grid cols */}
+          {/* Space Invaders Button */}
+          <MenuButton
+            variant="dark" // Use the new dark variant
+            title="חלליות פולשות"
+            description="הגן על התקווה שלך מול סכנות ומכשולים"
+            href="/mini-games/space-invaders"
+            className="min-h-[8rem]" // Keep height adjustment
+            actions={
+              <Link href="/docs/space-invaders" className="text-sm text-blue-400 hover:text-blue-300 hover:underline">
+                [תיעוד]
+              </Link>
+            }
+          />
 
-    </div>
+          {/* Daily Task Manager Button */}
+          <MenuButton
+            variant="dark" // Use the new dark variant
+            title="ניהול משימות צוות יומי"
+            description="נהל את המשימות היומיות של העובדים והמשאבים לעמידה ביעדים"
+            href="/mini-games/daily-task-manager"
+            className="min-h-[8rem]" // Keep height adjustment
+            actions={
+              <Link href="/docs/daily-task-manager" className="text-sm text-blue-400 hover:text-blue-300 hover:underline">
+                [תיעוד]
+              </Link>
+            }
+          />
+
+          {/* Hebrew Trivia Button */}
+          <MenuButton
+            variant="dark" // Use the new dark variant
+            title="טריוויה עברית"
+            description="השלם את הפסוק והציווי במשחק ידע מרתק"
+            href="/mini-games/hebrew-trivia"
+            className="min-h-[8rem]" // Keep height adjustment
+            actions={
+              <Link href="/docs/hebrew-trivia" className="text-sm text-blue-400 hover:text-blue-300 hover:underline">
+                [תיעוד]
+              </Link>
+            }
+          />
+
+          {/* Placeholder for potential 4th button */}
+           <MenuButton
+            variant="dark" // Use the new dark variant
+            title="בקרוב..."
+            description="משחקים נוספים יתווספו בהמשך."
+            // Keep only the page-specific layout adjustment
+            className="min-h-[8rem]"
+            // Removed titleClassName and descriptionClassName overrides
+            disabled // Disable the button
+          />
+        </div> {/* Closing Grid */}
+
+        {/* Removed Back Button Section */}
+
+      </div> {/* Closing Content container */}
+    </div> /* Closing Main Div */
   );
 }
 
-// Define props type for GameCard
-interface GameCardProps {
-  title: string;
-  description: string;
-  href: string;
-  imageUrl?: string; // Optional image URL
-  docsHref: string; // Added link for documentation
-}
-
-// Reusable component for game cards - Using Container and Button
-function GameCard({ title, description, href, imageUrl, docsHref }: GameCardProps) {
-  // Removed the outer Link wrapper to prevent nesting <a> tags
-  return (
-    <Container
-      variant="dialog"
-      // Added group class here for potential hover effects on children
-      className="group p-6 bg-black/70 hover:bg-black/80 transition duration-300 h-full flex flex-col shadow-lg overflow-hidden border border-yellow-800/50" // Adjusted background, added border
-    >
-      {imageUrl && (
-        <div className="mb-4 h-40 bg-gray-700 rounded overflow-hidden flex items-center justify-center">
-          {/* Image Link - Clicking image goes to game */}
-          <Link href={href} className="block w-full h-full">
-            <img src={imageUrl} alt={`${title} preview`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onError={(e) => e.currentTarget.style.display = 'none'} />
-          </Link>
-           {/* Fallback text if image fails */}
-          {!imageUrl && <span className="text-gray-400">אין תמונה</span>}
-        </div>
-      )}
-      {/* Title Link - Clicking title goes to game */}
-      <Link href={href} className="block">
-        <h2 className="text-xl font-bold mb-2 hover:text-yellow-400 transition-colors">{title}</h2>
-      </Link>
-      <p className="text-gray-300 mb-4 flex-grow">{description}</p>
-      {/* Action Buttons/Links */}
-      <div className="mt-auto flex justify-between items-center">
-        {/* Play Now Button is now a Link */}
-        <Link href={href} passHref>
-          <Button variant="primary" className="group-hover:bg-green-700">
-            שחק עכשיו {'<'} {/* Play Now < */}
-          </Button>
-        </Link>
-        {/* Docs Link remains a separate Link */}
-        <Link
-          href={docsHref}
-          // No need for stopPropagation as it's not nested in another link anymore
-          className="text-sm text-blue-400 hover:text-blue-300 hover:underline ml-4"
-        >
-          [תיעוד] {/* [Docs] */}
-        </Link>
-      </div>
-    </Container>
-  );
-}
+// Removed GameCard component and interface

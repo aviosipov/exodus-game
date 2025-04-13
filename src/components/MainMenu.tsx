@@ -4,8 +4,10 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
-import Button from './ui/Button'; // Import the new Button component
+// Removed SimpleButton import as it's now used within MenuButton
 import Container from './ui/Container'; // Import the Container component
+import { Typography } from './ui/Typography'; // Import the Typography component
+import MenuButton from './ui/MenuButton'; // Import the new MenuButton component
 // Removed audio-related imports: Volume2, VolumeX, Collapsible
 // Removed GameMenu import as it's now in layout
 
@@ -93,45 +95,55 @@ const MainMenu: React.FC = () => {
 
       {/* Content container - z-index added to ensure it's above the background */}
       <div className="relative z-0 flex flex-col items-center w-full">
-        <h1 className="text-4xl font-bold mb-2 text-white drop-shadow-md">יציאת מצרים: הרפתקה אינטראקטיבית</h1>
-        <p className="text-lg text-gray-200 mb-10 drop-shadow-md">נובלה ויזואלית אינטראקטיבית ומרכז פעילויות המבוסס על סיפור יציאת מצרים.</p>
+        {/* Using the new indigo-glow color variant */}
+        <Typography variant="h1" color="indigo-glow" className="mb-2"> {/* Use color variant, keep mb-2 */}
+           יציאת מצרים: הרפתקה אינטראקטיבית
+         </Typography>
+         <Typography variant="lead" color="secondary" className="mb-16 drop-shadow-md text-gray-200"> {/* Increased bottom margin from mb-10 to mb-16 */}
+           נובלה ויזואלית אינטראקטיבית ומרכז פעילויות המבוסס על סיפור יציאת מצרים.
+         </Typography>
 
-        {/* Primary Actions */}
-        {/* Primary Actions - Using Button component */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 w-full max-w-3xl">
-          {/* Button 1: Adventure - Updated Link */}
-          <Link href="/adventure">
-            <Button variant="secondary" className="w-full h-full flex flex-col items-start justify-center p-6 text-right"> {/* Align items to start (right in RTL) */}
-              <h2 className="text-2xl font-semibold mb-2">הרפתקה</h2> {/* Kept font-semibold here */}
-              <p>צאו למסע אינטראקטיבי בעקבות סיפור יציאת מצרים, פרק אחר פרק.</p>
-            </Button>
-          </Link>
+         {/* Title for the button grid - Removed colon, changed color, and enhanced glow */}
+         <Typography variant="h4" className="mb-6 drop-shadow-lg text-white"> {/* Removed colon, changed color to white, changed drop-shadow-md to drop-shadow-lg */}
+           בחר פעילות
+         </Typography>
 
-          {/* Button 2: Mini-games - Updated Link */}
-          <Link href="/mini-games">
-            <Button variant="secondary" className="w-full h-full flex flex-col items-start justify-center p-6 text-right"> {/* Align items to start (right in RTL) */}
-              <h2 className="text-2xl font-semibold mb-2">מיני-משחקים</h2> {/* Kept font-semibold here */}
-              <p>בדקו את הידע והכישורים שלכם עם משחקים קצרים המבוססים על הסיפור.</p>
-            </Button>
-          </Link>
+         {/* Primary Actions */}
+         {/* Primary Actions - Using Button component */}
+         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 w-full max-w-3xl">
+           {/* Button 1: Adventure - Using SimpleButton with description */}
+           {/* Button 1: Adventure - Using SimpleButton with description */}
+          {/* Using MenuButton component with variants */}
+          <MenuButton
+            variant="default" // Keep original style
+            href="/adventure"
+            title="הרפתקה"
+            description="צאו למסע אינטראקטיבי בעקבות סיפור יציאת מצרים, פרק אחר פרק."
+          />
 
-          {/* Button 3: Chat - Updated Link */}
-          <Link href="/chat">
-            <Button variant="secondary" className="w-full h-full flex flex-col items-start justify-center p-6 text-right"> {/* Align items to start (right in RTL) */}
-              <h2 className="text-2xl font-semibold mb-2">שיחה עם דמות</h2> {/* Kept font-semibold here */}
-              <p>שוחחו עם דמויות מהסיפור באמצעות בינה מלאכותית ולמדו את נקודת מבטן.</p>
-            </Button>
-          </Link>
+          {/* Using MenuButton component with variants */}
+          <MenuButton
+            variant="default" // Use bright variant
+            href="/mini-games"
+            title="מיני-משחקים"
+            description="בדקו את הידע והכישורים שלכם עם משחקים קצרים המבוססים על הסיפור."
+          />
 
-          {/* Button 4: Options */}
-          <Button
-            variant="secondary"
+          {/* Using MenuButton component with variants */}
+          <MenuButton
+            variant="default" // Use default variant again
+            href="/chat"
+            title="שיחה עם דמות"
+            description="שוחחו עם דמויות מהסיפור באמצעות בינה מלאכותית ולמדו את נקודת מבטן."
+          />
+
+          {/* Using MenuButton component with variants */}
+          <MenuButton
+            variant="default" // Use secondary variant
             onClick={() => alert('פתח אפשרויות')} // Placeholder action
-            className="w-full h-full flex flex-col items-start justify-center p-6 text-right" // Align items to start (right in RTL)
-          >
-            <h2 className="text-2xl font-semibold mb-2">אפשרויות</h2> {/* Kept font-semibold here */}
-            <p>התאימו את הגדרות המשחק, כמו עוצמת השמע.</p>
-          </Button>
+            title="אפשרויות"
+            description="התאימו את הגדרות המשחק, כמו עוצמת השמע."
+          />
         </div> {/* Closing Primary Actions Grid */}
 
         {/* Secondary/Meta Actions - Using Container component with dialog variant */}
@@ -140,16 +152,16 @@ const MainMenu: React.FC = () => {
           className="mt-8 w-full max-w-3xl flex flex-wrap justify-center items-center gap-4 text-sm" // Apply variant and keep layout styles
         >
           {/* Updated Footer Links */}
-          <Link href="/docs/about" className="text-amber-100 hover:text-white cursor-pointer">
-            אודות
+          <Link href="/docs/about" className="hover:text-white cursor-pointer">
+            <Typography variant="small" color="accent" className="text-amber-100">אודות</Typography> {/* Keep specific color if needed */}
           </Link>
           <span className="text-gray-400">|</span>
-          <Link href="/docs/content-editing" className="text-amber-100 hover:text-white cursor-pointer">
-            עריכת תוכן
+          <Link href="/docs/content-editing" className="hover:text-white cursor-pointer">
+            <Typography variant="small" color="accent" className="text-amber-100">עריכת תוכן</Typography> {/* Keep specific color if needed */}
           </Link>
           <span className="text-gray-400">|</span>
-          <Link href="/docs/dev-guide" className="text-amber-100 hover:text-white cursor-pointer">
-            מדריכים למפתחים
+          <Link href="/docs/dev-guide" className="hover:text-white cursor-pointer">
+            <Typography variant="small" color="accent" className="text-amber-100">מדריכים למפתחים</Typography> {/* Keep specific color if needed */}
           </Link>
         </Container> {/* Closing Secondary Actions Container */}
       </div> {/* Closing Content container */}
