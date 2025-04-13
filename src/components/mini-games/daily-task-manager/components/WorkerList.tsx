@@ -1,6 +1,8 @@
 import React from 'react';
 import { Worker } from '../types';
 import { Progress } from "@/components/ui/progress"; // Import shadcn Progress
+import Container from '@/components/ui/Container'; // Import Container
+import { Typography } from '@/components/ui/Typography'; // Import Typography
 
 interface WorkerListProps {
     workers: Worker[];
@@ -18,10 +20,12 @@ export const WorkerList: React.FC<WorkerListProps> = ({
     taskShortName,
 }) => {
     return (
-        <div className="bg-black/40 p-3 rounded border border-gray-600">
-            <h3 className="text-lg font-semibold mb-2 text-yellow-500">
+        // Use Container with 'default' (dark) variant
+        <Container variant="default" className="p-3"> {/* Changed variant to 'default' */}
+            {/* Use Typography for title */}
+            <Typography variant="h3" className="mb-2 text-yellow-500">
                 העובדים שלך
-            </h3>
+            </Typography>
             <div className="space-y-2 max-h-60 overflow-y-auto pr-2">
                 {workers.map((worker) => {
                     const { icon, color } = getWorkerStatusInfo(worker);
@@ -30,20 +34,23 @@ export const WorkerList: React.FC<WorkerListProps> = ({
                         <button
                             key={worker.id}
                             onClick={() => onSelectWorker(worker.id)}
+                            // Keep button styling for now, as it's list-item specific
                             className={`w-full text-right p-2 rounded border transition-colors duration-200 ${isSelected
                                 ? "bg-yellow-700/50 border-yellow-500"
                                 : "bg-black/30 border-gray-700 hover:bg-gray-700/50"
                                 }`}
                         >
-                            <span className={`font-semibold ${color}`}>
+                            {/* Use Typography for worker name */}
+                            <Typography variant="body1" as="span" className={`font-semibold ${color}`}>
                                 {worker.name_he}
-                            </span>
-                            <span className="text-sm float-left">
+                            </Typography>
+                            {/* Use Typography for status */}
+                            <Typography variant="small" as="span" className="float-left">
                                 {icon}{" "}
                                 {worker.status === "working"
                                     ? taskShortName(worker.currentTaskId)
                                     : worker.status}
-                            </span>
+                            </Typography>
                             {/* Progress Bar using shadcn/ui */}
                             {worker.status === "working" &&
                                 worker.taskProgress !== undefined && (
@@ -53,6 +60,6 @@ export const WorkerList: React.FC<WorkerListProps> = ({
                     );
                 })}
             </div>
-        </div>
+        </Container>
     );
 };

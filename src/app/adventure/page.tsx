@@ -124,18 +124,7 @@ export default function AdventureListPage() {
           />
         </div> {/* Closing Grid */}
 
-        {/* Back Button to Main Menu */}
-        <div className="mt-8 w-full max-w-xs">
-          <MenuButton
-            variant="default" // Use default yellow style for back button
-            title="חזרה לתפריט הראשי"
-            description="חזור לבחירת פעילות"
-            href="/" // Link back to the main menu
-            className="text-center"
-            titleClassName="text-lg"
-            descriptionClassName="text-sm text-indigo-800"
-          />
-        </div>
+
 
       </div> {/* Closing Content container */}
     </div> /* Closing Main Div */

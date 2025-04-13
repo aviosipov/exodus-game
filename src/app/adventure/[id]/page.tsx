@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from 'next/navigation'; // Hook to get route parameters
 import Container from "@/components/ui/Container"; // Import the Container component
+import SimpleButton from "@/components/ui/SimpleButton"; // Import SimpleButton
 
 // Define interfaces for better type safety
 interface Choice {
@@ -182,7 +183,7 @@ export default function AdventureScenePage() {
 
             {/* Dialogue Box - Using Container component */}
             <div className="absolute bottom-5 left-5 right-5 h-[150px] z-20">
-                <Container variant="dialog" className="h-full flex flex-col justify-between"> {/* Use Container with dialog variant */}
+                <Container variant="bright" className="h-full flex flex-col justify-between"> {/* Use Container with dialog variant */}
                     {/* Speaker and Text */}
                     <div className="text-right">
                         <h3 className="font-bold text-lg mb-2">{currentStepData.speaker || ""}</h3>
@@ -192,32 +193,35 @@ export default function AdventureScenePage() {
                     {/* Buttons Area */}
                     <div className="flex justify-start items-center">
                         {currentStepData.choices ? (
-                            // Render choices if they exist
+                            // Render choices if they exist using SimpleButton
                             currentStepData.choices.map((choice, index) => (
-                                <button
+                                <SimpleButton
                                     key={index}
-                                    className="ms-2 px-3 py-1 bg-green-600 hover:bg-green-700 rounded text-sm transition duration-300"
+                                    variant="default" // Use default yellow style for choices
+                                    className="ms-2 !text-sm !px-3 !py-1" // Override size/padding
                                     onClick={() => handleChoice(choice.outcome)}
                                 >
                                     {choice.text}
-                                </button>
+                                </SimpleButton>
                             ))
                         ) : !currentStepData.end ? (
-                            // Render "Next" button if no choices and not the end
-                            <button
-                                className="ms-2 px-3 py-1 bg-blue-500 hover:bg-blue-700 rounded text-sm"
+                            // Render "Next" button using SimpleButton
+                            <SimpleButton
+                                variant="bright" // Use bright blue style
+                                className="ms-2 !text-sm !px-3 !py-1" // Override size/padding
                                 onClick={nextStep}
                             >
                                 המשך {'>'} {/* Next > */}
-                            </button>
+                            </SimpleButton>
                         ) : (
-                            // Optional: Render something at the end, e.g., a restart button or link back
-                             <button
-                                className="ms-2 px-3 py-1 bg-gray-500 hover:bg-gray-700 rounded text-sm"
+                            // Optional: Render "Back to List" button using SimpleButton
+                             <SimpleButton
+                                variant="secondary" // Use secondary gray style
+                                className="ms-2 !text-sm !px-3 !py-1" // Override size/padding
                                 onClick={() => window.location.href = '/adventure'} // Navigate back to list
                             >
                                 חזור לרשימה {/* Back to List */}
-                            </button>
+                            </SimpleButton>
                         )}
                     </div>
                 </Container> {/* Close Container */}

@@ -4,7 +4,8 @@ import React, { useState, useEffect, useRef } from "react";
 // Removed unused Link import
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"; // Import Avatar components
 import Container from "@/components/ui/Container"; // Import Container
-import Button from "@/components/ui/Button"; // Import Button
+// Removed Button import
+import { Typography } from "@/components/ui/Typography"; // Import Typography as named export
 
 // Define character structure
 interface Character {
@@ -96,18 +97,19 @@ export default function ChatPage() {
 
         {/* Chat UI Container */}
         <Container
-          variant="dialog"
+          variant="default"
           className="w-full h-full flex flex-col shadow-lg !p-0" // Adjusted width/height to fill wrapper, removed margin
         >
-        {/* Chat Header with Avatar - Keep padding here */}
-        <div className="p-4 border-b border-gray-600 flex items-center justify-start gap-3"> {/* Keep internal padding */}
+        {/* Chat Header with Avatar - Keep padding here, removed bottom border */}
+        <div className="p-4 flex items-center justify-start gap-3"> {/* Keep internal padding, removed border-b border-gray-600 */}
           <Avatar className="h-12 w-12">
             <AvatarImage src={currentCharacter.imagePath} alt={currentCharacter.name} />
             <AvatarFallback>{currentCharacter.name.charAt(0)}</AvatarFallback> {/* Fallback to first initial */}
           </Avatar>
           <div className="text-right"> {/* Text group second in code -> visually left of avatar */}
-            <h2 className="text-xl font-semibold text-white">{currentCharacter.name}</h2>
-            <p className="text-sm text-gray-300">{currentCharacter.description}</p> {/* Use character description */}
+            {/* Use Typography for character name and description - Removed invalid weight prop */}
+            <Typography variant="h3" >{currentCharacter.name}</Typography>
+            <Typography variant="body1">{currentCharacter.description}</Typography>
           </div>
         </div>
         {/* Message Display Area */}
@@ -142,10 +144,13 @@ export default function ChatPage() {
             placeholder="כתוב את שאלתך כאן..."
             className="flex-grow p-2 rounded border border-gray-500 bg-gray-700 text-white focus:outline-none focus:border-blue-500 placeholder-gray-400" // Adjusted bg slightly
           />
-          {/* Use Button component - Corrected variant, removed size */}
-          <Button onClick={handleSendMessage} variant="primary"> {/* Use primary button */}
+          {/* Use standard HTML button with Tailwind classes */}
+          <button
+            onClick={handleSendMessage}
+            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+          >
             שלח {/* Send */}
-          </Button>
+          </button>
         </div>
          {/* Removed Back to Main Menu Button */}
       </Container> {/* Close Chat UI Container */}

@@ -1,5 +1,8 @@
 import React from 'react';
 import { GameResult, DailyGoal, GoalLabels } from '../types';
+import Container from '@/components/ui/Container'; // Import Container
+import { Typography } from '@/components/ui/Typography'; // Import Typography
+import SimpleButton from '@/components/ui/SimpleButton'; // Import SimpleButton
 
 interface EndScreenProps {
     result: GameResult;
@@ -10,24 +13,30 @@ interface EndScreenProps {
 
 export const EndScreen: React.FC<EndScreenProps> = ({ result, dailyGoal, goalLabels, onRestart }) => {
     return (
-        <div
+        // Use Container with default (dark) variant
+        <Container
+            variant="default"
             dir="rtl"
-            className="flex flex-col items-center justify-center text-white p-8 rounded-lg shadow-lg text-center max-w-2xl mx-auto bg-black/60 backdrop-blur-md border border-yellow-700 font-sans"
+            className="flex flex-col items-center justify-center text-white p-8 text-center max-w-2xl mx-auto font-sans"
         >
-            <h2 className="text-4xl font-bold mb-6 font-amatic text-yellow-400">
+            {/* Use Typography for title */}
+            <Typography variant="h2" color="accent" className="mb-6 font-amatic">
                 המשימה הסתיימה!
-            </h2>
+            </Typography>
+            {/* Use Typography for result message */}
             {result.success ? (
-                <p className="text-2xl mb-4 text-green-400 font-sans">
+                // Apply green text color directly using className, keep inherit color prop
+                <Typography variant="h3" color="inherit" className="mb-4 text-green-400">
                     המכסה הושגה! עבודה טובה, מנהל!
-                </p>
+                </Typography>
             ) : (
-                <p className="text-2xl mb-4 text-red-400 font-sans">
+                <Typography variant="h3" color="destructive" className="mb-4"> {/* Use h3 and destructive color */}
                     {'המכסה לא הושגה. הנוגשים לא יהיו מרוצים\'...'}
-                </p>
+                </Typography>
             )}
-            <div className="text-lg mb-6 font-sans">
-                <h3 className="font-semibold mb-2 underline">סיכום יעדים:</h3>
+            {/* Use Typography for summary section */}
+            <Typography variant="body1" as="div" className="mb-6">
+                <Typography variant="h4" as="h3" className="font-semibold mb-2 underline">סיכום יעדים:</Typography>
                 {Object.entries(result.goalAchievement).map(([key, value]) => {
                     if (
                         key.endsWith("_progress") ||
@@ -40,7 +49,8 @@ export const EndScreen: React.FC<EndScreenProps> = ({ result, dailyGoal, goalLab
                     const targetValue = dailyGoal[goalKey];
                     const label = goalLabels[goalKey] || goalKey;
                     return (
-                        <p key={goalKey}>
+                        // Use Typography for each goal line
+                        <Typography variant="body2" as="p" key={goalKey}>
                             {label}:{" "}
                             {typeof progressValue === "number"
                                 ? `${progressValue} / ${targetValue}`
@@ -49,19 +59,21 @@ export const EndScreen: React.FC<EndScreenProps> = ({ result, dailyGoal, goalLab
                             <span className={value ? "text-green-400" : "text-red-400"}>
                                 {value ? "הושג" : "לא הושג"}
                             </span>
-                        </p>
+                        </Typography>
                     );
                 })}
-            </div>
+            </Typography>
             {/* Optional: Display final resources or worker states here if needed */}
             {/* <pre className="text-xs text-left">{JSON.stringify(result.finalSharedResources, null, 2)}</pre> */}
             {/* <pre className="text-xs text-left">{JSON.stringify(result.finalWorkers, null, 2)}</pre> */}
-            <button
-                onClick={onRestart} // Allow restarting
-                className="mt-6 px-8 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-lg transition duration-300 shadow-md font-sans"
+            {/* Use SimpleButton for restart */}
+            <SimpleButton
+                variant="bright" // Use bright blue variant
+                onClick={onRestart}
+                className="mt-6" // Keep margin
             >
                 התחל מחדש
-            </button>
-        </div>
+            </SimpleButton>
+        </Container>
     );
 };

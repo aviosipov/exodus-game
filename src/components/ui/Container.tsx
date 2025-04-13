@@ -2,7 +2,8 @@
 import React from 'react';
 import { cn } from "@/lib/utils"; // Assuming you have a utility like this for class merging
 
-type ContainerVariant = 'default' | 'dialog' | 'bright'; // Add 'bright' variant
+// Rename 'default'->'light', 'dialog'->'default'
+type ContainerVariant = 'default' | 'light' | 'bright';
 
 interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
@@ -16,15 +17,15 @@ const Container: React.FC<ContainerProps> = ({
   className,
   ...props
 }) => {
-  const baseStyles = "rounded-lg"; // Common style
+  // Add common shadow to baseStyles
+  const baseStyles = "rounded-lg border border-gray-600 p-4 shadow-md";
 
+  // Remove variant-specific shadows
   const variantStyles: Record<ContainerVariant, string> = {
-    default: "bg-gray-50 border border-gray-300 p-6 shadow-sm",
-    dialog: "bg-black/70 text-white border border-gray-600 p-4", // Style from AdventurePage
-    bright: "bg-white/80 text-gray-900 border border-gray-300 p-4 shadow-lg", // Changed opacity to 80%
+    default: "bg-black/70 text-white", // Dark style is now default
+    light: "bg-gray-50/80", // Removed shadow-sm
+    bright: "bg-gray-50/80 text-gray-900", // Removed shadow-lg
   };
-
-  // Removed unused proseStyles variable
 
   return (
     <div
@@ -32,7 +33,7 @@ const Container: React.FC<ContainerProps> = ({
       // not the container itself. We'll handle this in the page component.
       className={cn(
         baseStyles,
-        variantStyles[variant],
+        variantStyles[variant], // This correctly picks the style based on the variant prop
         className // Allow overriding and adding classes
       )}
       {...props}

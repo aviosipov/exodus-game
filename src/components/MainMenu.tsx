@@ -146,12 +146,12 @@ const MainMenu: React.FC = () => {
           />
         </div> {/* Closing Primary Actions Grid */}
 
-        {/* Secondary/Meta Actions - Using Container component with dialog variant */}
+        {/* Secondary/Meta Actions - Using Container component with default (dark) variant */}
         <Container
-          variant="dialog"
-          className="mt-8 w-full max-w-3xl flex flex-wrap justify-center items-center gap-4 text-sm" // Apply variant and keep layout styles
+            variant="default" // Changed variant to 'default'
+            className="mt-8 w-full max-w-3xl flex flex-wrap justify-center items-center gap-4 text-sm" // Apply variant and keep layout styles
         >
-          {/* Updated Footer Links */}
+            {/* Updated Footer Links */}
           <Link href="/docs/about" className="hover:text-white cursor-pointer">
             <Typography variant="small" color="accent" className="text-amber-100">אודות</Typography> {/* Keep specific color if needed */}
           </Link>

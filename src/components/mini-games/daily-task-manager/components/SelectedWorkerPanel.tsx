@@ -2,6 +2,9 @@ import React from 'react';
 import { Worker, Task, ResourceLabels, GoalLabels } from '../types';
 import { StatBar } from './StatBar'; // Import the StatBar component
 import { Zap, UtensilsCrossed, Smile, Info } from 'lucide-react';
+import Container from '@/components/ui/Container'; // Import Container
+import { Typography } from '@/components/ui/Typography'; // Import Typography
+import SimpleButton from '@/components/ui/SimpleButton'; // Import SimpleButton
 
 interface SelectedWorkerPanelProps {
     selectedWorker: Worker;
@@ -27,10 +30,12 @@ export const SelectedWorkerPanel: React.FC<SelectedWorkerPanelProps> = ({
     getCostOutcomeTextFunc,
 }) => {
     return (
-        <div className="bg-black/40 p-3 rounded border border-gray-600">
-            <h3 className="text-lg font-semibold mb-2 text-yellow-500">
+        // Use Container with 'default' (dark) variant
+        <Container variant="default" className="p-3">
+            {/* Use Typography for title */}
+            <Typography variant="h3" className="mb-2 text-yellow-500">
                 פרטי עובד: {selectedWorker.name_he}
-            </h3>
+            </Typography>
             {/* Stats Bars */}
             <div className="space-y-1 mb-3 text-sm">
                 <StatBar
@@ -57,9 +62,10 @@ export const SelectedWorkerPanel: React.FC<SelectedWorkerPanelProps> = ({
                 />
             </div>
 
-            <h4 className="text-md font-semibold mb-2 text-yellow-400">
+            {/* Use Typography for subtitle */}
+            <Typography variant="h4" className="mb-2 text-yellow-400">
                 משימות זמינות לעובד זה:
-            </h4>
+            </Typography>
             <div className="space-y-2 max-h-60 overflow-y-auto pr-2">
                 {availableTasks.map((task) => {
                     const affordCheck = canAffordTask(task, selectedWorker);
@@ -67,10 +73,11 @@ export const SelectedWorkerPanel: React.FC<SelectedWorkerPanelProps> = ({
                         selectedWorker.status === "working" &&
                         selectedWorker.currentTaskId === task.id;
                     const { costs, outcomes } = getCostOutcomeTextFunc(task, sharedResourceLabels, goalLabels);
-                    const buttonTextPerforming = "בעבודה..."; // Use simple string
+                    const buttonTextPerforming = "בעבודה...";
                     const buttonTextIdle = "בצע משימה";
 
                     return (
+                        // Use Container for each task item? Or keep div? Keep div for now.
                         <div
                             key={task.id}
                             className={`p-2 rounded border text-sm ${affordCheck.affordable && selectedWorker.status === "idle"
@@ -78,47 +85,48 @@ export const SelectedWorkerPanel: React.FC<SelectedWorkerPanelProps> = ({
                                 : "border-gray-600 bg-black/20 opacity-70"
                                 }`}
                         >
-                            <p className="font-semibold text-yellow-300">
+                            {/* Use Typography for task name */}
+                            <Typography variant="body1" as="p" className="font-semibold text-yellow-300">
                                 {task.name_he} ({task.duration_seconds} שנ&#39;)
-                            </p>
+                            </Typography>
                             {task.description_he && (
-                                <p className="text-xs text-gray-300 mb-1">
+                                // Use Typography for task description
+                                <Typography variant="small" as="p" className="text-gray-300 mb-1">
                                     {task.description_he}
-                                </p>
+                                </Typography>
                             )}
-                            {/* Simplified Cost/Outcome display */}
-                            <div className="text-xs text-gray-400">
+                            {/* Use Typography for cost/outcome */}
+                            <Typography variant="small" as="div" className="text-gray-400">
                                 {costs.length > 0 && <p className="text-red-400">עלות: {costs.join(', ')}</p>}
                                 {outcomes.length > 0 && <p className="text-green-400">תוצאה: {outcomes.join(', ')}</p>}
-                            </div>
+                            </Typography>
                             {!affordCheck.affordable &&
                                 selectedWorker.status === "idle" && (
-                                    <p className="text-xs text-red-400 mt-1">
+                                    // Use Typography for affordability reason
+                                    <Typography variant="small" as="p" className="text-red-400 mt-1">
                                         <Info size={10} className="inline" />{" "}
                                         {affordCheck.reason}
-                                    </p>
+                                    </Typography>
                                 )}
-                            <button
+                            {/* Use SimpleButton for task action */}
+                            <SimpleButton
+                                variant="default" // Use default yellow variant
                                 onClick={() => onPerformTask(task)}
                                 disabled={
                                     !affordCheck.affordable ||
                                     selectedWorker.status !== "idle" ||
                                     gameEnded
                                 }
-                                className={`w-full mt-2 px-2 py-1 rounded font-bold text-black transition duration-200 text-xs ${affordCheck.affordable &&
-                                    selectedWorker.status === "idle"
-                                    ? "bg-yellow-500 hover:bg-yellow-400"
-                                    : "bg-gray-500 cursor-not-allowed"
-                                    } disabled:opacity-60 disabled:cursor-not-allowed`}
+                                className={`w-full mt-2 py-1 text-xs ${!(affordCheck.affordable && selectedWorker.status === "idle") ? "bg-gray-500 !border-gray-700 hover:bg-gray-500 cursor-not-allowed" : ""}`} // Override disabled style slightly
                             >
                                 {isPerformingThisTask
                                     ? buttonTextPerforming
                                     : buttonTextIdle}
-                            </button>
+                            </SimpleButton>
                         </div>
                     );
                 })}
             </div>
-        </div>
+        </Container>
     );
 };
