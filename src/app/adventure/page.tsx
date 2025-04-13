@@ -1,6 +1,7 @@
 "use client"; // Required for useState and useEffect
 
 import React, { useState, useEffect } from "react";
+import Container from "@/components/ui/Container"; // Import the Container component
 
 // --- Game Data ---
 const scene = [
@@ -165,9 +166,9 @@ export default function AdventurePage() {
                 style={{ backgroundImage: rightCharImg ? `url('${rightCharImg}')` : 'none' }}
             ></div>
 
-            {/* Dialogue Box */}
+            {/* Dialogue Box - Using Container component */}
             <div className="absolute bottom-5 left-5 right-5 h-[150px] z-20">
-                <div className="bg-black/70 text-white rounded-lg p-4 h-full border border-gray-600 flex flex-col justify-between">
+                <Container variant="dialog" className="h-full flex flex-col justify-between"> {/* Use Container with dialog variant and add layout classes */}
                     {/* Speaker and Text */}
                     <div className="text-right">
                         <h3 className="font-bold text-lg mb-2">{currentStepData.speaker || ""}</h3>
@@ -205,7 +206,7 @@ export default function AdventurePage() {
                             </button>
                         )}
                     </div>
-                </div>
+                </Container> {/* Close Container */}
             </div>
 
              {/* Choices Box (Alternative centered display - kept commented out for now) */}

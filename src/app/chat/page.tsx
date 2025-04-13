@@ -3,6 +3,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from 'next/link';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"; // Import Avatar components
+import Container from "@/components/ui/Container"; // Import Container
+import Button from "@/components/ui/Button"; // Import Button
 
 // Define message structure
 interface Message {
@@ -60,11 +62,14 @@ export default function ChatPage() {
       className="relative w-screen h-screen overflow-hidden bg-cover bg-center bg-no-repeat flex items-center" // Changed items-end back to items-center
       style={{ backgroundImage: `url('${BACKGROUND_IMG}')` }}
     >
-      {/* Right Side: Chat UI (Takes 1/3 width, increased margin, height 80vh, vertically centered) - Placed first due to RTL */}
-      <div className="w-1/3 h-[80vh] flex flex-col bg-black/80 border-s-2 border-gray-600 m-8 rounded-lg shadow-lg"> {/* Changed m-4 to m-8 */}
-        {/* Chat Header with Avatar */}
-        <div className="p-4 border-b border-gray-600 flex items-center justify-start gap-3"> {/* Changed justify-end to justify-start for RTL */}
-          <Avatar className="h-12 w-12"> {/* Added size classes */}
+      {/* Right Side: Chat UI - Using Container */}
+      <Container
+        variant="dialog"
+        className="w-1/3 h-[80vh] flex flex-col m-8 shadow-lg !p-0" // Use variant, add layout, remove padding override
+      >
+        {/* Chat Header with Avatar - Keep padding here */}
+        <div className="p-4 border-b border-gray-600 flex items-center justify-start gap-3"> {/* Keep internal padding */}
+          <Avatar className="h-12 w-12">
             <AvatarImage src={CHARACTER_IMG} alt={characterName} />
             <AvatarFallback>{characterName.charAt(0)}</AvatarFallback> {/* Fallback to first initial */}
           </Avatar>
@@ -103,22 +108,20 @@ export default function ChatPage() {
             onChange={handleInputChange}
             onKeyPress={handleKeyPress}
             placeholder="כתוב את שאלתך כאן..."
-            className="flex-grow p-2 rounded border border-gray-500 bg-gray-800 text-white focus:outline-none focus:border-blue-500"
+            className="flex-grow p-2 rounded border border-gray-500 bg-gray-700 text-white focus:outline-none focus:border-blue-500 placeholder-gray-400" // Adjusted bg slightly
           />
-          <button
-            onClick={handleSendMessage}
-            className="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded transition duration-300"
-          >
+          {/* Use Button component - Corrected variant, removed size */}
+          <Button onClick={handleSendMessage} variant="primary"> {/* Use primary button */}
             שלח {/* Send */}
-          </button>
+          </Button>
         </div>
-         {/* Back to Main Menu Button */}
+         {/* Back to Main Menu Button - Reverted to simple Link */}
          <div className="p-2 text-center border-t border-gray-600">
             <Link href="/" className="text-sm text-blue-400 hover:text-blue-300">
-            חזרה לתפריט הראשי
+              חזרה לתפריט הראשי
             </Link>
         </div>
-      </div>
+      </Container> {/* Close Container */}
 
       {/* Left Side: Character Display (Takes 2/3 width) - Placed second due to RTL */}
       <div className="w-2/3 h-full flex items-end justify-center p-10 relative"> {/* Keep width 2/3 */}

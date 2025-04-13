@@ -1,7 +1,8 @@
 "use client"; // For client-side interactions
 
 import Link from 'next/link';
-// Removed unused useState import
+import Container from '@/components/ui/Container'; // Import Container
+import Button from '@/components/ui/Button'; // Import Button
 
 export default function MiniGamesHub() {
   return (
@@ -41,10 +42,12 @@ export default function MiniGamesHub() {
         />
       </div>
 
-      {/* Back to Main Menu Button */}
+      {/* Back to Main Menu Button - Using Button component */}
       <div className="mt-10 text-center">
-        <Link href="/" className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded transition duration-300 shadow-md">
-          חזרה לתפריט הראשי {/* Changed text */}
+        <Link href="/" passHref legacyBehavior>
+          <Button variant="primary"> {/* Use primary button */}
+            חזרה לתפריט הראשי
+          </Button>
         </Link>
       </div>
     </div>
@@ -59,14 +62,17 @@ interface GameCardProps {
   imageUrl?: string; // Optional image URL
 }
 
-// Reusable component for game cards
+// Reusable component for game cards - Using Container and Button
 function GameCard({ title, description, href, imageUrl }: GameCardProps) {
   return (
     <Link href={href} className="block group">
-      <div className="bg-black/70 border border-gray-600 rounded-lg p-6 hover:bg-black/80 transition duration-300 h-full flex flex-col text-white shadow-lg overflow-hidden">
+      {/* Use Container for card structure */}
+      <Container
+        variant="dialog"
+        className="p-6 hover:bg-black/80 transition duration-300 h-full flex flex-col shadow-lg overflow-hidden" // Apply variant, add layout, hover, shadow, overflow, keep padding
+      >
         {imageUrl && (
-          <div className="mb-4 h-40 bg-gray-700 rounded overflow-hidden flex items-center justify-center">
-            {/* Basic image placeholder */}
+          <div className="mb-4 h-40 bg-gray-700 rounded overflow-hidden flex items-center justify-center"> {/* Keep image container */}
             <img src={imageUrl} alt={`${title} preview`} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onError={(e) => e.currentTarget.style.display = 'none'} />
              {/* Fallback text if image fails */}
             {!imageUrl && <span className="text-gray-400">אין תמונה</span>}
@@ -74,12 +80,13 @@ function GameCard({ title, description, href, imageUrl }: GameCardProps) {
         )}
         <h2 className="text-xl font-bold mb-2">{title}</h2>
         <p className="text-gray-300 mb-4 flex-grow">{description}</p>
-        <div className="mt-auto text-left"> {/* Aligns button to bottom-left (visually bottom-right in RTL) */}
-          <span className="inline-block bg-green-600 group-hover:bg-green-700 text-white py-2 px-4 rounded transition duration-300">
+        {/* Use Button component for action */}
+        <div className="mt-auto text-left">
+          <Button variant="primary" className="group-hover:bg-green-700"> {/* Use primary, maybe adjust hover if needed */}
             שחק עכשיו {'<'} {/* Play Now < */}
-          </span>
+          </Button>
         </div>
-      </div>
+      </Container> {/* Close Container */}
     </Link>
   );
 }

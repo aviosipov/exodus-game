@@ -1,23 +1,36 @@
 // components/ui/Container.tsx
 import React from 'react';
+import { cn } from "@/lib/utils"; // Assuming you have a utility like this for class merging
 
-interface ContainerProps {
+type ContainerVariant = 'default' | 'dialog';
+
+interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
-  className?: string; // Allow passing additional classes
+  variant?: ContainerVariant;
+  className?: string;
 }
 
-const Container: React.FC<ContainerProps> = ({ children, className = '' }) => {
+const Container: React.FC<ContainerProps> = ({
+  children,
+  variant = 'default',
+  className,
+  ...props
+}) => {
+  const baseStyles = "rounded-lg"; // Common style
+
+  const variantStyles: Record<ContainerVariant, string> = {
+    default: "bg-gray-50 border border-gray-300 p-6 shadow-sm",
+    dialog: "bg-black/70 text-white border border-gray-600 p-4", // Style from AdventurePage
+  };
+
   return (
     <div
-      className={`
-        bg-gray-50      // Light gray background (adjust like bg-white, bg-gray-100 if needed)
-        border          // Add a border
-        border-gray-300 // Light gray border color (adjust as needed)
-        rounded-lg      // Medium-large rounded corners (adjust like rounded-md, rounded-xl)
-        p-6             // Padding inside the container (adjust like p-4, p-8)
-        shadow-sm       // Optional: a subtle shadow
-        ${className}    // Merge with any additional classes passed in
-      `}
+      className={cn(
+        baseStyles,
+        variantStyles[variant],
+        className // Allow overriding and adding classes
+      )}
+      {...props}
     >
       {children}
     </div>

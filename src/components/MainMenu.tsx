@@ -5,7 +5,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Button from './ui/Button'; // Import the new Button component
-// Removed unused Container import
+import Container from './ui/Container'; // Import the Container component
 // Removed audio-related imports: Volume2, VolumeX, Collapsible
 
 const videoPaths = [
@@ -134,20 +134,24 @@ const MainMenu: React.FC = () => {
           </Button>
         </div> {/* Closing Primary Actions Grid */}
 
-        {/* Secondary/Meta Actions - Adjusted text color for theme */}
-        <div className="border-t border-amber-600/50 pt-6 mt-8 w-full max-w-3xl flex flex-wrap justify-center gap-4 text-sm bg-black/30 rounded px-4 py-2 backdrop-blur-sm">
+        {/* Secondary/Meta Actions - Using Container component with dialog variant */}
+        <Container
+          variant="dialog"
+          className="mt-8 w-full max-w-3xl flex flex-wrap justify-center items-center gap-4 text-sm" // Apply variant and keep layout styles
+        >
           <Link href="/about" passHref>
             <span className="text-amber-100 hover:text-white cursor-pointer">אודות</span>
           </Link>
-          <span className="text-amber-400">|</span>
+          {/* Use slightly different text color for better contrast on dark bg if needed */}
+          <span className="text-gray-400">|</span>
           <Link href="/edit" passHref>
             <span className="text-amber-100 hover:text-white cursor-pointer">עריכת תוכן</span>
           </Link>
-          <span className="text-amber-400">|</span>
+          <span className="text-gray-400">|</span>
           <Link href="/dev-guides" passHref>
             <span className="text-amber-100 hover:text-white cursor-pointer">מדריכים למפתחים</span>
           </Link>
-        </div> {/* Closing Secondary Actions Div */}
+        </Container> {/* Closing Secondary Actions Container */}
       </div> {/* Closing Content container */}
     </div> /* Closing Main Div */
   );
