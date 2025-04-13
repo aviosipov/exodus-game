@@ -174,13 +174,11 @@ export default function AdventureScenePage() {
                 className={`character absolute bottom-[170px] left-[50px] h-[60%] w-[30%] bg-contain bg-no-repeat bg-bottom transition-opacity duration-500 ease-in-out ${leftCharImg ? 'opacity-100' : 'opacity-0'}`}
                 style={{ backgroundImage: leftCharImg ? `url('${leftCharImg}')` : 'none' }}
             ></div>
-
             {/* Right Character */}
             <div
                 className={`character absolute bottom-[170px] right-[50px] h-[60%] w-[30%] bg-contain bg-no-repeat bg-bottom transition-opacity duration-500 ease-in-out ${rightCharImg ? 'opacity-100' : 'opacity-0'}`}
                 style={{ backgroundImage: rightCharImg ? `url('${rightCharImg}')` : 'none' }}
             ></div>
-
             {/* Dialogue Box - Using Container component */}
             <div className="absolute bottom-5 left-5 right-5 h-[150px] z-20">
                 <Container variant="bright" className="h-full flex flex-col justify-between"> {/* Use Container with dialog variant */}
@@ -194,7 +192,7 @@ export default function AdventureScenePage() {
                     <div className="flex justify-start items-center">
                         {currentStepData.choices ? (
                             // Render choices if they exist using SimpleButton
-                            currentStepData.choices.map((choice, index) => (
+                            (currentStepData.choices.map((choice, index) => (
                                 <SimpleButton
                                     key={index}
                                     variant="default" // Use default yellow style for choices
@@ -203,25 +201,23 @@ export default function AdventureScenePage() {
                                 >
                                     {choice.text}
                                 </SimpleButton>
-                            ))
+                            )))
                         ) : !currentStepData.end ? (
                             // Render "Next" button using SimpleButton
-                            <SimpleButton
+                            (<SimpleButton
                                 variant="bright" // Use bright blue style
                                 className="ms-2 !text-sm !px-3 !py-1" // Override size/padding
                                 onClick={nextStep}
-                            >
-                                המשך {'>'} {/* Next > */}
-                            </SimpleButton>
+                            >המשך {'>'} {/* Next > */}
+                            </SimpleButton>)
                         ) : (
                             // Optional: Render "Back to List" button using SimpleButton
-                             <SimpleButton
+                             (<SimpleButton
                                 variant="secondary" // Use secondary gray style
                                 className="ms-2 !text-sm !px-3 !py-1" // Override size/padding
                                 onClick={() => window.location.href = '/adventure'} // Navigate back to list
-                            >
-                                חזור לרשימה {/* Back to List */}
-                            </SimpleButton>
+                            >חזור לרשימה {/* Back to List */}
+                             </SimpleButton>)
                         )}
                     </div>
                 </Container> {/* Close Container */}

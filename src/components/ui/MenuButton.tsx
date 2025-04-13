@@ -62,13 +62,51 @@ const MenuButton: React.FC<MenuButtonProps> = ({
     </SimpleButton>
   );
 
+  // If href is provided, wrap only the main button content in a Link,
+  // but render the actions outside the Link to avoid nesting.
   if (href) {
-    // Using legacyBehavior with passHref allows Link to pass href to the underlying SimpleButton (or its wrapper)
-    // If SimpleButton directly renders an `<a>` tag, legacyBehavior might not be needed.
-    // Adjust based on SimpleButton's implementation. Assuming SimpleButton doesn't render `<a>`.
-    return <Link href={href} passHref legacyBehavior><a>{content}</a></Link>;
+    // When href is provided, wrap SimpleButton inside Link > a
+    return (
+      <div className={cn("relative", className)}> {/* Container for positioning actions */}
+        <Link href={href} className="block h-full"> {/* Make Link a block element */}
+          {/* The SimpleButton now acts as the content of the link */}
+          <SimpleButton
+            variant={variant}
+            // Apply necessary styling for the button itself
+            className={cn("w-full text-right flex flex-col items-start justify-between h-full", className)}
+            {...buttonProps} // Pass button props like onClick
+          >
+            {/* Main content wrapper */}
+            <div>
+              <Typography variant="h3" className={cn("mb-1", titleClassName)}>
+                {title}
+              </Typography>
+              <Typography
+                variant="body2"
+                color="muted"
+                className={cn(
+                  variant === 'dark' ? "text-gray-300" : "text-amber-800",
+                  descriptionClassName
+                )}
+              >
+                {description}
+              </Typography>
+            </div>
+            {/* Placeholder for spacing, actions will be positioned absolutely */}
+             {actions && <div className="mt-auto pt-2 h-6" />} {/* Adjust height as needed */}
+          </SimpleButton>
+        </Link>
+        {/* Render actions outside the Link, positioned absolutely */}
+        {actions && (
+          <div className="absolute bottom-2 right-4 z-10"> {/* Position actions */}
+             {actions}
+          </div>
+        )}
+      </div>
+    );
   }
 
+  // If no href, render the original content structure
   return content;
 };
 

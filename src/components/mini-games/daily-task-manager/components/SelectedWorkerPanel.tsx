@@ -61,7 +61,6 @@ export const SelectedWorkerPanel: React.FC<SelectedWorkerPanelProps> = ({
                     getProgressBarColorFunc={getProgressBarColorFunc}
                 />
             </div>
-
             {/* Use Typography for subtitle */}
             <Typography variant="h4" className="mb-2 text-yellow-400">
                 משימות זמינות לעובד זה:
@@ -91,9 +90,9 @@ export const SelectedWorkerPanel: React.FC<SelectedWorkerPanelProps> = ({
                             </Typography>
                             {task.description_he && (
                                 // Use Typography for task description
-                                <Typography variant="small" as="p" className="text-gray-300 mb-1">
+                                (<Typography variant="small" as="p" className="text-gray-300 mb-1">
                                     {task.description_he}
-                                </Typography>
+                                </Typography>)
                             )}
                             {/* Use Typography for cost/outcome */}
                             <Typography variant="small" as="div" className="text-gray-400">
@@ -103,10 +102,10 @@ export const SelectedWorkerPanel: React.FC<SelectedWorkerPanelProps> = ({
                             {!affordCheck.affordable &&
                                 selectedWorker.status === "idle" && (
                                     // Use Typography for affordability reason
-                                    <Typography variant="small" as="p" className="text-red-400 mt-1">
+                                    (<Typography variant="small" as="p" className="text-red-400 mt-1">
                                         <Info size={10} className="inline" />{" "}
                                         {affordCheck.reason}
-                                    </Typography>
+                                    </Typography>)
                                 )}
                             {/* Use SimpleButton for task action */}
                             <SimpleButton

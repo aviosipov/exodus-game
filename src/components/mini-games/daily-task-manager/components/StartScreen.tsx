@@ -18,9 +18,9 @@ export const StartScreen: React.FC<StartScreenProps> = ({ title_he, onStartGame 
         >
             {title_he && (
                 // Use Typography for title - Use accent color variant and keep underline
-                <Typography variant="h3" color="accent" > {/* Use accent color */}
+                (<Typography variant="h3" color="accent" > {/* Use accent color */}
                     {title_he}
-                </Typography>
+                </Typography>)
             )}
             {/* Use Typography for description */}
             <Typography variant="lead" color="secondary" > {/* Use lead variant and secondary color */}

@@ -17,10 +17,11 @@ interface DocFrontmatter {
   // Add other frontmatter fields here as needed
 }
 
+// Updated Props type to reflect params being a Promise
 type Props = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 const contentDir = path.join(process.cwd(), "src", "content", "docs");
@@ -68,7 +69,7 @@ async function getDocContent(slug: string): Promise<{ data: DocFrontmatter; cont
 
 // Generate metadata for the page
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = params;
+  const { slug } = await params; // Await params Promise
   // Capitalize first letter and replace hyphens with spaces for a nicer title
   const title = slug
     .split('-')
@@ -90,7 +91,7 @@ const backgroundImages = [
 
 
 export default async function DocPage({ params }: Props) {
-  const { slug } = params;
+  const { slug } = await params; // Await params Promise
   const docData = await getDocContent(slug);
 
   if (!docData) {

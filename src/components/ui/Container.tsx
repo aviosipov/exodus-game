@@ -22,9 +22,9 @@ const Container: React.FC<ContainerProps> = ({
 
   // Remove variant-specific shadows
   const variantStyles: Record<ContainerVariant, string> = {
-    default: "bg-black/70 text-white", // Dark style is now default
-    light: "bg-gray-50/80", // Removed shadow-sm
-    bright: "bg-gray-50/80 text-gray-900", // Removed shadow-lg
+    default: "bg-gray-900 opacity-80 text-white", // Dark style is now default
+    light: "bg-gray-50 opacity-80", // Removed shadow-sm
+    bright: "bg-gray-50 opacity-90 text-gray-900", // Made bright variant fully opaque
   };
 
   return (

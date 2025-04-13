@@ -71,7 +71,6 @@ const MainMenu: React.FC = () => {
       className="relative flex flex-col items-center justify-center min-h-screen p-8 text-right isolate"
     >
       {/* Removed GameMenu component as it's now in layout */}
-
       {/* Video Background */}
       <div className="absolute inset-0 w-full h-full -z-10 overflow-hidden">
         <video
@@ -89,10 +88,8 @@ const MainMenu: React.FC = () => {
           Your browser does not support the video tag.
         </video>
       </div>
-
       {/* Dark Overlay */}
       <div className="absolute inset-0 w-full h-full bg-black/30 -z-10"></div>
-
       {/* Content container - z-index added to ensure it's above the background */}
       <div className="relative z-0 flex flex-col items-center w-full">
         {/* Using the new indigo-glow color variant */}
@@ -152,15 +149,24 @@ const MainMenu: React.FC = () => {
             className="mt-8 w-full max-w-3xl flex flex-wrap justify-center items-center gap-4 text-sm" // Apply variant and keep layout styles
         >
             {/* Updated Footer Links */}
-          <Link href="/docs/about" className="hover:text-white cursor-pointer">
+          <Link
+            href="/docs/about"
+            className="hover:text-white cursor-pointer"
+          >
             <Typography variant="small" color="accent" className="text-amber-100">אודות</Typography> {/* Keep specific color if needed */}
           </Link>
           <span className="text-gray-400">|</span>
-          <Link href="/docs/content-editing" className="hover:text-white cursor-pointer">
+          <Link
+            href="/docs/content-editing"
+            className="hover:text-white cursor-pointer"
+          >
             <Typography variant="small" color="accent" className="text-amber-100">עריכת תוכן</Typography> {/* Keep specific color if needed */}
           </Link>
           <span className="text-gray-400">|</span>
-          <Link href="/docs/dev-guide" className="hover:text-white cursor-pointer">
+          <Link
+            href="/docs/dev-guide"
+            className="hover:text-white cursor-pointer"
+          >
             <Typography variant="small" color="accent" className="text-amber-100">מדריכים למפתחים</Typography> {/* Keep specific color if needed */}
           </Link>
         </Container> {/* Closing Secondary Actions Container */}

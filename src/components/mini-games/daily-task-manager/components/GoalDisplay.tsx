@@ -30,7 +30,7 @@ export const GoalDisplay: React.FC<GoalDisplayProps> = ({
                         </Typography>
                         {typeof targetValue === "number" ? (
                             // Keep progress bar divs
-                            <div className="w-full bg-gray-600 rounded-full h-4 relative">
+                            (<div className="w-full bg-gray-600 rounded-full h-4 relative">
                                 <div
                                     className="bg-blue-500 h-4 rounded-full text-center text-xs text-white font-bold flex items-center justify-center"
                                     style={{
@@ -43,12 +43,12 @@ export const GoalDisplay: React.FC<GoalDisplayProps> = ({
                                 >
                                     {goalProgress[key] ?? 0} / {targetValue}
                                 </div>
-                            </div>
+                            </div>)
                         ) : (
                             // Use Typography for non-numeric goal
-                            <Typography variant="body2" as="span" className="font-bold">
+                            (<Typography variant="body2" as="span" className="font-bold">
                                 {goalProgress[key] ?? ""}
-                            </Typography>
+                            </Typography>)
                         )}
                     </div>
                 ))}

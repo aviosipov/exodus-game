@@ -157,12 +157,10 @@ const HebrewTriviaGame: React.FC<HebrewTriviaGameProps> = ({ questionSet, onGame
         <span>שאלה {currentQuestionIndex + 1} / {questionSet.length}</span>
         <span>ניקוד: {score}</span>
       </div>
-
       {/* Question Display Area - Use default font (font-sans/Rubik) */}
       <div className="mb-8 p-5 bg-gradient-to-b from-indigo-800 to-indigo-900 rounded-xl border-2 border-indigo-600 shadow-lg min-h-[100px] flex items-center justify-center">
         <p className="text-xl md:text-2xl font-semibold text-center font-sans">{currentQuestion?.question_he}</p>
       </div>
-
       {/* Answer Options Area - Buttons now use default font (font-sans/Rubik) via baseClass */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
         {shuffledAnswers.map((answer, index) => (
@@ -178,7 +176,6 @@ const HebrewTriviaGame: React.FC<HebrewTriviaGameProps> = ({ questionSet, onGame
           </button>
         ))}
       </div>
-
       {/* Feedback Area - Removed, feedback is now on buttons */}
       {/* {showFeedback && ( ... )} */}
     </div>

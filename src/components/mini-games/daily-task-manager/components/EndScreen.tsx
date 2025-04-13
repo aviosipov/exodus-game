@@ -26,9 +26,8 @@ export const EndScreen: React.FC<EndScreenProps> = ({ result, dailyGoal, goalLab
             {/* Use Typography for result message */}
             {result.success ? (
                 // Apply green text color directly using className, keep inherit color prop
-                <Typography variant="h3" color="inherit" className="mb-4 text-green-400">
-                    המכסה הושגה! עבודה טובה, מנהל!
-                </Typography>
+                (<Typography variant="h3" color="inherit" className="mb-4 text-green-400">המכסה הושגה! עבודה טובה, מנהל!
+                                    </Typography>)
             ) : (
                 <Typography variant="h3" color="destructive" className="mb-4"> {/* Use h3 and destructive color */}
                     {'המכסה לא הושגה. הנוגשים לא יהיו מרוצים\'...'}
@@ -54,8 +53,7 @@ export const EndScreen: React.FC<EndScreenProps> = ({ result, dailyGoal, goalLab
                             {label}:{" "}
                             {typeof progressValue === "number"
                                 ? `${progressValue} / ${targetValue}`
-                                : progressValue}{" "}
-                            -{" "}
+                                : progressValue}{" "}-{" "}
                             <span className={value ? "text-green-400" : "text-red-400"}>
                                 {value ? "הושג" : "לא הושג"}
                             </span>

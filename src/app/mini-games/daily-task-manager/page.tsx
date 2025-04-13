@@ -62,10 +62,8 @@ const MissionSelectionPage: React.FC = () => {
           Your browser does not support the video tag.
         </video>
       </div>
-
       {/* Dark Overlay from MainMenu/MiniGamesHub */}
       <div className="absolute inset-0 w-full h-full bg-black/30 -z-10"></div>
-
       {/* Content container from MainMenu/MiniGamesHub */}
       <div className="relative z-0 flex flex-col items-center w-full">
         {/* Title using Typography */}

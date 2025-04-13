@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react'; // Removed useRef
 // Removed duplicate import line
-import Link from 'next/link'; // Re-import Link
 // Removed Container and Button imports
 import { Typography } from '@/components/ui/Typography'; // Import Typography
 import MenuButton from '@/components/ui/MenuButton'; // Import MenuButton
@@ -33,10 +32,8 @@ export default function MiniGamesHub() {
       style={{ backgroundImage: backgroundImage ? `url(${backgroundImage})` : 'none' }}
     >
       {/* Removed Video Background Section */}
-
       {/* Keep Dark Overlay */}
       <div className="absolute inset-0 w-full h-full bg-black/50 -z-10"></div> {/* Slightly darker overlay */}
-
       {/* Content container from MainMenu */}
       <div className="relative z-0 flex flex-col items-center w-full">
         {/* Title using Typography, styled like MainMenu */}
@@ -63,9 +60,9 @@ export default function MiniGamesHub() {
             href="/mini-games/space-invaders"
             className="min-h-[8rem]" // Keep height adjustment
             actions={
-              <Link href="/docs/space-invaders" className="text-sm text-blue-400 hover:text-blue-300 hover:underline">
+              <a href="/docs/space-invaders" target="_blank" rel="noopener noreferrer" className="text-sm text-blue-400 hover:text-blue-300 hover:underline">
                 [תיעוד]
-              </Link>
+              </a>
             }
           />
 
@@ -77,9 +74,9 @@ export default function MiniGamesHub() {
             href="/mini-games/daily-task-manager"
             className="min-h-[8rem]" // Keep height adjustment
             actions={
-              <Link href="/docs/daily-task-manager" className="text-sm text-blue-400 hover:text-blue-300 hover:underline">
+              <a href="/docs/daily-task-manager" target="_blank" rel="noopener noreferrer" className="text-sm text-blue-400 hover:text-blue-300 hover:underline">
                 [תיעוד]
-              </Link>
+              </a>
             }
           />
 
@@ -91,9 +88,9 @@ export default function MiniGamesHub() {
             href="/mini-games/hebrew-trivia"
             className="min-h-[8rem]" // Keep height adjustment
             actions={
-              <Link href="/docs/hebrew-trivia" className="text-sm text-blue-400 hover:text-blue-300 hover:underline">
+              <a href="/docs/hebrew-trivia" target="_blank" rel="noopener noreferrer" className="text-sm text-blue-400 hover:text-blue-300 hover:underline">
                 [תיעוד]
-              </Link>
+              </a>
             }
           />
 
