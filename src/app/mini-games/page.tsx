@@ -45,15 +45,7 @@ export default function MiniGamesHub() {
         />
       </div>
 
-      {/* Back to Main Menu Button - Updated Link */}
-      <div className="mt-10 text-center">
-        <Link href="/">
-          {/* Removed legacyBehavior and passHref. Button is now direct child */}
-          <Button variant="primary">
-            חזרה לתפריט הראשי
-          </Button>
-        </Link>
-      </div>
+
     </div>
   );
 }

@@ -101,7 +101,7 @@ const MainMenu: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 w-full max-w-3xl">
           {/* Button 1: Adventure - Updated Link */}
           <Link href="/adventure">
-            <Button variant="secondary" className="w-full h-full flex flex-col items-center justify-center p-6 text-right"> {/* Changed text-center to text-right */}
+            <Button variant="secondary" className="w-full h-full flex flex-col items-start justify-center p-6 text-right"> {/* Align items to start (right in RTL) */}
               <h2 className="text-2xl font-semibold mb-2">הרפתקה</h2> {/* Kept font-semibold here */}
               <p>צאו למסע אינטראקטיבי בעקבות סיפור יציאת מצרים, פרק אחר פרק.</p>
             </Button>
@@ -109,7 +109,7 @@ const MainMenu: React.FC = () => {
 
           {/* Button 2: Mini-games - Updated Link */}
           <Link href="/mini-games">
-            <Button variant="secondary" className="w-full h-full flex flex-col items-center justify-center p-6 text-right"> {/* Changed text-center to text-right */}
+            <Button variant="secondary" className="w-full h-full flex flex-col items-start justify-center p-6 text-right"> {/* Align items to start (right in RTL) */}
               <h2 className="text-2xl font-semibold mb-2">מיני-משחקים</h2> {/* Kept font-semibold here */}
               <p>בדקו את הידע והכישורים שלכם עם משחקים קצרים המבוססים על הסיפור.</p>
             </Button>
@@ -117,7 +117,7 @@ const MainMenu: React.FC = () => {
 
           {/* Button 3: Chat - Updated Link */}
           <Link href="/chat">
-            <Button variant="secondary" className="w-full h-full flex flex-col items-center justify-center p-6 text-right"> {/* Changed text-center to text-right */}
+            <Button variant="secondary" className="w-full h-full flex flex-col items-start justify-center p-6 text-right"> {/* Align items to start (right in RTL) */}
               <h2 className="text-2xl font-semibold mb-2">שיחה עם דמות</h2> {/* Kept font-semibold here */}
               <p>שוחחו עם דמויות מהסיפור באמצעות בינה מלאכותית ולמדו את נקודת מבטן.</p>
             </Button>
@@ -127,7 +127,7 @@ const MainMenu: React.FC = () => {
           <Button
             variant="secondary"
             onClick={() => alert('פתח אפשרויות')} // Placeholder action
-            className="w-full h-full flex flex-col items-center justify-center p-6 text-right" // Removed invalid comment
+            className="w-full h-full flex flex-col items-start justify-center p-6 text-right" // Align items to start (right in RTL)
           >
             <h2 className="text-2xl font-semibold mb-2">אפשרויות</h2> {/* Kept font-semibold here */}
             <p>התאימו את הגדרות המשחק, כמו עוצמת השמע.</p>
