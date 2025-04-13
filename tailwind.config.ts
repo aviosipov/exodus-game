@@ -19,6 +19,7 @@ const config: Config = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+      // Removed keyframes and animation for collapsible as anime.js is used now
     },
   },
   plugins: [
