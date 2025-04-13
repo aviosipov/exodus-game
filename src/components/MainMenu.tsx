@@ -139,16 +139,16 @@ const MainMenu: React.FC = () => {
           variant="dialog"
           className="mt-8 w-full max-w-3xl flex flex-wrap justify-center items-center gap-4 text-sm" // Apply variant and keep layout styles
         >
-          <Link href="/about" passHref>
+          <Link href="/docs/about" passHref>
             <span className="text-amber-100 hover:text-white cursor-pointer">אודות</span>
           </Link>
           {/* Use slightly different text color for better contrast on dark bg if needed */}
           <span className="text-gray-400">|</span>
-          <Link href="/edit" passHref>
+          <Link href="/docs/content-editing" passHref>
             <span className="text-amber-100 hover:text-white cursor-pointer">עריכת תוכן</span>
           </Link>
           <span className="text-gray-400">|</span>
-          <Link href="/dev-guides" passHref>
+          <Link href="/docs/dev-guide" passHref>
             <span className="text-amber-100 hover:text-white cursor-pointer">מדריכים למפתחים</span>
           </Link>
         </Container> {/* Closing Secondary Actions Container */}

@@ -1,0 +1,37 @@
+# Developer Guide
+
+Welcome to the Exodus game developer guide.
+
+## Getting Started
+
+1.  Clone the repository.
+2.  Install dependencies: `npm install`
+3.  Run the development server: `npm run dev`
+
+## Code Structure
+
+-   `src/app`: Next.js App Router pages and layouts.
+-   `src/components`: Reusable React components.
+-   `src/lib`: Utility functions and libraries.
+-   `src/content`: Static content files (like this guide).
+
+## Adding a New Feature
+
+```typescript
+// Example of a new component
+import React from 'react';
+
+interface FeatureProps {
+  title: string;
+}
+
+const NewFeature: React.FC<FeatureProps> = ({ title }) => {
+  return (
+    <div>
+      <h2>{title}</h2>
+      {/* Feature implementation */}
+    </div>
+  );
+};
+
+export default NewFeature;

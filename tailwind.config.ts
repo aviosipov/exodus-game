@@ -1,5 +1,6 @@
 import type { Config } from 'tailwindcss';
 import scrollbarPlugin from 'tailwind-scrollbar'; // Import the plugin
+import typographyPlugin from '@tailwindcss/typography'; // Import the typography plugin
 
 const config: Config = {
   content: [
@@ -24,6 +25,7 @@ const config: Config = {
   },
   plugins: [
     scrollbarPlugin, // Use the imported plugin variable
+    typographyPlugin, // Add the typography plugin
   ],
 }
 export default config
