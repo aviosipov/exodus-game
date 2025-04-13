@@ -2,9 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react'; // Keep only one set of React imports
 import Link from 'next/link'; // Keep only one Link import
-import { Volume2, VolumeX } from 'lucide-react'; // Import icons
-import * as Collapsible from '@radix-ui/react-collapsible'; // Import Collapsible
-// Removed static animejs import - will use dynamic import
+// Removed audio-related imports: Volume2, VolumeX, Collapsible
 
 const videoPaths = [
   '/videos/video1.mp4',
@@ -13,59 +11,16 @@ const videoPaths = [
   '/videos/video4.mp4',
 ];
 
-// Define audio files
-const audioFiles = [
-  'Whispers in the Sand.mp3',
-  'Whispers in the Dunes.mp3',
-];
+// Removed audioFiles definition
 
 const MainMenu: React.FC = () => {
   // Video state and ref
   const [videoIndex, setVideoIndex] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // Audio state and ref
-  const [isMuted, setIsMuted] = useState(false);
-  const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
-  const audioRef = useRef<HTMLAudioElement>(null);
-  const [isAudioOptionsOpen, setIsAudioOptionsOpen] = useState(false); // State for collapsible
-  const contentRef = useRef<HTMLDivElement>(null); // Ref for the collapsible content
+  // Removed audio state and refs
 
-  // --- Load state from localStorage on mount ---
-  useEffect(() => {
-    const savedTrackIndex = localStorage.getItem('bgMusicTrackIndex');
-    const savedMuteState = localStorage.getItem('bgMusicMuted');
-
-    if (savedTrackIndex !== null) {
-      const trackIndex = parseInt(savedTrackIndex, 10);
-      // Ensure the index is valid before setting
-      if (!isNaN(trackIndex) && trackIndex >= 0 && trackIndex < audioFiles.length) {
-        setCurrentTrackIndex(trackIndex);
-      }
-    }
-
-    if (savedMuteState !== null) {
-      setIsMuted(savedMuteState === 'true');
-    }
-    // Indicate initial load is complete if needed for other logic, e.g., preventing initial autoplay flicker
-    // setInitialLoadComplete(true); // Example if you add such state
-  }, []); // Empty dependency array ensures this runs only once on mount
-
-  // --- Save state to localStorage on change ---
-  useEffect(() => {
-    // Check if window is defined (runs only on client-side)
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('bgMusicTrackIndex', currentTrackIndex.toString());
-    }
-  }, [currentTrackIndex]);
-
-  useEffect(() => {
-    // Check if window is defined (runs only on client-side)
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('bgMusicMuted', isMuted.toString());
-    }
-  }, [isMuted]);
-
+  // Removed localStorage effects for audio
 
   // --- Video Effects ---
 
@@ -97,57 +52,9 @@ const MainMenu: React.FC = () => {
     }
   }, [videoIndex]); // Trigger this effect when the video element remounts due to key change
 
-  // --- Audio Effects ---
+  // Removed Audio Effects
 
-  // Effect to handle audio playback and track changes
-  useEffect(() => {
-    const audioElement = audioRef.current;
-    if (audioElement) {
-      // Set the source and attempt to play
-      audioElement.src = `/audio/${encodeURIComponent(audioFiles[currentTrackIndex])}`;
-      audioElement.load(); // Important to load the new source
-
-      const playPromise = audioElement.play();
-      if (playPromise !== undefined) {
-        playPromise.then(() => {
-          // Autoplay started!
-          // Ensure muted state is correct after play starts
-          audioElement.muted = isMuted;
-        }).catch(error => {
-          // Autoplay was prevented.
-          console.log("Audio autoplay prevented:", error);
-          // Optionally, prompt user interaction here
-          // Start muted to potentially bypass some restrictions on subsequent plays
-          audioElement.muted = true;
-          audioElement.play().then(() => {
-             // If it plays muted, respect the user's desired mute state
-             audioElement.muted = isMuted;
-          }).catch(err => console.log("Muted autoplay also failed:", err));
-        });
-      }
-    }
-  }, [currentTrackIndex]); // Re-run when track changes
-
-  // Effect to control mute state externally
-  useEffect(() => {
-    if (audioRef.current) {
-      audioRef.current.muted = isMuted;
-    }
-  }, [isMuted]);
-
-  // --- Control Handlers ---
-
-  const toggleMute = () => {
-    setIsMuted(!isMuted);
-    setIsAudioOptionsOpen(false); // Close collapsible on action
-  };
-
-  const selectTrack = (index: number) => {
-    if (index !== currentTrackIndex) {
-      setCurrentTrackIndex(index);
-    }
-    setIsAudioOptionsOpen(false); // Close collapsible on action
-  };
+  // Removed Control Handlers for audio
 
 
   return (
@@ -156,66 +63,8 @@ const MainMenu: React.FC = () => {
       // Removed the ::before classes for background image
       className="relative flex flex-col items-center justify-center min-h-screen p-8 text-right isolate"
     >
-      {/* Collapsible Audio Player Controls (Top Left) */}
-      {/* Wrap everything in a single Collapsible.Root */}
-      <Collapsible.Root
-        open={isAudioOptionsOpen}
-        onOpenChange={setIsAudioOptionsOpen}
-        className="fixed top-4 left-4 z-50 flex flex-col items-start bg-white/80 backdrop-blur-sm p-3 rounded-lg shadow-lg w-max" // Root is the main container now
-      >
-        {/* Top Row: Trigger + Mute Button */}
-        <div className="flex items-center gap-3 w-full">
-          {/* Collapsible Trigger Text (Visually Rightmost in RTL) */}
-          <Collapsible.Trigger asChild>
-            <button className="text-sm font-medium text-cyan-900 hover:text-blue-600 transition-colors cursor-pointer flex-grow text-right mr-1">
-              פסקול מוזיקה רקע
-            </button>
-          </Collapsible.Trigger> {/* Correctly closed Trigger */}
-
-           {/* Mute Button (Visually Leftmost in RTL) */}
-           <button
-            onClick={toggleMute}
-            className="p-1 hover:bg-gray-100/50 rounded-full transition-colors"
-            title={isMuted ? "בטל השתקה" : "השתק"} // Add title back
-           >
-            {isMuted ? (
-              <VolumeX className="w-5 h-5 text-orange-700" /> 
-            ) : (
-              <Volume2 className="w-5 h-5 text-lime-600" /> 
-            )}
-          </button> {/* Correctly closed Mute button */}
-        </div> {/* Correctly closed flex container */}
-
-        {/* Collapsible Content Area (Below Trigger, within the main box) */}
-        {/* Apply transition classes and use data-state for height/opacity */}
-        <Collapsible.Content
-          ref={contentRef} // Keep ref in case needed later, but animation is CSS based
-          className="w-full overflow-hidden transition-all duration-300 ease-in-out data-[state=closed]:h-0 data-[state=closed]:opacity-0 data-[state=open]:opacity-100"
-          // Radix Collapsible handles height animation implicitly with transitions when state changes
-          // Removed inline style, relying on data-state classes now
-        >
-          <div className="flex flex-col items-start gap-1 mt-2 pt-2 border-t border-gray-300/50">
-            {/* Track Selection Buttons */}
-            {audioFiles.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => selectTrack(index)}
-                  className={`flex items-center gap-2 text-sm p-1 rounded w-full text-right ${
-                    currentTrackIndex === index
-                      ? 'font-semibold text-blue-700 bg-blue-100/50' // Highlight active track
-                      : 'text-gray-700 hover:bg-gray-100/50'
-                  }`}
-                >
-                   <span className="inline-block w-4 h-4"></span> {/* Spacer */}
-                   <span>רצועה {index + 1}</span>
-                 </button>
-               ))}
-          </div>
-        </Collapsible.Content>
-      </Collapsible.Root>
-
-      {/* Hidden Audio Element */}
-      <audio ref={audioRef} loop hidden playsInline />
+      {/* Removed Collapsible Audio Player Controls JSX */}
+      {/* Removed Hidden Audio Element */}
 
       {/* Video Background */}
       <div className="absolute inset-0 w-full h-full -z-10 overflow-hidden">

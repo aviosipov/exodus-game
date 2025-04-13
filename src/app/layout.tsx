@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Rubik, Amatic_SC, Noto_Serif_Hebrew } from 'next/font/google';
 import "./globals.css";
+import AudioPlayer from "@/components/AudioPlayer"; // Import the AudioPlayer
 
 // Rubik (variable font)
 const rubik = Rubik({
@@ -37,6 +38,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${rubik.variable} ${amaticSC.variable} ${notoSerif.variable}`}>
       <body className="antialiased">
+        <AudioPlayer /> {/* Add the AudioPlayer component */}
         {children}
       </body>
     </html>
