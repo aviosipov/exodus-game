@@ -1,6 +1,7 @@
 "use client"; // Required for hooks and client-side interactions
 
 import React, { useState, useEffect } from 'react'; // Removed useRef
+import Link from 'next/link'; // Import Link
 // Removed duplicate import line
 // Removed Container and Button imports
 import { Typography } from '@/components/ui/Typography'; // Import Typography
@@ -63,13 +64,14 @@ export default function MiniGamesHub() {
               // Removed actions prop
             />
             {/* Documentation Link - Placed outside MenuButton */}
-            <a
-              href="/docs/space-invaders"
-              rel="noopener noreferrer"
-              className="mt-2 text-sm text-gray-900 hover:text-black hover:underline font-light self-start bg-yellow-300/70 px-1 rounded-sm" // Added bg opacity, padding, rounded corners, adjusted text color
-            >
-              [תיעוד]
-            </a>
+            <Link href="/docs/space-invaders" passHref legacyBehavior>
+              <a
+                rel="noopener noreferrer"
+                className="mt-2 text-sm text-gray-900 hover:text-black hover:underline font-light self-start bg-yellow-300/70 px-1 rounded-sm" // Added bg opacity, padding, rounded corners, adjusted text color
+              >
+                [תיעוד]
+              </a>
+            </Link>
           </div>
 
           {/* Daily Task Manager Button Container */}
@@ -83,13 +85,14 @@ export default function MiniGamesHub() {
               // Removed actions prop
             />
             {/* Documentation Link - Placed outside MenuButton */}
-            <a
-              href="/docs/daily-task-manager"
-              rel="noopener noreferrer"
-              className="mt-2 text-sm text-gray-900 hover:text-black hover:underline font-light self-start bg-yellow-300/70 px-1 rounded-sm" // Added bg opacity, padding, rounded corners, adjusted text color
-            >
-              [תיעוד]
-            </a>
+            <Link href="/docs/daily-task-manager" passHref legacyBehavior>
+              <a
+                rel="noopener noreferrer"
+                className="mt-2 text-sm text-gray-900 hover:text-black hover:underline font-light self-start bg-yellow-300/70 px-1 rounded-sm" // Added bg opacity, padding, rounded corners, adjusted text color
+              >
+                [תיעוד]
+              </a>
+            </Link>
           </div>
 
           {/* Hebrew Trivia Button Container */}
@@ -103,13 +106,14 @@ export default function MiniGamesHub() {
               // Removed actions prop
             />
             {/* Documentation Link - Placed outside MenuButton */}
-            <a
-              href="/docs/hebrew-trivia"
-              rel="noopener noreferrer"
-              className="mt-2 text-sm text-gray-900 hover:text-black hover:underline font-light self-start bg-yellow-300/70 px-1 rounded-sm" // Added bg opacity, padding, rounded corners, adjusted text color
-            >
-              [תיעוד]
-            </a>
+            <Link href="/docs/hebrew-trivia" passHref legacyBehavior>
+              <a
+                rel="noopener noreferrer"
+                className="mt-2 text-sm text-gray-900 hover:text-black hover:underline font-light self-start bg-yellow-300/70 px-1 rounded-sm" // Added bg opacity, padding, rounded corners, adjusted text color
+              >
+                [תיעוד]
+              </a>
+            </Link>
           </div>
 
           {/* Placeholder for potential 4th button */}

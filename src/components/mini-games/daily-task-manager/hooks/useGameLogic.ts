@@ -81,7 +81,7 @@ export const useGameLogic = ({
         setSelectedWorkerId(null);
         setFeedbackMessage(null);
         // Timer and worker reset is handled within their respective hooks via gameStarted/gameEnded flags
-    }, [initialSharedResources, dailyGoal, globalTimeLimit_seconds]); // Dependencies for resetting
+    }, [initialSharedResources, dailyGoal]); // Dependencies for resetting - removed globalTimeLimit_seconds
 
     // --- Check Goal Met ---
     const checkGoalMet = useCallback((): GameResult => {
