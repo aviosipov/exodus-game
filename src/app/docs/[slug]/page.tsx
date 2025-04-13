@@ -4,6 +4,7 @@ import matter from 'gray-matter'; // Import gray-matter
 import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
 import { mdxComponents } from "@/mdx-components"; // Import custom components
+import Container from "@/components/ui/Container"; // Import Container
 import remarkGfm from "remark-gfm";
 import rehypePrettyCode from "rehype-pretty-code";
 import type { Options as PrettyCodeOptions } from "rehype-pretty-code";
@@ -79,6 +80,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
+// Define the list of background images
+const backgroundImages = [
+  '/images/docs-bg/bg1.png',
+  '/images/docs-bg/bg2.png',
+  '/images/docs-bg/bg3.png',
+  '/images/docs-bg/bg4.png',
+];
+
 
 export default async function DocPage({ params }: Props) {
   const { slug } = params;
@@ -112,17 +121,40 @@ export default async function DocPage({ params }: Props) {
     },
   };
 
-  // Determine text direction based on frontmatter
+  // Determine text direction and container variant based on frontmatter
   const textDirection = frontmatter.lang === 'he' ? 'rtl' : 'ltr';
+  const containerVariant = 'bright'; // Use the new bright variant
+  const proseClasses = containerVariant === 'bright' ? 'prose' : 'prose prose-invert'; // Adjust prose for contrast
+
+  // Select a random background image
+  const randomBgIndex = Math.floor(Math.random() * backgroundImages.length);
+  const selectedBgImage = backgroundImages[randomBgIndex];
 
   return (
-    // Apply prose class and conditional direction
-    <article
-      className="prose prose-invert max-w-none p-6 lg:prose-xl"
-      dir={textDirection} // Apply direction dynamically
+    <div
+      className="relative flex flex-col items-center justify-center min-h-screen p-4 md:p-8 isolate" // Added padding and flex centering
+      style={{
+        backgroundImage: `url(${selectedBgImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed', // Optional: Keep background fixed during scroll
+      }}
     >
-      {/* Render the MDX content */}
-      <MDXRemote
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 w-full h-full bg-black/60 -z-10"></div>
+
+      {/* Content Container */}
+      <Container
+        variant={containerVariant}
+        className="w-full max-w-6xl my-4 z-0 h-[70vh] overflow-y-auto" // Set fixed height to 70vh and enable scrolling
+      >
+        {/* Apply prose class and conditional direction to the article inside the container */}
+        <article
+          className={`${proseClasses} max-w-none lg:prose-xl`} // Apply dynamic prose class, removed padding
+          dir={textDirection} // Apply direction dynamically
+        >
+          {/* Render the MDX content */}
+          <MDXRemote
         source={source}
         components={mdxComponents}
         options={{
@@ -132,6 +164,8 @@ export default async function DocPage({ params }: Props) {
           },
         }}
       />
-    </article>
+        </article>
+      </Container>
+    </div>
   );
 }
