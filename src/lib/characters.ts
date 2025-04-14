@@ -1,46 +1,69 @@
-// Define character structure
+import fs from 'fs';
+import path from 'path';
+
+// Define character structure (remains the same)
 export interface Character {
-  id: string; // Unique identifier for the character
+  id: string;
   name: string;
   imagePath: string;
+  thumbPath: string;
   description: string;
-  systemPrompt: string; // Prompt to guide the AI's personality and knowledge base
+  systemPrompt: string;
 }
 
-// Define available characters
-export const availableCharacters: Character[] = [
-  {
-    id: 'ohad',
-    name: 'אוהד',
-    imagePath: '/images/ohad_avatar_nobg.png',
-    description: 'דמות היסטורית מתקופת יציאת מצרים',
-    systemPrompt: 'אתה אוהד, עד ראייה ליציאת מצרים. דבר מנקודת מבטך על האירועים, האתגרים והתקוות של בני ישראל במדבר. השתמש בידע מהמסמכים שסופקו לך כדי לענות על שאלות ספציפיות.'
-  },
-  {
-    id: 'ahmos',
-    name: 'אחמוס',
-    imagePath: '/images/ahmos_avatar_nobg.png',
-    description: 'פרעה מצרי קדום',
-    systemPrompt: 'אתה אחמוס הראשון, פרעה שאיחד את מצרים וגירש את החיקסוס. דבר על ממלכתך, האתגרים וההישגים שלך כמנהיג מצרים העתיקה. השתמש בידע מהמסמכים שסופקו לך.'
-  },
-  {
-    id: 'oziris',
-    name: 'אוזיריס',
-    imagePath: '/images/oziris_avatar_nobg.png',
-    description: 'אל מצרי קדום',
-    systemPrompt: 'אני אוזיריס, אל העולם התחתון, התחייה והנילוס. דבר על המיתולוגיה המצרית, תפקידי בממלכת המתים והקשר שלי לטבע ולפוריות. ענה על שאלות בהתבסס על הידע האלוהי שלי ועל המסמכים שסופקו.'
-  },
-  {
-    id: 'yishachar',
-    name: 'יששכר',
-    imagePath: '/images/yishachar_avatar_nobg.png',
-    description: 'דמות מקראית',
-    systemPrompt: 'אני יששכר, אחד משנים עשר בניו של יעקב אבינו. דבר על חיי השבטים, ברכות יעקב, והחוכמה המיוחסת לשבט יששכר. השתמש בידע מהמסמכים שסופקו לך כדי להרחיב על נושאים קשורים.'
-  },
-  // Add other characters as needed
-];
+// Define the base path for characters relative to the project root
+const charactersBasePath = path.join(process.cwd(), 'public', 'characters');
 
-// Helper function to get character by ID
+// Rewritten function to get character data by reading files
 export const getCharacterById = (id: string): Character | undefined => {
-  return availableCharacters.find(char => char.id === id);
+  try {
+    const characterDir = path.join(charactersBasePath, id);
+    const infoPath = path.join(characterDir, 'info.json');
+    const promptPath = path.join(characterDir, 'prompt.txt');
+
+    // Check if directory and files exist
+    if (!fs.existsSync(characterDir) || !fs.existsSync(infoPath) || !fs.existsSync(promptPath)) {
+      console.warn(`Character files not found for id: ${id}`);
+      return undefined;
+    }
+
+    // Read and parse info.json
+    const infoContent = fs.readFileSync(infoPath, 'utf-8');
+    const infoData = JSON.parse(infoContent);
+
+    // Read prompt.txt
+    const promptContent = fs.readFileSync(promptPath, 'utf-8');
+
+    // Construct the Character object
+    const character: Character = {
+      id: id,
+      name: infoData.name || 'Unknown Name', // Provide default if missing
+      description: infoData.description || 'No description available.', // Provide default
+      imagePath: `/characters/${id}/image.png`, // Construct path
+      thumbPath: `/characters/${id}/thumb.png`, // Construct path
+      systemPrompt: promptContent.trim(), // Use the content of prompt.txt
+    };
+
+    return character;
+
+  } catch (error) {
+    console.error(`Error reading character data for id ${id}:`, error);
+    return undefined;
+  }
+};
+
+// Optional: Function to get all character IDs (if needed elsewhere)
+export const getAllCharacterIds = (): string[] => {
+  try {
+    if (!fs.existsSync(charactersBasePath)) {
+      return [];
+    }
+    const directories = fs.readdirSync(charactersBasePath, { withFileTypes: true })
+      .filter(dirent => dirent.isDirectory())
+      .map(dirent => dirent.name);
+    return directories;
+  } catch (error) {
+    console.error("Error reading character directories:", error);
+    return [];
+  }
 };

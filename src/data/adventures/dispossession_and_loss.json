@@ -6,51 +6,51 @@
       "id": "start_dispossession",
       "speaker": "מספר",
       "text": "רוח רעה נושבת במצרים. צווים חדשים מטילים מיסים כבדים על בני ישראל בלבד, וחובות ישנים, אמיתיים או מדומים, נדרשים לפירעון מיידי. אתם, אוהד ויששכר, חשים את הלולאה מתהדקת סביב צווארכם.",
-      "character_left_img": "/images/ohad_avatar_nobg.png",
-      "character_right_img": "/images/issachar_avatar_nobg.png",
+      "character_left_img": "/characters/ohad/image.png",
+      "character_right_img": "/characters/issachar/image.png",
       "background_img": "/images/ancient_egypt_village_bg.webp"
     },
     {
       "speaker": "אוזיריס",
       "text": "(בפנים חמורות סבר, מחזיק מגילה) אוהד בן עמרם, על פי רישומי פרעה, עליך חוב מיסים עצום שלא שולם במשך שנים. הבית הזה והאדמה מסביב יעברו לרשותנו ככיסוי חלקי לחוב.",
-      "character_left_img": "/images/ohad_avatar_nobg.png",
-      "character_right_img": "/images/oziris_avatar_nobg.png",
+      "character_left_img": "/characters/ohad/image.png",
+      "character_right_img": "/characters/osiris/image.png",
       "background_img": "/images/ancient_egypt_village_bg.webp"
     },
     {
         "speaker": "אחמוס",
         "text": "(מחייך בזלזול) נראה שזמנכם הטוב במצרים נגמר, עברים. תתרגלו למגורים צנועים יותר. הארמון הזה קצת גדול עליכם, לא?",
-        "character_left_img": "/images/ahmose_avatar_nobg.png",
-        "character_right_img": "/images/oziris_avatar_nobg.png",
+        "character_left_img": "/characters/ahmos/image.png",
+        "character_right_img": "/characters/osiris/image.png",
         "background_img": "/images/ancient_egypt_village_bg.webp"
       },
     {
       "speaker": "אֹהַד",
       "text": "חוב?! איזה חוב? שילמתי את כל מיסיי תמיד! זו עלילה! אין לי סכומים כאלה!",
-      "character_left_img": "/images/ohad_avatar_nobg.png",
-      "character_right_img": "/images/oziris_avatar_nobg.png",
+      "character_left_img": "/characters/ohad/image.png",
+      "character_right_img": "/characters/osiris/image.png",
       "background_img": "/images/ancient_egypt_village_bg.webp"
     },
     {
       "speaker": "יִשָּׂשכָר",
       "text": "(מצטרף בבהלה) גם אליי באו בדרישות דומות! זה שוד לאור היום! הם מנסים לנשל אותנו מכל מה שיש לנו!",
-      "character_left_img": "/images/issachar_avatar_nobg.png",
-      "character_right_img": "/images/ohad_avatar_nobg.png",
+      "character_left_img": "/characters/issachar/image.png",
+      "character_right_img": "/characters/ohad/image.png",
       "background_img": "/images/ancient_egypt_village_bg.webp"
     },
     {
       "speaker": "אוזיריס",
       "text": "שוד? זו פקודת המלך! מי אתם שתערערו על רישומי פרעה? התשלום יבוצע, בין אם בכסף או בנכסים. פנו את הבית מיד!",
-      "character_left_img": "/images/issachar_avatar_nobg.png",
-      "character_right_img": "/images/oziris_avatar_nobg.png",
+      "character_left_img": "/characters/issachar/image.png",
+      "character_right_img": "/characters/osiris/image.png",
       "background_img": "/images/ancient_egypt_village_bg.webp"
     },
     {
       "id": "moment_of_eviction",
       "speaker": "מספר",
       "text": "שומרים המלווים את אוזיריס ואחמוס מתחילים להתקרב לביתך. המציאות מכה בך בעוצמה. ביתך, כל מה שבנית, עומד להילקח ממך. כיצד אתה מגיב ברגע זה?",
-      "character_left_img": "/images/ohad_avatar_nobg.png",
-      "character_right_img": "/images/oziris_avatar_nobg.png",
+      "character_left_img": "/characters/ohad/image.png",
+      "character_right_img": "/characters/osiris/image.png",
       "background_img": "/images/ancient_egypt_village_bg.webp",
       "choices": [
         { "text": "התחנן על נפשך: \"אנא, תנו לי זמן! אנסה לגייס את הכסף!\"", "outcome": "plead_time" },
@@ -62,8 +62,8 @@
       "id": "plead_time",
       "speaker": "אוזיריס",
       "text": "(צוחק בקול) זמן? הזמן שלכם נגמר, עבדים! פרעה אינו סבלני לחייבים. פנו את הבית או שנוציא אתכם בכוח!",
-      "character_left_img": "/images/ohad_avatar_nobg.png",
-      "character_right_img": "/images/oziris_avatar_nobg.png",
+      "character_left_img": "/characters/ohad/image.png",
+      "character_right_img": "/characters/osiris/image.png",
       "background_img": "/images/ancient_egypt_village_bg.webp",
       "next": "eviction_scene"
     },
@@ -71,8 +71,8 @@
       "id": "cry_injustice",
       "speaker": "אחמוס",
       "text": "(בטון מאיים) עוד מילה אחת, עבד, ותמצא את עצמך במחצבות עם שאר המורדים! אוזיריס, תן הוראה לפנות אותם מהר!",
-      "character_left_img": "/images/ahmose_avatar_nobg.png",
-      "character_right_img": "/images/oziris_avatar_nobg.png",
+      "character_left_img": "/characters/ahmos/image.png",
+      "character_right_img": "/characters/osiris/image.png",
       "background_img": "/images/ancient_egypt_village_bg.webp",
       "next": "eviction_scene"
     },
@@ -80,8 +80,8 @@
       "id": "accept_fate",
       "speaker": "אוזיריס",
       "text": "(בזלזול) בסדר, קח את הסמרטוטים שלך ולך. אבל מהר! אנחנו רוצים להיכנס לביתנו החדש.",
-      "character_left_img": "/images/ohad_avatar_nobg.png",
-      "character_right_img": "/images/oziris_avatar_nobg.png",
+      "character_left_img": "/characters/ohad/image.png",
+      "character_right_img": "/characters/osiris/image.png",
       "background_img": "/images/ancient_egypt_village_bg.webp",
       "next": "eviction_scene"
     },
@@ -89,29 +89,29 @@
       "id": "eviction_scene",
       "speaker": "מספר",
       "text": "בכאב לב ובחוסר אונים, אתה ויששכר נדחקים החוצה מביתך. אתה רואה את אוזיריס ואחמוס נכנסים פנימה, צוחקים ובוחנים את השלל החדש שלהם. אתם עומדים ברחוב, חסרי כל.",
-      "character_left_img": "/images/ohad_avatar_nobg.png",
-      "character_right_img": "/images/issachar_avatar_nobg.png",
+      "character_left_img": "/characters/ohad/image.png",
+      "character_right_img": "/characters/issachar/image.png",
       "background_img": "/images/ancient_egypt_slums_bg.webp"
     },
     {
       "speaker": "יִשָּׂשכָר",
       "text": "(קולו שבור) גם ביתי נלקח, אוהד. גירשו אותי ואת משפחתי כמו כלבים. לאן נלך עכשיו? נותרנו ללא קורת גג, ללא רכוש.",
-      "character_left_img": "/images/issachar_avatar_nobg.png",
-      "character_right_img": "/images/ohad_avatar_nobg.png",
+      "character_left_img": "/characters/issachar/image.png",
+      "character_right_img": "/characters/ohad/image.png",
       "background_img": "/images/ancient_egypt_slums_bg.webp"
     },
     {
       "speaker": "אֹהַד",
       "text": "(מביט סביב בייאוש) אני לא יודע, יששכר. הם לקחו הכל. השאירו אותנו חשופים ופגיעים.",
-      "character_left_img": "/images/ohad_avatar_nobg.png",
-      "character_right_img": "/images/issachar_avatar_nobg.png",
+      "character_left_img": "/characters/ohad/image.png",
+      "character_right_img": "/characters/issachar/image.png",
       "background_img": "/images/ancient_egypt_slums_bg.webp"
     },
     {
       "id": "end_scene_dispossession",
       "speaker": "מספר",
       "text": "השמש שוקעת על מצרים, אך עבורכם ועבור רבים מבני ישראל, החושך רק מתעמק. לא רק עבודת פרך מכבידה עליכם, אלא גם עוני מחפיר ונישול מנכסיכם. המצרים שהיו פעם שכנים, ואף מכרים, מנצלים את חולשתכם ללא רחם. היאוש מכרסם בלבבות.",
-      "character_left_img": "/images/ohad_avatar_nobg.png",
+      "character_left_img": "/characters/ohad/image.png",
       "character_right_img": null,
       "background_img": "/images/ancient_egypt_slums_bg.webp",
       "end": true

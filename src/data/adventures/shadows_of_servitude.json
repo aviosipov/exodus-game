@@ -20,28 +20,28 @@
     {
         "speaker": "נוגש מצרי",
         "text": "אשר, שמעתי שאתם, העברים, חרוצים ובניינים מנוסים. הממלכה זקוקה לעזרתכם בפרויקט לאומי חשוב - בניית ערי מסכנות לפרעה.",
-        "character_left_img": "/images/asher_avatar_nobg.png",
-        "character_right_img": "/images/egyptian_foreman_avatar_nobg.png",
+        "character_left_img": "/characters/ohad/image.png",
+        "character_right_img": "/characters/osiris/image.png",
         "background_img": "/images/construction_site_early_bg.webp"
     },
     {
         "speaker": "אשר",
         "text": "ערי מסכנות? זהו פרויקט גדול. במה נוכל לסייע?",
-        "character_left_img": "/images/asher_avatar_nobg.png",
-        "character_right_img": "/images/egyptian_foreman_avatar_nobg.png",
+        "character_left_img": "/characters/ohad/image.png",
+        "character_right_img": "/characters/osiris/image.png",
         "background_img": "/images/construction_site_early_bg.webp"
     },
     {
         "speaker": "נוגש מצרי",
         "text": "(בנימה עניינית, כמעט פוקדת) תתגייסו לעבודה. כל אחד לפי יכולתו. מצרים מצפה מכם לתרום את חלקכם. בתחילה, כמובן, נדאג לכם לשכר הוגן.",
-        "character_left_img": "/images/asher_avatar_nobg.png",
-        "character_right_img": "/images/egyptian_foreman_avatar_nobg.png",
+        "character_left_img": "/characters/ohad/image.png",
+        "character_right_img": "/characters/osiris/image.png",
         "background_img": "/images/construction_site_early_bg.webp"
     },
     {
         "speaker": "מספר",
         "text": "הבקשה נשמעת הגיונית, כמעט. חובה אזרחית. רבים מבני ישראל נענים לקריאה, בתקווה לשמור על היחסים הטובים ועל מעמדם.",
-        "character_left_img": "/images/asher_avatar_nobg.png",
+        "character_left_img": "/characters/ohad/image.png",
         "character_right_img": null,
         "background_img": "/images/construction_site_early_bg.webp"
     },
@@ -56,29 +56,29 @@
     {
         "speaker": "נוגש מצרי",
         "text": "(בטון קשוח יותר) אשר! הקצב איטי מדי! פרעה דורש לראות התקדמות! הכפילו את מכסת הלבנים היומית!",
-        "character_left_img": "/images/asher_avatar_nobg.png",
-        "character_right_img": "/images/egyptian_foreman_angry_avatar_nobg.png",
+        "character_left_img": "/characters/ohad/image.png",
+        "character_right_img": "/characters/osiris/image.png",
         "background_img": "/images/construction_site_harder_bg.webp"
     },
     {
         "speaker": "אשר",
         "text": "אבל אדוני, זה בלתי אפשרי! אנשינו עובדים מצאת החמה עד צאת הנשמה! הם מותשים!",
-        "character_left_img": "/images/asher_avatar_nobg.png",
-        "character_right_img": "/images/egyptian_foreman_angry_avatar_nobg.png",
+        "character_left_img": "/characters/ohad/image.png",
+        "character_right_img": "/characters/osiris/image.png",
         "background_img": "/images/construction_site_harder_bg.webp"
     },
     {
         "speaker": "נוגש מצרי",
         "text": "(בבוז) תלונות לא יבנו ערים! מי שלא עומד בקצב - ייענש! ודא שזה יקרה!",
-        "character_left_img": "/images/asher_avatar_nobg.png",
-        "character_right_img": "/images/egyptian_foreman_angry_avatar_nobg.png",
+        "character_left_img": "/characters/ohad/image.png",
+        "character_right_img": "/characters/osiris/image.png",
         "background_img": "/images/construction_site_harder_bg.webp"
     },
     {
         "id": "dawning_realization",
         "speaker": "מספר",
         "text": "האסימון נופל. זו אינה עוד בקשה לעזרה, זוהי תחילתה של עבדות. התחושה קשה ומרה. כיצד עליכם להגיב למצב המשתנה?",
-        "character_left_img": "/images/asher_avatar_nobg.png",
+        "character_left_img": "/characters/ohad/image.png",
         "character_right_img": null,
         "background_img": "/images/construction_site_oppressive_bg.webp",
         "choices": [
@@ -91,7 +91,7 @@
         "id": "hope_and_pray",
         "speaker": "מספר",
         "text": "אתם אוחזים בתקווה הדקה שהמצב ישתפר, שהמצרים יתעשתו. אתם ממשיכים בעבודה, נושאים תפילה חרישית לבורא עולם.",
-        "character_left_img": "/images/asher_avatar_nobg.png",
+        "character_left_img": "/characters/ohad/image.png",
         "character_right_img": null,
         "background_img": "/images/construction_site_oppressive_bg.webp",
         "next": "maror_begins"
@@ -100,8 +100,8 @@
         "id": "share_concerns",
         "speaker": "זקן השבט",
         "text": "אכן, בני, הרוחות רעות. עלינו להיות חזקים ומאוחדים. נמשיך לעבוד לפי שעה, אך עינינו יהיו פקוחות. נתפלל יחד לחוכמה והדרכה.",
-        "character_left_img": "/images/asher_avatar_nobg.png",
-        "character_right_img": "/images/elder_avatar_nobg.png",
+        "character_left_img": "/characters/ohad/image.png",
+        "character_right_img": "/characters/issachar/image.png",
         "background_img": "/images/israelite_gathering_modest_bg.webp",
         "next": "maror_begins"
     },
@@ -109,8 +109,8 @@
         "id": "appease_masters",
         "speaker": "מספר",
         "text": "אתם מנסים לעבוד קשה יותר, מהר יותר, לדכא כל תלונה. אך נראה ששום דבר אינו מספק את הנוגשים. הדרישות רק גוברות, והמבטים נעשים קרים יותר.",
-        "character_left_img": "/images/asher_avatar_nobg.png",
-        "character_right_img": "/images/egyptian_foreman_indifferent_avatar_nobg.png",
+        "character_left_img": "/characters/ohad/image.png",
+        "character_right_img": "/characters/osiris/image.png",
         "background_img": "/images/construction_site_oppressive_bg.webp",
         "next": "maror_begins"
     },

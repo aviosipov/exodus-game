@@ -8,8 +8,8 @@ const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
 
-// Use edge runtime for optimal streaming performance
-export const runtime = 'edge';
+// Removed edge runtime export as fs module is used in characters.ts
+// export const runtime = 'edge';
 
 export async function POST(req: NextRequest) {
   try {
