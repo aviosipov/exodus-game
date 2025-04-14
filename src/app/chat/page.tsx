@@ -5,7 +5,70 @@ import React, { useState, useEffect, useRef, FormEvent, KeyboardEvent } from "re
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Container from "@/components/ui/Container";
 import { Typography } from "@/components/ui/Typography";
-import { Character, availableCharacters } from '@/lib/characters'; // Import shared character data
+// Removed: import { Character, availableCharacters } from '@/lib/characters';
+
+// Define Character structure locally or import if defined elsewhere appropriately
+interface Character {
+  id: string;
+  name: string;
+  description: string;
+  imagePath: string;
+  thumbPath: string;
+}
+
+// Define the characters based on the created folders
+const loadedCharacters: Character[] = [
+  {
+    id: "moses",
+    name: "משה",
+    description: "המנהיג העברי שקיבל את עשרת הדיברות והוציא את בני ישראל מעבדות במצרים.",
+    imagePath: "/characters/moses/image.png",
+    thumbPath: "/characters/moses/thumb.png",
+  },
+  {
+    id: "elisheva",
+    name: "אלישבע",
+    description: "אשת אהרן הכהן הגדול וגיסתו של משה. ידועה באדיקותה ובקשר שלה לשושלת הכהונה.",
+    imagePath: "/characters/elisheva/image.png",
+    thumbPath: "/characters/elisheva/thumb.png",
+  },
+  {
+    id: "pharaoh",
+    name: "פרעה",
+    description: "שליט מצרים בתקופת יציאת מצרים, ידוע בלבו הקשה והתנגדותו לדרישות משה לשחרר את בני ישראל.",
+    imagePath: "/characters/pharaoh/image.png",
+    thumbPath: "/characters/pharaoh/thumb.png",
+  },
+  {
+    id: "ahmos",
+    name: "אחמוס",
+    description: "איש מצרי רגיל החווה את אירועי יציאת מצרים הסוערים, מייצג את נקודת המבט של פשוטי העם המצריים.",
+    imagePath: "/characters/ahmos/image.png",
+    thumbPath: "/characters/ahmos/thumb.png",
+  },
+  {
+    id: "issachar",
+    name: "יששכר",
+    description: "מלומד עברי משבט יששכר, ידוע בחוכמתו ובהבנתו. מייצג את היסוד האינטלקטואלי והרוחני בקהילת בני ישראל ביציאת מצרים.",
+    imagePath: "/characters/issachar/image.png",
+    thumbPath: "/characters/issachar/thumb.png",
+  },
+  {
+    id: "osiris",
+    name: "אוזיריס",
+    description: "איש מצרי, ייתכן פקיד או כהן, נאמן לפרעה ולדרכים המצריות המסורתיות. מייצג את נקודת המבט של הממסד המצרי ביציאת מצרים.",
+    imagePath: "/characters/osiris/image.png",
+    thumbPath: "/characters/osiris/thumb.png",
+  },
+  {
+    id: "ohad",
+    name: "אוהד",
+    description: "איש עברי רגיל הסובל מעבדות במצרים ומשתתף ביציאת מצרים. מייצג את נקודת המבט של הישראלי הפשוט המתמודד עם קשיים ומקווה לגאולה.",
+    imagePath: "/characters/ohad/image.png",
+    thumbPath: "/characters/ohad/thumb.png",
+  },
+];
+
 
 // Define message structure
 interface Message {
@@ -23,7 +86,7 @@ const BACKGROUND_IMG = "/images/ancient_egypt_prosperity_bg.webp";
 
 export default function ChatPage() {
   // --- State Management ---
-  const [currentCharacter, setCurrentCharacter] = useState<Character>(availableCharacters[0]);
+  const [currentCharacter, setCurrentCharacter] = useState<Character>(loadedCharacters[0]); // Use loaded characters
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -137,14 +200,14 @@ export default function ChatPage() {
       <div className="w-1/3 h-[90vh] flex flex-col items-center m-8">
         {/* Character Selection UI */}
         <div className="flex space-x-2 space-x-reverse mb-4">
-          {availableCharacters.map((char) => (
+          {loadedCharacters.map((char) => ( // Use loaded characters
             <Avatar
-              key={char.name}
-              className={`h-16 w-16 cursor-pointer border-2 ${currentCharacter.name === char.name ? 'border-blue-500' : 'border-transparent'} hover:border-blue-300`}
+              key={char.id} // Use id for key
+              className={`h-16 w-16 cursor-pointer border-2 ${currentCharacter.id === char.id ? 'border-blue-500' : 'border-transparent'} hover:border-blue-300`} // Compare by id
               onClick={() => setCurrentCharacter(char)}
               title={char.name}
             >
-              <AvatarImage src={char.imagePath} alt={char.name} />
+              <AvatarImage src={char.thumbPath} alt={char.name} /> {/* Use thumbPath */}
               <AvatarFallback>{char.name.charAt(0)}</AvatarFallback>
             </Avatar>
           ))}
@@ -158,7 +221,8 @@ export default function ChatPage() {
           {/* Chat Header */}
           <div className="p-4 flex items-center justify-start gap-3">
             <Avatar className="h-12 w-12">
-              <AvatarImage src={currentCharacter.imagePath} alt={currentCharacter.name} />
+              {/* Optionally use thumbPath here too for consistency, or keep imagePath */}
+              <AvatarImage src={currentCharacter.thumbPath} alt={currentCharacter.name} />
               <AvatarFallback>{currentCharacter.name.charAt(0)}</AvatarFallback>
             </Avatar>
             <div className="text-right">
@@ -219,7 +283,7 @@ export default function ChatPage() {
       </div>
 
       {/* Left Side: Character Display */}
-      <div className="w-2/3 h-full flex items-end justify-center p-10 relative">
+      <div className="w-2/3 h-full flex items-end justify-start p-10 relative"> {/* Changed justify-center to justify-start */}
          <div
             key={currentCharacter.name}
             className={`character h-[80%] w-full bg-contain bg-no-repeat bg-bottom transition-opacity duration-500 ease-in-out opacity-100`}
