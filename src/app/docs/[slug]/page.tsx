@@ -5,6 +5,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
 import { mdxComponents } from "@/mdx-components"; // Import custom components
 import Container from "@/components/ui/Container"; // Import Container
+import { CopyButton } from "@/components/ui/CopyButton"; // Import the new CopyButton
 import remarkGfm from "remark-gfm";
 import rehypePrettyCode from "rehype-pretty-code";
 import type { Options as PrettyCodeOptions } from "rehype-pretty-code";
@@ -147,8 +148,14 @@ export default async function DocPage({ params }: Props) {
       {/* Content Container */}
       <Container
         variant={containerVariant}
-        className="w-full max-w-6xl my-4 z-0 h-[70vh] overflow-y-auto" // Set fixed height to 70vh and enable scrolling
+        className="relative w-full max-w-6xl my-4 z-0 h-[70vh] overflow-y-auto" // Added relative positioning
       >
+        {/* Add the Copy Button */}
+        <CopyButton
+          textToCopy={source}
+          className="absolute top-4 right-4 z-10" // Position top-right, ensure it's above content
+          // Optionally adjust button variant if needed, e.g., variant="dark"
+        />
         {/* Apply prose class and conditional direction to the article inside the container */}
         <article
           className={`${proseClasses} max-w-none lg:prose-xl`} // Apply dynamic prose class, removed padding
