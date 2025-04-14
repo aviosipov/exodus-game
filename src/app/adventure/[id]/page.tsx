@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useParams } from 'next/navigation'; // Hook to get route parameters
-import Container from "@/components/ui/Container"; // Import the Container component
+// import Container from "@/components/ui/Container"; // Removed unused import
 import SimpleButton from "@/components/ui/SimpleButton"; // Import SimpleButton
 
 // Define interfaces for better type safety
@@ -52,19 +52,8 @@ export default function AdventureScenePage() {
             setError(null);
             try {
                 // Dynamically import the JSON based on the adventureId
-                // Note: This uses dynamic import, assuming JSON files are accessible relative to the built code.
-                // A more robust approach might involve an API route or getStaticProps/getServerSideProps
-                // if JSON files are in the public directory or fetched from a server.
-                // For simplicity with local JSON files in `src/data`, we'll use require for now,
-                // but be aware this might not work optimally in all Next.js deployment scenarios.
-                // A better approach for Next.js >= 13 App Router is needed here.
-                // Let's assume an API route /api/adventures/[id] exists for fetching.
-
-                // Dynamically import the JSON based on the adventureId
-                // This assumes the adventureId directly corresponds to the filename (e.g., 'days_of_honor' -> 'days_of_honor.json')
                 const data = await import(`@/data/adventures/${adventureId}.json`);
                 setAdventureData(data.default); // Assuming default export
-
                 setCurrentStepIndex(0); // Reset step index when new data loads
             } catch (err) {
                 console.error("Failed to load adventure data:", err);
@@ -88,7 +77,6 @@ export default function AdventureScenePage() {
             setCurrentStepIndex(outcomeStepIndex);
         } else {
             console.error(`Outcome step with id "${outcomeId}" not found.`);
-            // Fallback to next sequential step if outcome not found
             nextStep();
         }
     };
@@ -98,15 +86,12 @@ export default function AdventureScenePage() {
 
         if (currentStepData.end) {
             console.log("End of scene.");
-            // Optionally reset, navigate away, or show a final message/button
-            // setCurrentStepIndex(0); // Example: Restart scene
             return;
         }
 
         let nextIndex = -1;
-        const scene = adventureData.scenes; // Alias for convenience
+        const scene = adventureData.scenes;
 
-        // If the current step has a specific 'next' id, find and jump to it
         if (currentStepData.next) {
             nextIndex = scene.findIndex(step => step.id === currentStepData.next);
             if (nextIndex === -1) {
@@ -114,15 +99,11 @@ export default function AdventureScenePage() {
             }
         }
 
-        // If no specific 'next' or it wasn't found, proceed sequentially
         if (nextIndex === -1) {
             nextIndex = currentStepIndex + 1;
         }
 
-        // Skip over intermediate outcome steps if progressing sequentially
         while (nextIndex < scene.length && scene[nextIndex].id && !scene[nextIndex].choices && !currentStepData.next) {
-             // Only skip if we are moving sequentially (not explicitly jumping via 'next')
-             // and the target step looks like an outcome step (has id, no choices)
              console.log(`Skipping outcome step ${nextIndex}`);
              nextIndex++;
         }
@@ -131,7 +112,6 @@ export default function AdventureScenePage() {
             setCurrentStepIndex(nextIndex);
         } else {
             console.log("End of scene reached.");
-            // Handle end of scene if reached sequentially
         }
     };
 
@@ -149,7 +129,6 @@ export default function AdventureScenePage() {
     }
 
     if (!currentStepData) {
-        // This might happen briefly or if data is malformed
         return <div className="flex justify-center items-center h-screen">Initializing scene...</div>;
     }
 
@@ -173,48 +152,62 @@ export default function AdventureScenePage() {
                 className={`character absolute bottom-[170px] right-[50px] h-[60%] w-[30%] bg-contain bg-no-repeat bg-bottom transition-opacity duration-500 ease-in-out ${rightCharImg ? 'opacity-100' : 'opacity-0'}`}
                 style={{ backgroundImage: rightCharImg ? `url('${rightCharImg}')` : 'none' }}
             ></div>
-            {/* Dialogue Box - Using Container component */}
-            <div className="absolute bottom-5 left-5 right-5 h-[150px] z-20">
-                <Container variant="bright" className="h-full flex flex-col justify-between"> {/* Use Container with dialog variant */}
-                    {/* Speaker and Text */}
-                    <div className="text-right">
-                        <h3 className="font-bold text-lg mb-2">{currentStepData.speaker || ""}</h3>
-                        <p className="text-base">{currentStepData.text}</p>
-                    </div>
+            {/* Dialogue Box - Aspect Ratio Container */}
+            {/* Outer container sets the 80% width and positions */}
+            <div className="absolute bottom-10 left-[10%] right-[10%] z-20"> {/* Changed left/right to 10% for 80% width */}
+                <div className="relative w-full" style={{ paddingBottom: '24.6%' }}> {/* Aspect ratio container (218/886) */}
+                    {/* Background Image */}
+                    <img
+                        src="/images/stone-bg-v3.png"
+                        alt="Dialog background"
+                        className="absolute inset-0 w-full h-full object-cover z-0 opacity-85" // Added opacity-75
+                    />
+                    {/* Yellow Overlay - Reinstated */}
+                    
+                    {/* Content Overlay - Removed yellow background */}
+                    <div className="absolute inset-0 z-10 flex flex-col justify-between p-7"> {/* Removed bg-yellow-400/30 */}
+                        {/* Speaker and Text */}
+                        {/* Increased font size, added white text shadow */}
+                        <div className="text-right text-black" style={{ textShadow: '0 0 5px white' }}>
+                            <h3 className="font-bold text-2xl mb-2">{currentStepData.speaker || ""}</h3> {/* Increased to text-2xl */}
+                            <p className="text-xl">{currentStepData.text}</p> {/* Increased to text-xl */}
+                        </div>
 
-                    {/* Buttons Area */}
-                    <div className="flex justify-start items-center">
-                        {currentStepData.choices ? (
-                            // Render choices if they exist using SimpleButton
-                            (currentStepData.choices.map((choice, index) => (
+                        {/* Buttons Area */}
+                        {/* Added mt-4 for spacing */}
+                        <div className="flex justify-center items-center mt-4"> {/* Changed justify-start to justify-center */}
+                            {currentStepData.choices ? (
+                                // Render choices if they exist using SimpleButton
+                                (currentStepData.choices.map((choice, index) => (
+                                    <SimpleButton
+                                        key={index}
+                                        variant="default" // Use default yellow style for choices
+                                        className="ms-2 text-base px-4 py-2" // Increased text size and padding
+                                        onClick={() => handleChoice(choice.outcome)}
+                                    >
+                                        {choice.text}
+                                    </SimpleButton>
+                                )))
+                            ) : !currentStepData.end ?
+                                /* Render "Next" button using SimpleButton */
                                 <SimpleButton
-                                    key={index}
-                                    variant="default" // Use default yellow style for choices
-                                    className="ms-2 !text-sm !px-3 !py-1" // Override size/padding
-                                    onClick={() => handleChoice(choice.outcome)}
-                                >
-                                    {choice.text}
+                                    variant="bright" // Use bright blue style
+                                    className="ms-2 text-base px-4 py-2" // Increased text size and padding
+                                    onClick={nextStep}
+                                >המשך {'>'} {/* Next > */}
                                 </SimpleButton>
-                            )))
-                        ) : !currentStepData.end ? (
-                            // Render "Next" button using SimpleButton
-                            (<SimpleButton
-                                variant="bright" // Use bright blue style
-                                className="ms-2 !text-sm !px-3 !py-1" // Override size/padding
-                                onClick={nextStep}
-                            >המשך {'>'} {/* Next > */}
-                            </SimpleButton>)
-                        ) : (
-                            // Optional: Render "Back to List" button using SimpleButton
-                             (<SimpleButton
-                                variant="secondary" // Use secondary gray style
-                                className="ms-2 !text-sm !px-3 !py-1" // Override size/padding
-                                onClick={() => window.location.href = '/adventure'} // Navigate back to list
-                            >חזור לרשימה {/* Back to List */}
-                             </SimpleButton>)
-                        )}
+                             :
+                                /* Optional: Render "Back to List" button using SimpleButton */
+                                 <SimpleButton
+                                    variant="secondary" // Use secondary gray style
+                                    className="ms-2 text-base px-4 py-2" // Increased text size and padding
+                                    onClick={() => window.location.href = '/adventure'} // Navigate back to list
+                                >חזור לרשימה {/* Back to List */}
+                                 </SimpleButton>
+                            }
+                        </div>
                     </div>
-                </Container> {/* Close Container */}
+                </div>
             </div>
         </div>
     );
