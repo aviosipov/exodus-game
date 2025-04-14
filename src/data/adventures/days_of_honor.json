@@ -8,35 +8,35 @@
         "text": "שנות שפע במצרים. השמש מאירה על ערים משגשגות ועל שדות פוריים לאורך הנילוס. אתם, בני ישראל, זוכים ליחס של כבוד והערכה מצד המצרים.",
         "character_left_img": "/characters/ohad/image.png",
         "character_right_img": null,
-        "background_img": "/images/ancient_egypt_prosperity_bg.webp"
+        "background_img": "/images/adventures/days_of_honor/prosperity_1.png"
     },
     {
-        "speaker": "יסכהר",
+        "speaker": "יששכר",
         "text": "אשר, עבודתך בפרויקט התעלות מרשימה כתמיד. פרעה עצמו שמע על חריצותך.",
         "character_left_img": "/characters/ohad/image.png",
         "character_right_img": "/characters/osiris/image.png",
-        "background_img": "/images/ancient_egypt_prosperity_bg.webp"
+        "background_img": "/images/adventures/days_of_honor/prosperity_1.png"
     },
     {
         "speaker": "אשר",
-        "text": "תודה לך, יסכהר האדון. אנו משתדלים לתרום כמיטב יכולתנו לשגשוגה של מצרים, הארץ שקיבלה אותנו בזרועות פתוחות.",
+        "text": "תודה לך, יששכר האדון. אנו משתדלים לתרום כמיטב יכולתנו לשגשוגה של מצרים, הארץ שקיבלה אותנו בזרועות פתוחות.",
         "character_left_img": "/characters/ohad/image.png",
         "character_right_img": "/characters/osiris/image.png",
-        "background_img": "/images/ancient_egypt_prosperity_bg.webp"
+        "background_img": "/images/adventures/days_of_honor/prosperity_1.png"
     },
     {
-        "speaker": "יסכהר",
+        "speaker": "יששכר",
         "text": "אכן, ואנו מעריכים זאת. למעשה, השר הממונה מבקש את עצתך בנוגע לתכנון הגשר החדש. חוכמתכם ידועה.",
         "character_left_img": "/characters/ohad/image.png",
         "character_right_img": "/characters/osiris/image.png",
-        "background_img": "/images/ancient_egypt_prosperity_bg.webp"
+        "background_img": "/images/adventures/days_of_honor/prosperity_1.png"
     },
     {
         "speaker": "מספר",
         "text": "ההצעה מחממת את ליבך. זוהי הזדמנות נוספת להוכיח את נאמנותכם וכישרונכם.",
         "character_left_img": "/characters/ohad/image.png",
         "character_right_img": "/characters/osiris/image.png",
-        "background_img": "/images/ancient_egypt_prosperity_bg.webp",
+        "background_img": "/images/adventures/days_of_honor/prosperity_1.png",
         "choices": [
             { "text": "הסכם בהתלהבות: \"בכבוד רב! אשמח לסייע בכל דרך.\"", "outcome": "accept_eagerly" },
             { "text": "הסכם בצניעות: \"אעשה כמיטב יכולתי, אדוני.\"", "outcome": "accept_modestly" },
@@ -45,29 +45,29 @@
     },
     {
         "id": "accept_eagerly",
-        "speaker": "יסכהר",
+        "speaker": "יששכר",
         "text": "(מחייך בסיפוק) מצוין, אשר! ידעתי שאפשר לסמוך עליך. בוא עמי למשרדי השר.",
         "character_left_img": "/characters/ohad/image.png",
         "character_right_img": "/characters/osiris/image.png",
-        "background_img": "/images/ancient_egypt_prosperity_bg.webp",
+        "background_img": "/images/adventures/days_of_honor/prosperity_1.png",
         "next": "end_scene_honor"
     },
     {
         "id": "accept_modestly",
-        "speaker": "יסכהר",
+        "speaker": "יששכר",
         "text": "(מהנהן בהערכה) ענוותנותך מוסיפה לכבודך, אשר. אני בטוח שתרומתך תהיה חשובה. נפגש מחר לדון בפרטים.",
         "character_left_img": "/characters/ohad/image.png",
         "character_right_img": "/characters/osiris/image.png",
-        "background_img": "/images/ancient_egypt_prosperity_bg.webp",
+        "background_img": "/images/adventures/days_of_honor/prosperity_1.png",
         "next": "end_scene_honor"
     },
     {
         "id": "hesitate",
-        "speaker": "יסכהר",
+        "speaker": "יששכר",
         "text": "(מביט בך לרגע) אל תפקפק בערכך, אשר. ניסיונך מוערך. אנו סומכים על שיקול דעתך. הכן את רעיונותיך לפגישה מחר.",
         "character_left_img": "/characters/ohad/image.png",
         "character_right_img": "/characters/osiris/image.png",
-        "background_img": "/images/ancient_egypt_prosperity_bg.webp",
+        "background_img": "/images/adventures/days_of_honor/prosperity_1.png",
         "next": "end_scene_honor"
     },
     {
@@ -76,7 +76,7 @@
         "text": "קרני השמש מוסיפות לזרוח על מצרים. היחסים עם המצרים טובים, ואתם חלק משגשוג הממלכה. אך האם מצב זה יימשך לנצח?",
         "character_left_img": "/characters/ohad/image.png",
         "character_right_img": null,
-        "background_img": "/images/ancient_egypt_prosperity_bg.webp",
+        "background_img": "/images/adventures/days_of_honor/prosperity_1.png",
         "end": true
     }
   ]

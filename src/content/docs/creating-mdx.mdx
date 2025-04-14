@@ -1,0 +1,108 @@
+---
+title: Creating MDX Documentation Pages
+description: A guide on how to create and structure MDX files for this project's documentation.
+---
+
+import { Steps } from '@astrojs/starlight/components';
+
+MDX allows you to write Markdown documents and embed interactive JSX components within them. This guide explains how to create new documentation pages using MDX for this project.
+
+## File Structure
+
+All documentation pages should reside within the `src/content/docs/` directory. You can organize pages into subdirectories as needed.
+
+## Basic Structure
+
+An MDX file typically starts with **frontmatter**, followed by the main content written in Markdown.
+
+### Frontmatter
+
+Frontmatter is written in YAML format between triple-dashed lines (`---`) at the very top of the file. It provides metadata about the page.
+
+Key frontmatter properties used in this project (based on Starlight defaults):
+
+-   `title`: (Required) The main title of the page, displayed prominently.
+-   `description`: (Optional) A brief description of the page content, often used for SEO and previews.
+-   `editUrl`: (Optional) Set to `false` to disable the "Edit page" link if needed.
+-   `sidebar`: (Optional) Customize sidebar behavior (e.g., `label`, `order`, `hidden`). See [Starlight Sidebar Docs](https://starlight.astro.build/guides/sidebar/) for details.
+
+**Example Frontmatter:**
+
+```yaml
+---
+title: My Awesome Documentation Page
+description: Learn all about the awesome features.
+sidebar:
+  label: Awesome Features
+  order: 3
+---
+```
+
+### Content
+
+Below the frontmatter, write your content using standard Markdown syntax.
+
+```markdown
+---
+title: Example Page
+description: This is an example MDX page.
+---
+
+# Heading 1
+
+This is standard Markdown text. You can use **bold**, *italic*, `code`, and [links](https://example.com).
+
+## Heading 2
+
+- Create lists
+- Like this one
+
+> Blockquotes are also supported.
+
+Code blocks:
+```javascript
+function greet() {
+  console.log('Hello from MDX!');
+}
+```
+```
+
+## Using Components
+
+MDX shines when you embed interactive components written in frameworks like React, Vue, Svelte, or Astro.
+
+<Steps>
+1.  **Import the Component:**
+    Use standard JavaScript/TypeScript import syntax at the top of your file (after frontmatter). See the code example below the steps for syntax.
+
+2.  **Use the Component:**
+    Embed the component using JSX syntax directly within your Markdown where needed. See the code example below the steps for syntax.
+
+</Steps>
+
+Here are examples showing the *code* for importing and using components within MDX:
+
+**Importing:**
+```jsx
+import MyComponent from '../../components/MyComponent.astro';
+import { Card, CardGrid } from '@astrojs/starlight/components';
+```
+
+**Using:**
+
+```jsx
+<Card title="Important Note">
+  Remember to import components before using them!
+</Card>
+
+{/* Example of a custom component */}
+{/* <MyComponent prop1="value" /> */}
+```
+
+## Best Practices
+
+-   Keep frontmatter concise and accurate.
+-   Use semantic Markdown (correct heading levels, lists, etc.).
+-   Organize content logically with clear headings.
+-   Leverage Starlight's built-in components (`Card`, `CardGrid`, `Tabs`, `Aside`, etc.) for enhanced documentation formatting. Refer to the [Starlight Components Guide](https://starlight.astro.build/guides/components/).
+-   If creating custom components, ensure they are well-documented and placed in an appropriate project directory (e.g., `src/components/`).

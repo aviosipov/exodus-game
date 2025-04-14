@@ -8,56 +8,56 @@
       "text": "הצפרדעים נעלמו, אך ההקלה במצרים הייתה קצרת מועד. כעונש נוסף, או אולי מתוך רשעות לשמה, מטילים הנוגשים על חלק מבני ישראל עבודה משפילה במיוחד: לנקות את רחובות הערים ולטאטא את האבק שהצטבר.",
       "character_left_img": "/characters/ohad/image.png",
       "character_right_img": null,
-      "background_img": "/images/ancient_egypt_street_cleaning_bg.webp"
+      "background_img": "/images/adventures/plague_of_lice/street_cleaning_1.png"
     },
     {
       "speaker": "נוגש מצרי",
       "text": "(צועק על קבוצת עבדים, ביניהם אוהד ויששכר) מה אתם עומדים שם? הרחובות מטונפים! קחו את המטאטאים ונקו את העפר הזה עד שהאבנים יבריקו!",
       "character_left_img": "/characters/osiris/image.png",
       "character_right_img": "/characters/ohad/image.png",
-      "background_img": "/images/ancient_egypt_street_cleaning_bg.webp"
+      "background_img": "/images/adventures/plague_of_lice/street_cleaning_1.png"
     },
     {
       "speaker": "אֹהַד",
       "text": "(מתחיל לטאטא בחוסר רצון, לוחש ליששכר) כאילו לא מספיקה עבודת הלבנים, עכשיו גם לנקות את הזוהמה שלהם...",
       "character_left_img": "/characters/ohad/image.png",
       "character_right_img": "/characters/issachar/image.png",
-      "background_img": "/images/ancient_egypt_street_cleaning_bg.webp"
+      "background_img": "/images/adventures/plague_of_lice/street_cleaning_1.png"
     },
     {
       "speaker": "מספר",
       "text": "אך לפתע, קורה דבר מוזר. בעודכם מטאטאים, נראה שהעפר עצמו מתעורר לחיים. הוא מתרומם באוויר כענן רוחש של יצורים זעירים וטורדניים.",
       "character_left_img": "/characters/ohad/image.png",
       "character_right_img": "/characters/issachar/image.png",
-      "background_img": "/images/ancient_egypt_street_cleaning_bg.webp"
+      "background_img": "/images/adventures/plague_of_lice/street_cleaning_1.png"
     },
     {
         "speaker": "יִשָּׂשכָר",
         "text": "(משפשף את עיניו באימה) מה זה? העפר... הוא הפך ל... כינים! מיליוני כינים!",
         "character_left_img": "/characters/issachar/image.png",
         "character_right_img": "/characters/ohad/image.png",
-        "background_img": "/images/ancient_egypt_lice_gnats_plague_bg.webp"
+        "background_img": "/images/adventures/plague_of_lice/lice_plague_1.png"
       },
     {
       "speaker": "מספר",
       "text": "מכת הכינים השלישית הכתה במצרים. נחילים עצומים של יצורים עוקצניים מכסים כל משטח, חודרים לבגדים, לעיניים ולאוזניים, ומציקים לאדם ולבהמה כאחד. אפילו חרטומי מצרים, המנסים לחקות את המכה בלהטיהם, נכשלים ומודים: 'אצבע אלוהים היא'.",
       "character_left_img": null,
       "character_right_img": "/characters/osiris/image.png",
-      "background_img": "/images/ancient_egypt_lice_gnats_plague_bg.webp"
+      "background_img": "/images/adventures/plague_of_lice/lice_plague_1.png"
     },
     {
       "speaker": "אֹהַד",
       "text": "(מנסה להדוף את הכינים מעליו) אי אפשר לטאטא את זה... זה בכל מקום! הנוגשים עצמם מכוסים ובורחים!",
       "character_left_img": "/characters/ohad/image.png",
       "character_right_img": "/characters/issachar/image.png",
-      "background_img": "/images/ancient_egypt_lice_gnats_plague_bg.webp"
+      "background_img": "/images/adventures/plague_of_lice/lice_plague_1.png"
     },
     {
         "speaker": "יִשָּׂשכָר",
         "text": "(מגרד את זרועו) לפחות דבר אחד טוב יצא מזה - אי אפשר לנקות רחובות כשכל העפר הפך למטרד אחד גדול. העבודה המשפילה הזו הופסקה.",
         "character_left_img": "/characters/issachar/image.png",
         "character_right_img": "/characters/ohad/image.png",
-        "background_img": "/images/ancient_egypt_lice_gnats_plague_bg.webp"
+        "background_img": "/images/adventures/plague_of_lice/lice_plague_1.png"
       },
     {
       "id": "another_respite",
@@ -65,7 +65,7 @@
       "text": "שוב, המכה הפוגעת במצרים מביאה להפוגה בלתי צפויה בעבודתכם, ובפרט בעבודה המשפילה של ניקוי הרחובות. כיצד תגיבו להתרחשות הזו?",
       "character_left_img": "/characters/ohad/image.png",
       "character_right_img": "/characters/issachar/image.png",
-      "background_img": "/images/israelite_camp_respite_bg.webp",
+      "background_img": "/images/adventures/plague_of_lice/respite_1.png",
       "choices": [
         { "text": "נדון בכוח המתגבר של המכות ובכישלון חרטומי מצרים.", "outcome": "discuss_power" },
         { "text": "נמצא מקום מוגן יחסית מהכינים וננסה לנוח למרות הכל.", "outcome": "find_shelter" },
@@ -78,7 +78,7 @@
       "text": "השיחות ביניכם נסובות סביב עוצמת המכות וההכרה הגוברת, אפילו בקרב המצרים, שמדובר בכוח עליון. האם פרעה סוף סוף ייכנע?",
       "character_left_img": "/characters/ohad/image.png",
       "character_right_img": null,
-      "background_img": "/images/israelite_camp_respite_bg.webp",
+      "background_img": "/images/adventures/plague_of_lice/respite_1.png",
       "next": "end_scene_lice"
     },
     {
@@ -87,7 +87,7 @@
       "text": "אתם מוצאים פינה שקטה יחסית, מנסים להגן על עצמכם מהמטרד הבלתי פוסק. המנוחה אינה מושלמת, אך עצם ההפסקה מהעבודה היא הקלה.",
       "character_left_img": "/characters/ohad/image.png",
       "character_right_img": null,
-      "background_img": "/images/israelite_camp_respite_bg.webp",
+      "background_img": "/images/adventures/plague_of_lice/respite_1.png",
       "next": "end_scene_lice"
     },
     {
@@ -96,7 +96,7 @@
       "text": "אתם מהרהרים בפליאה כיצד אפילו הדבר הנמוך ביותר, עפר הארץ, הפך לכלי ביד אלוהים כדי להכות במצרים. התחושה היא שיש סדר נסתר וצדק בעולם.",
       "character_left_img": "/characters/ohad/image.png",
       "character_right_img": null,
-      "background_img": "/images/israelite_camp_respite_bg.webp",
+      "background_img": "/images/adventures/plague_of_lice/respite_1.png",
       "next": "end_scene_lice"
     },
     {
@@ -105,7 +105,7 @@
       "text": "מכת הכינים מציפה את מצרים בסבל קטן אך בלתי פוסק, ומכה במיוחד בגאוותם של החרטומים. עבורכם, זו עוד הפוגה כפויה מעבודות הפרך, ובפרט מהשפלת ניקוי הרחובות. אך האם סבל זה יספיק כדי לשכנע את פרעה לשלח אתכם?",
       "character_left_img": "/characters/ohad/image.png",
       "character_right_img": null,
-      "background_img": "/images/israelite_camp_respite_bg.webp",
+      "background_img": "/images/adventures/plague_of_lice/respite_1.png",
       "end": true
     }
   ]

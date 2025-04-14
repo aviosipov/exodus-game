@@ -8,42 +8,42 @@
         "text": "השנים חלפו. הדור שהכיר את יוסף ואת גדולתו הלך לעולמו. פרעה חדש עלה על כיסא מצרים, ועימו החלה רוח אחרת לנשב במסדרונות השלטון.",
         "character_left_img": null,
         "character_right_img": null,
-        "background_img": "/images/ancient_egypt_changing_bg.webp"
+        "background_img": "/images/adventures/shadows_of_servitude/changing_atmosphere_1.png"
     },
     {
         "speaker": "מספר",
         "text": "היחס החם והמכבד החל להתקרר. המצרים הביטו בכם, בני ישראל, בחשדנות גוברת. התרביתם והתעצמתם, והדבר החל להדאיג אותם.",
         "character_left_img": null,
         "character_right_img": null,
-        "background_img": "/images/ancient_egypt_changing_bg.webp"
+        "background_img": "/images/adventures/shadows_of_servitude/changing_atmosphere_1.png"
     },
     {
         "speaker": "נוגש מצרי",
         "text": "אשר, שמעתי שאתם, העברים, חרוצים ובניינים מנוסים. הממלכה זקוקה לעזרתכם בפרויקט לאומי חשוב - בניית ערי מסכנות לפרעה.",
         "character_left_img": "/characters/ohad/image.png",
         "character_right_img": "/characters/osiris/image.png",
-        "background_img": "/images/construction_site_early_bg.webp"
+        "background_img": "/images/adventures/shadows_of_servitude/early_construction_1.png"
     },
     {
         "speaker": "אשר",
         "text": "ערי מסכנות? זהו פרויקט גדול. במה נוכל לסייע?",
         "character_left_img": "/characters/ohad/image.png",
         "character_right_img": "/characters/osiris/image.png",
-        "background_img": "/images/construction_site_early_bg.webp"
+        "background_img": "/images/adventures/shadows_of_servitude/early_construction_1.png"
     },
     {
         "speaker": "נוגש מצרי",
         "text": "(בנימה עניינית, כמעט פוקדת) תתגייסו לעבודה. כל אחד לפי יכולתו. מצרים מצפה מכם לתרום את חלקכם. בתחילה, כמובן, נדאג לכם לשכר הוגן.",
         "character_left_img": "/characters/ohad/image.png",
         "character_right_img": "/characters/osiris/image.png",
-        "background_img": "/images/construction_site_early_bg.webp"
+        "background_img": "/images/adventures/shadows_of_servitude/early_construction_1.png"
     },
     {
         "speaker": "מספר",
         "text": "הבקשה נשמעת הגיונית, כמעט. חובה אזרחית. רבים מבני ישראל נענים לקריאה, בתקווה לשמור על היחסים הטובים ועל מעמדם.",
         "character_left_img": "/characters/ohad/image.png",
         "character_right_img": null,
-        "background_img": "/images/construction_site_early_bg.webp"
+        "background_img": "/images/adventures/shadows_of_servitude/early_construction_1.png"
     },
     {
         "id": "work_begins",
@@ -51,28 +51,28 @@
         "text": "העבודה מתחילה. היא קשה, אך נסבלת. הימים הופכים לשבועות. השכר שהובטח מתחיל להתעכב, והופך זעום. הדרישות הולכות וגוברות.",
         "character_left_img": null,
         "character_right_img": null,
-        "background_img": "/images/construction_site_harder_bg.webp"
+        "background_img": "/images/adventures/shadows_of_servitude/harder_work_1.png"
     },
     {
         "speaker": "נוגש מצרי",
         "text": "(בטון קשוח יותר) אשר! הקצב איטי מדי! פרעה דורש לראות התקדמות! הכפילו את מכסת הלבנים היומית!",
         "character_left_img": "/characters/ohad/image.png",
         "character_right_img": "/characters/osiris/image.png",
-        "background_img": "/images/construction_site_harder_bg.webp"
+        "background_img": "/images/adventures/shadows_of_servitude/harder_work_1.png"
     },
     {
         "speaker": "אשר",
         "text": "אבל אדוני, זה בלתי אפשרי! אנשינו עובדים מצאת החמה עד צאת הנשמה! הם מותשים!",
         "character_left_img": "/characters/ohad/image.png",
         "character_right_img": "/characters/osiris/image.png",
-        "background_img": "/images/construction_site_harder_bg.webp"
+        "background_img": "/images/adventures/shadows_of_servitude/harder_work_1.png"
     },
     {
         "speaker": "נוגש מצרי",
         "text": "(בבוז) תלונות לא יבנו ערים! מי שלא עומד בקצב - ייענש! ודא שזה יקרה!",
         "character_left_img": "/characters/ohad/image.png",
         "character_right_img": "/characters/osiris/image.png",
-        "background_img": "/images/construction_site_harder_bg.webp"
+        "background_img": "/images/adventures/shadows_of_servitude/harder_work_1.png"
     },
     {
         "id": "dawning_realization",
@@ -80,7 +80,7 @@
         "text": "האסימון נופל. זו אינה עוד בקשה לעזרה, זוהי תחילתה של עבדות. התחושה קשה ומרה. כיצד עליכם להגיב למצב המשתנה?",
         "character_left_img": "/characters/ohad/image.png",
         "character_right_img": null,
-        "background_img": "/images/construction_site_oppressive_bg.webp",
+        "background_img": "/images/adventures/shadows_of_servitude/oppressive_construction_1.png",
         "choices": [
             { "text": "להתפלל לשינוי ולהאמין שזה זמני.", "outcome": "hope_and_pray" },
             { "text": "לדבר עם הזקנים ולשתף בחששות.", "outcome": "share_concerns" },
@@ -93,7 +93,7 @@
         "text": "אתם אוחזים בתקווה הדקה שהמצב ישתפר, שהמצרים יתעשתו. אתם ממשיכים בעבודה, נושאים תפילה חרישית לבורא עולם.",
         "character_left_img": "/characters/ohad/image.png",
         "character_right_img": null,
-        "background_img": "/images/construction_site_oppressive_bg.webp",
+        "background_img": "/images/adventures/shadows_of_servitude/oppressive_construction_1.png",
         "next": "maror_begins"
     },
     {
@@ -102,7 +102,7 @@
         "text": "אכן, בני, הרוחות רעות. עלינו להיות חזקים ומאוחדים. נמשיך לעבוד לפי שעה, אך עינינו יהיו פקוחות. נתפלל יחד לחוכמה והדרכה.",
         "character_left_img": "/characters/ohad/image.png",
         "character_right_img": "/characters/issachar/image.png",
-        "background_img": "/images/israelite_gathering_modest_bg.webp",
+        "background_img": "/images/adventures/shadows_of_servitude/israelite_gathering_1.png",
         "next": "maror_begins"
     },
     {
@@ -111,7 +111,7 @@
         "text": "אתם מנסים לעבוד קשה יותר, מהר יותר, לדכא כל תלונה. אך נראה ששום דבר אינו מספק את הנוגשים. הדרישות רק גוברות, והמבטים נעשים קרים יותר.",
         "character_left_img": "/characters/ohad/image.png",
         "character_right_img": "/characters/osiris/image.png",
-        "background_img": "/images/construction_site_oppressive_bg.webp",
+        "background_img": "/images/adventures/shadows_of_servitude/oppressive_construction_1.png",
         "next": "maror_begins"
     },
     {
@@ -120,7 +120,7 @@
         "text": "כך, בהדרגה, הפכה העזרה לעול, והעבודה לשעבוד. כמו המרור שטעמו מתחיל עדין ונעשה מר וחריף, כך החלו חייכם במצרים להפוך למרים.",
         "character_left_img": null,
         "character_right_img": null,
-        "background_img": "/images/ancient_egypt_oppression_start_bg.webp"
+        "background_img": "/images/adventures/shadows_of_servitude/oppression_starts_1.png"
     },
     {
         "id": "end_scene_shadows",
@@ -128,7 +128,7 @@
         "text": "צללי השעבוד התארכו מעל ארץ גושן. התקווה לימים טובים יותר החלה להישחק, והפחד מפני העתיד החל לכרסם בלבבות. הדרך למטה רק החלה...",
         "character_left_img": null,
         "character_right_img": null,
-        "background_img": "/images/ancient_egypt_oppression_start_bg.webp",
+        "background_img": "/images/adventures/shadows_of_servitude/oppression_starts_1.png",
         "end": true
     }
   ]

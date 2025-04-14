@@ -8,42 +8,42 @@
       "text": "הימים במצרים הפכו קשים מנשוא. השמש קופחת, והעבודה בבורות הטיט ולבני הלבנים אינה נגמרת. הנוגשים המצרים מכים ללא רחם, דורשים עוד ועוד לבנים, והתבן חסר.",
       "character_left_img": "/characters/ohad/image.png",
       "character_right_img": null,
-      "background_img": "/images/ancient_egypt_slavery_bg.webp"
+      "background_img": "/images/adventures/worsening_of_servitude/brick_making_site_1.png"
     },
     {
       "speaker": "קנמון (נוגש מצרי)",
       "text": "עצלנים! התנועה שלכם איטית כמו הנילוס בבצורת! פרעה דורש ערים חדשות, והן לא ייבנו מעצמן! אשר, המכסה שלך להיום הוכפלה!",
       "character_left_img": "/characters/ohad/image.png",
       "character_right_img": "/characters/osiris/image.png",
-      "background_img": "/images/ancient_egypt_slavery_bg.webp"
+      "background_img": "/images/adventures/worsening_of_servitude/brick_making_site_1.png"
     },
     {
       "speaker": "אשר",
       "text": "(בלחישה, באפיסת כוחות) הכפילו? אבל... בקושי עמדנו במכסה הקודמת. אין לנו מספיק תבן, והאנשים מתמוטטים בחום.",
       "character_left_img": "/characters/ohad/image.png",
       "character_right_img": "/characters/osiris/image.png",
-      "background_img": "/images/ancient_egypt_slavery_bg.webp"
+      "background_img": "/images/adventures/worsening_of_servitude/brick_making_site_1.png"
     },
     {
       "speaker": "אליאנה (אישה עברייה)",
       "text": "(נשענת על הקיר לרגע, מותשת) אשר צודק, אדוני. אנו עושים כמיטב יכולתנו, אך הכוח אוזל. אנא, מעט חמלה...",
       "character_left_img": "/characters/elisheva/image.png",
       "character_right_img": "/characters/osiris/image.png",
-      "background_img": "/images/ancient_egypt_slavery_bg.webp"
+      "background_img": "/images/adventures/worsening_of_servitude/brick_making_site_1.png"
     },
     {
       "speaker": "קנמון (נוגש מצרי)",
       "text": "חמלה?! (צוחק בקרירות) חמלה היא מותרות שאינכם זכאים להם! התלונות שלכם רק מוכיחות שאתם זקוקים ליד קשה יותר! חזרו לעבודה, או שהשוט יפגוש את גבכם!",
       "character_left_img": "/characters/elisheva/image.png",
       "character_right_img": "/characters/osiris/image.png",
-      "background_img": "/images/ancient_egypt_slavery_bg.webp"
+      "background_img": "/images/adventures/worsening_of_servitude/brick_making_site_1.png"
     },
     {
       "speaker": "מספר",
       "text": "קנמון מרים את שוטו באיום. לידך, עובד מבוגר כושל ומועד, מפיל כמה לבנים טריות שהתייבשו חלקית. עיניו של קנמון רושפות מזעם והוא פונה אל העובד.",
       "character_left_img": "/characters/ohad/image.png",
       "character_right_img": "/characters/osiris/image.png",
-      "background_img": "/images/ancient_egypt_slavery_bg.webp"
+      "background_img": "/images/adventures/worsening_of_servitude/brick_making_site_1.png"
     },
     {
         "id": "moment_of_crisis",
@@ -51,7 +51,7 @@
         "text": "ליבך הולם בחוזקה. הנוגש עומד להכות את האיש הזקן. מה תעשה?",
         "character_left_img": "/characters/ohad/image.png",
         "character_right_img": "/characters/osiris/image.png",
-        "background_img": "/images/ancient_egypt_slavery_bg.webp",
+        "background_img": "/images/adventures/worsening_of_servitude/brick_making_site_1.png",
         "choices": [
             { "text": "התערב והסט את תשומת ליבו של הנוגש: \"אדוני! אולי אוכל לעזור לו?\"", "outcome": "intervene_distract" },
             { "text": "הפצר בנוגש לרחם: \"אנא, אדוני, הוא איש זקן וחלוש!\"", "outcome": "plead_mercy" },
@@ -64,7 +64,7 @@
         "text": "(מסתובב אליך, עיניו מצטמצמות) אתה רוצה את המכות במקומו, אשר? חזור לעבודתך לפני שאשנה את דעתי ואלמד את שניכם לקח!",
         "character_left_img": "/characters/ohad/image.png",
         "character_right_img": "/characters/osiris/image.png",
-        "background_img": "/images/ancient_egypt_slavery_bg.webp",
+        "background_img": "/images/adventures/worsening_of_servitude/brick_making_site_1.png",
         "next": "end_scene_hardship"
     },
     {
@@ -73,7 +73,7 @@
         "text": "(מצליף בשוט באוויר ליד פניך) רחמים? אם כך הוא ילמד להיזהר! ואתה, אל תתערב! חולשתו אינה תירוץ!",
         "character_left_img": "/characters/ohad/image.png",
         "character_right_img": "/characters/osiris/image.png",
-        "background_img": "/images/ancient_egypt_slavery_bg.webp",
+        "background_img": "/images/adventures/worsening_of_servitude/brick_making_site_1.png",
         "next": "end_scene_hardship"
     },
     {
@@ -82,7 +82,7 @@
         "text": "אתה משפיל את עיניך, וליבך כבד. קול חבטת השוט נשמע קרוב. קשה לשאת את המראות והקולות, אך הפחד משתק.",
         "character_left_img": "/characters/ohad/image.png",
         "character_right_img": "/characters/osiris/image.png",
-        "background_img": "/images/ancient_egypt_slavery_bg.webp",
+        "background_img": "/images/adventures/worsening_of_servitude/brick_making_site_1.png",
         "next": "end_scene_hardship"
     },
     {
@@ -91,7 +91,7 @@
         "text": "היום מסתיים באיטיות מייסרת. גופך כואב, ורוחך שפופה. השעבוד מחמיר מיום ליום, ונראה שאין כל תקווה באופק. החיים הפכו לסיוט מתמשך תחת השלטון המצרי האכזר.",
         "character_left_img": "/characters/ohad/image.png",
         "character_right_img": null,
-        "background_img": "/images/ancient_egypt_slavery_bg.webp",
+        "background_img": "/images/adventures/worsening_of_servitude/brick_making_site_1.png",
         "end": true
     }
   ]

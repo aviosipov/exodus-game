@@ -8,7 +8,7 @@
       "text": "ביום גורלי במצרים, כשכל המים הפכו לדם סמיך וצמיגי, נראתה ההתהוות של מהפכה שקטה. המצרים נטשו את השגרה, והעבדים קלטו ברגע זה תחושת תקווה.",
       "character_left_img": "/characters/ohad/image.png",
       "character_right_img": null,
-      "background_img": "/images/ancient_egypt_blood_bg.webp"
+      "background_img": "/images/adventures/plague_of_blood/nile_blood_1.png"
     },
     {
       "id": "ohad_reacts",
@@ -16,28 +16,28 @@
       "text": "מה זה? המים... הם נראים כמו דם! זו לא רק מזימה מצרית, זו הכרזה על שינוי מתקרב. האם זה הזמן שלנו לשבור את השגרה?",
       "character_left_img": "/characters/ohad/image.png",
       "character_right_img": "/characters/osiris/image.png",
-      "background_img": "/images/ancient_egypt_blood_bg.webp"
+      "background_img": "/images/adventures/plague_of_blood/nile_blood_1.png"
     },
     {
       "speaker": "אוזיריס",
       "text": "דממ... המראה הזה מעורר גם חשש וגם תקווה. אך מה יקרה עכשיו? המצרים נאבקים לנהל את הכאוס, ואנו עומדים בפני רגע מכונן.",
       "character_left_img": "/characters/ohad/image.png",
       "character_right_img": "/characters/osiris/image.png",
-      "background_img": "/images/ancient_egypt_blood_bg.webp"
+      "background_img": "/images/adventures/plague_of_blood/nile_blood_1.png"
     },
     {
       "speaker": "מספר",
       "text": "המכת דם חוללה תהפוכות בתודעת המצרים, ובאותה עת פתחה פתח לרגע של הקלה בקרב העבדים. זו הייתה קריאה לשינוי – גם אם בשלב הראשון נעשה רק בשקט ובזהירות.",
       "character_left_img": "/characters/ohad/image.png",
       "character_right_img": "/characters/osiris/image.png",
-      "background_img": "/images/ancient_egypt_blood_bg.webp"
+      "background_img": "/images/adventures/plague_of_blood/nile_blood_1.png"
     },
     {
       "speaker": "אוהד",
       "text": "מה עלינו לעשות עכשיו? האם להנצל את הרגע הזה ולהתארגן לקראת מהפכה, או להישאר שקטים ולבחון את המצב בזהירות?",
       "character_left_img": "/characters/ohad/image.png",
       "character_right_img": "/characters/osiris/image.png",
-      "background_img": "/images/ancient_egypt_blood_bg.webp",
+      "background_img": "/images/adventures/plague_of_blood/nile_blood_1.png",
       "choices": [
         {
           "text": "להתגייס בהתלהבות: 'זה הזמן לשינוי, בואו נצא למרד!'",
@@ -59,7 +59,7 @@
       "text": "(בקול נלהב) כן, זו ההזדמנות שלנו! עלינו להתאחד ולנקוט בפעולה – להראות למצרים שאיננו יותר מוכנים לסבול את השעבוד!",
       "character_left_img": "/characters/ohad/image.png",
       "character_right_img": "/characters/osiris/image.png",
-      "background_img": "/images/ancient_egypt_blood_bg.webp",
+      "background_img": "/images/adventures/plague_of_blood/nile_blood_1.png",
       "next": "end_blood_scene"
     },
     {
@@ -68,7 +68,7 @@
       "text": "(בקול שקול) ננצל רגע זה כדי לאסוף מידע ולתכנן מהלך זהיר. אולי בהמשך נצליח לשנות את גורלנו בצורה בטוחה.",
       "character_left_img": "/characters/ohad/image.png",
       "character_right_img": "/characters/osiris/image.png",
-      "background_img": "/images/ancient_egypt_blood_bg.webp",
+      "background_img": "/images/adventures/plague_of_blood/nile_blood_1.png",
       "next": "end_blood_scene"
     },
     {
@@ -77,7 +77,7 @@
       "text": "(בקול מהורהר) אולי עדיף שנישאר זמינים ונבחן את המצב לפני שנעשה מהלך מסוכן. לפעמים, זהירות היא המפתח להישרדות.",
       "character_left_img": "/characters/ohad/image.png",
       "character_right_img": "/characters/osiris/image.png",
-      "background_img": "/images/ancient_egypt_blood_bg.webp",
+      "background_img": "/images/adventures/plague_of_blood/nile_blood_1.png",
       "next": "end_blood_scene"
     },
     {
@@ -86,7 +86,7 @@
       "text": "המכת דם סימנה את ראשיתו של שינוי בממלכה. המצרים נלחמים על שמירת הסדר, ואילו העבדים מקבלים רגע נשימה – רגע שבו נרקמת תקווה לעתיד טוב יותר. האם זו רק התחלה או כבר קו סיום לשעבוד?",
       "character_left_img": "/characters/ohad/image.png",
       "character_right_img": null,
-      "background_img": "/images/ancient_egypt_blood_bg.webp",
+      "background_img": "/images/adventures/plague_of_blood/nile_blood_1.png",
       "end": true
     }
   ]

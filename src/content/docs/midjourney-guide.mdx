@@ -1,0 +1,47 @@
+---
+title: Midjourney Image Generation Guide
+description: Guidelines for creating consistent background images for the Exodus game adventures using Midjourney.
+sidebar:
+  label: Midjourney Guide
+  order: 4
+---
+
+import { Card } from '@astrojs/starlight/components';
+
+This guide outlines the specific style and parameters to use when generating background images for the Exodus game adventures using Midjourney. Following these guidelines ensures visual consistency across the game.
+
+## Core Style Parameters
+
+When generating images, please adhere to the following core parameters:
+
+-   **Style:** The primary style should be `Hand-drawn illustration`. This provides a consistent artistic feel.
+-   **Aspect Ratio:** Always use `--ar 16:9`. This ensures the images fit the game's background display area correctly.
+-   **View:** Aim for a `Panoramic view`. This gives a wide perspective suitable for background scenes.
+
+## Prompt Content Guidelines
+
+Your prompts should clearly describe:
+
+1.  **Setting:** Where does the scene take place? (e.g., ancient Egyptian construction site, village street, Nile riverbank, Israelite camp).
+2.  **Atmosphere/Mood:** What is the feeling of the scene? (e.g., oppressive, chaotic, prosperous, somber, tense, hopeful, respite).
+3.  **Key Elements:** What important objects or figures should be visible? (e.g., Hebrew slaves working, frogs swarming, Egyptians looking horrified, piles of bricks, taskmasters overseeing).
+4.  **Time of Day/Lighting:** (If relevant) Is it day, evening, night? Is the sun harsh or setting? Is it dimly lit?
+
+**Example Prompt Structure:**
+
+Panoramic view of (Setting Description) showing (Key Elements). The atmosphere is (Atmosphere/Mood). Style: Hand-drawn illustration. --ar 16:9
+
+## Example Prompts (Based on Previous Adventures)
+
+-   **Changing Atmosphere:** `Panoramic view of ancient Egypt, perhaps showing subtle signs of change. Maybe slightly less vibrant than prosperity, or a view of the palace/city suggesting a new, sterner regime. The atmosphere hints at unease beneath the surface. Style: Hand-drawn illustration. --ar 16:9`
+-   **Oppressive Construction:** `Panoramic view of the ancient Egyptian construction site, now clearly oppressive. Israelites are exhausted, working under harsh conditions (heat, dust). Taskmasters are actively overseeing with severity, perhaps using whips or showing clear authority. Atmosphere of dawning realization of servitude. Style: Hand-drawn illustration. --ar 16:9`
+-   **Nile Blood Plague:** `Panoramic view of the Nile river turned into thick, viscous blood under a dramatic sky. Show Egyptians looking on in horror and disbelief from the banks, while Israelites might show a mix of shock and perhaps a glimmer of hope or awe. The scene should feel ominous and unnatural. Style: Hand-drawn illustration. --ar 16:9`
+-   **Lush Wheat Fields:** `Panoramic view of lush golden ripe wheat fields in ancient Egypt. The atmosphere is one of abundance before the looting. Style: Hand-drawn illustration. --ar 16:9`
+
+## Workflow
+
+1.  Generate the required image(s) using Midjourney based on the prompts derived from the adventure scene descriptions and these guidelines.
+2.  Ensure the generated image file is placed in your `Downloads` folder.
+3.  Inform the AI assistant (Cline) that the image(s) are ready in the Downloads folder. The AI will then handle copying, renaming, and updating the relevant adventure JSON file.
+
+*(Note: The AI uses a standard naming convention like `[scene_description]_1.png` within the appropriate `public/images/adventures/[adventure_name]/` directory.)*

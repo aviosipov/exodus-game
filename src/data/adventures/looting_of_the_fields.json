@@ -8,42 +8,42 @@
       "text": "לאחר העבודה המפרכת, השדות הבשלים היו קרן האור היחידה שלכם. התבואה הזהיבה בשמש, מבטיחה מזון למשפחותיכם. אתה, אוהד, וידידך יששכר, עומדים בשדותיכם, מקווים שהפעם, לפחות את פרי עמלכם זה יניחו לכם.",
       "character_left_img": "/characters/ohad/image.png",
       "character_right_img": "/characters/issachar/image.png",
-      "background_img": "/images/ancient_egypt_fields_ripe_bg.webp"
+      "background_img": "/images/adventures/looting_of_the_fields/lush_field_1.png"
     },
     {
       "speaker": "אוזיריס",
       "text": "(מגיע עם אחמוס ומספר מצרים נוספים, מצביע על השדה של אוהד) יבול יפה, אוהד. פרעה ישמח לקבל אותו כמנחה.",
       "character_left_img": "/characters/ohad/image.png",
       "character_right_img": "/characters/osiris/image.png",
-      "background_img": "/images/ancient_egypt_fields_ripe_bg.webp"
+      "background_img": "/images/adventures/looting_of_the_fields/lush_field_1.png"
     },
     {
         "speaker": "אחמוס",
         "text": "(פונה ליששכר בלעג) וגם השדה שלך, יששכר, נראה מבטיח. חבל שתצטרך להסתפק בפירורים שאנחנו נשאיר.",
         "character_left_img": "/characters/ahmos/image.png",
         "character_right_img": "/characters/issachar/image.png",
-        "background_img": "/images/ancient_egypt_fields_ripe_bg.webp"
+        "background_img": "/images/adventures/looting_of_the_fields/lush_field_1.png"
       },
     {
       "speaker": "אֹהַד",
       "text": "לקבל כמנחה?! זה היבול שלי! עמלתי עליו בזיעת אפי כל העונה! אתם לא יכולים פשוט לקחת אותו!",
       "character_left_img": "/characters/ohad/image.png",
       "character_right_img": "/characters/osiris/image.png",
-      "background_img": "/images/ancient_egypt_fields_ripe_bg.webp"
+      "background_img": "/images/adventures/looting_of_the_fields/lush_field_1.png"
     },
     {
       "speaker": "יִשָּׂשכָר",
       "text": "(בכעס וחוסר אונים) מה זאת אומרת להסתפק בפירורים? זה האוכל של הילדים שלנו! זו גזלה!",
       "character_left_img": "/characters/issachar/image.png",
       "character_right_img": "/characters/ahmos/image.png",
-      "background_img": "/images/ancient_egypt_fields_ripe_bg.webp"
+      "background_img": "/images/adventures/looting_of_the_fields/lush_field_1.png"
     },
     {
         "speaker": "מספר",
         "text": "אוזיריס ואחמוס מתעלמים מתחנוניכם. הם מסמנים לאנשיהם, ואלה נכנסים לשדות ומתחילים לקצור בזריזות ובאכזריות, רומסים שיבולים בדרכם, ממלאים שקים בתבואה שלכם.",
         "character_left_img": "/characters/ohad/image.png",
         "character_right_img": "/characters/osiris/image.png",
-        "background_img": "/images/ancient_egypt_fields_ripe_bg.webp"
+        "background_img": "/images/adventures/looting_of_the_fields/lush_field_1.png"
     },
     {
       "id": "moment_of_theft",
@@ -51,7 +51,7 @@
       "text": "אתה רואה את אוזיריס עצמו אוסף אלומות מהשדה שלך בחיוך שבע רצון. ליבך נשבר למראה הביזה הגלויה. מה תעשה מול חוסר האונים המוחלט?",
       "character_left_img": "/characters/ohad/image.png",
       "character_right_img": "/characters/osiris/image.png",
-      "background_img": "/images/ancient_egypt_fields_ripe_bg.webp",
+      "background_img": "/images/adventures/looting_of_the_fields/lush_field_1.png",
       "choices": [
         { "text": "נסה לחטוף חזרה אלומת שיבולים אחת מידיו של מצרי קרוב: \"עזוב את זה! זה שלי!\"", "outcome": "try_reclaim" },
         { "text": "פנה לאוזיריס בניסיון נואש לפנות אל העבר: \"אוזיריס, איך אתה יכול? פעם כיבדנו זה את זה!\"", "outcome": "appeal_past" },
@@ -64,7 +64,7 @@
       "text": "(דוחף אותך בחוזקה לרצפה) חתיכת עבד חוצפן! אל תפריע לקציר של אדוניך! בפעם הבאה זה ייגמר רע יותר!",
       "character_left_img": "/characters/ahmos/image.png",
       "character_right_img": "/characters/ohad/image.png",
-      "background_img": "/images/ancient_egypt_fields_plundered_bg.webp",
+      "background_img": "/images/adventures/looting_of_the_fields/plundered_field_1.png",
       "next": "looting_continues"
     },
     {
@@ -73,7 +73,7 @@
       "text": "(מביט בך בבוז) פעם? זה היה פעם. עכשיו אתם עבדים, והיבול שלכם - הוא שלנו. תלמד את מקומך, אוהד.",
       "character_left_img": "/characters/osiris/image.png",
       "character_right_img": "/characters/ohad/image.png",
-      "background_img": "/images/ancient_egypt_fields_plundered_bg.webp",
+      "background_img": "/images/adventures/looting_of_the_fields/plundered_field_1.png",
       "next": "looting_continues"
     },
     {
@@ -82,7 +82,7 @@
       "text": "אתה עומד שם, רואה ושומע את הקציר הנמרץ, את צחוקם של המצרים, את רשרוש השיבולים הנגזלות. חוסר האונים צורב בנשמתך.",
       "character_left_img": "/characters/ohad/image.png",
       "character_right_img": "/characters/issachar/image.png",
-      "background_img": "/images/ancient_egypt_fields_plundered_bg.webp",
+      "background_img": "/images/adventures/looting_of_the_fields/plundered_field_1.png",
       "next": "looting_continues"
     },
     {
@@ -91,21 +91,21 @@
         "text": "תוך זמן קצר, השדות כמעט ריקים. המצרים מעמיסים את השקים המלאים על עגלות ועוזבים, משאירים מאחוריהם אדמה חרוכה וכמה שיבולים בודדות פזורות.",
         "character_left_img": "/characters/ohad/image.png",
         "character_right_img": "/characters/issachar/image.png",
-        "background_img": "/images/ancient_egypt_fields_plundered_bg.webp"
+        "background_img": "/images/adventures/looting_of_the_fields/plundered_field_1.png"
       },
     {
       "speaker": "יִשָּׂשכָר",
       "text": "(מביט בשדה ההרוס, קולו חנוק) הם לקחו הכל... לא השאירו כמעט כלום. מה נאכיל את הילדים, אוהד? מה נעשה עכשיו?",
       "character_left_img": "/characters/issachar/image.png",
       "character_right_img": "/characters/ohad/image.png",
-      "background_img": "/images/ancient_egypt_fields_plundered_bg.webp"
+      "background_img": "/images/adventures/looting_of_the_fields/plundered_field_1.png"
     },
     {
       "speaker": "אֹהַד",
       "text": "(מביט באופק הריק, בייאוש עמוק) אין לי תשובה, יששכר. עבודה קשה, בתים הרוסים, ועכשיו גם רעב. נראה שאין תחתית לסבל שלנו.",
       "character_left_img": "/characters/ohad/image.png",
       "character_right_img": "/characters/issachar/image.png",
-      "background_img": "/images/ancient_egypt_fields_plundered_bg.webp"
+      "background_img": "/images/adventures/looting_of_the_fields/plundered_field_1.png"
     },
     {
       "id": "end_scene_field_looting",
@@ -113,7 +113,7 @@
       "text": "הביזה הגלויה של השדות היא מכה נוספת שמנחיתים המצרים. גזילת המזון והפרנסה מוסיפה על עבודת הפרך ונישול הרכוש, ומטרתה לשבור את רוחם של בני ישראל ולהבהיר להם שאין להם דבר משלהם תחת השלטון המצרי.",
       "character_left_img": "/characters/ohad/image.png",
       "character_right_img": null,
-      "background_img": "/images/ancient_egypt_fields_plundered_bg.webp",
+      "background_img": "/images/adventures/looting_of_the_fields/plundered_field_1.png",
       "end": true
     }
   ]
