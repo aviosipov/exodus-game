@@ -1,17 +1,17 @@
 "use client"; // Required for hooks and client-side interactions
 
 import React, { useState, useEffect, useRef } from 'react';
-// Removed unused Link import
 import { Typography } from '@/components/ui/Typography'; // Import Typography
 import MenuButton from '@/components/ui/MenuButton'; // Import MenuButton
 
-// TODO: Fetch this list dynamically from the filesystem or an API route
-const adventures = [
-    { id: "days_of_honor", title: "ימי הכבוד", description: "פרק ראשון: תחילת הסיפור במצרים." },
-    // Add more adventures here as they are created
-];
+// Interface for the adventure data fetched from the API
+interface AdventureInfo {
+    id: string;
+    title: string;
+    description: string;
+}
 
-// Video paths from MainMenu/MiniGamesHub
+// Video paths from MainMenu/MiniGamesHub - Keep this part
 const videoPaths = [
   '/videos/video1.mp4',
   '/videos/video2.mp4',
@@ -20,11 +20,40 @@ const videoPaths = [
 ];
 
 export default function AdventureListPage() {
-  // Video state and ref from MainMenu/MiniGamesHub
+  // Video state and ref - Keep this part
   const [videoIndex, setVideoIndex] = useState(0);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  // --- Video Effects from MainMenu/MiniGamesHub ---
+  // State for fetched adventures, loading, and errors
+  const [fetchedAdventures, setFetchedAdventures] = useState<AdventureInfo[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  // --- Fetch Adventures ---
+  useEffect(() => {
+    const fetchAdventures = async () => {
+      setIsLoading(true);
+      setError(null);
+      try {
+        const response = await fetch('/api/adventures');
+        if (!response.ok) {
+          throw new Error(`Failed to fetch adventures: ${response.statusText}`);
+        }
+        const data: AdventureInfo[] = await response.json();
+        setFetchedAdventures(data);
+      } catch (err) {
+        console.error("Error fetching adventures:", err);
+        setError(err instanceof Error ? err.message : "An unknown error occurred");
+        setFetchedAdventures([]); // Clear adventures on error
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchAdventures();
+  }, []); // Empty dependency array means this runs once on mount
+
+  // --- Video Effects - Keep this part ---
   useEffect(() => {
     const intervalId = setInterval(() => {
       setVideoIndex(prevIndex => (prevIndex + 1) % videoPaths.length);
@@ -87,8 +116,16 @@ export default function AdventureListPage() {
 
         {/* Grid for adventure selection, using MenuButton */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 w-full max-w-3xl">
-          {adventures.length > 0 ? (
-            adventures.map((adventure) => (
+          {isLoading ? (
+            <Typography variant="body1" color="secondary" className="col-span-full text-center">
+              טוען פרקים...
+            </Typography>
+          ) : error ? (
+            <Typography variant="body1" color="destructive" className="col-span-full text-center">
+              שגיאה בטעינת הפרקים: {error}
+            </Typography>
+          ) : fetchedAdventures.length > 0 ? (
+            fetchedAdventures.map((adventure) => (
               <MenuButton
                 key={adventure.id}
                 variant="dark" // Use the dark variant
@@ -105,7 +142,7 @@ export default function AdventureListPage() {
               לא נמצאו פרקים זמינים כרגע.
             </Typography>
           )}
-           {/* Optional: Add placeholders if needed */}
+           {/* Optional: Add placeholders if needed - Keep these */}
            <MenuButton
             variant="dark"
             title="בקרוב..."

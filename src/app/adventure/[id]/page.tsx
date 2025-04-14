@@ -60,16 +60,10 @@ export default function AdventureScenePage() {
                 // A better approach for Next.js >= 13 App Router is needed here.
                 // Let's assume an API route /api/adventures/[id] exists for fetching.
 
-                // --- Placeholder for actual data fetching ---
-                // In a real app, fetch from `/api/adventures/${adventureId}` or use server-side fetching
-                // For now, we'll simulate fetching the previously created JSON
-                if (adventureId === 'days_of_honor') {
-                     const data = await import(`@/data/adventures/days_of_honor.json`);
-                     setAdventureData(data.default); // Assuming default export
-                } else {
-                    throw new Error(`Adventure "${adventureId}" not found.`);
-                }
-                // --- End Placeholder ---
+                // Dynamically import the JSON based on the adventureId
+                // This assumes the adventureId directly corresponds to the filename (e.g., 'days_of_honor' -> 'days_of_honor.json')
+                const data = await import(`@/data/adventures/${adventureId}.json`);
+                setAdventureData(data.default); // Assuming default export
 
                 setCurrentStepIndex(0); // Reset step index when new data loads
             } catch (err) {
