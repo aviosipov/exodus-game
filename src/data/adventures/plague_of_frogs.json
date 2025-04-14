@@ -1,0 +1,98 @@
+{
+  "title": "מכת צפרדע",
+  "description": "צפרדעים פושטות על מצרים, משבשות את חיי המצרים באופן חסר תקדים ומעניקות לבני ישראל הפוגה בלתי צפויה מעבודות הפרך הקשות.",
+  "scenes": [
+    {
+      "id": "start_frog_plague",
+      "speaker": "מספר",
+      "text": "לאחר מכת הדם, מכה חדשה נוחתת על מצרים. צפרדעים! מיליוני קרפדות ירוקות וחלקלקות עולות מן היאור ופושטות על כל פינה בארץ מצרים. הן מכסות את האדמה, קופצות אל הבתים, אל התנורים ואל משכבות המצרים.",
+      "character_left_img": null,
+      "character_right_img": null,
+      "background_img": "/images/ancient_egypt_frogs_everywhere_bg.webp"
+    },
+    {
+      "speaker": "אֹהַד",
+      "text": "(מביט סביב בתדהמה) יששכר, ראה! צפרדעים בכל מקום! הן יוצאות מכל חור!",
+      "character_left_img": "/images/ohad_avatar_nobg.png",
+      "character_right_img": "/images/issachar_avatar_nobg.png",
+      "background_img": "/images/ancient_egypt_frogs_everywhere_bg.webp"
+    },
+    {
+      "speaker": "יִשָּׂשכָר",
+      "text": "(מכווץ את פניו בגועל) מעולם לא ראיתי דבר כזה. האוויר מלא בקרקורים! נראה שאי אפשר לזוז בלי לדרוך על אחת מהן.",
+      "character_left_img": "/images/issachar_avatar_nobg.png",
+      "character_right_img": "/images/ohad_avatar_nobg.png",
+      "background_img": "/images/ancient_egypt_frogs_everywhere_bg.webp"
+    },
+    {
+        "speaker": "מספר",
+        "text": "המצרים אחוזי פלצות ותיעוב. הצפרדעים חודרות לבתיהם, משתלטות על מטבחיהם וחדרי השינה שלהם. בנמל, העבודה נעצרת כליל - הצפרדעים קופצות על האוניות, מזהמות את הסחורות ומבריחות את הסבלים.",
+        "character_left_img": null,
+        "character_right_img": null,
+        "background_img": "/images/ancient_egypt_port_frogs_bg.webp"
+      },
+    {
+        "speaker": "אֹהַד",
+        "text": "(מבחין בהיעדר הנוגשים) שמת לב? אין כאן אף נוגש היום. גם אתרי העבודה האחרים נראים שוממים.",
+        "character_left_img": "/images/ohad_avatar_nobg.png",
+        "character_right_img": "/images/issachar_avatar_nobg.png",
+        "background_img": "/images/ancient_egypt_frogs_everywhere_bg.webp"
+      },
+      {
+        "speaker": "יִשָּׂשכָר",
+        "text": "(מחייך קלות) נראה שאדונינו המצרים עסוקים מדי בגירוש הפולשים המקרקרים האלה מכדי להשגיח עלינו. קיבלנו... חופשה?",
+        "character_left_img": "/images/issachar_avatar_nobg.png",
+        "character_right_img": "/images/ohad_avatar_nobg.png",
+        "background_img": "/images/ancient_egypt_frogs_everywhere_bg.webp"
+      },
+      {
+        "id": "unexpected_respite",
+        "speaker": "מספר",
+        "text": "זו הפעם הראשונה מזה זמן רב שאתם חופשיים מעול העבודה המפרכת. המצרים טרודים בצרותיהם, ואתם זוכים להפוגה בלתי צפויה. כיצד תנצלו את הזמן הזה?",
+        "character_left_img": "/images/ohad_avatar_nobg.png",
+        "character_right_img": "/images/issachar_avatar_nobg.png",
+        "background_img": "/images/israelite_camp_respite_bg.webp",
+        "choices": [
+          { "text": "נתכנס יחד לתפילה ולהבנת משמעות האותות הללו.", "outcome": "gather_pray" },
+          { "text": "ננצל את הזמן למנוחה נדירה, נאגור כוחות.", "outcome": "rest_recover" },
+          { "text": "נצפה במתרחש אצל המצרים, ננסה להבין את גודל המכה.", "outcome": "observe_egyptians" }
+        ]
+      },
+      {
+        "id": "gather_pray",
+        "speaker": "מספר",
+        "text": "אתם מתאספים בקבוצות קטנות, משוחחים בלחש על משה, על אלוהים ועל המכות הניחתות על מצרים. יש באוויר תחושה של פליאה, תקווה מהולה בחשש מפני הבאות.",
+        "character_left_img": "/images/ohad_avatar_nobg.png",
+        "character_right_img": null,
+        "background_img": "/images/israelite_camp_respite_bg.webp",
+        "next": "end_scene_frogs"
+      },
+      {
+        "id": "rest_recover",
+        "speaker": "מספר",
+        "text": "אתם מתמסרים למנוחה המתוקה. רבים פשוט ישנים, אחרים יושבים בשקט עם משפחותיהם. השקט היחסי, המופרע רק על ידי קרקורי הצפרדעים מרחוק, הוא מצרך נדיר ומבורך.",
+        "character_left_img": "/images/ohad_avatar_nobg.png",
+        "character_right_img": null,
+        "background_img": "/images/israelite_camp_respite_bg.webp",
+        "next": "end_scene_frogs"
+      },
+      {
+        "id": "observe_egyptians",
+        "speaker": "מספר",
+        "text": "אתם צופים ממרחק בטוח בכאוס השורר בבתי המצרים וברחובות. המראה של אדוניכם המבוהלים, הנלחמים בחוסר אונים בצבא הצפרדעים, מעורר בכם רגשות מעורבים - סיפוק מסוים, אולי רחמים, ותהייה על עוצמת הכוח שפועל כאן.",
+        "character_left_img": "/images/ohad_avatar_nobg.png",
+        "character_right_img": null,
+        "background_img": "/images/israelite_camp_respite_bg.webp",
+        "next": "end_scene_frogs"
+      },
+    {
+      "id": "end_scene_frogs",
+      "speaker": "מספר",
+      "text": "מכת הצפרדעים הפכה את חיי המצרים לסיוט מתמשך והביאה את עבודות הממלכה לעצירה. עבורכם, בני ישראל, זוהי הפוגה מפתיעה ורגע נדיר של נחת. אך כמה זמן תימשך ההקלה הזו? האם פרעה ילמד לקח, או שמא ליבו רק ילך ויקשה?",
+      "character_left_img": "/images/ohad_avatar_nobg.png",
+      "character_right_img": null,
+      "background_img": "/images/israelite_camp_respite_bg.webp",
+      "end": true
+    }
+  ]
+}
