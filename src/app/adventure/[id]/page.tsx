@@ -86,32 +86,20 @@ export default function AdventureScenePage() {
 
         if (currentStepData.end) {
             console.log("End of scene.");
+            // Consider adding navigation back or to an end screen here
+            // For now, it just stops progression.
             return;
         }
 
-        let nextIndex = -1;
-        const scene = adventureData.scenes;
-
-        if (currentStepData.next) {
-            nextIndex = scene.findIndex(step => step.id === currentStepData.next);
-            if (nextIndex === -1) {
-                console.error(`Next step with id "${currentStepData.next}" not found. Proceeding sequentially.`);
-            }
-        }
-
-        if (nextIndex === -1) {
-            nextIndex = currentStepIndex + 1;
-        }
-
-        while (nextIndex < scene.length && scene[nextIndex].id && !scene[nextIndex].choices && !currentStepData.next) {
-             console.log(`Skipping outcome step ${nextIndex}`);
-             nextIndex++;
-        }
+        const nextIndex = currentStepIndex + 1;
+        const scene = adventureData.scenes; // Keep for checking bounds
 
         if (nextIndex < scene.length) {
             setCurrentStepIndex(nextIndex);
         } else {
-            console.log("End of scene reached.");
+            console.log("End of adventure reached.");
+            // Optional: Navigate back or show a completion message
+            // Example: window.location.href = '/adventure';
         }
     };
 

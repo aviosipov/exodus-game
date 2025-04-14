@@ -1,0 +1,92 @@
+{
+  "title": "התרמית של פרעה",
+  "description": "פרעה רוקם תוכנית ערמומית להכביד את עול השעבוד על בני ישראל.",
+  "scenes": [
+    {
+      "speaker": "מספר",
+      "text": "השמש קפחה על אתר הבנייה. בני ישראל עמלו, אך טרם ידעו איזה מפנה יביא עליהם הגורל. לפתע, להפתעת הכל, הופיע פרעה בכבודו ובעצמו.",
+      "character_left_img": null,
+      "character_right_img": null,
+      "background_img": "/images/construction_site_day.webp"
+    },
+    {
+      "speaker": "מספר",
+      "text": "פרעה הגיע עם סל ומגריפה בידיו, כמתכוון להשתתף בעבודה. הוא פנה אל בני ישראל בנאום מלא טוב לב מזויף.",
+      "character_left_img": null,
+      "character_right_img": "/images/pharaoh_smiling_tools.png",
+      "background_img": "/images/construction_site_day.webp"
+    },
+    {
+      "speaker": "פרעה",
+      "text": "עובדיי הנאמנים! רואה אני את עבודתכם הקשה! היום אני מציע לכם הזדמנות מיוחדת: הראו לי למה אתם מסוגלים, הכינו כמה שיותר לבנים! על כל לבנה מעבר למכסה הרגילה, אשלם לכם בנדיבות!",
+      "character_left_img": null,
+      "character_right_img": "/images/pharaoh_persuasive.png",
+      "background_img": "/images/construction_site_day.webp",
+      "choices": [
+        {
+          "text": "נשמע מצוין! בואו נתאמץ למען השכר!",
+          "outcome": "work_hard_motivated"
+        },
+        {
+          "text": "הממ, נשמע טוב מכדי להיות אמיתי...",
+          "outcome": "work_hard_skeptical"
+        },
+        {
+          "text": "האם אפשר לברר את תנאי התשלום כעת?",
+          "outcome": "pharaoh_dismisses_question"
+        }
+      ]
+    },
+    {
+      "id": "pharaoh_dismisses_question",
+      "speaker": "פרעה",
+      "text": "לא עת לשאלות! עת לעבודה! הראו את חריצותכם, ואני אדאג לשאר. אל תטילו ספק בנדיבותי!",
+      "character_left_img": null,
+      "character_right_img": "/images/pharaoh_impatient.png",
+      "background_img": "/images/construction_site_day.webp",
+      "next": "work_hard_skeptical"
+    },
+    {
+      "id": "work_hard_motivated",
+      "speaker": "מספר",
+      "text": "מעודדים מהבטחתו של פרעה, בני ישראל ניגשו למלאכה במרץ שלא נראה כמותו. כל אחד השתדל להתעלות על עצמו, חולם על השכר הנדיב.",
+      "character_left_img": "/images/israelites_working_hard.png",
+      "character_right_img": null,
+      "background_img": "/images/construction_site_intense.webp",
+      "next": "end_of_day"
+    },
+    {
+      "id": "work_hard_skeptical",
+      "speaker": "מספר",
+      "text": "אף שדברי פרעה (או תשובתו המתחמקת) עוררו ספקות, לא הייתה ברירה אחרת. בני ישראל עבדו בחריצות, אך צל של חשד ליווה אותם.",
+      "character_left_img": "/images/israelites_working_skeptical.png",
+      "character_right_img": null,
+      "background_img": "/images/construction_site_intense.webp",
+      "next": "end_of_day"
+    },
+    {
+      "id": "end_of_day",
+      "speaker": "מספר",
+      "text": "בסוף היום, ערמות של לבנים טריות נערמו באתר. עייפים אך מלאי ציפייה (או חשש), התאספו הפועלים בפני פרעה.",
+      "character_left_img": "/images/israelites_tired_waiting.png",
+      "character_right_img": "/images/pharaoh_serious.png",
+      "background_img": "/images/construction_site_evening.webp"
+    },
+    {
+      "speaker": "פרעה",
+      "text": "עבדתם יפה! הראיתם כמה לבנים אתם יכולים לייצר ביום אחד. אם כן, מעתה ואילך - זו תהיה המכסה היומית שלכם! ולא יהיה כל תשלום. זו חובתכם!",
+      "character_left_img": null,
+      "character_right_img": "/images/pharaoh_angry_reveal.png",
+      "background_img": "/images/construction_site_evening.webp"
+    },
+    {
+      "id": "aftermath_trickery",
+      "speaker": "מספר",
+      "text": "דברי פרעה נפלו עליהם כרעם ביום בהיר. ההבטחה לשכר התגלתה כמלכודת אכזרית. עמלם נוצל נגדם כדי לקבוע מכסה בלתי אפשרית ולגזול מהם את התקווה האחרונה לתשלום. השעבוד הפך קשה עוד יותר.",
+      "character_left_img": "/images/israelites_shocked_despair.png",
+      "character_right_img": null,
+      "background_img": "/images/construction_site_night.webp",
+      "end": true
+    }
+  ]
+}
