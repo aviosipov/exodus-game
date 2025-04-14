@@ -249,6 +249,14 @@ export default function ChatPage() {
                 </div>
               </div>
             ))}
+            {/* Loading Indicator */}
+            {isLoading && (
+              <div className="flex justify-end">
+                <div className="max-w-[70%] p-3 rounded-lg bg-gray-600 text-white animate-pulse">
+                  ...
+                </div>
+              </div>
+            )}
             {/* Display Error */}
             {error && (
               <div className="flex justify-center">

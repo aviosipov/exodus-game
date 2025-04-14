@@ -46,7 +46,7 @@ export async function POST(req: NextRequest) {
     try {
       // Create request parameters
       const requestParams: OpenAI.Responses.ResponseCreateParams = {
-        model: "gpt-4o-mini", // Or your preferred model
+        model: "gpt-4.1-mini", // Or your preferred model
         input: lastUserMessageContent, // The current user message content
         instructions: character.systemPrompt, // Use instructions for system prompt
         tools: [{
