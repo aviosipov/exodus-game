@@ -150,13 +150,6 @@ export default function AdventureListPage() {
             className="min-h-[8rem]"
             disabled
           />
-           <MenuButton
-            variant="dark"
-            title="בקרוב..."
-            description="פרקים נוספים יתווספו בהמשך."
-            className="min-h-[8rem]"
-            disabled
-          />
         </div> {/* Closing Grid */}
 
 
