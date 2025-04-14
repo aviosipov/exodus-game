@@ -13,7 +13,7 @@ const shuffleArray = <T,>(array: T[]): T[] => {
   return shuffled;
 };
 
-const HebrewTriviaGame: React.FC<HebrewTriviaGameProps> = ({ questionSet, onGameComplete, topic_he }) => { // Added topic_he here
+const HebrewTriviaGame: React.FC<HebrewTriviaGameProps> = ({ questionSet, topic_he }) => { // Removed onGameComplete from props destructuring
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
@@ -63,14 +63,15 @@ const HebrewTriviaGame: React.FC<HebrewTriviaGameProps> = ({ questionSet, onGame
         // State reset for next question happens in the useEffect [currentQuestion]
       } else {
         setGameCompleted(true);
-        onGameComplete(score + (correct ? 1 : 0)); // Pass final score including the last answer
+        // Removed call to onGameComplete as the prop is no longer passed
+        // The component now handles displaying the end screen itself.
       }
     }, 1500); // 1.5 second delay for feedback
 
     // Cleanup timer if component unmounts or question changes before timeout finishes
     return () => clearTimeout(timer);
 
-  }, [currentQuestion, currentQuestionIndex, questionSet, score, showFeedback, gameCompleted, onGameComplete]);
+  }, [currentQuestion, currentQuestionIndex, questionSet, score, showFeedback, gameCompleted]); // Removed onGameComplete from dependencies
 
   const startGame = () => {
     setGameStarted(true);

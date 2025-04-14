@@ -10,6 +10,6 @@ export type QuestionSet = Question[];
 
 export interface HebrewTriviaGameProps {
   questionSet: QuestionSet;
-  onGameComplete: (finalScore: number) => void; // Callback when the game ends
+  // onGameComplete: (finalScore: number) => void; // Removed: Cannot pass functions from Server to Client Components
   topic_he?: string; // Optional topic/title for the trivia set
 }
