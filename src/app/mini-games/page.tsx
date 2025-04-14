@@ -116,18 +116,24 @@ export default function MiniGamesHub() {
             </Link>
           </div>
 
-          {/* Placeholder for potential 4th button */}
-          <div className="flex flex-col items-start"> {/* Container for consistency */}
+          {/* Pyramid Tetris Button Container */}
+          <div className="flex flex-col items-start"> {/* Container for button + link */}
             <MenuButton
-              variant="dark" // Use the new dark variant
-              title="בקרוב..."
-              description="משחקים נוספים יתווספו בהמשך."
-              // Keep only the page-specific layout adjustment
-              className="min-h-[8rem] w-full" // Ensure button takes full width
-              // Removed titleClassName and descriptionClassName overrides
-              disabled // Disable the button
+              variant="dark"
+              title="פירמידה טטריס"
+              description="בנה פירמידה על ידי התאמת בלוקים לחריצים"
+              href="/mini-games/pyramid-tetris"
+              className="min-h-[8rem] w-full" // Ensure button takes full width of container
             />
-            {/* No documentation link for placeholder */}
+            {/* Documentation Link - Placed outside MenuButton */}
+            <Link href="/docs/pyramid-tetris" passHref legacyBehavior>
+              <a
+                rel="noopener noreferrer"
+                className="mt-2 text-sm text-gray-900 hover:text-black hover:underline font-light self-start bg-yellow-300/70 px-1 rounded-sm" // Added bg opacity, padding, rounded corners, adjusted text color
+              >
+                [תיעוד]
+              </a>
+            </Link>
           </div>
         </div> {/* Closing Grid */}
 
