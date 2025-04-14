@@ -35,15 +35,14 @@ async function readChapterJson(filePath: string): Promise<ChapterData | null> {
   }
 }
 
-// Define the props for the page component, including URL parameters
-interface HebrewTriviaChapterPageProps {
-  params: {
-    chapterName: string; // This comes from the dynamic segment [chapterName]
-  };
-}
-
 // Server Component for displaying a specific trivia chapter game
-const HebrewTriviaChapterPage: React.FC<HebrewTriviaChapterPageProps> = async ({ params }) => {
+// Inline the props type definition
+const HebrewTriviaChapterPage = async ({
+  params,
+}: {
+  params: { chapterName: string };
+  // searchParams?: { [key: string]: string | string[] | undefined }; // Optional: Add if needed
+}) => {
   const { chapterName } = params;
 
   // Basic validation for chapterName to prevent directory traversal attacks

@@ -71,7 +71,7 @@ const HebrewTriviaGame: React.FC<HebrewTriviaGameProps> = ({ questionSet, topic_
     // Cleanup timer if component unmounts or question changes before timeout finishes
     return () => clearTimeout(timer);
 
-  }, [currentQuestion, currentQuestionIndex, questionSet, score, showFeedback, gameCompleted]); // Removed onGameComplete from dependencies
+  }, [currentQuestion, currentQuestionIndex, questionSet, showFeedback, gameCompleted]); // Removed score and onGameComplete from dependencies
 
   const startGame = () => {
     setGameStarted(true);
