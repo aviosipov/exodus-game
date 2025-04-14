@@ -37,12 +37,13 @@ async function readChapterJson(filePath: string): Promise<ChapterData | null> {
 
 // Server Component for displaying a specific trivia chapter game
 // Inline the props type definition
-const HebrewTriviaChapterPage = async ({
-  params,
-}: {
-  params: { chapterName: string };
-  // searchParams?: { [key: string]: string | string[] | undefined }; // Optional: Add if needed
-}) => {
+const HebrewTriviaChapterPage = async (
+  props: {
+    params: Promise<{ chapterName: string }>;
+    // searchParams?: { [key: string]: string | string[] | undefined }; // Optional: Add if needed
+  }
+) => {
+  const params = await props.params;
   const { chapterName } = params;
 
   // Basic validation for chapterName to prevent directory traversal attacks
