@@ -193,11 +193,12 @@ export default function ChatPage() {
   return (
     <div
       dir="rtl" // Right-to-left for Hebrew
-      // Changed flex direction for mobile, reversed order on md+, adjusted justification
-      className="relative w-screen h-screen overflow-hidden bg-cover bg-center bg-no-repeat flex flex-col md:flex-row-reverse items-center md:justify-between"
+      // Changed flex direction for mobile, normal row order on md+, adjusted justification
+      className="relative w-screen h-screen overflow-hidden bg-cover bg-center bg-no-repeat flex flex-col md:flex-row items-center md:justify-between" // Removed md:flex-row-reverse
       style={{ backgroundImage: `url('${BACKGROUND_IMG}')` }}
     >
-      {/* Right Side Wrapper (Chat + Selection) - Now takes full width on mobile, 1/3 on md+. Added top padding for mobile (pt-16) */}
+      {/* Right Side Wrapper (Chat + Selection) - Takes full width on mobile, 1/3 on md+. Added top padding for mobile (pt-16) */}
+      {/* This is now the RIGHT side on desktop */}
       <div className="w-full md:w-1/3 h-full md:h-[90vh] flex flex-col items-center pt-16 p-4 md:pt-4 md:m-8"> {/* Added pt-16 for mobile, kept p-4/md:pt-4 for others */}
         {/* Character Selection UI */}
         <div className="flex space-x-2 space-x-reverse mb-4">
@@ -293,6 +294,7 @@ export default function ChatPage() {
       </div>
 
       {/* Left Side: Character Display - Hidden on mobile, takes 2/3 width on md+ */}
+      {/* This is now the LEFT side on desktop */}
       <div className="hidden md:flex w-full md:w-2/3 h-full items-end justify-center p-10 relative"> {/* Centered character */}
          <div
             key={currentCharacter.name}
