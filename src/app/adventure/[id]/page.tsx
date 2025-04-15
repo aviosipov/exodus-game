@@ -132,17 +132,17 @@ export default function AdventureScenePage() {
         >
             {/* Left Character */}
             <div
-                className={`character absolute bottom-[170px] left-[50px] h-[60%] w-[30%] bg-contain bg-no-repeat bg-bottom transition-opacity duration-500 ease-in-out ${leftCharImg ? 'opacity-100' : 'opacity-0'}`}
+                className={`character absolute bottom-0 left-0 h-[85%] w-[42%] bg-contain bg-no-repeat bg-bottom transition-opacity duration-500 ease-in-out ${leftCharImg ? 'opacity-100' : 'opacity-0'}`}
                 style={{ backgroundImage: leftCharImg ? `url('${leftCharImg}')` : 'none' }}
             ></div>
             {/* Right Character */}
             <div
-                className={`character absolute bottom-[170px] right-[50px] h-[60%] w-[30%] bg-contain bg-no-repeat bg-bottom transition-opacity duration-500 ease-in-out ${rightCharImg ? 'opacity-100' : 'opacity-0'}`}
+                className={`character absolute bottom-0 right-0 h-[85%] w-[42%] bg-contain bg-no-repeat bg-bottom transition-opacity duration-500 ease-in-out ${rightCharImg ? 'opacity-100' : 'opacity-0'}`}
                 style={{ backgroundImage: rightCharImg ? `url('${rightCharImg}')` : 'none' }}
             ></div>
             {/* Dialogue Box - Aspect Ratio Container */}
-            {/* Outer container sets the 80% width and positions */}
-            <div className="absolute bottom-10 left-[10%] right-[10%] z-20"> {/* Changed left/right to 10% for 80% width */}
+            {/* Outer container sets the 64% width and positions */}
+            <div className="absolute bottom-10 left-[18%] right-[18%] z-20"> {/* Changed left/right to 18% for 64% width */}
                 <div className="relative w-full" style={{ paddingBottom: '24.6%' }}> {/* Aspect ratio container (218/886) */}
                     {/* Background Image */}
                     <img
