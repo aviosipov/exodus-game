@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, FormEvent, KeyboardEvent } from "react";
+import { Trash2 } from 'lucide-react'; // Import Trash2 icon
 // Removed: import { useChat } from 'ai/react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Container from "@/components/ui/Container";
@@ -182,6 +183,12 @@ export default function ChatPage() {
     }
   };
 
+  // --- Clear Chat Handler ---
+  const handleClearChat = () => {
+    setMessages([]);
+    setError(null); // Also clear any existing errors
+  };
+
   // --- Input Key Press Handler ---
   const handleKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter' && !event.shiftKey) {
@@ -232,6 +239,15 @@ export default function ChatPage() {
               <Typography variant="h3">{currentCharacter.name}</Typography>
               <Typography variant="body1">{currentCharacter.description}</Typography>
             </div>
+            {/* Clear Chat Button */}
+            <button
+              onClick={handleClearChat}
+              className="ml-auto p-2 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 rounded"
+              title="Clear Chat"
+              disabled={messages.length === 0 || isLoading} // Disable if no messages or loading
+            >
+              <Trash2 size={20} />
+            </button>
           </div>
 
           {/* Message Display Area */}
