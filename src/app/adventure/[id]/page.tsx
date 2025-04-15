@@ -127,8 +127,10 @@ export default function AdventureScenePage() {
     return (
         <div
             dir="rtl" // Right-to-left for Hebrew
-            className="relative w-screen h-screen overflow-hidden bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: bgImg ? `url('${bgImg}')` : 'none', backgroundColor: bgImg ? 'transparent' : '#e0d8c0' }} // Set background image or fallback color
+            // Mobile first: default bg color, md+ applies image styles
+            className="relative w-screen h-screen overflow-hidden bg-[#e0d8c0] md:bg-cover md:bg-center md:bg-no-repeat"
+            // Inline style now only sets the image URL if it exists
+            style={{ backgroundImage: bgImg ? `url('${bgImg}')` : 'none' }}
         >
             {/* Left Character */}
             <div
@@ -140,57 +142,89 @@ export default function AdventureScenePage() {
                 className={`character absolute bottom-0 right-0 h-[85%] w-[42%] bg-contain bg-no-repeat bg-bottom transition-opacity duration-500 ease-in-out ${rightCharImg ? 'opacity-100' : 'opacity-0'}`}
                 style={{ backgroundImage: rightCharImg ? `url('${rightCharImg}')` : 'none' }}
             ></div>
-            {/* Dialogue Box - Aspect Ratio Container */}
-            {/* Outer container sets the 64% width and positions */}
-            <div className="absolute bottom-10 left-[18%] right-[18%] z-20"> {/* Changed left/right to 18% for 64% width */}
-                <div className="relative w-full" style={{ paddingBottom: '24.6%' }}> {/* Aspect ratio container (218/886) */}
+
+            {/* --- Mobile Dialog --- */}
+            <div className="absolute top-20 left-4 right-4 z-20 bg-gray-100/70 rounded-lg overflow-hidden p-7 md:hidden"> {/* Increased top margin to top-8 */}
+                <div className="flex flex-col justify-between h-full">
+                    {/* Speaker and Text */}
+                    <div className="text-right text-black" style={{ textShadow: '0 0 5px white' }}>
+                        <h3 className="font-bold text-2xl mb-2">{currentStepData.speaker || ""}</h3>
+                        <p className="text-xl">{currentStepData.text}</p>
+                    </div>
+                    {/* Buttons Area */}
+                    <div className="flex justify-center items-center mt-4">
+                        {currentStepData.choices ? (
+                            (currentStepData.choices.map((choice, index) => (
+                                <SimpleButton
+                                    key={`mobile-${index}`}
+                                    variant="default"
+                                    className="ms-2 text-base px-4 py-2"
+                                    onClick={() => handleChoice(choice.outcome)}
+                                >
+                                    {choice.text}
+                                </SimpleButton>
+                            )))
+                        ) : !currentStepData.end ?
+                            <SimpleButton
+                                variant="bright"
+                                className="ms-2 text-base px-4 py-2"
+                                onClick={nextStep}
+                            >המשך {'>'}
+                            </SimpleButton>
+                         :
+                             <SimpleButton
+                                variant="secondary"
+                                className="ms-2 text-base px-4 py-2"
+                                onClick={() => window.location.href = '/adventure'}
+                            >חזור לרשימה
+                             </SimpleButton>
+                        }
+                    </div>
+                </div>
+            </div>
+
+            {/* --- Desktop Dialog --- */}
+            <div className="hidden md:block absolute bottom-10 left-[18%] right-[18%] z-20"> {/* Show only on md+ */}
+                <div className="relative w-full" style={{ paddingBottom: '24.6%' }}> {/* Aspect ratio container */}
                     {/* Background Image */}
                     <img
                         src="/images/stone-bg-v3.png"
                         alt="Dialog background"
-                        className="absolute inset-0 w-full h-full object-cover z-0 opacity-85" // Added opacity-75
+                        className="absolute inset-0 w-full h-full object-cover z-0 opacity-85"
                     />
-                    {/* Yellow Overlay - Reinstated */}
-                    
-                    {/* Content Overlay - Removed yellow background */}
-                    <div className="absolute inset-0 z-10 flex flex-col justify-between p-7"> {/* Removed bg-yellow-400/30 */}
+                    {/* Content Overlay */}
+                    <div className="absolute inset-0 z-10 flex flex-col justify-between p-7">
                         {/* Speaker and Text */}
-                        {/* Increased font size, added white text shadow */}
                         <div className="text-right text-black" style={{ textShadow: '0 0 5px white' }}>
-                            <h3 className="font-bold text-2xl mb-2">{currentStepData.speaker || ""}</h3> {/* Increased to text-2xl */}
-                            <p className="text-xl">{currentStepData.text}</p> {/* Increased to text-xl */}
+                            <h3 className="font-bold text-2xl mb-2">{currentStepData.speaker || ""}</h3>
+                            <p className="text-xl">{currentStepData.text}</p>
                         </div>
-
                         {/* Buttons Area */}
-                        {/* Added mt-4 for spacing */}
-                        <div className="flex justify-center items-center mt-4"> {/* Changed justify-start to justify-center */}
+                        <div className="flex justify-center items-center mt-4">
                             {currentStepData.choices ? (
-                                // Render choices if they exist using SimpleButton
                                 (currentStepData.choices.map((choice, index) => (
                                     <SimpleButton
-                                        key={index}
-                                        variant="default" // Use default yellow style for choices
-                                        className="ms-2 text-base px-4 py-2" // Increased text size and padding
+                                        key={`desktop-${index}`}
+                                        variant="default"
+                                        className="ms-2 text-base px-4 py-2"
                                         onClick={() => handleChoice(choice.outcome)}
                                     >
                                         {choice.text}
                                     </SimpleButton>
                                 )))
                             ) : !currentStepData.end ?
-                                /* Render "Next" button using SimpleButton */
                                 <SimpleButton
-                                    variant="bright" // Use bright blue style
-                                    className="ms-2 text-base px-4 py-2" // Increased text size and padding
+                                    variant="bright"
+                                    className="ms-2 text-base px-4 py-2"
                                     onClick={nextStep}
-                                >המשך {'>'} {/* Next > */}
+                                >המשך {'>'}
                                 </SimpleButton>
                              :
-                                /* Optional: Render "Back to List" button using SimpleButton */
                                  <SimpleButton
-                                    variant="secondary" // Use secondary gray style
-                                    className="ms-2 text-base px-4 py-2" // Increased text size and padding
-                                    onClick={() => window.location.href = '/adventure'} // Navigate back to list
-                                >חזור לרשימה {/* Back to List */}
+                                    variant="secondary"
+                                    className="ms-2 text-base px-4 py-2"
+                                    onClick={() => window.location.href = '/adventure'}
+                                >חזור לרשימה
                                  </SimpleButton>
                             }
                         </div>
