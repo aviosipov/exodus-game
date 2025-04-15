@@ -1,0 +1,97 @@
+{
+  "title": "מכת ערוב",
+  "description": "חיות רעות ממלאות את רחובות מצרים וטורפות ילדים מצריים. בני ישראל משוחררים ממטלות שמירה וציד.",
+  "scenes": [
+    {
+      "id": "start_arov",
+      "speaker": "מספר",
+      "text": "לאחר מכת הדם, מכה נוספת פוקדת את מצרים. הפעם, האיום מגיע מן היבשה. חיות פרא מכל הסוגים – אריות, זאבים, דובים ונחשים – פולשות לערים ולבתים המצריים.",
+      "character_left_img": null,
+      "character_right_img": null,
+      "background_img": "/images/egypt_streets_chaos_beasts.webp"
+    },
+    {
+      "speaker": "מספר",
+      "text": "החיות תוקפניות בצורה חסרת תקדים. הן אינן פוגעות בבני ישראל או ברכושם, אך זורעות הרס ואימה בקרב המצרים. יללות וצרחות נשמעות בכל פינה.",
+      "character_left_img": null,
+      "character_right_img": null,
+      "background_img": "/images/egypt_streets_chaos_beasts.webp"
+    },
+    {
+      "speaker": "נוגש מצרי",
+      "text": "(בפאניקה) היכן העבד הזה?! הייתי צריך אותו שיצוד עבורי... אבל מי יעז לצאת החוצה עכשיו? הארורים האלה משתוללים בכל מקום!",
+      "character_left_img": null,
+      "character_right_img": "/images/egyptian_taskmaster_scared_avatar_nobg.png",
+      "background_img": "/images/egyptian_house_indoors_fear.webp"
+    },
+    {
+      "speaker": "אישה מצרית",
+      "text": "(בוכה) הילד שלי... לא הספקתי להכניס אותו הביתה! החיות האלה... הן לקחו אותו! למה האלים עושים לנו את זה?!",
+      "character_left_img": "/images/egyptian_woman_crying_avatar_nobg.png",
+      "character_right_img": null,
+      "background_img": "/images/egyptian_house_indoors_fear.webp"
+    },
+    {
+      "speaker": "אשר",
+      "text": "(לאשתו, בלחש) שמעת? הם כבר לא דורשים מאיתנו לשמור על הצאן שלהם בשדות הפתוחים או ללוות את ילדיהם. הם מפחדים מדי לצאת החוצה בעצמם.",
+      "character_left_img": "/images/ohad_avatar_nobg.png",
+      "character_right_img": "/images/israelite_woman_avatar_nobg.png",
+      "background_img": "/images/israelite_dwelling_simple.webp"
+    },
+    {
+       "speaker": "מספר",
+       "text": "האיום המתמיד מהחיות משתק את המצרים. העבודה הקשה שדרשו מכם מתחילה להתרופף. אינכם נשלחים למשימות מסוכנות מחוץ לאזורי המגורים המוגנים שלכם.",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelite_dwelling_simple.webp"
+    },
+    {
+       "speaker": "מספר",
+       "text": "אתם עדים לסבל המצרים ולכוח העליון המגן עליכם. מה אתם חשים ברגעים אלה?",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelite_dwelling_watching_outside.webp",
+       "choices": [
+           { "text": "פחד וחשש שזה יגיע גם אלינו.", "outcome": "feel_fear" },
+           { "text": "הקלה מסוימת מהפחתת העומס.", "outcome": "feel_relief" },
+           { "text": "יראת כבוד מכוחו של ה'.", "outcome": "feel_awe" }
+       ]
+    },
+    {
+       "id": "feel_fear",
+       "speaker": "מספר",
+       "text": "הלב מתכווץ למראה האסון הפוקד את שכניכם, ותפילה חרישית נישאת שהמגן האלוקי ימשיך לחצוץ ביניכם לבין הזוועה.",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelite_dwelling_watching_outside.webp",
+       "next": "end_scene_arov"
+    },
+    {
+       "id": "feel_relief",
+       "speaker": "מספר",
+       "text": "למרות האימה מסביב, אי אפשר להתעלם מההקלה הפיזית. פחות עבודה, פחות סיכון. זוהי נחמה קטנה בתוך השעבוד המתמשך.",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelite_dwelling_watching_outside.webp",
+       "next": "end_scene_arov"
+    },
+    {
+       "id": "feel_awe",
+       "speaker": "מספר",
+       "text": "ברור כשמש שיד מכוונת פועלת כאן. ההגנה המופלאה עליכם למול ההרס הפוקד את המצרים מעוררת יראת כבוד והכרה בגדולת ה'.",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelite_dwelling_watching_outside.webp",
+       "next": "end_scene_arov"
+    },
+    {
+       "id": "end_scene_arov",
+       "speaker": "מספר",
+       "text": "מכת הערוב מכרסמת בכוחה של מצרים. המצרים מפוחדים ונחלשים, והעומס על בני ישראל פוחת במעט. האם פרעה יכנע הפעם?",
+       "character_left_img": null,
+       "character_right_img": null,
+       "background_img": "/images/egypt_streets_chaos_beasts_fading.webp",
+       "end": true
+    }
+  ]
+}

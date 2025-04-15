@@ -1,0 +1,104 @@
+{
+  "title": "מכת דבר",
+  "description": "מגפה קטלנית משמידה את מקנה המצרים, אך פוסחת על עדרי בני ישראל. בני ישראל משוחררים מרעיית עדרי המצרים.",
+  "scenes": [
+    {
+      "id": "start_dever",
+      "speaker": "מספר",
+      "text": "זמן קצר לאחר שמכת הערוב שככה במקצת, נחתה על מצרים מכה נוספת, שקטה אך קטלנית לא פחות. מגפה מסתורית החלה להתפשט בקרב מקנה המצרים.",
+      "character_left_img": null,
+      "character_right_img": null,
+      "background_img": "/images/egyptian_fields_sick_animals.webp"
+    },
+    {
+      "speaker": "מספר",
+      "text": "סוסים, חמורים, גמלים, בקר וצאן – כולם נפלו חלל למחלה. בשדות וברפתות המצריות נערמו פגרי הבהמות. האוויר התמלא בזמזום זבובים ובצחנת המוות.",
+      "character_left_img": null,
+      "character_right_img": null,
+      "background_img": "/images/egyptian_fields_dead_animals.webp"
+    },
+    {
+      "speaker": "בעל חווה מצרי",
+      "text": "(בייאוש) הכל... הכל אבד! הסוסים שמשכו את המרכבות, השוורים שחרשו את השדות, הצאן שנתן לנו צמר וחלב... כולם מתו! מה נעשה עכשיו?",
+      "character_left_img": null,
+      "character_right_img": "/images/egyptian_farmer_despair_avatar_nobg.png",
+      "background_img": "/images/egyptian_farm_ruined.webp"
+    },
+    {
+      "speaker": "מספר",
+      "text": "אך בארץ גושן, מקום מושבם של בני ישראל, התמונה הייתה שונה לחלוטין. אף לא בהמה אחת מבני ישראל מתה. העדרים שלכם נותרו בריאים ושלמים, רועים באחו בשלווה.",
+      "character_left_img": null,
+      "character_right_img": null,
+      "background_img": "/images/goshen_fields_healthy_animals.webp"
+    },
+    {
+      "speaker": "ראובן",
+      "text": "(לאשר, בהשתאות) ראית, אשר? פגרים בכל רחבי מצרים, ואצלנו – שום דבר. כאילו יד נעלמה מגנה על כל מה ששייך לנו.",
+      "character_left_img": "/images/reuven_avatar_nobg.png",
+      "character_right_img": "/images/ohad_avatar_nobg.png",
+      "background_img": "/images/goshen_fields_healthy_animals.webp"
+    },
+    {
+      "speaker": "אשר",
+      "text": "אכן, ראובן. ושים לב לדבר נוסף – הנוגשים כבר לא באים לקחת אותנו לרעות את העדרים שלהם. פשוט... אין להם יותר עדרים.",
+      "character_left_img": "/images/reuven_avatar_nobg.png",
+      "character_right_img": "/images/ohad_avatar_nobg.png",
+      "background_img": "/images/goshen_fields_healthy_animals.webp"
+    },
+    {
+       "speaker": "מספר",
+       "text": "העבודה המפרכת של רעיית מקנה המצרים, שהייתה חלק משגרת יומכם, נעלמה כלא הייתה. זו הקלה משמעותית, פחות שעות תחת השמש הקופחת וללא האחריות הכבדה על רכושם.",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelite_resting_shade.webp"
+    },
+    {
+       "speaker": "מספר",
+       "text": "ההבדל הברור בין גורל מקנה מצרים לגורל מקנה ישראל מעורר מחשבה. כיצד אתם מפרשים את האירוע הזה?",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelite_contemplating.webp",
+       "choices": [
+           { "text": "זוהי הוכחה נוספת להשגחה העליונה המבדילה בינינו לבינם.", "outcome": "interpret_divine" },
+           { "text": "הפסד כלכלי עצום למצרים, שמחליש אותם עוד יותר.", "outcome": "interpret_economic" },
+           { "text": "אנו מודים על ההקלה בעבודה ועל כך שמקנינו ניצל.", "outcome": "interpret_relief" }
+       ]
+    },
+    {
+       "id": "interpret_divine",
+       "speaker": "מספר",
+       "text": "האמונה מתחזקת. ברור לכם כי יד ה' היא זו שמכה במצרים ושומרת עליכם, ומבדילה בבירור בין עמו לבין אויביו.",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelite_contemplating.webp",
+       "next": "end_scene_dever"
+    },
+    {
+       "id": "interpret_economic",
+       "speaker": "מספר",
+       "text": "אתם רואים כיצד כל מכה מכרסמת בעוצמתה הכלכלית של מצרים. בלי בהמות עבודה ותוצרת, הממלכה נחלשת, ואולי זה יקרב את שחרורכם.",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelite_contemplating.webp",
+       "next": "end_scene_dever"
+    },
+    {
+       "id": "interpret_relief",
+       "speaker": "מספר",
+       "text": "הכרת תודה ממלאת את ליבכם על ההצלה הפרטית שלכם – הן של רכושכם והן מהעבודה הקשה שנחסכה מכם. כל הקלה היא צעד קטן לקראת התקווה.",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelite_contemplating.webp",
+       "next": "end_scene_dever"
+    },
+    {
+       "id": "end_scene_dever",
+       "speaker": "מספר",
+       "text": "מכת הדבר מותירה את מצרים פגועה כלכלית ומוכיחה שוב את ההגנה המיוחדת על בני ישראל ועל רכושם. נטל נוסף הוסר מעל כתפי העבדים. אך ליבו של פרעה עדיין קשה.",
+       "character_left_img": null,
+       "character_right_img": null,
+       "background_img": "/images/egyptian_fields_dead_animals_desolate.webp",
+       "end": true
+    }
+  ]
+}
