@@ -1,0 +1,104 @@
+{
+  "title": "מכת בכורות",
+  "description": "בלילה גורלי, כל בכורי מצרים מתים. הזעקה שוברת את פרעה, והוא דוחק בבני ישראל לצאת ממצרים לאלתר. היציאה מתחילה.",
+  "scenes": [
+    {
+      "id": "start_bechorot",
+      "speaker": "מספר",
+      "text": "הלילה הגורלי הגיע. בבתי בני ישראל, ההכנות בעיצומן כפי שציווה ה'. קורבן הפסח נאכל בחיפזון, והמשקופים מסומנים בדם. באוויר תחושה של מתח דרוך וציפייה.",
+      "character_left_img": null,
+      "character_right_img": null,
+      "background_img": "/images/israelite_passover_preparation_night.webp"
+    },
+    {
+      "speaker": "מספר",
+      "text": "בחצות הלילה, דממה נפלה על ארץ גושן. אך בשאר מצרים, התרחשה המכה העשירית והנוראה מכל. יד ה' עברה בארץ, וכל בכור - מבכור פרעה היושב על כיסאו, עד בכור השפחה ובכור הבהמה - מת.",
+      "character_left_img": null,
+      "character_right_img": null,
+      "background_img": "/images/egypt_midnight_plague_strikes.webp"
+    },
+    {
+      "speaker": "מספר",
+      "text": "צעקה גדולה וمرة עלתה בכל רחבי מצרים. בכל בית מצרי היה מת. האבל, הפאניקה והאימה אחזו בממלכה השבורה.",
+      "character_left_img": null,
+      "character_right_img": null,
+      "background_img": "/images/egypt_great_cry_wailing.webp"
+    },
+    {
+      "speaker": "פרעה",
+      "text": "(קול שבור, בהול) קראו למשה ולאהרן! מהר! (למשה ואהרן) קומו! צאו מתוך עמי! גם אתם, גם בני ישראל! לכו עבדו את ה' כדבריכם! קחו גם את צאנכם ובקרכם ולכו! ו... וברכתם גם אותי!",
+      "character_left_img": "/images/moses_aaron_avatars_nobg.png",
+      "character_right_img": "/images/pharaoh_broken_panicked_nobg.png",
+      "background_img": "/images/pharaoh_court_night_chaos.webp"
+    },
+    {
+      "speaker": "פקיד מצרי",
+      "text": "(דוחף את בני ישראל) צאו מהר! כולנו מתים! קחו מה שאתם רוצים, כסף, זהב, בגדים - רק לכו כבר!",
+      "character_left_img": "/images/egyptian_urging_departure_nobg.png",
+      "character_right_img": "/images/ohad_avatar_nobg.png",
+      "background_img": "/images/egyptian_street_urging_exodus.webp"
+    },
+    {
+      "speaker": "מספר",
+      "text": "המצרים דחקו בכם לצאת בחיפזון. לא היה זמן להתמהמה. אספתם את מעט רכושכם, ואת הבצק שהכנתם עוד טרם הספיק להחמיץ נשאתם על שכמכם.",
+      "character_left_img": null,
+      "character_right_img": null,
+      "background_img": "/images/israelites_hasty_preparation_departure.webp"
+    },
+    {
+      "speaker": "אשר",
+      "text": "(תוך כדי הליכה מהירה) סוף סוף... אחרי כל השנים האלה, כל הסבל... אנחנו יוצאים. אנחנו חופשיים!",
+      "character_left_img": "/images/ohad_avatar_nobg.png",
+      "character_right_img": "/images/miriam_avatar_nobg.png",
+      "background_img": "/images/israelites_beginning_exodus_march.webp"
+    },
+    {
+       "speaker": "מספר",
+       "text": "אתם צועדים אל מחוץ לגבולות מצרים, משאירים מאחור מאות שנים של שעבוד. האוויר מלא בתחושת דחיפות, אך גם בתקווה והתרגשות. הרגע לו חיכיתם הגיע. מהי התחושה העיקרית המלווה אתכם ברגע היסטורי זה?",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelites_marching_out_dawn.webp",
+       "choices": [
+           { "text": "תחושת ניצחון ושחרור – סוף סוף יצאנו מעבדות לחירות!", "outcome": "feel_victory_freedom" },
+           { "text": "הקלה עצומה וכרת תודה על ההצלה הניסית.", "outcome": "feel_relief_gratitude" },
+           { "text": "חשש מהלא נודע – מה מצפה לנו במדבר?", "outcome": "feel_anxiety_unknown" }
+       ]
+    },
+    {
+       "id": "feel_victory_freedom",
+       "speaker": "מספר",
+       "text": "גאווה ממלאת את ליבכם. יד ה' הוציאה אתכם ממצרים ביד רמה ובזרוע נטויה. אתם צועדים כעם חופשי, מותירים את אויביכם מושפלים מאחור.",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelites_marching_proudly.webp",
+       "next": "end_scene_bechorot_exodus"
+    },
+    {
+       "id": "feel_relief_gratitude",
+       "speaker": "מספר",
+       "text": "אנחת רווחה עמוקה נפלטת מכם. הסיוט נגמר. תודה לאל שהוציא אתכם מבית עבדים והציל אתכם מהמכות ומהשעבוד. אתם צועדים אל עתיד חדש.",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelites_marching_relief.webp",
+       "next": "end_scene_bechorot_exodus"
+    },
+    {
+       "id": "feel_anxiety_unknown",
+       "speaker": "מספר",
+       "text": "השמחה על השחרור מהולה בחשש. מצרים מאחוריכם, אבל לפנים משתרע מדבר גדול ונורא. הדרך עוד ארוכה ולא ידועה, אך אתם בוטחים בהבטחת ה'.",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelites_marching_into_desert.webp",
+       "next": "end_scene_bechorot_exodus"
+    },
+    {
+       "id": "end_scene_bechorot_exodus",
+       "speaker": "מספר",
+       "text": "מכת הבכורות שברה סופית את מצרים. העם יוצא ממצרים בגדול, בחירות מלאה וביד רמה! פרק השעבוד במצרים הסתיים. המסע אל החירות והארץ המובטחת מתחיל כעת.",
+       "character_left_img": null,
+       "character_right_img": null,
+       "background_img": "/images/exodus_begins_wide_shot.webp",
+       "end": true
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "title": "מכת חושך",
+  "description": "חושך מוחלט ואפלה כבדה יורדים על מצרים למשך שלושה ימים, משתקים את המצרים בבתיהם. בני ישראל, להם יש אור, זוכים לחופש תנועה וטועמים טעם של חירות.",
+  "scenes": [
+    {
+      "id": "start_hoshech",
+      "speaker": "מספר",
+      "text": "לאחר הארבה שכילה כל ירק, ירדה על מצרים מכה מסוג אחר לגמרי. לא הרס פיזי, אלא אפלה. חושך סמיך וכבד כיסה את כל ארץ מצרים, חושך שניתן היה למשש.",
+      "character_left_img": null,
+      "character_right_img": null,
+      "background_img": "/images/egypt_darkness_falling.webp"
+    },
+    {
+      "speaker": "מספר",
+      "text": "שלושה ימים נמשכה האפלה. המצרים היו משותקים לחלוטין. איש לא ראה את אחיו, ואיש לא קם ממקומו. הבתים, הרחובות, הארמונות – הכל שקע בדממה ובעלטה מוחלטת.",
+      "character_left_img": null,
+      "character_right_img": null,
+      "background_img": "/images/egypt_pitch_black_stillness.webp"
+    },
+    {
+      "speaker": "קול מצרי 1 (בלחש, בחושך)",
+      "text": "אתה שם? מישהו שומע אותי? אני לא רואה כלום... אני לא יכול לזוז...",
+      "character_left_img": null,
+      "character_right_img": null,
+      "background_img": "/images/egypt_pitch_black_stillness.webp"
+    },
+    {
+      "speaker": "קול מצרי 2 (בפאניקה שקטה)",
+      "text": "זה כמו קבר... אנחנו קבורים בחיים בחושך הזה! מה קורה לנו?",
+      "character_left_img": null,
+      "character_right_img": null,
+      "background_img": "/images/egypt_pitch_black_stillness.webp"
+    },
+    {
+      "speaker": "מספר",
+      "text": "אך בקרב בני ישראל, התמונה הייתה הפוכה לחלוטין. בבתיכם ובכל מושבותיכם שרר אור. יכולתם לראות, לזוז, לדבר, ולנוע בחופשיות מוחלטת.",
+      "character_left_img": null,
+      "character_right_img": null,
+      "background_img": "/images/israelite_dwellings_lit_contrast.webp"
+    },
+    {
+      "speaker": "אשר",
+      "text": "(יוצא מביתו, מביט החוצה אל החושך המצרי) זה לא ייאמן. שם - אפלה מוחלטת. כאן - אור יום. אנחנו יכולים ללכת לאן שנרצה, לעשות מה שנרצה.",
+      "character_left_img": "/images/ohad_avatar_nobg.png",
+      "character_right_img": null,
+      "background_img": "/images/israelite_moving_freely_egypt_dark.webp"
+    },
+    {
+      "speaker": "מרים",
+      "text": "(מצטרפת אליו, נושמת עמוק) שלושה ימים... בלי נוגשים, בלי פקודות, בלי פחד מהמצרים שלא יכולים לראות אותנו או לקום ממקומם. זה... זה מרגיש כמו חירות, אשר.",
+      "character_left_img": "/images/miriam_avatar_nobg.png",
+      "character_right_img": "/images/ohad_avatar_nobg.png",
+      "background_img": "/images/israelite_moving_freely_egypt_dark.webp"
+    },
+    {
+       "speaker": "מספר",
+       "text": "לראשונה מזה שנים רבות, אתם חופשיים מהפיקוח והשליטה המצרית. המעבידים שלכם משותקים וחסרי אונים. חופש התנועה שלכם מוחלט. זו טעימה אמיתית ראשונה של החיים ללא שעבוד.",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelites_experiencing_freedom.webp"
+    },
+    {
+       "speaker": "מספר",
+       "text": "שלושה ימים של אור בתוך החושך המצרי. כיצד אתם מנצלים את הזמן הייחודי הזה, את החופש הפתאומי הזה?",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelite_choosing_action_in_light.webp",
+       "choices": [
+           { "text": "לחזק את הקשרים הקהילתיים ולהתכונן לבאות.", "outcome": "action_community" },
+           { "text": "לנוח ולאגור כוחות לקראת הלא נודע.", "outcome": "action_rest" },
+           { "text": "להתבונן במצרים המשותקים ולהבין את גודל הנס.", "outcome": "action_observe" }
+       ]
+    },
+    {
+       "id": "action_community",
+       "speaker": "מספר",
+       "text": "אתם מנצלים את הזמן כדי להתאסף, לדבר, לחזק איש את רעהו ולהתכונן יחד לקראת מה שעתיד לבוא. תחושת האחדות והגורל המשותף מתחזקת באור.",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelites_gathering_community.webp",
+       "next": "end_scene_hoshech"
+    },
+    {
+       "id": "action_rest",
+       "speaker": "מספר",
+       "text": "לאחר שנים של עבודת פרך, אתם מנצלים את ההפוגה הבלתי צפויה למנוחה. הגוף והנפש זקוקים להתאוששות לקראת המסע שעוד נכון לכם.",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelites_resting_peacefully.webp",
+       "next": "end_scene_hoshech"
+    },
+    {
+       "id": "action_observe",
+       "speaker": "מספר",
+       "text": "אתם מתבוננים בזהירות במצרים השקועים באפלה ובשיתוק. המראה מחזק את אמונתכם ומבהיר את עוצמת ההתערבות האלוהית ואת ההבדלה ביניכם לבינם.",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelite_observing_darkness_carefully.webp",
+       "next": "end_scene_hoshech"
+    },
+    {
+       "id": "end_scene_hoshech",
+       "speaker": "מספר",
+       "text": "מכת החושך מסמנת שיא בהיחלשות מצרים ובבידודם, בעוד היא מעניקה לבני ישראל חופש תנועה מוחלט וטעימה ראשונה של חירות אמיתית. הפער בין העמים ברור מאי פעם, והבמה מוכנה למכה האחרונה והמכריעה.",
+       "character_left_img": null,
+       "character_right_img": null,
+       "background_img": "/images/egypt_emerging_from_darkness_weakened.webp",
+       "end": true
+    }
+  ]
+}
