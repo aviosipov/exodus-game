@@ -15,6 +15,7 @@ interface Character {
   description: string;
   imagePath: string;
   thumbPath: string;
+  openingLines?: string[]; // Add optional opening lines
 }
 
 // Define the characters based on the created folders
@@ -25,6 +26,11 @@ const loadedCharacters: Character[] = [
     description: "המנהיג העברי שקיבל את עשרת הדיברות והוציא את בני ישראל מעבדות במצרים.",
     imagePath: "/characters/moses/image.png",
     thumbPath: "/characters/moses/thumb.png",
+    openingLines: [
+      "שלום לך. מה מביא אותך אליי היום?",
+      "ברוך הבא. האם יש משהו שתרצה לדון בו?",
+      "שמעתי שחיפשת אותי. במה אוכל לעזור?"
+    ]
   },
   {
     id: "elisheva",
@@ -32,6 +38,11 @@ const loadedCharacters: Character[] = [
     description: "אשת אהרן הכהן הגדול וגיסתו של משה. ידועה באדיקותה ובקשר שלה לשושלת הכהונה.",
     imagePath: "/characters/elisheva/image.png",
     thumbPath: "/characters/elisheva/thumb.png",
+    openingLines: [
+      "שלום עליך. ברוך שאתה מבקר אותנו.",
+      "מה שלומך היום? אני מקווה שהכל כשורה.",
+      "האם תרצה לשוחח? אני כאן להקשיב."
+    ]
   },
   {
     id: "pharaoh",
@@ -39,6 +50,11 @@ const loadedCharacters: Character[] = [
     description: "שליט מצרים בתקופת יציאת מצרים, ידוע בלבו הקשה והתנגדותו לדרישות משה לשחרר את בני ישראל.",
     imagePath: "/characters/pharaoh/image.png",
     thumbPath: "/characters/pharaoh/thumb.png",
+    openingLines: [
+      "מי אתה שאתה מעז לפנות אל פרעה?",
+      "דבר מהר. זמני יקר.",
+      "מה רצונך? האם באת לבקש רחמים או להמרות את פי?"
+    ]
   },
   {
     id: "ahmos",
@@ -46,6 +62,11 @@ const loadedCharacters: Character[] = [
     description: "איש מצרי רגיל החווה את אירועי יציאת מצרים הסוערים, מייצג את נקודת המבט של פשוטי העם המצריים.",
     imagePath: "/characters/ahmos/image.png",
     thumbPath: "/characters/ahmos/thumb.png",
+    openingLines: [
+      "אהלן. הימים האלה... קשים. מה שלומך?",
+      "שלום. ראית מה קורה בחוץ? אני לא מבין כלום.",
+      "בא לשבת קצת? הראש שלי מסתובב מכל הבלגן."
+    ]
   },
   {
     id: "issachar",
@@ -53,6 +74,11 @@ const loadedCharacters: Character[] = [
     description: "מלומד עברי משבט יששכר, ידוע בחוכמתו ובהבנתו. מייצג את היסוד האינטלקטואלי והרוחני בקהילת בני ישראל ביציאת מצרים.",
     imagePath: "/characters/issachar/image.png",
     thumbPath: "/characters/issachar/thumb.png",
+    openingLines: [
+      "שלום. האם באת לדון בדברי חכמה או לשאול שאלה?",
+      "ברוך הבא. מה מעסיק את מחשבותיך היום?",
+      "שמח לראותך. האם יש נושא מסוים שתרצה לחקור יחד?"
+    ]
   },
   {
     id: "osiris",
@@ -60,6 +86,11 @@ const loadedCharacters: Character[] = [
     description: "איש מצרי, ייתכן פקיד או כהן, נאמן לפרעה ולדרכים המצריות המסורתיות. מייצג את נקודת המבט של הממסד המצרי ביציאת מצרים.",
     imagePath: "/characters/osiris/image.png",
     thumbPath: "/characters/osiris/thumb.png",
+    openingLines: [
+      "בשם פרעה, מה רצונך?",
+      "האלים בוחנים אותנו. מה מביא אותך לכאן בזמנים אלו?",
+      "הסדר בממלכה מופר. האם באת לדון בענייני המדינה?"
+    ]
   },
   {
     id: "ohad",
@@ -67,6 +98,11 @@ const loadedCharacters: Character[] = [
     description: "איש עברי רגיל הסובל מעבדות במצרים ומשתתף ביציאת מצרים. מייצג את נקודת המבט של הישראלי הפשוט המתמודד עם קשיים ומקווה לגאולה.",
     imagePath: "/characters/ohad/image.png",
     thumbPath: "/characters/ohad/thumb.png",
+    openingLines: [
+      "עוד יום של עבודה קשה... מה שלומך, אחי?",
+      "שלום. שמעת משהו חדש ממשה? אני מחכה לגאולה.",
+      "ברוך הבא. טוב לראות פנים מוכרות בזמנים כאלה."
+    ]
   },
 ];
 
@@ -93,6 +129,7 @@ export default function ChatPage() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const [previousOpeningLineIndex, setPreviousOpeningLineIndex] = useState<number | null>(null); // State for previous index
 
   // --- Effects ---
   // Effect to scroll to bottom when messages change
@@ -100,12 +137,36 @@ export default function ChatPage() {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // Effect to potentially clear chat when character changes (optional)
+  // Effect to add initial message from character if chat is empty
   useEffect(() => {
-    // setMessages([]); // Uncomment to clear messages when character changes
-    // setInput("");
-    // setError(null);
-  }, [currentCharacter]);
+    // Check if messages are empty AND the character has opening lines
+    if (messages.length === 0 && currentCharacter.openingLines && currentCharacter.openingLines.length > 0) {
+      let randomIndex: number;
+      const numLines = currentCharacter.openingLines.length;
+
+      if (numLines === 1) {
+        randomIndex = 0; // Only one choice
+      } else {
+        // Generate random index, ensuring it's different from the previous one if possible
+        do {
+          randomIndex = Math.floor(Math.random() * numLines);
+          // Keep trying if it matches the previous index AND there's more than one line to choose from
+        } while (numLines > 1 && randomIndex === previousOpeningLineIndex);
+      }
+
+      const randomLine = currentCharacter.openingLines[randomIndex];
+      const initialMessage: Message = {
+        id: generateId(), // Generate a unique ID
+        role: 'assistant',
+        content: randomLine,
+      };
+      setMessages([initialMessage]);
+      setPreviousOpeningLineIndex(randomIndex); // Store the index used for this character
+    }
+    // This effect runs when the character changes or when the message list becomes empty (e.g., after clearing)
+    // previousOpeningLineIndex is NOT included in dependencies to prevent potential loops if state updates trigger effects.
+    // The logic correctly uses the state value at the time the effect runs.
+  }, [currentCharacter, messages.length]);
 
   // --- Input Change Handler ---
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -185,8 +246,9 @@ export default function ChatPage() {
 
   // --- Clear Chat Handler ---
   const handleClearChat = () => {
-    setMessages([]);
+    setMessages([]); // Clear messages, the useEffect above will add the opening line back
     setError(null); // Also clear any existing errors
+    setPreviousOpeningLineIndex(null); // Reset the index constraint when clearing
   };
 
   // --- Input Key Press Handler ---
