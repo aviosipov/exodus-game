@@ -1,37 +1,79 @@
-# Developer Guide
+---
+title: "מדריך למפתחים - הרפתקת יציאת מצרים האינטראקטיבית"
+description: "כיצד להגדיר, להריץ ולתרום לפרויקט \"יציאת מצרים: הרפתקה אינטראקטיבית\"."
+lang: he
+---
 
-Welcome to the Exodus game developer guide.
+ברוכים הבאים למדריך למפתחים של "יציאת מצרים: הרפתקה אינטראקטיבית"! מדריך זה יעזור לכם להבין את הפרויקט, להגדיר אותו מקומית ולהתחיל לתרום.
 
-## Getting Started
+## חזון הפרויקט
 
-1.  Clone the repository.
-2.  Install dependencies: `npm install`
-3.  Run the development server: `npm run dev`
+הפרויקט נולד מתוך שיחות מעוררות השראה עם **הרב אריאל פוקס** סביב ספרו "**כיצד תספר**", המעמיק בסיפור יציאת מצרים ומציע דרכים חדשות לספר ולהבין אותו.
 
-## Code Structure
+המטרה שלנו היא לא רק לספר מחדש את סיפור יציאת מצרים, אלא לאפשר למשתמשים *לחוות* אותו בצורה אינטראקטיבית, מרתקת ומעוררת מחשבה, תוך שימוש ביכולות המתקדמות של **בינה מלאכותית (AI)**. אנו שואפים לגשר בין הנרטיב המסורתי לטכנולוגיה חדשנית, ולאפשר למשתמשים לשוחח עם דמויות מפתח מהסיפור, שכל אחת מהן מגיבה על בסיס אישיותה, הרקע והפרספקטיבה הייחודית שלה.
 
--   `src/app`: Next.js App Router pages and layouts.
--   `src/components`: Reusable React components.
--   `src/lib`: Utility functions and libraries.
--   `src/content`: Static content files (like this guide).
+## טכנולוגיות מרכזיות (Building Blocks)
 
-## Adding a New Feature
+הפרויקט בנוי על שילוב של טכנולוגיות מודרניות ליצירת חוויה אינטראקטיבית ועשירה:
 
-```typescript
-// Example of a new component
-import React from 'react';
+*   **Astro:** פריימוורק לבניית אתרים מהירים ומודרניים.
+*   **React/Preact:** ספריות לבניית ממשקי משתמש דינמיים (משולבות בתוך Astro).
+*   **Tailwind CSS:** פריימוורק CSS לעיצוב מהיר ויעיל.
+*   **OpenAI API:** לשימוש במודלי שפה מתקדמים המניעים את האינטראקציה עם הדמויות.
+*   **MDX:** לכתיבת תוכן המשלב Markdown וקומפוננטות React/Astro.
 
-interface FeatureProps {
-  title: string;
-}
+## קישור למאגר הקוד
 
-const NewFeature: React.FC<FeatureProps> = ({ title }) => {
-  return (
-    <div>
-      <h2>{title}</h2>
-      {/* Feature implementation */}
-    </div>
-  );
-};
+קוד המקור של הפרויקט זמין ב-GitHub:
+[https://github.com/aviosipov/exodus-game](https://github.com/aviosipov/exodus-game)
 
-export default NewFeature;
+## התקנה והרצה מקומית
+
+כדי להריץ את הפרויקט על המחשב המקומי שלכם, בצעו את השלבים הבאים:
+
+1.  **שכפול המאגר (Clone):**
+    פתחו טרמינל והריצו את הפקודה:
+    ```bash
+    git clone https://github.com/aviosipov/exodus-game.git
+    cd exodus-game
+    ```
+
+2.  **התקנת תלויות:**
+    התקינו את כל החבילות הנדרשות באמצעות מנהל החבילות המועדף עליכם (npm מומלץ):
+    ```bash
+    npm install
+    # או אם אתם משתמשים ב-yarn:
+    # yarn install
+    ```
+
+3.  **הגדרת משתני סביבה:**
+    הפרויקט דורש מספר מפתחות API כדי לתקשר עם שירותי OpenAI.
+    *   צרו קובץ חדש בשם `.env.local` בתיקייה הראשית של הפרויקט.
+    *   העתיקו את התוכן מהקובץ `.env.local.sample` אל הקובץ החדש שיצרתם.
+    *   **`OPENAI_API_KEY`**: הזינו את מפתח ה-API שלכם מ-OpenAI. ניתן להשיג מפתח בכתובת: [https://platform.openai.com/api-keys](https://platform.openai.com/api-keys).
+    *   **`OPENAI_VECTOR_STORE_ID`**: זהו מזהה ייחודי עבור מאגר הוקטורים של הפרויקט ב-OpenAI. ייתכן שתצטרכו ליצור אחד משלכם או לקבל אותו ממנהלי הפרויקט אם אתם מגדירים מאפס.
+
+4.  **הרצת שרת הפיתוח:**
+    הריצו את הפקודה הבאה כדי להפעיל את שרת הפיתוח המקומי:
+    ```bash
+    npm run dev
+    # או אם אתם משתמשים ב-yarn:
+    # yarn dev
+    ```
+    לאחר מכן, פתחו את הדפדפן בכתובת שמופיעה בטרמינל (בדרך כלל `http://localhost:4321`).
+
+## מדריכים נוספים
+
+למידע נוסף על היבטים ספציפיים של הפרויקט, עיינו במדריכים הבאים:
+
+*   **[מדריך לעריכת תוכן](/docs/content-editing/)**: כיצד לערוך ולהוסיף תוכן לאתר.
+*   **[מדריך JSON להרפתקאות](/docs/adventure-json-guide/)**: הסבר על מבנה קבצי ה-JSON המגדירים את ההרפתקאות.
+*   **[יצירת קבצי MDX](/docs/creating-mdx/)**: כיצד ליצור דפי תוכן חדשים באמצעות MDX.
+*   **[אודות הפרויקט](/docs/about/)**: מידע כללי נוסף על הפרויקט.
+*   **[מנהל משימות יומי](/docs/daily-task-manager/)**: מדריך למנהל המשימות.
+*   **[טריוויה עברית](/docs/hebrew-trivia/)**: מדריך למשחק הטריוויה.
+*   **[מדריך Midjourney](/docs/midjourney-guide/)**: כיצד להשתמש ב-Midjourney בפרויקט.
+*   **[Space Invaders](/docs/space-invaders/)**: מדריך למשחק פולשים מהחלל.
+
+
+נשמח לתרומות ורעיונות נוספים!
