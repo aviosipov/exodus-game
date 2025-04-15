@@ -1,0 +1,104 @@
+{
+  "title": "מכת שחין",
+  "description": "שחין מייסר תוקף את המצרים, כולל החרטומים. המצרים עסוקים בכאבם האישי, והפיקוח על בני ישראל מתרופף.",
+  "scenes": [
+    {
+      "id": "start_shehin",
+      "speaker": "מספר",
+      "text": "המכה הבאה הכתה ישירות בגופם של המצרים. אבעבועות מוגלתיות וכואבות, שחין פורח, החלו להופיע על עורם של אנשים ובהמות כאחד בכל רחבי מצרים.",
+      "character_left_img": null,
+      "character_right_img": null,
+      "background_img": "/images/egypt_general_suffering_skin.webp"
+    },
+    {
+      "speaker": "מספר",
+      "text": "הפצעים היו מייסרים, מגרדים ושורפים. איש לא נמלט – מהפשוטים שבעם ועד ליועצי פרעה. אפילו החרטומים, שניסו בעבר לחקות את מעשי משה, הוכו קשות ולא יכלו לעמוד על רגליהם מרוב כאב.",
+      "character_left_img": "/images/egyptian_magician_suffering_nobg.png",
+      "character_right_img": null,
+      "background_img": "/images/pharaoh_court_distress.webp"
+    },
+    {
+      "speaker": "נוגש מצרי",
+      "text": "(נאנח בכאב, מגרד את זרועו) לכו כבר לעבודה! אהה... קשה לזוז. השחין הזה... אלים ארורים, למה עלינו? לכו, אני אבוא אחר כך... אולי.",
+      "character_left_img": null,
+      "character_right_img": "/images/egyptian_taskmaster_sick_nobg.png",
+      "background_img": "/images/egypt_worksite_less_supervision.webp"
+    },
+    {
+      "speaker": "אישה מצרית",
+      "text": "(מטפלת בבנה הבוכה, שניהם מכוסים פצעים) שקט, ילדי, שקט... אני יודעת שזה כואב. אין לנו מרפא לדבר הזה. כולנו סובלים.",
+      "character_left_img": "/images/egyptian_woman_sick_child_nobg.png",
+      "character_right_img": null,
+      "background_img": "/images/egyptian_home_suffering.webp"
+    },
+    {
+      "speaker": "מרים",
+      "text": "(לאשר, בשקט) תראה אותם, אשר. בקושי זזים. הנוגשים שכמעט שברו לנו את הגב עסוקים עכשיו בכאבים שלהם. הם מניחים לנו קצת.",
+      "character_left_img": "/images/miriam_avatar_nobg.png",
+      "character_right_img": "/images/ohad_avatar_nobg.png",
+      "background_img": "/images/israelite_area_observing.webp"
+    },
+    {
+      "speaker": "אשר",
+      "text": "נכון, מרים. אפילו במחנות העבודה הלחץ פחת. כשהאדונים סובלים בעצמם, קשה להם יותר להקפיד על העבדים. אבל הפצעים האלה נראים נורא...",
+      "character_left_img": "/images/miriam_avatar_nobg.png",
+      "character_right_img": "/images/ohad_avatar_nobg.png",
+      "background_img": "/images/israelite_area_observing.webp"
+    },
+    {
+       "speaker": "מספר",
+       "text": "גם הפעם, בני ישראל לא נפגעו מהמכה. עורכם נותר חלק ונקי. בעוד המצרים מתייסרים, אתם זוכים לרגע של הפוגה, כשהפיקוח והלחץ מצד המעבידים המצריים פוחתים באופן ניכר.",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelite_group_relief.webp"
+    },
+    {
+       "speaker": "מספר",
+       "text": "אתם רואים את המצרים נאבקים בכאבם האישי. כיצד משפיע עליכם המראה הזה וההקלה הזמנית בשעבוד?",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelite_observing_egyptians.webp",
+       "choices": [
+           { "text": "חמלה על סבלם, למרות שהם אויבינו.", "outcome": "feel_pity" },
+           { "text": "הכרה בכך שהסבל שלהם מקל עלינו כעת.", "outcome": "feel_practical_relief" },
+           { "text": "חשש קל מהמחלה, ותודה על ההגנה.", "outcome": "feel_fear_gratitude" }
+       ]
+    },
+    {
+       "id": "feel_pity",
+       "speaker": "מספר",
+       "text": "למרות כל מה שעשו לכם, קשה לא לחוש מידה של חמלה למראה סבל אנושי כה גדול. הלב נכמר, גם אם המחשבה על שחרור עדיין קיימת.",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelite_observing_egyptians.webp",
+       "next": "end_scene_shehin"
+    },
+    {
+       "id": "feel_practical_relief",
+       "speaker": "מספר",
+       "text": "אתם מכירים בכך שהכאב שלהם הוא ההקלה שלכם כרגע. פחות מכות, פחות פקודות, פחות עבודה מפרכת. זו תוצאה ישירה של המכה, ואתם נושמים קצת יותר לרווחה.",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelite_observing_egyptians.webp",
+       "next": "end_scene_shehin"
+    },
+    {
+       "id": "feel_fear_gratitude",
+       "speaker": "מספר",
+       "text": "המראה של המחלה המדבקת מעורר חשש קל, אך הוא מתגמד מול ההבנה שאתם מוגנים. תחושת תודה על ההשגחה העליונה ממלאת אתכם.",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelite_observing_egyptians.webp",
+       "next": "end_scene_shehin"
+    },
+    {
+       "id": "end_scene_shehin",
+       "speaker": "מספר",
+       "text": "מכת השחין מכניעה את המצרים דרך סבל אישי ופיזי. כוחם לפקח ולהכביד על בני ישראל נחלש משמעותית, בעוד בני ישראל עצמם נותרים ללא פגע. שלב נוסף בתהליך שחיקת כוחה של מצרים הושלם.",
+       "character_left_img": null,
+       "character_right_img": null,
+       "background_img": "/images/egypt_suffering_subdued.webp",
+       "end": true
+    }
+  ]
+}

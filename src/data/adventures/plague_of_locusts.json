@@ -1,0 +1,111 @@
+{
+  "title": "מכת ארבה",
+  "description": "נחילי ארבה עצומים מכסים את מצרים ומכלים כל ירק ועץ ששרד את הברד. העבודה החקלאית נעלמת כליל, והמצרים חסרי אונים מול הרעב הממשמש ובא.",
+  "scenes": [
+    {
+      "id": "start_arbeh",
+      "speaker": "מספר",
+      "text": "האדמה המצרית עוד לא התאוששה ממכת הברד והאש, וכבר נגלתה מכה נוראה נוספת. רוח קדים עזה נשאה עמה ענן שחור ועצום שהאפיל את השמיים – נחיל אינסופי של ארבה.",
+      "character_left_img": null,
+      "character_right_img": null,
+      "background_img": "/images/locust_swarm_approaching_sky.webp"
+    },
+    {
+      "speaker": "מספר",
+      "text": "הארבה כיסה את כל ארץ מצרים, לא הותיר פינה חשופה. זמזום מחריש אוזניים מילא את האוויר. הם נחתו על כל מה שנותר ירוק – עשב, שיבולי חיטה וכוסמין ששרדו את הברד, עלי העצים ואפילו קליפתם.",
+      "character_left_img": null,
+      "character_right_img": null,
+      "background_img": "/images/locusts_covering_land_eating.webp"
+    },
+    {
+      "speaker": "איכר מצרי",
+      "text": "(מביט בחוסר אונים בשדהו הנאכל) לא נשאר כלום! הברד הרס חצי, והארבה הזה... הוא אוכל את כל השאר! איך נחיה? מה נאכיל את ילדינו? זה הסוף!",
+      "character_left_img": null,
+      "character_right_img": "/images/egyptian_farmer_utter_despair_nobg.png",
+      "background_img": "/images/field_devoured_by_locusts.webp"
+    },
+    {
+      "speaker": "יועץ פרעה",
+      "text": "(לפרעה, בלחש וביראה) אדוני המלך, עד מתי האיש הזה יהיה לנו למוקש? שלח את האנשים! הטרם תדע כי אבדה מצרים?! לא נשאר לנו דבר!",
+      "character_left_img": "/images/pharaoh_avatar_nobg.png",
+      "character_right_img": "/images/egyptian_advisor_pleading_nobg.png",
+      "background_img": "/images/pharaoh_court_tense.webp"
+    },
+    {
+      "speaker": "מספר",
+      "text": "הארבה לא הותיר זכר לירק בשדות או על העצים. הארץ שהייתה פורייה הפכה שוממה וחומה. הרעב החל להסתמן כאיום ממשי ומיידי על כל תושבי מצרים.",
+      "character_left_img": null,
+      "character_right_img": null,
+      "background_img": "/images/egypt_land_barren_after_locusts.webp"
+    },
+    {
+      "speaker": "אלישבע",
+      "text": "(לאשר, מביטה על השממה) זה לא ייאמן. כאילו האדמה עצמה מתה. אין יותר מה לקצור, אין מה לאסוף. נגמרה עבודת השדה לחלוטין.",
+      "character_left_img": "/images/elisheva_avatar_nobg.png",
+      "character_right_img": "/images/ohad_avatar_nobg.png",
+      "background_img": "/images/israelite_view_barren_land.webp"
+    },
+    {
+      "speaker": "אשר",
+      "text": "אכן, אלישבע. המצרים איבדו את כל מזונם. הם חסרי אונים לחלוטין. והמשמעות עבורנו... אין להם יותר צורך בנו בשדות.",
+      "character_left_img": "/images/elisheva_avatar_nobg.png",
+      "character_right_img": "/images/ohad_avatar_nobg.png",
+      "background_img": "/images/israelite_view_barren_land.webp"
+    },
+    {
+       "speaker": "מספר",
+       "text": "מכת הארבה השלימה את החורבן החקלאי. לא נותרה כל עבודה חקלאית עבורכם במצרים. העול הכבד של עבודת השדה הוסר כליל, בעוד המצרים עומדים בפני איום קיומי של רעב.",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelites_no_farm_work.webp"
+    },
+    {
+       "speaker": "מספר",
+       "text": "אתם רואים את מצרים מושמדת מבחינה חקלאית, את ייאושם של המצרים, וחווים את ההפסקה המוחלטת של עבודת השדה. מה עובר בראשכם ברגע זה?",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelite_contemplating_destruction.webp",
+       "choices": [
+           { "text": "הלם מגודל ההרס ומהעוצמה שהביאה אותו.", "outcome": "feel_shock_power" },
+           { "text": "הבנה שמצרים הגיעה לנקודת שבירה, ושהשחרור קרוב.", "outcome": "feel_breaking_point" },
+           { "text": "הקלה גדולה על סיום העבודה הקשה ביותר בשדות.", "outcome": "feel_final_farm_relief" }
+       ]
+    },
+    {
+       "id": "feel_shock_power",
+       "speaker": "מספר",
+       "text": "קשה לתפוס את היקף החורבן. לראות ארץ שלמה נאכלת עד היסוד על ידי נחיל חרקים מעורר תחושת הלם ויראה עצומה מפני הכוח שמסוגל לחולל זאת.",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelite_contemplating_destruction.webp",
+       "next": "end_scene_arbeh"
+    },
+    {
+       "id": "feel_breaking_point",
+       "speaker": "מספר",
+       "text": "המצרים על סף רעב. יועצי פרעה מתחננים בפניו. התחושה היא שאי אפשר לרדת נמוך יותר. אולי הפעם, סוף סוף, פרעה ייכנע והגאולה תגיע.",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelite_contemplating_destruction.webp",
+       "next": "end_scene_arbeh"
+    },
+    {
+       "id": "feel_final_farm_relief",
+       "speaker": "מספר",
+       "text": "לצד האימה, ישנה תחושת הקלה משמעותית. העבודה המפרכת ביותר, עבודת האדמה תחת השמש הקופחת, הסתיימה. אין יותר יבולים לגדל עבור המצרים.",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelite_contemplating_destruction.webp",
+       "next": "end_scene_arbeh"
+    },
+    {
+       "id": "end_scene_arbeh",
+       "speaker": "מספר",
+       "text": "מכת הארבה מחקה כל זכר לצמחייה במצרים והותירה את הממלכה על סף רעב. העבודה החקלאית של בני ישראל בוטלה לחלוטין. הלחץ על פרעה גובר, אך האם ליבו יתרכך הפעם?",
+       "character_left_img": null,
+       "character_right_img": null,
+       "background_img": "/images/egypt_land_completely_barren.webp",
+       "end": true
+    }
+  ]
+}

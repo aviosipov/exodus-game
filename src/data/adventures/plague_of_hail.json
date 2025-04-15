@@ -1,0 +1,111 @@
+{
+  "title": "מכת ברד",
+  "description": "ברד כבד ואש מתלקחת משמידים את גידולי השדה והעצים במצרים, אך פוסחים על ארץ גושן. העבודה החקלאית מצטמצמת, והמצרים חרדים מקריסה כלכלית.",
+  "scenes": [
+    {
+      "id": "start_barad",
+      "speaker": "מספר",
+      "text": "לאחר השחין המייסר, הגיע תורה של מכה שירדה מהשמיים. משה נטה את ידו, ורעמים וברקים החלו להרעיד את הארץ. ואז, החל לרדת ברד כבד, כפי שלא נראה מעולם במצרים.",
+      "character_left_img": null,
+      "character_right_img": null,
+      "background_img": "/images/egypt_sky_darkening_storm.webp"
+    },
+    {
+      "speaker": "מספר",
+      "text": "אך לא היה זה ברד רגיל. גושי קרח עצומים ניתכו ארצה, ומתוכם התלקחה אש שאחזה בכל אשר פגעה. מראה אימים של קרח ואש יורדים יחדיו מהשמיים.",
+      "character_left_img": null,
+      "character_right_img": null,
+      "background_img": "/images/hail_fire_storm_destruction.webp"
+    },
+    {
+      "speaker": "פועל מצרי",
+      "text": "(צועק בבהלה) מהשמיים! אש וקרח! רוצו למצוא מחסה! הגידולים... העצים... הכל נהרס! זה סוף העולם!",
+      "character_left_img": null,
+      "character_right_img": "/images/egyptian_worker_fleeing_nobg.png",
+      "background_img": "/images/egyptian_fields_destroyed_hail_fire.webp"
+    },
+    {
+      "speaker": "מספר",
+      "text": "הברד והאש הכו ללא רחם. גידולי הפשתן והשעורה, שכבר הבשילו, הושמדו כליל. עצים נשברו והתלקחו. כל אדם ובהמה שנשארו בשדה מצאו את מותם.",
+      "character_left_img": null,
+      "character_right_img": null,
+      "background_img": "/images/egyptian_fields_aftermath_destruction.webp"
+    },
+    {
+      "speaker": "מספר",
+      "text": "אך בארץ גושן, שם ישבו בני ישראל, שרר שקט. השמיים היו בהירים, ואף לא אבן ברד אחת נפלה. ההבדלה הייתה ברורה ומוחלטת.",
+      "character_left_img": null,
+      "character_right_img": null,
+      "background_img": "/images/goshen_calm_during_storm.webp"
+    },
+    {
+      "speaker": "אשר",
+      "text": "(צופה מרחוק במתרחש במצרים) הכוח... העוצמה הזו... להוריד אש וקרח מהשמיים. זה מפחיד לחשוב מה עוד יכול לקרות להם.",
+      "character_left_img": "/images/ohad_avatar_nobg.png",
+      "character_right_img": null,
+      "background_img": "/images/goshen_observing_egypt_storm.webp"
+    },
+    {
+      "speaker": "פקיד מצרי",
+      "text": "(לאחר שהסערה שככה, סוקר את הנזק) האסון הזה... איבדנו יבול של חודשים. מה נאכל? מה נסחור? הממלכה לא תוכל לעמוד בזה לאורך זמן. פרעה חייב לעשות משהו!",
+      "character_left_img": null,
+      "character_right_img": "/images/egyptian_official_worried_nobg.png",
+      "background_img": "/images/egyptian_fields_aftermath_destruction.webp"
+    },
+    {
+       "speaker": "מספר",
+       "text": "עם הרס היבולים והעצים, חלק גדול מהעבודה החקלאית שהוטלה עליכם – קציר, איסוף, עיבוד – הפך למיותר כרגע. שוב, מכה על המצרים מביאה להקלה מסוימת בעול השעבוד שלכם.",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelite_less_field_work.webp"
+    },
+    {
+       "speaker": "מספר",
+       "text": "אתם עדים להרס חסר תקדים ולחרדה הגוברת במצרים, בעודכם מוגנים לחלוטין. מה התחושה הדומיננטית בלבכם?",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelite_watching_aftermath.webp",
+       "choices": [
+           { "text": "יראה ופחד מעוצמת האל המכה במצרים.", "outcome": "feel_awe_fear" },
+           { "text": "הבנה שהלחץ הכלכלי עשוי לשבור את פרעה.", "outcome": "feel_economic_hope" },
+           { "text": "הקלה על כך שיש פחות עבודת שדה מפרכת.", "outcome": "feel_work_relief" }
+       ]
+    },
+    {
+       "id": "feel_awe_fear",
+       "speaker": "מספר",
+       "text": "המחזה של אש וקרח יורדים יחד מהשמיים ממלא אתכם ביראת כבוד ופחד. אתם מבינים את עוצמת הכוח הפועל כאן, ושמחים להיות בצד המוגן.",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelite_watching_aftermath.webp",
+       "next": "end_scene_barad"
+    },
+    {
+       "id": "feel_economic_hope",
+       "speaker": "מספר",
+       "text": "אתם רואים את היאוש בעיני המצרים ומבינים את גודל הנזק הכלכלי. אולי הפעם, הלחץ הזה יהיה מספיק כדי לשכנע את פרעה לשלח אתכם לחופשי.",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelite_watching_aftermath.webp",
+       "next": "end_scene_barad"
+    },
+    {
+       "id": "feel_work_relief",
+       "speaker": "מספר",
+       "text": "מעבר למשמעויות הגדולות, אתם חשים את ההקלה המיידית. פחות יבולים לקצור משמע פחות עבודת פרך בשדות. כל הקלה כזו נותנת כוח להמשיך.",
+       "character_left_img": "/images/ohad_avatar_nobg.png",
+       "character_right_img": null,
+       "background_img": "/images/israelite_watching_aftermath.webp",
+       "next": "end_scene_barad"
+    },
+    {
+       "id": "end_scene_barad",
+       "speaker": "מספר",
+       "text": "מכת הברד משאירה אחריה הרס וחורבן במצרים, ומכה קשה בכלכלתה. החרדה מפני קריסה כוללת מתחילה להתפשט. בארץ גושן, לעומת זאת, שורר שקט, והעבודה החקלאית שהוטלה על בני ישראל הצטמצמה. האם הפעם פרעה יישבר?",
+       "character_left_img": null,
+       "character_right_img": null,
+       "background_img": "/images/egypt_devastated_landscape.webp",
+       "end": true
+    }
+  ]
+}
