@@ -107,7 +107,9 @@ const MainMenu: React.FC = () => {
 
          {/* Primary Actions */}
          {/* Primary Actions - Using Button component */}
-         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 w-full max-w-3xl">
+         {/* Changed gap-6 to gap-4 md:gap-6 for smaller mobile spacing */}
+         {/* Changed md:grid-cols-2 to md:grid-cols-3 for desktop layout */}
+         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-12 w-full max-w-3xl">
            {/* Button 1: Adventure - Using SimpleButton with description */}
            {/* Button 1: Adventure - Using SimpleButton with description */}
           {/* Using MenuButton component with variants */}
@@ -116,14 +118,7 @@ const MainMenu: React.FC = () => {
             href="/adventure"
             title="הרפתקה"
             description="צאו למסע אינטראקטיבי בעקבות סיפור יציאת מצרים, פרק אחר פרק."
-          />
-
-          {/* Using MenuButton component with variants */}
-          <MenuButton
-            variant="default" // Use bright variant
-            href="/mini-games"
-            title="מיני-משחקים"
-            description="בדקו את הידע והכישורים שלכם עם משחקים קצרים המבוססים על הסיפור."
+            descriptionClassName="hidden md:block" // Hide description on mobile
           />
 
           {/* Using MenuButton component with variants */}
@@ -132,15 +127,18 @@ const MainMenu: React.FC = () => {
             href="/chat"
             title="שיחה עם דמות"
             description="שוחחו עם דמויות מהסיפור באמצעות בינה מלאכותית ולמדו את נקודת מבטן."
+            descriptionClassName="hidden md:block" // Hide description on mobile
           />
 
           {/* Using MenuButton component with variants */}
           <MenuButton
-            variant="default" // Use secondary variant
-            onClick={() => alert('פתח אפשרויות')} // Placeholder action
-            title="אפשרויות"
-            description="התאימו את הגדרות המשחק, כמו עוצמת השמע."
+            variant="default" // Use bright variant
+            href="/mini-games"
+            title="מיני-משחקים"
+            description="בדקו את הידע והכישורים שלכם עם משחקים קצרים המבוססים על הסיפור."
+            descriptionClassName="hidden md:block" // Hide description on mobile
           />
+
         </div> {/* Closing Primary Actions Grid */}
 
         {/* Secondary/Meta Actions - Using Container component with default (dark) variant */}

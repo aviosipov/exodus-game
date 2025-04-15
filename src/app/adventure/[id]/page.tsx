@@ -151,14 +151,14 @@ export default function AdventureScenePage() {
                         <h3 className="font-bold text-2xl mb-2">{currentStepData.speaker || ""}</h3>
                         <p className="text-xl">{currentStepData.text}</p>
                     </div>
-                    {/* Buttons Area */}
-                    <div className="flex justify-center items-center mt-4">
+                    {/* Buttons Area - Changed to flex-col for mobile row layout */}
+                    <div className="flex flex-col justify-center items-center mt-4">
                         {currentStepData.choices ? (
                             (currentStepData.choices.map((choice, index) => (
                                 <SimpleButton
                                     key={`mobile-${index}`}
                                     variant="default"
-                                    className="ms-2 text-base px-4 py-2"
+                                    className="mb-2 text-base px-4 py-2 w-full" // Changed ms-2 to mb-2, added w-full
                                     onClick={() => handleChoice(choice.outcome)}
                                 >
                                     {choice.text}

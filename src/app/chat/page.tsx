@@ -6,106 +6,17 @@ import { Trash2 } from 'lucide-react'; // Import Trash2 icon
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Container from "@/components/ui/Container";
 import { Typography } from "@/components/ui/Typography";
-// Removed: import { Character, availableCharacters } from '@/lib/characters';
 
-// Define Character structure locally or import if defined elsewhere appropriately
+// Define Character structure - This should ideally match the structure in info.json
+// We might need to fetch this definition or ensure consistency manually.
 interface Character {
   id: string;
   name: string;
   description: string;
   imagePath: string;
   thumbPath: string;
-  openingLines?: string[]; // Add optional opening lines
+  openingLines?: string[];
 }
-
-// Define the characters based on the created folders
-const loadedCharacters: Character[] = [
-  {
-    id: "moses",
-    name: "משה",
-    description: "המנהיג העברי שקיבל את עשרת הדיברות והוציא את בני ישראל מעבדות במצרים.",
-    imagePath: "/characters/moses/image.png",
-    thumbPath: "/characters/moses/thumb.png",
-    openingLines: [
-      "שלום לך. מה מביא אותך אליי היום?",
-      "ברוך הבא. האם יש משהו שתרצה לדון בו?",
-      "שמעתי שחיפשת אותי. במה אוכל לעזור?"
-    ]
-  },
-  {
-    id: "elisheva",
-    name: "אלישבע",
-    description: "אשת אהרן הכהן הגדול וגיסתו של משה. ידועה באדיקותה ובקשר שלה לשושלת הכהונה.",
-    imagePath: "/characters/elisheva/image.png",
-    thumbPath: "/characters/elisheva/thumb.png",
-    openingLines: [
-      "שלום עליך. ברוך שאתה מבקר אותנו.",
-      "מה שלומך היום? אני מקווה שהכל כשורה.",
-      "האם תרצה לשוחח? אני כאן להקשיב."
-    ]
-  },
-  {
-    id: "pharaoh",
-    name: "פרעה",
-    description: "שליט מצרים בתקופת יציאת מצרים, ידוע בלבו הקשה והתנגדותו לדרישות משה לשחרר את בני ישראל.",
-    imagePath: "/characters/pharaoh/image.png",
-    thumbPath: "/characters/pharaoh/thumb.png",
-    openingLines: [
-      "מי אתה שאתה מעז לפנות אל פרעה?",
-      "דבר מהר. זמני יקר.",
-      "מה רצונך? האם באת לבקש רחמים או להמרות את פי?"
-    ]
-  },
-  {
-    id: "ahmos",
-    name: "אחמוס",
-    description: "איש מצרי רגיל החווה את אירועי יציאת מצרים הסוערים, מייצג את נקודת המבט של פשוטי העם המצריים.",
-    imagePath: "/characters/ahmos/image.png",
-    thumbPath: "/characters/ahmos/thumb.png",
-    openingLines: [
-      "אהלן. הימים האלה... קשים. מה שלומך?",
-      "שלום. ראית מה קורה בחוץ? אני לא מבין כלום.",
-      "בא לשבת קצת? הראש שלי מסתובב מכל הבלגן."
-    ]
-  },
-  {
-    id: "issachar",
-    name: "יששכר",
-    description: "מלומד עברי משבט יששכר, ידוע בחוכמתו ובהבנתו. מייצג את היסוד האינטלקטואלי והרוחני בקהילת בני ישראל ביציאת מצרים.",
-    imagePath: "/characters/issachar/image.png",
-    thumbPath: "/characters/issachar/thumb.png",
-    openingLines: [
-      "שלום. האם באת לדון בדברי חכמה או לשאול שאלה?",
-      "ברוך הבא. מה מעסיק את מחשבותיך היום?",
-      "שמח לראותך. האם יש נושא מסוים שתרצה לחקור יחד?"
-    ]
-  },
-  {
-    id: "osiris",
-    name: "אוזיריס",
-    description: "איש מצרי, ייתכן פקיד או כהן, נאמן לפרעה ולדרכים המצריות המסורתיות. מייצג את נקודת המבט של הממסד המצרי ביציאת מצרים.",
-    imagePath: "/characters/osiris/image.png",
-    thumbPath: "/characters/osiris/thumb.png",
-    openingLines: [
-      "בשם פרעה, מה רצונך?",
-      "האלים בוחנים אותנו. מה מביא אותך לכאן בזמנים אלו?",
-      "הסדר בממלכה מופר. האם באת לדון בענייני המדינה?"
-    ]
-  },
-  {
-    id: "ohad",
-    name: "אוהד",
-    description: "איש עברי רגיל הסובל מעבדות במצרים ומשתתף ביציאת מצרים. מייצג את נקודת המבט של הישראלי הפשוט המתמודד עם קשיים ומקווה לגאולה.",
-    imagePath: "/characters/ohad/image.png",
-    thumbPath: "/characters/ohad/thumb.png",
-    openingLines: [
-      "עוד יום של עבודה קשה... מה שלומך, אחי?",
-      "שלום. שמעת משהו חדש ממשה? אני מחכה לגאולה.",
-      "ברוך הבא. טוב לראות פנים מוכרות בזמנים כאלה."
-    ]
-  },
-];
-
 
 // Define message structure
 interface Message {
@@ -123,50 +34,54 @@ const BACKGROUND_IMG = "/images/ancient_egypt_prosperity_bg.webp";
 
 export default function ChatPage() {
   // --- State Management ---
-  const [currentCharacter, setCurrentCharacter] = useState<Character>(loadedCharacters[0]); // Use loaded characters
+  const [allCharacters, setAllCharacters] = useState<Character[]>([]); // State to hold loaded characters
+  const [currentCharacter, setCurrentCharacter] = useState<Character | null>(null); // Start with null initially
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  const [previousOpeningLineIndex, setPreviousOpeningLineIndex] = useState<number | null>(null); // State for previous index
+  // Removed unused previousOpeningLineIndex state
 
   // --- Effects ---
+  // Effect to load characters on component mount
+  useEffect(() => {
+    const fetchCharacters = async () => {
+      // Define the known character IDs (folder names)
+      // In a real app, this might come from an API endpoint that lists directories
+      const characterIds = ["moses", "elisheva", "pharaoh", "ahmos", "issachar", "osiris", "ohad"];
+      try {
+        const characterPromises = characterIds.map(id =>
+          fetch(`/characters/${id}/info.json`).then(res => {
+            if (!res.ok) {
+              throw new Error(`Failed to fetch info for ${id}: ${res.statusText}`);
+            }
+            return res.json();
+          })
+        );
+        const charactersData = await Promise.all(characterPromises);
+        setAllCharacters(charactersData);
+        // Set the first character as the default current character
+        if (charactersData.length > 0) {
+          setCurrentCharacter(charactersData[0]);
+        }
+      } catch (error) {
+        console.error("Failed to load characters:", error);
+        setError("Failed to load character data."); // Set error state
+      }
+    };
+
+    fetchCharacters();
+  }, []); // Empty dependency array ensures this runs only once on mount
+
+
   // Effect to scroll to bottom when messages change
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // Effect to add initial message from character if chat is empty
-  useEffect(() => {
-    // Check if messages are empty AND the character has opening lines
-    if (messages.length === 0 && currentCharacter.openingLines && currentCharacter.openingLines.length > 0) {
-      let randomIndex: number;
-      const numLines = currentCharacter.openingLines.length;
-
-      if (numLines === 1) {
-        randomIndex = 0; // Only one choice
-      } else {
-        // Generate random index, ensuring it's different from the previous one if possible
-        do {
-          randomIndex = Math.floor(Math.random() * numLines);
-          // Keep trying if it matches the previous index AND there's more than one line to choose from
-        } while (numLines > 1 && randomIndex === previousOpeningLineIndex);
-      }
-
-      const randomLine = currentCharacter.openingLines[randomIndex];
-      const initialMessage: Message = {
-        id: generateId(), // Generate a unique ID
-        role: 'assistant',
-        content: randomLine,
-      };
-      setMessages([initialMessage]);
-      setPreviousOpeningLineIndex(randomIndex); // Store the index used for this character
-    }
-    // This effect runs when the character changes or when the message list becomes empty (e.g., after clearing)
-    // previousOpeningLineIndex is NOT included in dependencies to prevent potential loops if state updates trigger effects.
-    // The logic correctly uses the state value at the time the effect runs.
-  }, [currentCharacter, messages.length]);
+  // Removed useEffect that automatically added initial assistant message.
+  // Conversation starters will be handled differently below.
 
   // --- Input Change Handler ---
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -179,21 +94,22 @@ export default function ChatPage() {
     return lastAssistantMessage?.response_id || null;
   };
 
-  // --- Form Submission Handler (Manual Fetch) ---
-  const handleFormSubmit = async (event?: FormEvent<HTMLFormElement>) => {
-    if (event) event.preventDefault(); // Prevent default form submission if event exists
-    if (!input.trim() || isLoading) return; // Don't submit if empty or loading
+  // --- Send Message Function (used by both form submit and starter click) ---
+  const sendMessage = async (messageContent: string, currentMessages: Message[]) => {
+    if (!messageContent.trim() || isLoading || !currentCharacter) return; // Added check for currentCharacter
 
-    const userInput = input;
-    const newUserMessage: Message = { id: generateId(), role: 'user', content: userInput };
+    const newUserMessage: Message = { id: generateId(), role: 'user', content: messageContent };
 
-    // Optimistically add user message
+    // Use functional update to ensure we have the latest messages state
     setMessages(prev => [...prev, newUserMessage]);
-    setInput(""); // Clear input field
     setIsLoading(true);
     setError(null);
 
-    const lastAssistantId = getLastAssistantResponseId();
+    // Get last assistant ID based on the state *before* adding the new user message
+    const lastAssistantId = getLastAssistantResponseId(); // This needs to use the state *before* the update
+
+    // Prepare the message history to send to the API *including* the new user message
+    const messagesToSend = [...currentMessages, newUserMessage];
 
     try {
       const response = await fetch('/api/chat', {
@@ -202,10 +118,10 @@ export default function ChatPage() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          messages: [...messages, newUserMessage], // Send current history including new user message
-          body: { // Nest characterId and previous_response_id inside 'body' as expected by backend
-            characterId: currentCharacter.id,
-            previous_response_id: lastAssistantId,
+          messages: messagesToSend, // Send the updated history
+          body: {
+            characterId: currentCharacter.id, // No need for null check here due to guard clause above
+            previous_response_id: lastAssistantId, // Send the ID from *before* the user message was added
           }
         }),
       });
@@ -244,11 +160,26 @@ export default function ChatPage() {
     }
   };
 
+
+  // --- Form Submission Handler (Manual Fetch) ---
+  const handleFormSubmit = async (event?: FormEvent<HTMLFormElement>) => {
+    if (event) event.preventDefault();
+    if (!input.trim()) return;
+    sendMessage(input, messages); // Pass current messages state
+    setInput(""); // Clear input after sending
+  };
+
+  // --- Conversation Starter Click Handler ---
+  const handleStarterClick = (starterText: string) => {
+    sendMessage(starterText, messages); // Pass current messages state
+  };
+
+
   // --- Clear Chat Handler ---
   const handleClearChat = () => {
-    setMessages([]); // Clear messages, the useEffect above will add the opening line back
+    setMessages([]); // Clear messages
     setError(null); // Also clear any existing errors
-    setPreviousOpeningLineIndex(null); // Reset the index constraint when clearing
+    // Removed previousOpeningLineIndex reset
   };
 
   // --- Input Key Press Handler ---
@@ -270,15 +201,16 @@ export default function ChatPage() {
       {/* This is now the RIGHT side on desktop */}
       <div className="w-full md:w-1/3 h-full md:h-[90vh] flex flex-col items-center pt-16 p-4 md:pt-4 md:m-8"> {/* Added pt-16 for mobile, kept p-4/md:pt-4 for others */}
         {/* Character Selection UI */}
-        <div className="flex space-x-2 space-x-reverse mb-4">
-          {loadedCharacters.map((char) => ( // Use loaded characters
+        <div className="flex space-x-2 space-x-reverse mb-4 min-h-[72px]"> {/* Added min-height */}
+          {allCharacters.length === 0 && !error && <p className="text-white">Loading characters...</p>} {/* Loading indicator */}
+          {allCharacters.map((char: Character) => ( // Use allCharacters and add type
             <Avatar
-              key={char.id} // Use id for key
-              className={`h-16 w-16 cursor-pointer border-2 ${currentCharacter.id === char.id ? 'border-blue-500' : 'border-transparent'} hover:border-blue-300`} // Compare by id
+              key={char.id}
+              className={`h-16 w-16 cursor-pointer border-2 ${currentCharacter?.id === char.id ? 'border-blue-500' : 'border-transparent'} hover:border-blue-300`} // Added null check
               onClick={() => setCurrentCharacter(char)}
               title={char.name}
             >
-              <AvatarImage src={char.thumbPath} alt={char.name} /> {/* Use thumbPath */}
+              <AvatarImage src={char.thumbPath} alt={char.name} />
               <AvatarFallback>{char.name.charAt(0)}</AvatarFallback>
             </Avatar>
           ))}
@@ -291,29 +223,49 @@ export default function ChatPage() {
           className="w-full h-full flex flex-col shadow-lg !p-0 overflow-hidden"
         >
           {/* Chat Header */}
-          <div className="p-4 flex items-center justify-start gap-3 border-b border-gray-700"> {/* Added border */}
-            <Avatar className="h-12 w-12">
-              {/* Optionally use thumbPath here too for consistency, or keep imagePath */}
-              <AvatarImage src={currentCharacter.thumbPath} alt={currentCharacter.name} />
-              <AvatarFallback>{currentCharacter.name.charAt(0)}</AvatarFallback>
-            </Avatar>
-            <div className="text-right">
-              <Typography variant="h3">{currentCharacter.name}</Typography>
-              <Typography variant="body1">{currentCharacter.description}</Typography>
-            </div>
-            {/* Clear Chat Button */}
-            <button
+          {/* Conditional rendering for Chat Header based on currentCharacter */}
+          {currentCharacter && (
+            <div className="p-4 flex items-center justify-start gap-3 border-b border-gray-700">
+              <Avatar className="h-12 w-12">
+                <AvatarImage src={currentCharacter.thumbPath} alt={currentCharacter.name} />
+                <AvatarFallback>{currentCharacter.name.charAt(0)}</AvatarFallback>
+              </Avatar>
+              <div className="text-right">
+                <Typography variant="h3">{currentCharacter.name}</Typography>
+                <Typography variant="body1">{currentCharacter.description}</Typography>
+              </div >
+              {/* Clear Chat Button */}
+              < button
               onClick={handleClearChat}
               className="ml-auto p-2 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-50 rounded"
               title="Clear Chat"
               disabled={messages.length === 0 || isLoading} // Disable if no messages or loading
-            >
-              <Trash2 size={20} />
-            </button>
-          </div>
+              >
+                < Trash2 size={20} />
+              </button >
+            </div >
+          )}
+          {/* End Conditional Chat Header */}
 
           {/* Message Display Area */}
-          <div className="flex-grow p-4 overflow-y-auto space-y-4">
+          <div className="flex-grow p-4 overflow-y-auto space-y-4 flex flex-col justify-center"> {/* Added flex flex-col justify-center */}
+            {/* Show Starters only if messages are empty */}
+            {messages.length === 0 && currentCharacter && currentCharacter.openingLines && (
+              <div className="flex flex-col items-center gap-4 my-auto"> {/* Increased gap to 4 */}
+                {currentCharacter.openingLines.map((line, index) => (
+                  <button
+                    key={index}
+                    onClick={() => handleStarterClick(line)}
+                    disabled={isLoading}
+                    className="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-opacity-50 disabled:opacity-50 transition-colors duration-150 ease-in-out"
+                  >
+                    {line}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {/* Regular Message Mapping */}
             {messages.map((msg) => (
               <div
                 key={msg.id}
@@ -346,10 +298,10 @@ export default function ChatPage() {
                 </div>
               </div>
             )}
-            <div ref={messagesEndRef} />
+            <div ref={messagesEndRef} /> {/* This helps scroll to bottom */}
           </div>
 
-          {/* Input Area */}
+          {/* Input Area - Hide if showing starters? Optional, keeping it visible for now */}
           <form onSubmit={handleFormSubmit} className="p-4 border-t border-gray-600 flex items-center gap-3">
             <input
               type="text"
@@ -373,14 +325,18 @@ export default function ChatPage() {
 
       {/* Left Side: Character Display - Hidden on mobile, takes 2/3 width on md+ */}
       {/* This is now the LEFT side on desktop */}
-      <div className="hidden md:flex w-full md:w-2/3 h-full items-end justify-center p-10 relative"> {/* Centered character */}
-         <div
-            key={currentCharacter.name}
-            // Increased height slightly, ensure it scales within container
-            className={`character h-[85%] w-full bg-contain bg-no-repeat bg-center transition-opacity duration-500 ease-in-out opacity-100`}
-            style={{ backgroundImage: `url('${currentCharacter.imagePath}')` }}
-         ></div>
-      </div>
+      {/* Conditional rendering for Character Display based on currentCharacter */}
+      {currentCharacter && (
+        <div className="hidden md:flex w-full md:w-2/3 h-full items-end justify-center p-10 relative"> {/* Centered character */}
+          <div
+              key={currentCharacter.id} // Use id for key
+              // Increased height slightly, ensure it scales within container
+              className={`character h-[85%] w-full bg-contain bg-no-repeat bg-center transition-opacity duration-500 ease-in-out opacity-100`}
+              style={{ backgroundImage: `url('${currentCharacter.imagePath}')` }}
+          ></div>
+        </div>
+      )}
+      {/* End Conditional Character Display */}
     </div>
   );
 }
