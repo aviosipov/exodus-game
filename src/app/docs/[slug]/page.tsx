@@ -1,33 +1,39 @@
+// This is now a Server Component again
 import { promises as fs } from "fs";
 import path from "path";
-import matter from 'gray-matter'; // Import gray-matter
-import { MDXRemote } from "next-mdx-remote/rsc";
+import matter from 'gray-matter';
+// Removed useState, useEffect
 import { notFound } from "next/navigation";
-import { mdxComponents } from "@/mdx-components"; // Import custom components
-import Container from "@/components/ui/Container"; // Import Container
-import { CopyButton } from "@/components/ui/CopyButton"; // Import the new CopyButton
+// Removed MDXRemote, mdxComponents, Container, CopyButton, ChatInterface from here
+// Import the client layout component
+import DocClientLayout from "./DocClientLayout";
+// Import Character type for fetching
+import type { Character } from "@/components/chat/ChatInterface";
+// Import serialize for MDX
+import { serialize } from 'next-mdx-remote/serialize';
 import remarkGfm from "remark-gfm";
 import rehypePrettyCode from "rehype-pretty-code";
+// Keep these types for options
 import type { Options as PrettyCodeOptions } from "rehype-pretty-code";
 import type { Element } from "hast";
 import type { Metadata } from 'next';
 
-// Define interface for expected frontmatter
+// Define interface for expected frontmatter (keep as is)
 interface DocFrontmatter {
-  lang?: string; // Language code (e.g., 'he', 'en')
+  lang?: string;
   // Add other frontmatter fields here as needed
 }
 
-// Updated Props type to reflect params being a Promise
+// Props type remains the same
 type Props = {
-  params: Promise<{
+  params: {
     slug: string;
-  }>;
+  };
 };
 
 const contentDir = path.join(process.cwd(), "src", "content", "docs");
 
-// Function to generate static paths (optional but good for performance)
+// generateStaticParams remains the same
 export async function generateStaticParams() {
   try {
     const files = await fs.readdir(contentDir);
@@ -43,7 +49,7 @@ export async function generateStaticParams() {
   }
 }
 
-// Function to get the parsed content and frontmatter of a specific doc
+// getDocContent remains the same
 async function getDocContent(slug: string): Promise<{ data: DocFrontmatter; content: string } | null> {
   // Try both .mdx and .md extensions
   let filePath = path.join(contentDir, `${slug}.mdx`);
@@ -68,9 +74,9 @@ async function getDocContent(slug: string): Promise<{ data: DocFrontmatter; cont
   }
 }
 
-// Generate metadata for the page
+// generateMetadata remains the same
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params; // Await params Promise
+  const { slug } = params; // No need to await here
   // Capitalize first letter and replace hyphens with spaces for a nicer title
   const title = slug
     .split('-')
@@ -90,21 +96,41 @@ const backgroundImages = [
   '/images/docs-bg/bg4.png',
 ];
 
-
+// This is the main Server Component again
 export default async function DocPage({ params }: Props) {
-  const { slug } = await params; // Await params Promise
-  const docData = await getDocContent(slug);
+  const { slug } = params;
 
-  if (!docData) {
-    notFound(); // Trigger 404 if content couldn't be loaded
+  // --- Server-Side Data Fetching ---
+  const docResult = await getDocContent(slug);
+
+  if (!docResult) {
+    notFound(); // Trigger 404 if doc not found
   }
 
-  const { data: frontmatter, content: source } = docData; // Destructure frontmatter and content
+  const { data: frontmatter, content: rawSource } = docResult;
 
-  // Define pretty code options (using the same config as the reference project)
+  // Fetch dev guide character info (handle potential errors)
+  let devGuideCharacter: Character | null = null;
+  try {
+    // Construct absolute URL for server-side fetch if needed, or use relative if base URL is configured
+    // Fetch Tomer's info instead of Ohad's
+    const charResponse = await fetch(`${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/characters/tomer/info.json`);
+    if (charResponse.ok) {
+      devGuideCharacter = await charResponse.json();
+    } else {
+      console.warn(`Failed to fetch dev guide info: ${charResponse.statusText}`);
+      // Keep devGuideCharacter as null, the client component will handle it
+    }
+  } catch (err) {
+    console.error("Error fetching dev guide character info:", err);
+     // Keep devGuideCharacter as null
+  }
+
+  // --- MDX Serialization ---
   const prettyCodeOptions: Partial<PrettyCodeOptions> = {
-    theme: "one-dark-pro", // Or choose another theme: https://github.com/shikijs/shiki/blob/main/docs/themes.md
+    theme: "one-dark-pro",
     keepBackground: false,
+    // Keep other options as they were
     onVisitLine(node: Element) {
       if (node.children.length === 0) {
         node.children = [{ type: "text", value: " " }];
@@ -123,57 +149,23 @@ export default async function DocPage({ params }: Props) {
     },
   };
 
-  // Determine text direction and container variant based on frontmatter
-  const textDirection = frontmatter.lang === 'he' ? 'rtl' : 'ltr';
-  const containerVariant = 'bright'; // Use the new bright variant
-  const proseClasses = containerVariant === 'bright' ? 'prose' : 'prose prose-invert'; // Adjust prose for contrast
+  const serializedSource = await serialize(rawSource, {
+    parseFrontmatter: false, // Already parsed using gray-matter
+    mdxOptions: {
+      remarkPlugins: [remarkGfm],
+      rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]],
+    },
+  });
 
-  // Select a random background image
-  const randomBgIndex = Math.floor(Math.random() * backgroundImages.length);
-  const selectedBgImage = backgroundImages[randomBgIndex];
-
+  // --- Rendering ---
+  // Pass fetched data and serialized source to the client component
   return (
-    <div
-      className="relative flex flex-col items-center justify-center min-h-screen p-4 md:p-8 isolate" // Added padding and flex centering
-      style={{
-        backgroundImage: `url(${selectedBgImage})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed', // Optional: Keep background fixed during scroll
-      }}
-    >
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 w-full h-full bg-black/60 -z-10"></div>
-
-      {/* Content Container */}
-      <Container
-        variant={containerVariant}
-        className="relative w-full max-w-6xl my-4 z-0 h-[70vh] overflow-y-auto" // Added relative positioning
-      >
-        {/* Add the Copy Button */}
-        <CopyButton
-          textToCopy={source}
-          className="absolute top-4 right-4 z-10" // Position top-right, ensure it's above content
-          // Optionally adjust button variant if needed, e.g., variant="dark"
-        />
-        {/* Apply prose class and conditional direction to the article inside the container */}
-        <article
-          className={`${proseClasses} max-w-none lg:prose-xl`} // Apply dynamic prose class, removed padding
-          dir={textDirection} // Apply direction dynamically
-        >
-          {/* Render the MDX content */}
-          <MDXRemote
-        source={source}
-        components={mdxComponents}
-        options={{
-          mdxOptions: {
-            remarkPlugins: [remarkGfm],
-            rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]],
-          },
-        }}
-      />
-        </article>
-      </Container>
-    </div>
+    <DocClientLayout
+      serializedSource={serializedSource}
+      frontmatter={frontmatter}
+      devGuideCharacter={devGuideCharacter}
+      rawSource={rawSource} // Pass raw source for copy button
+      backgroundImages={backgroundImages} // Pass the list of images
+    />
   );
 }
