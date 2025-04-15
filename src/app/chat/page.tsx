@@ -248,7 +248,7 @@ export default function ChatPage() {
           {/* End Conditional Chat Header */}
 
           {/* Message Display Area */}
-          <div className="flex-grow p-4 overflow-y-auto space-y-4 flex flex-col justify-center"> {/* Added flex flex-col justify-center */}
+          <div className="flex-grow p-4 overflow-y-auto space-y-4 flex flex-col"> {/* Removed justify-center */}
             {/* Show Starters only if messages are empty */}
             {messages.length === 0 && currentCharacter && currentCharacter.openingLines && (
               <div className="flex flex-col items-center gap-4 my-auto"> {/* Increased gap to 4 */}
