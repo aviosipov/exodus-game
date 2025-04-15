@@ -98,8 +98,8 @@ export default function AdventureListPage() {
       </div>
       {/* Dark Overlay from MainMenu/MiniGamesHub */}
       <div className="absolute inset-0 w-full h-full bg-black/30 -z-10"></div>
-      {/* Content container from MainMenu/MiniGamesHub */}
-      <div className="relative z-0 flex flex-col items-center w-full">
+      {/* Content container from MainMenu/MiniGamesHub - Added top padding for mobile */}
+      <div className="relative z-0 flex flex-col items-center w-full pt-16 md:pt-0"> {/* Added pt-16 md:pt-0 */}
         {/* Title using Typography */}
         <Typography variant="h1" color="indigo-glow" className="mb-2">
           הרפתקה

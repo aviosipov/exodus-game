@@ -90,8 +90,8 @@ const MainMenu: React.FC = () => {
       </div>
       {/* Dark Overlay */}
       <div className="absolute inset-0 w-full h-full bg-black/30 -z-10"></div>
-      {/* Content container - z-index added to ensure it's above the background */}
-      <div className="relative z-0 flex flex-col items-center w-full">
+      {/* Content container - z-index added, added top padding for mobile (pt-16) */}
+      <div className="relative z-0 flex flex-col items-center w-full pt-16 md:pt-0"> {/* Added pt-16 md:pt-0 */}
         {/* Using the new indigo-glow color variant */}
         <Typography variant="h1" color="indigo-glow" className="mb-2"> {/* Use color variant, keep mb-2 */}
            יציאת מצרים: הרפתקה אינטראקטיבית

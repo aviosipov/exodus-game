@@ -35,8 +35,8 @@ export default function MiniGamesHub() {
       {/* Removed Video Background Section */}
       {/* Keep Dark Overlay */}
       <div className="absolute inset-0 w-full h-full bg-black/50 -z-10"></div> {/* Slightly darker overlay */}
-      {/* Content container from MainMenu */}
-      <div className="relative z-0 flex flex-col items-center w-full">
+      {/* Content container from MainMenu - Added top padding for mobile */}
+      <div className="relative z-0 flex flex-col items-center w-full pt-16 md:pt-0"> {/* Added pt-16 md:pt-0 */}
         {/* Title using Typography, styled like MainMenu */}
         <Typography variant="h1" color="indigo-glow" className="mb-2">
           מיני-משחקים

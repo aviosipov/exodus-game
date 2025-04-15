@@ -193,11 +193,12 @@ export default function ChatPage() {
   return (
     <div
       dir="rtl" // Right-to-left for Hebrew
-      className="relative w-screen h-screen overflow-hidden bg-cover bg-center bg-no-repeat flex items-center justify-between"
+      // Changed flex direction for mobile, reversed order on md+, adjusted justification
+      className="relative w-screen h-screen overflow-hidden bg-cover bg-center bg-no-repeat flex flex-col md:flex-row-reverse items-center md:justify-between"
       style={{ backgroundImage: `url('${BACKGROUND_IMG}')` }}
     >
-      {/* Right Side Wrapper (Chat + Selection) */}
-      <div className="w-1/3 h-[90vh] flex flex-col items-center m-8">
+      {/* Right Side Wrapper (Chat + Selection) - Now takes full width on mobile, 1/3 on md+. Added top padding for mobile (pt-16) */}
+      <div className="w-full md:w-1/3 h-full md:h-[90vh] flex flex-col items-center pt-16 p-4 md:pt-4 md:m-8"> {/* Added pt-16 for mobile, kept p-4/md:pt-4 for others */}
         {/* Character Selection UI */}
         <div className="flex space-x-2 space-x-reverse mb-4">
           {loadedCharacters.map((char) => ( // Use loaded characters
@@ -216,10 +217,11 @@ export default function ChatPage() {
         {/* Chat UI Container */}
         <Container
           variant="default"
-          className="w-full h-full flex flex-col shadow-lg !p-0"
+          // Ensure full height within its flex container, handle overflow
+          className="w-full h-full flex flex-col shadow-lg !p-0 overflow-hidden"
         >
           {/* Chat Header */}
-          <div className="p-4 flex items-center justify-start gap-3">
+          <div className="p-4 flex items-center justify-start gap-3 border-b border-gray-700"> {/* Added border */}
             <Avatar className="h-12 w-12">
               {/* Optionally use thumbPath here too for consistency, or keep imagePath */}
               <AvatarImage src={currentCharacter.thumbPath} alt={currentCharacter.name} />
@@ -290,11 +292,12 @@ export default function ChatPage() {
         </Container>
       </div>
 
-      {/* Left Side: Character Display */}
-      <div className="w-2/3 h-full flex items-end justify-start p-10 relative"> {/* Changed justify-center to justify-start */}
+      {/* Left Side: Character Display - Hidden on mobile, takes 2/3 width on md+ */}
+      <div className="hidden md:flex w-full md:w-2/3 h-full items-end justify-center p-10 relative"> {/* Centered character */}
          <div
             key={currentCharacter.name}
-            className={`character h-[80%] w-full bg-contain bg-no-repeat bg-bottom transition-opacity duration-500 ease-in-out opacity-100`}
+            // Increased height slightly, ensure it scales within container
+            className={`character h-[85%] w-full bg-contain bg-no-repeat bg-center transition-opacity duration-500 ease-in-out opacity-100`}
             style={{ backgroundImage: `url('${currentCharacter.imagePath}')` }}
          ></div>
       </div>
