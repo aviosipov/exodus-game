@@ -127,7 +127,9 @@ export default function AdventureListPage() {
               שגיאה בטעינת הפרקים: {error}
             </Typography>
           ) : fetchedAdventures.length > 0 ? (
-            fetchedAdventures.map((adventure) => (
+            fetchedAdventures
+              .filter(adventure => !adventure.id.endsWith('_ru')) // Filter out Russian content
+              .map((adventure) => (
               <MenuButton
                 key={adventure.id}
                 variant="dark" // Use the dark variant
