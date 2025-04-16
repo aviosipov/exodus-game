@@ -4,6 +4,7 @@ import path from "path";
 import matter from 'gray-matter';
 // Removed useState, useEffect
 import { notFound } from "next/navigation";
+import { Suspense } from 'react'; // Import Suspense
 // Removed MDXRemote, mdxComponents, Container, CopyButton, ChatInterface from here
 // Import the client layout component
 import DocClientLayout from "./DocClientLayout";
@@ -109,12 +110,14 @@ export default async function DocPage({ params }: { params: any }) {
   // --- Rendering ---
   // Pass raw source to the client component for client-side serialization
   return (
-    <DocClientLayout
-      // serializedSource prop removed
-      frontmatter={frontmatter}
-      // devGuideCharacter prop removed
-      rawSource={rawSource} // Pass raw source for copy button
-      backgroundImages={backgroundImages} // Pass the list of images
-    />
+    <Suspense fallback={<div>Loading...</div>}> {/* Wrap in Suspense */}
+      <DocClientLayout
+        // serializedSource prop removed
+        frontmatter={frontmatter}
+        // devGuideCharacter prop removed
+        rawSource={rawSource} // Pass raw source for copy button
+        backgroundImages={backgroundImages} // Pass the list of images
+      />
+    </Suspense>
   );
 }
