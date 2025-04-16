@@ -1,6 +1,6 @@
 "use client"; // Required for useState, useEffect, useParams
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react"; // Added useRef
 import { useParams } from 'next/navigation'; // Hook to get route parameters
 // import Container from "@/components/ui/Container"; // Removed unused import
 import SimpleButton from "@/components/ui/SimpleButton"; // Import SimpleButton
@@ -38,6 +38,7 @@ export default function AdventureScenePage() {
     const [currentStepIndex, setCurrentStepIndex] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
+    const audioRef = useRef<HTMLAudioElement>(null); // Ref for the audio element
 
     // Fetch adventure data based on ID
     useEffect(() => {
@@ -69,6 +70,39 @@ export default function AdventureScenePage() {
 
     // Derive current step data from adventureData and currentStepIndex
     const currentStepData = adventureData?.scenes?.[currentStepIndex];
+
+    // Effect to handle audio playback when the step changes
+    useEffect(() => {
+        if (currentStepData && adventureId && audioRef.current) {
+            const sceneId = currentStepData.id || `scene_${currentStepIndex}`;
+            const audioSrc = `/audio/adventures/${adventureId}/${adventureId}.${sceneId}.mp3`;
+
+            // Stop previous audio if playing
+            audioRef.current.pause();
+            audioRef.current.currentTime = 0;
+
+            // Set new source and attempt to play
+            audioRef.current.src = audioSrc;
+            audioRef.current.load(); // Important to load the new source
+
+            // Attempt to play, handle potential autoplay restrictions
+            const playPromise = audioRef.current.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    // Autoplay was prevented.
+                    console.warn(`Audio autoplay prevented for ${audioSrc}:`, error);
+                    // You might want to show a play button here if autoplay fails.
+                });
+            }
+
+             // Cleanup function to pause audio when component unmounts or step changes
+             return () => {
+                if (audioRef.current) {
+                    audioRef.current.pause();
+                }
+            };
+        }
+    }, [currentStepData, adventureId, currentStepIndex]); // Depend on currentStepData and adventureId
 
     const handleChoice = (outcomeId: string) => {
         if (!adventureData?.scenes) return;
@@ -231,6 +265,9 @@ export default function AdventureScenePage() {
                     </div>
                 </div>
             </div>
+
+            {/* Hidden Audio Player */}
+            <audio ref={audioRef} preload="auto" />
         </div>
     );
 }

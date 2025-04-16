@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "voiceover": "node scripts/generate-voiceover.mjs"
   },
   "dependencies": {
     "@ai-sdk/openai": "^1.3.10",
@@ -44,6 +45,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "dotenv": "^16.5.0",
     "eslint": "^9",
     "eslint-config-next": "15.3.0",
     "tailwind-scrollbar": "^4.0.2",
