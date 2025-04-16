@@ -35,6 +35,7 @@ interface ChatInterfaceProps {
     onMessagesUpdate?: (messages: Message[]) => void; // Callback when messages change
     height?: string; // Allow custom height
     dir?: 'ltr' | 'rtl'; // Add dir prop
+    initialContext?: string; // Optional context to inject at the start
 }
 
 export const ChatInterface: React.FC<ChatInterfaceProps> = ({
@@ -44,7 +45,8 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
     className = "",
     onMessagesUpdate,
     height = "h-full", // Default to full height
-    dir = 'ltr' // Default to 'ltr' if not provided
+    dir = 'ltr', // Default to 'ltr' if not provided
+    initialContext // Destructure the new prop
 }) => {
     const [messages, setMessages] = useState<Message[]>(initialMessages);
     const [input, setInput] = useState<string>("");
@@ -88,20 +90,28 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
 
         const lastAssistantId = getLastAssistantResponseId(); // Get ID *before* adding new user message
 
+        // Check if this is the first message being sent in this session
+        const isFirstMessage = messages.length === 0;
+
         // Prepare history *including* the new user message
         const messagesToSend = [...messages, newUserMessage]; // Use current state + new message
+
+        // Prepare the request body
+        const requestBody = {
+            messages: messagesToSend,
+            body: {
+                characterId: character.id,
+                previous_response_id: lastAssistantId,
+                // Include initialContext only if it exists and it's the first message
+                ...(isFirstMessage && initialContext && { initial_context: initialContext })
+            }
+        };
 
         try {
             const response = await fetch('/api/chat', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    messages: messagesToSend,
-                    body: {
-                        characterId: character.id,
-                        previous_response_id: lastAssistantId,
-                    }
-                }),
+                body: JSON.stringify(requestBody), // Use the prepared request body
             });
 
             if (!response.ok) {

@@ -13,10 +13,11 @@ const openai = new OpenAI({
 
 export async function POST(req: NextRequest) {
   try {
-    // Extract messages, characterId, and previous_response_id from the request body
+    // Extract messages, characterId, previous_response_id, and initial_context from the request body
     const { messages, body } = await req.json();
     const characterId = body?.characterId;
     const previous_response_id = body?.previous_response_id; // Get the previous response ID
+    const initial_context = body?.initial_context; // Get the initial context (MDX content)
 
     // --- 1. Get Character Info & Vector Store ID ---
     const character = getCharacterById(characterId);
@@ -44,11 +45,17 @@ export async function POST(req: NextRequest) {
 
     // --- 3. Call the Responses API with Streaming ---
     try {
+      // Prepare the system prompt, potentially prepending the initial context
+      let systemPrompt = character.systemPrompt;
+      if (initial_context) {
+        systemPrompt = `Here is the content of the document we are discussing:\n\n${initial_context}\n\n---\n\n${character.systemPrompt}`;
+      }
+
       // Create request parameters
       const requestParams: OpenAI.Responses.ResponseCreateParams = {
         model: "gpt-4.1-mini", // Or your preferred model
         input: lastUserMessageContent, // The current user message content
-        instructions: character.systemPrompt, // Use instructions for system prompt
+        instructions: systemPrompt, // Use the potentially modified system prompt
         tools: [{
           type: "file_search",
           vector_store_ids: [vectorStoreId] // Link to your vector store

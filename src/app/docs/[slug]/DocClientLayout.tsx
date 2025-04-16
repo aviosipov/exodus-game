@@ -100,6 +100,7 @@ export default function DocClientLayout({
                className="flex-grow"
                height="h-full"
                dir="rtl" // Pass rtl since Tomer uses Hebrew
+               initialContext={rawSource} // Pass the MDX content as initial context
              />
            ) : (
              <Container variant="default" className="h-full flex items-center justify-center">
