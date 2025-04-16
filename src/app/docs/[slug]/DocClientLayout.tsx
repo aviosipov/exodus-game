@@ -175,7 +175,7 @@ export default function DocClientLayout({
         {/* Left Column: MDX Content */}
         <Container
           variant={containerVariant}
-          className="w-2/3 h-full overflow-y-auto relative"
+          className="w-1/2 h-full overflow-y-auto relative" /* Reverted width */
         >
           <CopyButton
             textToCopy={rawSource} // Use rawSource for the copy button
@@ -202,7 +202,7 @@ export default function DocClientLayout({
         </Container>
 
         {/* Right Column: Chat Interface */}
-        <div className="w-1/3 h-full flex flex-col">
+        <div className="w-1/2 h-full flex flex-col"> {/* Reverted width */}
            {isCharLoading ? ( // Use renamed state
              <Container variant="default" className="h-full flex items-center justify-center">
                Loading Chat...
