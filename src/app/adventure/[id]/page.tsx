@@ -34,6 +34,14 @@ export default function AdventureScenePage() {
     const params = useParams();
     const adventureId = params?.id as string; // Get adventure ID from URL
 
+    // Determine language and text direction
+    const isRussian = adventureId?.endsWith('_ru');
+    const textDirection = isRussian ? 'ltr' : 'rtl';
+    const textAlignClass = isRussian ? 'text-left' : 'text-right';
+    const continueButtonText = isRussian ? 'Продолжить >' : 'המשך >';
+    const backToListButtonText = isRussian ? 'Назад к списку' : 'חזור לרשימה';
+
+
     const [adventureData, setAdventureData] = useState<AdventureData | null>(null);
     const [currentStepIndex, setCurrentStepIndex] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
@@ -160,7 +168,7 @@ export default function AdventureScenePage() {
 
     return (
         <div
-            dir="rtl" // Right-to-left for Hebrew
+            dir={textDirection} // Dynamic direction based on language
             // Mobile first: default bg color, md+ applies image styles
             className="relative w-screen h-screen overflow-hidden bg-[#e0d8c0] md:bg-cover md:bg-center md:bg-no-repeat"
             // Inline style now only sets the image URL if it exists
@@ -181,7 +189,7 @@ export default function AdventureScenePage() {
             <div className="absolute top-20 left-4 right-4 z-20 bg-gray-100/70 rounded-lg overflow-hidden p-7 md:hidden"> {/* Increased top margin to top-8 */}
                 <div className="flex flex-col justify-between h-full">
                     {/* Speaker and Text */}
-                    <div className="text-right text-black" style={{ textShadow: '0 0 5px white' }}>
+                    <div className={`${textAlignClass} text-black`} style={{ textShadow: '0 0 5px white' }}>
                         <h3 className="font-bold text-2xl mb-2">{currentStepData.speaker || ""}</h3>
                         <p className="text-xl">{currentStepData.text}</p>
                     </div>
@@ -203,14 +211,14 @@ export default function AdventureScenePage() {
                                 variant="bright"
                                 className="ms-2 text-base px-4 py-2"
                                 onClick={nextStep}
-                            >המשך {'>'}
+                            >{continueButtonText}
                             </SimpleButton>
                          :
                              <SimpleButton
                                 variant="secondary"
                                 className="ms-2 text-base px-4 py-2"
                                 onClick={() => window.location.href = '/adventure'}
-                            >חזור לרשימה
+                            >{backToListButtonText}
                              </SimpleButton>
                         }
                     </div>
@@ -229,7 +237,7 @@ export default function AdventureScenePage() {
                     {/* Content Overlay */}
                     <div className="absolute inset-0 z-10 flex flex-col justify-between p-7">
                         {/* Speaker and Text */}
-                        <div className="text-right text-black" style={{ textShadow: '0 0 5px white' }}>
+                        <div className={`${textAlignClass} text-black`} style={{ textShadow: '0 0 5px white' }}>
                             <h3 className="font-bold text-2xl mb-2">{currentStepData.speaker || ""}</h3>
                             <p className="text-xl">{currentStepData.text}</p>
                         </div>
@@ -251,14 +259,14 @@ export default function AdventureScenePage() {
                                     variant="bright"
                                     className="ms-2 text-base px-4 py-2"
                                     onClick={nextStep}
-                                >המשך {'>'}
+                                >{continueButtonText}
                                 </SimpleButton>
                              :
                                  <SimpleButton
                                     variant="secondary"
                                     className="ms-2 text-base px-4 py-2"
                                     onClick={() => window.location.href = '/adventure'}
-                                >חזור לרשימה
+                                >{backToListButtonText}
                                  </SimpleButton>
                             }
                         </div>

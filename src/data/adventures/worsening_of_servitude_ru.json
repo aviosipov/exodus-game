@@ -1,0 +1,99 @@
+{
+  "title": "Ужесточение рабства",
+  "description": "Новый фараон, не знавший Иосифа, видит в сынах Израилевых угрозу и ужесточает для них бремя рабства.",
+  "voiceOver": true,
+  "scenes": [
+    {
+      "id": "start_hardship",
+      "speaker": "Рассказчик",
+      "text": "Дни в Египте стали невыносимо тяжелыми. Солнце палит, и работа в глиняных ямах и на изготовлении кирпичей не кончается. Египетские надсмотрщики бьют безжалостно, требуя все больше и больше кирпичей, а соломы не хватает.",
+      "character_left_img": "/characters/ohad/image.png",
+      "character_right_img": null,
+      "background_img": "/images/adventures/worsening_of_servitude/brick_making_site_1.png"
+    },
+    {
+      "speaker": "Кенмон (египетский надсмотрщик)",
+      "text": "Ленивцы! Вы двигаетесь медленнее, чем Нил в засуху! Фараон требует новые города, и они не построятся сами! Ашер, твоя норма на сегодня удвоена!",
+      "character_left_img": "/characters/ohad/image.png",
+      "character_right_img": "/characters/osiris/image.png",
+      "background_img": "/images/adventures/worsening_of_servitude/brick_making_site_1.png"
+    },
+    {
+      "speaker": "Ашер",
+      "text": "(Шепотом, в изнеможении) Удвоили? Но... мы едва справлялись с прежней нормой. У нас недостаточно соломы, и люди падают от жары.",
+      "character_left_img": "/characters/ohad/image.png",
+      "character_right_img": "/characters/osiris/image.png",
+      "background_img": "/images/adventures/worsening_of_servitude/brick_making_site_1.png"
+    },
+    {
+      "speaker": "Элиана (еврейская женщина)",
+      "text": "(Опирается на стену на мгновение, измученная) Ашер прав, господин. Мы делаем все возможное, но силы на исходе. Пожалуйста, немного сострадания...",
+      "character_left_img": "/characters/elisheva/image.png",
+      "character_right_img": "/characters/osiris/image.png",
+      "background_img": "/images/adventures/worsening_of_servitude/brick_making_site_1.png"
+    },
+    {
+      "speaker": "Кенмон (египетский надсмотрщик)",
+      "text": "Сострадания?! (Холодно смеется) Сострадание – это роскошь, которой вы не заслуживаете! Ваши жалобы лишь доказывают, что вам нужна более твердая рука! Возвращайтесь к работе, или кнут встретится с вашими спинами!",
+      "character_left_img": "/characters/elisheva/image.png",
+      "character_right_img": "/characters/osiris/image.png",
+      "background_img": "/images/adventures/worsening_of_servitude/brick_making_site_1.png"
+    },
+    {
+      "speaker": "Рассказчик",
+      "text": "Кенмон угрожающе поднимает кнут. Рядом с тобой пожилой работник спотыкается и падает, роняя несколько свежих, частично высохших кирпичей. Глаза Кенмона вспыхивают гневом, и он поворачивается к работнику.",
+      "character_left_img": "/characters/ohad/image.png",
+      "character_right_img": "/characters/osiris/image.png",
+      "background_img": "/images/adventures/worsening_of_servitude/brick_making_site_1.png"
+    },
+    {
+        "id": "moment_of_crisis",
+        "speaker": "Рассказчик",
+        "text": "Твое сердце сильно бьется. Надсмотрщик собирается ударить старика. Что ты сделаешь?",
+        "character_left_img": "/characters/ohad/image.png",
+        "character_right_img": "/characters/osiris/image.png",
+        "background_img": "/images/adventures/worsening_of_servitude/brick_making_site_1.png",
+        "choices": [
+            { "text": "Вмешайся и отвлеки надсмотрщика: \"Господин! Может, я ему помогу?\"", "outcome": "intervene_distract" },
+            { "text": "Умоляй надсмотрщика о пощаде: \"Пожалуйста, господин, он старый и слабый человек!\"", "outcome": "plead_mercy" },
+            { "text": "Опусти взгляд и молча продолжай работать, опасаясь последствий.", "outcome": "remain_silent" }
+        ]
+    },
+    {
+        "id": "intervene_distract",
+        "speaker": "Кенмон (египетский надсмотрщик)",
+        "text": "(Поворачивается к тебе, сузив глаза) Хочешь получить удары вместо него, Ашер? Возвращайся к своей работе, пока я не передумал и не преподал урок вам обоим!",
+        "character_left_img": "/characters/ohad/image.png",
+        "character_right_img": "/characters/osiris/image.png",
+        "background_img": "/images/adventures/worsening_of_servitude/brick_making_site_1.png",
+        "next": "end_scene_hardship"
+    },
+    {
+        "id": "plead_mercy",
+        "speaker": "Кенмон (египетский надсмотрщик)",
+        "text": "(Щелкает кнутом в воздухе рядом с твоим лицом) Пощады? Так он научится быть осторожнее! А ты не вмешивайся! Его слабость – не оправдание!",
+        "character_left_img": "/characters/ohad/image.png",
+        "character_right_img": "/characters/osiris/image.png",
+        "background_img": "/images/adventures/worsening_of_servitude/brick_making_site_1.png",
+        "next": "end_scene_hardship"
+    },
+    {
+        "id": "remain_silent",
+        "speaker": "Рассказчик",
+        "text": "Ты опускаешь глаза, и на сердце тяжело. Рядом раздается звук удара кнута. Трудно выносить эти виды и звуки, но страх парализует.",
+        "character_left_img": "/characters/ohad/image.png",
+        "character_right_img": "/characters/osiris/image.png",
+        "background_img": "/images/adventures/worsening_of_servitude/brick_making_site_1.png",
+        "next": "end_scene_hardship"
+    },
+    {
+        "id": "end_scene_hardship",
+        "speaker": "Рассказчик",
+        "text": "День мучительно медленно подходит к концу. Твое тело болит, а дух подавлен. Рабство ужесточается с каждым днем, и кажется, что впереди нет никакой надежды. Жизнь превратилась в непрекращающийся кошмар под жестоким египетским правлением.",
+        "character_left_img": "/characters/ohad/image.png",
+        "character_right_img": null,
+        "background_img": "/images/adventures/worsening_of_servitude/brick_making_site_1.png",
+        "end": true
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "title": "Дни почета",
+  "description": "Годы изобилия в Египте, сыны Израилевы пользуются уважением.",
+  "voiceOver": true,
+  "scenes": [
+    {
+        "id": "start_honor",
+        "speaker": "Рассказчик",
+        "text": "Годы изобилия в Египте. Солнце освещает процветающие города и плодородные поля вдоль Нила. Вы, сыны Израилевы, пользуетесь уважением и признанием со стороны египтян.",
+        "character_left_img": "/characters/ohad/image.png",
+        "character_right_img": null,
+        "background_img": "/images/adventures/days_of_honor/prosperity_1.png"
+    },
+    {
+        "speaker": "Иссахар",
+        "text": "Ашер, твоя работа над проектом каналов как всегда впечатляет. Сам фараон слышал о твоем усердии.",
+        "character_left_img": "/characters/ohad/image.png",
+        "character_right_img": "/characters/osiris/image.png",
+        "background_img": "/images/adventures/days_of_honor/prosperity_1.png"
+    },
+    {
+        "speaker": "Ашер",
+        "text": "Благодарю тебя, господин Иссахар. Мы стараемся внести свой вклад в процветание Египта, земли, принявшей нас с распростертыми объятиями.",
+        "character_left_img": "/characters/ohad/image.png",
+        "character_right_img": "/characters/osiris/image.png",
+        "background_img": "/images/adventures/days_of_honor/prosperity_1.png"
+    },
+    {
+        "speaker": "Иссахар",
+        "text": "Действительно, и мы ценим это. На самом деле, ответственный министр просит твоего совета относительно планирования нового моста. Ваша мудрость известна.",
+        "character_left_img": "/characters/ohad/image.png",
+        "character_right_img": "/characters/osiris/image.png",
+        "background_img": "/images/adventures/days_of_honor/prosperity_1.png"
+    },
+    {
+        "speaker": "Рассказчик",
+        "text": "Предложение согревает твое сердце. Это еще одна возможность доказать вашу верность и талант.",
+        "character_left_img": "/characters/ohad/image.png",
+        "character_right_img": "/characters/osiris/image.png",
+        "background_img": "/images/adventures/days_of_honor/prosperity_1.png",
+        "choices": [
+            { "text": "Согласись с энтузиазмом: \"С большим уважением! Буду рад помочь любым способом.\"", "outcome": "accept_eagerly" },
+            { "text": "Согласись скромно: \"Сделаю все возможное, господин.\"", "outcome": "accept_modestly" },
+            { "text": "Немного колебайся: \"Вы уверены, что я подходящий человек?\"", "outcome": "hesitate" }
+        ]
+    },
+    {
+        "id": "accept_eagerly",
+        "speaker": "Иссахар",
+        "text": "(Улыбается с удовлетворением) Отлично, Ашер! Я знал, что на тебя можно положиться. Пойдем со мной в кабинет министра.",
+        "character_left_img": "/characters/ohad/image.png",
+        "character_right_img": "/characters/osiris/image.png",
+        "background_img": "/images/adventures/days_of_honor/prosperity_1.png",
+        "next": "end_scene_honor"
+    },
+    {
+        "id": "accept_modestly",
+        "speaker": "Иссахар",
+        "text": "(Кивает с признательностью) Твоя скромность добавляет тебе чести, Ашер. Я уверен, что твой вклад будет важен. Встретимся завтра, чтобы обсудить детали.",
+        "character_left_img": "/characters/ohad/image.png",
+        "character_right_img": "/characters/osiris/image.png",
+        "background_img": "/images/adventures/days_of_honor/prosperity_1.png",
+        "next": "end_scene_honor"
+    },
+    {
+        "id": "hesitate",
+        "speaker": "Иссахар",
+        "text": "(Смотрит на тебя мгновение) Не сомневайся в своей ценности, Ашер. Твой опыт ценится. Мы доверяем твоему суждению. Подготовь свои идеи к завтрашней встрече.",
+        "character_left_img": "/characters/ohad/image.png",
+        "character_right_img": "/characters/osiris/image.png",
+        "background_img": "/images/adventures/days_of_honor/prosperity_1.png",
+        "next": "end_scene_honor"
+    },
+    {
+        "id": "end_scene_honor",
+        "speaker": "Рассказчик",
+        "text": "Лучи солнца продолжают сиять над Египтом. Отношения с египтянами хорошие, и вы являетесь частью процветания царства. Но будет ли это положение длиться вечно?",
+        "character_left_img": "/characters/ohad/image.png",
+        "character_right_img": null,
+        "background_img": "/images/adventures/days_of_honor/prosperity_1.png",
+        "end": true
+    }
+  ]
+}

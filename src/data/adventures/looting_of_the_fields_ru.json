@@ -1,0 +1,121 @@
+{
+  "title": "Разграбление полей",
+  "description": "Угнетение усиливается, когда египтяне нападают на созревшие поля сынов Израилевых, собирают урожай для себя и оставляют евреев бороться с голодом и безысходностью.",
+  "voiceOver": true,
+  "scenes": [
+    {
+      "id": "start_field_looting",
+      "speaker": "Рассказчик",
+      "text": "После изнурительной работы созревшие поля были вашим единственным лучом света. Зерно золотилось на солнце, обещая пищу вашим семьям. Ты, Охад, и твой друг Иссахар стоите на своих полях, надеясь, что на этот раз вам хотя бы оставят плоды вашего труда.",
+      "character_left_img": "/characters/ohad/image.png",
+      "character_right_img": "/characters/issachar/image.png",
+      "background_img": "/images/adventures/looting_of_the_fields/lush_field_1.png"
+    },
+    {
+      "speaker": "Осирис",
+      "text": "(Приходит с Ахмосом и несколькими другими египтянами, указывает на поле Охада) Хороший урожай, Охад. Фараон будет рад получить его в качестве подношения.",
+      "character_left_img": "/characters/ohad/image.png",
+      "character_right_img": "/characters/osiris/image.png",
+      "background_img": "/images/adventures/looting_of_the_fields/lush_field_1.png"
+    },
+    {
+        "speaker": "Ахмос",
+        "text": "(Обращается к Иссахару с насмешкой) И твое поле, Иссахар, тоже выглядит многообещающе. Жаль, что тебе придется довольствоваться крохами, которые мы оставим.",
+        "character_left_img": "/characters/ahmos/image.png",
+        "character_right_img": "/characters/issachar/image.png",
+        "background_img": "/images/adventures/looting_of_the_fields/lush_field_1.png"
+      },
+    {
+      "speaker": "Охад",
+      "text": "Получить в качестве подношения?! Это мой урожай! Я трудился над ним в поте лица весь сезон! Вы не можете просто так его забрать!",
+      "character_left_img": "/characters/ohad/image.png",
+      "character_right_img": "/characters/osiris/image.png",
+      "background_img": "/images/adventures/looting_of_the_fields/lush_field_1.png"
+    },
+    {
+      "speaker": "Иссахар",
+      "text": "(В гневе и бессилии) Что значит довольствоваться крохами? Это еда наших детей! Это грабеж!",
+      "character_left_img": "/characters/issachar/image.png",
+      "character_right_img": "/characters/ahmos/image.png",
+      "background_img": "/images/adventures/looting_of_the_fields/lush_field_1.png"
+    },
+    {
+        "speaker": "Рассказчик",
+        "text": "Осирис и Ахмос игнорируют ваши мольбы. Они подают знак своим людям, и те входят в поля и начинают жать быстро и жестоко, топча колосья на своем пути, наполняя мешки вашим зерном.",
+        "character_left_img": "/characters/ohad/image.png",
+        "character_right_img": "/characters/osiris/image.png",
+        "background_img": "/images/adventures/looting_of_the_fields/lush_field_1.png"
+    },
+    {
+      "id": "moment_of_theft",
+      "speaker": "Рассказчик",
+      "text": "Ты видишь, как сам Осирис собирает снопы с твоего поля с довольной улыбкой. Твое сердце разрывается при виде открытого грабежа. Что ты сделаешь перед лицом полного бессилия?",
+      "character_left_img": "/characters/ohad/image.png",
+      "character_right_img": "/characters/osiris/image.png",
+      "background_img": "/images/adventures/looting_of_the_fields/lush_field_1.png",
+      "choices": [
+        { "text": "Попытайся вырвать один сноп из рук ближайшего египтянина: \"Оставь! Это мое!\"", "outcome": "try_reclaim" },
+        { "text": "Обратись к Осирису в отчаянной попытке воззвать к прошлому: \"Осирис, как ты можешь? Когда-то мы уважали друг друга!\"", "outcome": "appeal_past" },
+        { "text": "Стой застыв на месте, сжимая кулаки в гневе и отчаянии, наблюдая за грабежом.", "outcome": "watch_helplessly" }
+      ]
+    },
+    {
+      "id": "try_reclaim",
+      "speaker": "Ахмос",
+      "text": "(Сильно толкает тебя на землю) Наглый раб! Не мешай жатве твоего господина! В следующий раз это закончится хуже!",
+      "character_left_img": "/characters/ahmos/image.png",
+      "character_right_img": "/characters/ohad/image.png",
+      "background_img": "/images/adventures/looting_of_the_fields/plundered_field_1.png",
+      "next": "looting_continues"
+    },
+    {
+      "id": "appeal_past",
+      "speaker": "Осирис",
+      "text": "(Смотрит на тебя с презрением) Когда-то? Это было когда-то. Теперь вы рабы, и ваш урожай – наш. Знай свое место, Охад.",
+      "character_left_img": "/characters/osiris/image.png",
+      "character_right_img": "/characters/ohad/image.png",
+      "background_img": "/images/adventures/looting_of_the_fields/plundered_field_1.png",
+      "next": "looting_continues"
+    },
+    {
+      "id": "watch_helplessly",
+      "speaker": "Рассказчик",
+      "text": "Ты стоишь там, видишь и слышишь энергичную жатву, смех египтян, шелест украденных колосьев. Бессилие жжет твою душу.",
+      "character_left_img": "/characters/ohad/image.png",
+      "character_right_img": "/characters/issachar/image.png",
+      "background_img": "/images/adventures/looting_of_the_fields/plundered_field_1.png",
+      "next": "looting_continues"
+    },
+    {
+        "id": "looting_continues",
+        "speaker": "Рассказчик",
+        "text": "Вскоре поля почти пусты. Египтяне грузят полные мешки на повозки и уезжают, оставляя за собой выжженную землю и несколько разбросанных колосьев.",
+        "character_left_img": "/characters/ohad/image.png",
+        "character_right_img": "/characters/issachar/image.png",
+        "background_img": "/images/adventures/looting_of_the_fields/plundered_field_1.png"
+      },
+    {
+      "speaker": "Иссахар",
+      "text": "(Смотрит на разоренное поле, голос сдавлен) Они забрали все... Почти ничего не оставили. Чем мы будем кормить детей, Охад? Что нам теперь делать?",
+      "character_left_img": "/characters/issachar/image.png",
+      "character_right_img": "/characters/ohad/image.png",
+      "background_img": "/images/adventures/looting_of_the_fields/plundered_field_1.png"
+    },
+    {
+      "speaker": "Охад",
+      "text": "(Смотрит на пустой горизонт, в глубоком отчаянии) У меня нет ответа, Иссахар. Тяжелая работа, разрушенные дома, а теперь еще и голод. Кажется, нет предела нашим страданиям.",
+      "character_left_img": "/characters/ohad/image.png",
+      "character_right_img": "/characters/issachar/image.png",
+      "background_img": "/images/adventures/looting_of_the_fields/plundered_field_1.png"
+    },
+    {
+      "id": "end_scene_field_looting",
+      "speaker": "Рассказчик",
+      "text": "Открытое разграбление полей – это еще один удар, нанесенный египтянами. Лишение пищи и средств к существованию усугубляет каторжный труд и изъятие имущества, и его цель – сломить дух сынов Израилевых и дать им понять, что у них нет ничего своего под властью Египта.",
+      "character_left_img": "/characters/ohad/image.png",
+      "character_right_img": null,
+      "background_img": "/images/adventures/looting_of_the_fields/plundered_field_1.png",
+      "end": true
+    }
+  ]
+}

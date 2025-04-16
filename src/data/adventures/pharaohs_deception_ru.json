@@ -1,0 +1,93 @@
+{
+  "title": "Обман фараона",
+  "description": "Фараон, обеспокоенный ростом числа сынов Израилевых, замышляет жестокую уловку, чтобы ограничить их рождаемость.",
+  "voiceOver": true,
+  "scenes": [
+    {
+      "speaker": "Рассказчик",
+      "text": "Солнце палило над стройплощадкой. Сыны Израилевы трудились, еще не зная, какой поворот судьбы их ожидает. Внезапно, к всеобщему удивлению, появился сам фараон.",
+      "character_left_img": null,
+      "character_right_img": null,
+      "background_img": "/images/adventures/pharaohs_deception/construction_site_day.png"
+    },
+    {
+      "speaker": "Рассказчик",
+      "text": "Фараон пришел с корзиной и лопатой в руках, как будто намереваясь принять участие в работе. Он обратился к сынам Израилевым с речью, полной фальшивого добродушия.",
+      "character_left_img": null,
+      "character_right_img": "/characters/pharaoh/image.png",
+      "background_img": "/images/adventures/pharaohs_deception/construction_site_day.png"
+    },
+    {
+      "speaker": "Фараон",
+      "text": "Мои верные работники! Я вижу ваш тяжкий труд! Сегодня я предлагаю вам особую возможность: покажите мне, на что вы способны, изготовьте как можно больше кирпичей! За каждый кирпич сверх обычной нормы я щедро заплачу вам!",
+      "character_left_img": null,
+      "character_right_img": "/characters/pharaoh/image.png",
+      "background_img": "/images/adventures/pharaohs_deception/construction_site_day.png",
+      "choices": [
+        {
+          "text": "Звучит отлично! Давайте постараемся ради награды!",
+          "outcome": "work_hard_motivated"
+        },
+        {
+          "text": "Хм, звучит слишком хорошо, чтобы быть правдой...",
+          "outcome": "work_hard_skeptical"
+        },
+        {
+          "text": "Можно ли узнать условия оплаты сейчас?",
+          "outcome": "pharaoh_dismisses_question"
+        }
+      ]
+    },
+    {
+      "id": "pharaoh_dismisses_question",
+      "speaker": "Фараон",
+      "text": "Не время для вопросов! Время работать! Покажите свое усердие, а об остальном я позабочусь. Не сомневайтесь в моей щедрости!",
+      "character_left_img": null,
+      "character_right_img": "/characters/pharaoh/image.png",
+      "background_img": "/images/adventures/pharaohs_deception/construction_site_day.png",
+      "next": "work_hard_skeptical"
+    },
+    {
+      "id": "work_hard_motivated",
+      "speaker": "Рассказчик",
+      "text": "Воодушевленные обещанием фараона, сыны Израилевы принялись за работу с невиданным рвением. Каждый старался превзойти себя, мечтая о щедрой награде.",
+      "character_left_img": "/characters/ohad/image.png",
+      "character_right_img": null,
+      "background_img": "/images/adventures/pharaohs_deception/construction_site_intense.png",
+      "next": "end_of_day"
+    },
+    {
+      "id": "work_hard_skeptical",
+      "speaker": "Рассказчик",
+      "text": "Хотя слова фараона (или его уклончивый ответ) вызвали сомнения, другого выбора не было. Сыны Израилевы работали усердно, но тень подозрения сопровождала их.",
+      "character_left_img": "/characters/ohad/image.png",
+      "character_right_img": null,
+      "background_img": "/images/adventures/pharaohs_deception/construction_site_intense.png",
+      "next": "end_of_day"
+    },
+    {
+      "id": "end_of_day",
+      "speaker": "Рассказчик",
+      "text": "В конце дня на площадке высились груды свежих кирпичей. Усталые, но полные ожидания (или опасения), рабочие собрались перед фараоном.",
+      "character_left_img": "/characters/ohad/image.png",
+      "character_right_img": "/characters/pharaoh/image.png",
+      "background_img": "/images/adventures/pharaohs_deception/construction_site_evening.png"
+    },
+    {
+      "speaker": "Фараон",
+      "text": "Вы хорошо поработали! Вы показали, сколько кирпичей можете произвести за один день. Итак, отныне - это будет ваша дневная норма! И никакой оплаты не будет. Это ваша обязанность!",
+      "character_left_img": null,
+      "character_right_img": "/characters/pharaoh/image.png",
+      "background_img": "/images/adventures/pharaohs_deception/construction_site_evening.png"
+    },
+    {
+      "id": "aftermath_trickery",
+      "speaker": "Рассказчик",
+      "text": "Слова фараона обрушились на них как гром среди ясного неба. Обещание награды оказалось жестокой ловушкой. Их труд был использован против них, чтобы установить невыполнимую норму и лишить последней надежды на оплату. Рабство стало еще тяжелее.",
+      "character_left_img": "/characters/ohad/image.png",
+      "character_right_img": null,
+      "background_img": "/images/adventures/pharaohs_deception/construction_site_night.png",
+      "end": true
+    }
+  ]
+}

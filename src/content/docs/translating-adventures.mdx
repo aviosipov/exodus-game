@@ -1,0 +1,66 @@
+---
+title: How to Translate Adventure Episodes
+description: Guide on translating adventure JSON files and generating voiceovers for new languages.
+lang: en
+---
+
+# Translating Adventure Episodes
+
+This guide explains the process for translating an existing adventure episode into a new language, using Russian (`_ru`) as an example.
+
+## Steps
+
+1.  **Duplicate the Adventure JSON:**
+    *   Locate the original adventure JSON file in `src/data/adventures/`. For example, `original_adventure.json`.
+    *   Create a copy of this file in the same directory.
+    *   Rename the copied file by adding a language suffix before the `.json` extension. For Russian, use `_ru`. Example: `original_adventure_ru.json`.
+
+2.  **Translate the JSON Content:**
+    *   Open the newly created language-specific JSON file (e.g., `original_adventure_ru.json`).
+    *   Translate the following text fields into the target language:
+        *   `title`: The main title of the adventure.
+        *   `description`: The short description shown in the adventure list.
+        *   `scenes[].speaker`: (Optional, if speaker names need translation).
+        *   `scenes[].text`: The main narrative text for each scene.
+        *   `scenes[].choices[].text`: The text displayed for each player choice.
+    *   **Important:** Do *not* translate `id`, `outcome`, `next`, image paths (`character_left_img`, `character_right_img`, `background_img`), or boolean flags like `voiceOver` and `end`.
+
+3.  **Ensure `voiceOver` Flag:**
+    *   Verify that the `"voiceOver": true` flag exists at the top level of the translated JSON file. This enables voiceover generation and playback.
+
+    ```json {3}
+    {
+      "title": "Translated Title",
+      "description": "Translated description.",
+      "voiceOver": true,
+      "scenes": [
+        // ... translated scenes
+      ]
+    }
+    ```
+
+4.  **Generate Voiceover Audio:**
+    *   Make sure your `OPENAI_API_KEY` is set in your `.env.local` file.
+    *   Open your terminal in the project root directory.
+    *   Run the voiceover generation script, providing the *translated* episode name (without the `.json` extension):
+        ```bash
+        npm run voiceover original_adventure_ru
+        ```
+    *   This script reads the translated JSON, calls the OpenAI TTS API for each text segment, and saves the generated MP3 audio files to `public/audio/adventures/original_adventure_ru/`.
+    *   *(Optional)*: For potentially better results in the target language, you can temporarily modify the `NARRATION_INSTRUCTIONS` constant within the `scripts/generate-voiceover.mjs` script to be in the target language before running the command, and revert it back to English afterwards.
+
+5.  **Verify Text Direction (LTR/RTL):**
+    *   The main adventure page component (`src/app/adventure/[id]/page.tsx`) automatically handles text direction based on the file suffix.
+    *   It checks if the `adventureId` ends with `_ru`. If so, it applies Left-to-Right (LTR) text direction (`dir="ltr"`) and left text alignment (`text-left`).
+    *   For other languages or the default (Hebrew), it uses Right-to-Left (RTL).
+    *   If translating to another LTR language (e.g., French `_fr`), you might need to update the logic in `src/app/adventure/[id]/page.tsx` to recognize other LTR suffixes.
+
+## Example
+
+To translate `looting_of_the_fields.json` to Russian:
+
+1.  Copy it to `looting_of_the_fields_ru.json`.
+2.  Translate the `title`, `description`, `speaker` (if needed), `text` fields inside `looting_of_the_fields_ru.json`.
+3.  Ensure `"voiceOver": true` is present.
+4.  Run `npm run voiceover looting_of_the_fields_ru`.
+5.  The component `src/app/adventure/[id]/page.tsx` will automatically detect the `_ru` suffix and render the text as LTR.
