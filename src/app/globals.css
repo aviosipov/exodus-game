@@ -141,3 +141,15 @@
   from { height: var(--radix-collapsible-content-height); opacity: 1; }
   to { height: 0; opacity: 0; }
 }
+
+/* Force LTR for specific code blocks */
+pre.force-ltr-code {
+  direction: ltr !important;
+  text-align: left !important;
+}
+
+/* Ensure children inherit LTR and left alignment */
+pre.force-ltr-code * {
+  direction: ltr !important;
+  text-align: left !important;
+}
