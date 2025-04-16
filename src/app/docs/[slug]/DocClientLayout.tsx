@@ -275,13 +275,14 @@ export default function DocClientLayout({
         {/* Left Column: MDX Content */}
         <Container
           variant={containerVariant}
-          className="w-1/2 h-full overflow-y-auto relative" /* Reverted width */
-        >
-          <CopyButton
-            textToCopy={rawSource} // Use rawSource for the copy button
-            className="absolute top-4 right-4 z-10"
-          />
-          <article
+           className="w-1/2 h-full overflow-y-auto relative" /* Reverted width */
+         >
+           <CopyButton
+             textToCopy={rawSource} // Use rawSource for the copy button
+             // Conditionally set position based on text direction
+             className={`absolute top-4 z-10 ${textDirection === 'rtl' ? 'left-4' : 'right-4'}`}
+           />
+           <article
             className={`${proseClasses} max-w-none lg:prose-xl p-4`}
             dir={textDirection}
           >
