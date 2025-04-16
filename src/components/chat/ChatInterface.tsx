@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState, useEffect, useRef, FormEvent, KeyboardEvent } from "react";
+import ReactMarkdown from 'react-markdown'; // Import ReactMarkdown
+import remarkGfm from 'remark-gfm'; // Import remarkGfm for GitHub Flavored Markdown
 import { Trash2 } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Container from "@/components/ui/Container";
@@ -243,10 +245,20 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
                             className={`max-w-[70%] p-3 rounded-lg ${
                                 msg.role === 'user'
                                     ? 'bg-blue-600 text-white'
-                                    : 'bg-gray-600 text-white'
+                                    : 'bg-gray-600 text-white' // Keep background color for the bubble
                             }`}
                         >
-                            {msg.content}
+                            {/* Render user messages directly */}
+                            {msg.role === 'user' ? (
+                                msg.content
+                            ) : (
+                                /* Render assistant messages with Markdown, applying prose styles */
+                                <div className="prose prose-sm dark:prose-invert max-w-none text-white"> {/* Apply prose styles directly */}
+                                    <ReactMarkdown remarkPlugins={[remarkGfm]}>
+                                        {msg.content}
+                                    </ReactMarkdown>
+                                </div>
+                            )}
                         </div>
                     </div>
                 ))}
