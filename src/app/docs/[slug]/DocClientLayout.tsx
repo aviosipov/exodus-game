@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react"; // Added useRef
-import { useRouter, useSearchParams } from 'next/navigation'; // Added router hooks
+import { useState, useEffect, useRef } from "react";
+import { useRouter, useSearchParams } from 'next/navigation';
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from 'next-mdx-remote/serialize'; // Import serialize
 import remarkGfm from "remark-gfm"; // Import remarkGfm
@@ -61,7 +61,10 @@ export default function DocClientLayout({
   // Router and Search Params
   const router = useRouter();
   const searchParams = useSearchParams();
-  const chatRef = useRef<ChatInterfaceHandle>(null); // Ref for ChatInterface
+  const chatRef = useRef<ChatInterfaceHandle>(null);
+
+  // State for mobile view toggle
+  const [mobileView, setMobileView] = useState<'chat' | 'doc'>('chat');
 
   // Fetch character data on component mount
   useEffect(() => {
@@ -269,16 +272,38 @@ export default function DocClientLayout({
       {/* Dark Overlay */}
       <div className="absolute inset-0 w-full h-full bg-black/60 -z-10"></div>
 
-      {/* Main Content Area - Flexbox for two columns */}
-      <div className="relative w-full max-w-7xl my-4 z-0 flex flex-row gap-4 h-[85vh]">
+      {/* Main Content Area - Use flex-col for mobile, md:flex-row for desktop */}
+      <div className="relative w-full max-w-7xl my-4 z-0 flex flex-col md:flex-row gap-4 h-[85vh]">
 
-        {/* Left Column: MDX Content */}
+        {/* Mobile View Toggle Buttons (Only visible below md breakpoint) */}
+        {/* eslint-disable react/no-unescaped-entities */}
+        <div className="md:hidden flex justify-center gap-4 mb-4">
+          <button
+            onClick={() => setMobileView('chat')}
+            className={`px-4 py-2 rounded ${mobileView === 'chat' ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300'}`}
+          >
+            הצג צ'אט
+          </button>
+          <button
+            onClick={() => setMobileView('doc')}
+            className={`px-4 py-2 rounded ${mobileView === 'doc' ? 'bg-blue-600 text-white' : 'bg-gray-700 text-gray-300'}`}
+          >
+            הצג מסמך
+          </button>
+        </div>
+        {/* eslint-enable react/no-unescaped-entities */}
+
+        {/* Left Column: MDX Content - Conditional visibility and width */}
         <Container
           variant={containerVariant}
-           className="w-1/2 h-full overflow-y-auto relative" /* Reverted width */
+          // Full width on mobile if 'doc' is selected, hidden otherwise. Half width on desktop.
+          className={`
+            ${mobileView === 'doc' ? 'flex' : 'hidden'} md:flex
+            w-full md:w-1/2 h-full overflow-y-auto relative flex-col
+          `}
          >
            <CopyButton
-             textToCopy={rawSource} // Use rawSource for the copy button
+             textToCopy={rawSource}
              // Conditionally set position based on text direction
              className={`absolute top-4 z-10 ${textDirection === 'rtl' ? 'left-4' : 'right-4'}`}
            />
@@ -302,13 +327,17 @@ export default function DocClientLayout({
           </article>
         </Container>
 
-        {/* Right Column: Chat Interface */}
-        <div className="w-1/2 h-full flex flex-col"> {/* Reverted width */}
-           {isCharLoading ? ( // Use renamed state
+        {/* Right Column: Chat Interface - Conditional visibility and width */}
+        {/* Full width on mobile if 'chat' is selected, hidden otherwise. Half width on desktop. */}
+        <div className={`
+          ${mobileView === 'chat' ? 'flex' : 'hidden'} md:flex
+          w-full md:w-1/2 h-full flex-col
+        `}>
+           {isCharLoading ? (
              <Container variant="default" className="h-full flex items-center justify-center">
                Loading Chat...
              </Container>
-           ) : charError ? ( // Use renamed state
+           ) : charError ? (
              <Container variant="default" className="h-full flex items-center justify-center">
                {charError}
              </Container>
