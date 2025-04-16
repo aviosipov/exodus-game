@@ -1,7 +1,12 @@
 "use client";
 
-// Removed unused useState, useEffect
-import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote"; // Keep MDXRemoteSerializeResult for prop type
+import { useState, useEffect } from "react";
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
+import { serialize } from 'next-mdx-remote/serialize'; // Import serialize
+import remarkGfm from "remark-gfm"; // Import remarkGfm
+import rehypePrettyCode from "rehype-pretty-code"; // Import rehypePrettyCode
+import type { Options as PrettyCodeOptions } from "rehype-pretty-code"; // Import types
+import type { Element } from "hast"; // Import types
 import { mdxComponents } from "@/mdx-components";
 import Container from "@/components/ui/Container";
 import { CopyButton } from "@/components/ui/CopyButton";
@@ -13,12 +18,10 @@ interface DocFrontmatter {
   lang?: string;
 }
 
-// Define the props the client component will receive
+// Define the props the client component will receive (remove serializedSource)
 interface DocClientLayoutProps {
-  serializedSource: MDXRemoteSerializeResult; // Expect serialized source object
   frontmatter: DocFrontmatter;
-  devGuideCharacter: Character | null;
-  rawSource: string; // Pass raw source separately for CopyButton
+  rawSource: string;
   backgroundImages: string[];
 }
 
@@ -32,13 +35,90 @@ const defaultBackgroundImages = [
 
 
 export default function DocClientLayout({
-  serializedSource,
+  // serializedSource removed from destructuring
   frontmatter,
-  devGuideCharacter,
-  rawSource, // Receive raw source for copy button
+  rawSource,
   backgroundImages = defaultBackgroundImages
 }: DocClientLayoutProps) {
-  // Removed unused prettyCodeOptions variable
+  // State for character data, loading, and error
+  const [characterData, setCharacterData] = useState<Character | null>(null);
+  const [isCharLoading, setIsCharLoading] = useState(true); // Renamed for clarity
+  const [charError, setCharError] = useState<string | null>(null); // Renamed for clarity
+
+  // State for MDX serialization
+  const [serializedSource, setSerializedSource] = useState<MDXRemoteSerializeResult | null>(null);
+  const [isSerializing, setIsSerializing] = useState(true);
+  const [serializeError, setSerializeError] = useState<string | null>(null);
+
+  // Fetch character data on component mount
+  useEffect(() => {
+    async function fetchCharacterData() {
+      setIsCharLoading(true);
+      setCharError(null);
+      try {
+        // Fetch Tomer's info
+        const charResponse = await fetch(`/characters/tomer/info.json`);
+        if (charResponse.ok) {
+          const data = await charResponse.json();
+          setCharacterData(data);
+        } else {
+          console.warn(`Failed to fetch dev guide info: ${charResponse.statusText}`);
+          setCharError(`Failed to load chat character: ${charResponse.statusText}`);
+        }
+      } catch (err) {
+        console.error("Error fetching dev guide character info:", err);
+        setCharError("Error loading chat character.");
+      } finally {
+        setIsCharLoading(false);
+      }
+    }
+    fetchCharacterData();
+  }, []);
+
+  // Serialize MDX source on component mount or when rawSource changes
+  useEffect(() => {
+    async function serializeMdx() {
+      setIsSerializing(true);
+      setSerializeError(null);
+      try {
+        const prettyCodeOptions: Partial<PrettyCodeOptions> = {
+          theme: "one-dark-pro",
+          keepBackground: false,
+          onVisitLine(node: Element) {
+            if (node.children.length === 0) {
+              node.children = [{ type: "text", value: " " }];
+            }
+          },
+          onVisitHighlightedLine(node: Element) {
+            if (!node.properties) node.properties = {};
+            if (!node.properties.className) node.properties.className = [];
+            if (Array.isArray(node.properties.className)) {
+               node.properties.className.push("highlighted");
+            }
+          },
+          onVisitHighlightedChars(node: Element) {
+            if (!node.properties) node.properties = {};
+            node.properties.className = ["word"];
+          },
+        };
+
+        const result = await serialize(rawSource, {
+          parseFrontmatter: false, // Already parsed in server component
+          mdxOptions: {
+            remarkPlugins: [remarkGfm],
+            rehypePlugins: [[rehypePrettyCode, prettyCodeOptions]],
+          },
+        });
+        setSerializedSource(result);
+      } catch (error) {
+        console.error("Error serializing MDX:", error);
+        setSerializeError("Failed to render document content.");
+      } finally {
+        setIsSerializing(false);
+      }
+    }
+    serializeMdx();
+  }, [rawSource]); // Re-run if rawSource changes
 
   // Determine text direction and container variant based on props
   const textDirection = frontmatter.lang === 'he' ? 'rtl' : 'ltr';
@@ -48,9 +128,6 @@ export default function DocClientLayout({
   // Select background image
   const randomBgIndex = Math.floor(Math.random() * backgroundImages.length);
   const selectedBgImage = backgroundImages[randomBgIndex];
-
-  // No need for loading/error state here as data is fetched server-side
-  // If devGuideCharacter is null, the chat interface will show a loading/error state internally or based on its implementation
 
   return (
     <div
@@ -81,30 +158,44 @@ export default function DocClientLayout({
             className={`${proseClasses} max-w-none lg:prose-xl p-4`}
             dir={textDirection}
           >
-            {/* MDXRemote now receives source directly */}
-            {/* Note: MDXRemote might need serialized source if not using /rsc */}
-            {/* Pass the serialized source object to MDXRemote */}
-             <MDXRemote
-              {...serializedSource} // Spread the serialized source object
-              components={mdxComponents}
-            />
+            {/* Conditionally render MDXRemote */}
+            {isSerializing ? (
+              <p>Loading content...</p>
+            ) : serializeError ? (
+              <p className="text-red-500">{serializeError}</p>
+            ) : serializedSource ? (
+              <MDXRemote
+                {...serializedSource}
+                components={mdxComponents}
+              />
+            ) : (
+              <p>Could not load content.</p>
+            )}
           </article>
         </Container>
 
         {/* Right Column: Chat Interface */}
         <div className="w-1/3 h-full flex flex-col">
-           {devGuideCharacter ? (
+           {isCharLoading ? ( // Use renamed state
+             <Container variant="default" className="h-full flex items-center justify-center">
+               Loading Chat...
+             </Container>
+           ) : charError ? ( // Use renamed state
+             <Container variant="default" className="h-full flex items-center justify-center">
+               {charError}
+             </Container>
+           ) : characterData ? (
              <ChatInterface
-               character={devGuideCharacter}
+               character={characterData}
                showStarters={true}
                className="flex-grow"
                height="h-full"
-               dir="rtl" // Pass rtl since Tomer uses Hebrew
-               initialContext={rawSource} // Pass the MDX content as initial context
+               dir="rtl"
+               initialContext={rawSource}
              />
            ) : (
              <Container variant="default" className="h-full flex items-center justify-center">
-               Chat unavailable. Character data missing.
+               Chat unavailable. Character data could not be loaded.
              </Container>
            )}
         </div>
