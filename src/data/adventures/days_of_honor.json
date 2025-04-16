@@ -1,6 +1,7 @@
 {
   "title": "ימי הכבוד",
   "description": "שנות שפע במצרים, בני ישראל זוכים ליחס של כבוד.",
+  "voiceOver": true,
   "scenes": [
     {
         "id": "start_honor",

@@ -3,12 +3,14 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Typography } from '@/components/ui/Typography'; // Import Typography
 import MenuButton from '@/components/ui/MenuButton'; // Import MenuButton
+import { Volume2 } from 'lucide-react'; // Import the icon
 
 // Interface for the adventure data fetched from the API
 interface AdventureInfo {
     id: string;
     title: string;
     description: string;
+    voiceOver?: boolean; // Add the voiceOver flag
 }
 
 // Video paths from MainMenu/MiniGamesHub - Keep this part
@@ -129,7 +131,8 @@ export default function AdventureListPage() {
               <MenuButton
                 key={adventure.id}
                 variant="dark" // Use the dark variant
-                title={adventure.title}
+                title={adventure.title} // Pass title as string
+                titlePrefix={adventure.voiceOver ? <Volume2 className="w-4 h-4 text-blue-300" /> : undefined} // Pass icon to prefix prop
                 description={adventure.description || 'לחץ כאן כדי להתחיל...'} // Use description or fallback
                 href={`/adventure/${adventure.id}`}
                 className="min-h-[8rem]" // Keep height adjustment

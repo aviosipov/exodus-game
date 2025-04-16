@@ -50,6 +50,7 @@ export default function DocClientLayout({
   const [serializedSource, setSerializedSource] = useState<MDXRemoteSerializeResult | null>(null);
   const [isSerializing, setIsSerializing] = useState(true);
   const [serializeError, setSerializeError] = useState<string | null>(null);
+  const [selectedBgImage, setSelectedBgImage] = useState<string | null>(null); // State for background image
 
   // State for document search flow
   const [isSearchingDocs, setIsSearchingDocs] = useState(false);
@@ -178,6 +179,12 @@ export default function DocClientLayout({
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams, characterData, isCharLoading]);
 
+  // Effect to select background image only on client mount
+  useEffect(() => {
+    const randomBgIndex = Math.floor(Math.random() * backgroundImages.length);
+    setSelectedBgImage(backgroundImages[randomBgIndex]);
+  }, [backgroundImages]); // Re-run if backgroundImages prop changes (though unlikely here)
+
   // Function to handle the first message logic
   const handleBeforeSendMessage = async (messageContent: string): Promise<boolean> => {
     // Reset search hints if a new search is starting
@@ -246,19 +253,18 @@ export default function DocClientLayout({
   const containerVariant = 'bright';
   const proseClasses = containerVariant === 'bright' ? 'prose' : 'prose prose-invert';
 
-  // Select background image
-  const randomBgIndex = Math.floor(Math.random() * backgroundImages.length);
-  const selectedBgImage = backgroundImages[randomBgIndex];
+  // Background style object - only apply image when state is set
+  const backgroundStyle = selectedBgImage ? {
+    backgroundImage: `url(${selectedBgImage})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundAttachment: 'fixed',
+  } : {}; // Empty object if no image selected yet
 
   return (
     <div
       className="relative flex flex-col items-center justify-center min-h-screen p-4 md:p-8 isolate"
-      style={{
-        backgroundImage: `url(${selectedBgImage})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed',
-      }}
+      style={backgroundStyle} // Apply the conditional style
     >
       {/* Dark Overlay */}
       <div className="absolute inset-0 w-full h-full bg-black/60 -z-10"></div>

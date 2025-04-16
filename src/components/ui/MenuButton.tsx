@@ -9,6 +9,7 @@ import { type VariantProps } from 'class-variance-authority'; // Import VariantP
 interface MenuButtonProps extends Omit<SimpleButtonProps, 'children' | 'variant'>,
                                    VariantProps<typeof buttonVariants> { // Add variant prop
   title: string;
+  titlePrefix?: React.ReactNode; // Optional prefix element (e.g., icon)
   description: string;
   href?: string; // Optional href for linking
   className?: string;
@@ -19,6 +20,7 @@ interface MenuButtonProps extends Omit<SimpleButtonProps, 'children' | 'variant'
 
 const MenuButton: React.FC<MenuButtonProps> = ({
   title,
+  titlePrefix, // Destructure the new prop
   description,
   href,
   variant, // Destructure variant
@@ -37,8 +39,9 @@ const MenuButton: React.FC<MenuButtonProps> = ({
     >
       {/* Main content wrapper */}
       <div>
-        <Typography variant="h3" className={cn("mb-1", titleClassName)}>
-          {title}
+        <Typography variant="h3" className={cn("mb-1 flex items-center", titleClassName)}> {/* Use flex for alignment */}
+          {titlePrefix} {/* Render the prefix */}
+          <span className={titlePrefix ? 'mr-2' : ''}>{title}</span> {/* Add margin if prefix exists */}
         </Typography>
         {/* Conditionally set description color based on variant */}
       <Typography
@@ -76,8 +79,9 @@ const MenuButton: React.FC<MenuButtonProps> = ({
        >
          {/* Main content wrapper (Title and Description only) */}
         <div>
-          <Typography variant="h3" className={cn("mb-1", titleClassName)}>
-            {title}
+          <Typography variant="h3" className={cn("mb-1 flex items-center", titleClassName)}> {/* Use flex for alignment */}
+             {titlePrefix} {/* Render the prefix */}
+             <span className={titlePrefix ? 'mr-2' : ''}>{title}</span> {/* Add margin if prefix exists */}
           </Typography>
           <Typography
             variant="body2"

@@ -1,5 +1,6 @@
 import React from "react";
 import type { MDXComponents } from "mdx/types";
+import { Volume2 } from 'lucide-react'; // Import the icon
 // Removed Checkbox import as it's not available/needed here
 
 // This file allows you to provide custom React components
@@ -78,4 +79,6 @@ export const mdxComponents: MDXComponents = {
       {children}
     </pre>
   ),
+  // Add custom components that can be used in MDX
+  Volume2: (props) => <Volume2 {...props} />, // Make Volume2 available
 };

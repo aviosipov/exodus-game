@@ -6,6 +6,7 @@ interface AdventureInfo {
     id: string;
     title: string;
     description: string;
+    voiceOver?: boolean; // Add optional voiceOver flag
 }
 
 export async function GET() {
@@ -33,6 +34,7 @@ export async function GET() {
                     id: adventureId,
                     title: jsonData.title,
                     description: jsonData.description,
+                    voiceOver: jsonData.voiceOver === true // Explicitly check for true
                 });
             } else {
                 console.warn(`File ${file} is missing title or description.`);
