@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react"; // Added useRef
+import { useRouter, useSearchParams } from 'next/navigation'; // Added router hooks
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from 'next-mdx-remote/serialize'; // Import serialize
 import remarkGfm from "remark-gfm"; // Import remarkGfm
@@ -11,8 +12,7 @@ import { visit } from 'unist-util-visit'; // Import visit for tree traversal
 import { mdxComponents } from "@/mdx-components";
 import Container from "@/components/ui/Container";
 import { CopyButton } from "@/components/ui/CopyButton";
-import { ChatInterface, Character } from "@/components/chat/ChatInterface";
-// Removed unused PrettyCodeOptions and Element types
+import { ChatInterface, Character, ChatInterfaceHandle } from "@/components/chat/ChatInterface"; // Import ChatInterfaceHandle
 
 // Define interface for expected frontmatter (can be reused or imported)
 interface DocFrontmatter {
@@ -50,6 +50,17 @@ export default function DocClientLayout({
   const [serializedSource, setSerializedSource] = useState<MDXRemoteSerializeResult | null>(null);
   const [isSerializing, setIsSerializing] = useState(true);
   const [serializeError, setSerializeError] = useState<string | null>(null);
+
+  // State for document search flow
+  const [isSearchingDocs, setIsSearchingDocs] = useState(false);
+  const [foundDocName, setFoundDocName] = useState<string | null>(null);
+  const [searchError, setSearchError] = useState<string | null>(null);
+  const [hasSearched, setHasSearched] = useState(false); // Track if search has run
+
+  // Router and Search Params
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const chatRef = useRef<ChatInterfaceHandle>(null); // Ref for ChatInterface
 
   // Fetch character data on component mount
   useEffect(() => {
@@ -147,6 +158,89 @@ export default function DocClientLayout({
     serializeMdx();
   }, [rawSource]); // Re-run if rawSource changes
 
+  // Effect to handle initial query after navigation, ensuring character is loaded
+  useEffect(() => {
+    const initialQuery = searchParams.get('initialQuery');
+    // Only proceed if we have an initial query, the chat ref, AND character data is loaded
+    if (initialQuery && chatRef.current && characterData && !isCharLoading) {
+      console.log("Initial query found and character loaded, sending to chat:", initialQuery);
+      // Use timeout to ensure chat UI is fully settled after state updates
+      setTimeout(() => {
+         if (chatRef.current) {
+            chatRef.current.sendMessage(initialQuery);
+            // Clean the URL - replace state to avoid adding to history
+            const currentPath = window.location.pathname; // Get current path without query params
+            router.replace(currentPath, { scroll: false }); // Use replace to remove query param
+         }
+      }, 100); // Keep small delay for UI updates
+    }
+    // Depend on searchParams AND characterData/isCharLoading to ensure readiness
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams, characterData, isCharLoading]);
+
+  // Function to handle the first message logic
+  const handleBeforeSendMessage = async (messageContent: string): Promise<boolean> => {
+    // Reset search hints if a new search is starting
+    setFoundDocName(null);
+    setSearchError(null);
+
+    if (hasSearched) {
+      return true; // Allow subsequent messages without searching again
+    }
+
+    setHasSearched(true); // Mark search as attempted for this session
+    setIsSearchingDocs(true);
+
+    try {
+      // 1. Get list of docs
+      const listRes = await fetch('/api/docs/list');
+      if (!listRes.ok) {
+        throw new Error(`Failed to fetch doc list: ${listRes.statusText}`);
+      }
+      const documents = await listRes.json();
+
+      // 2. Find relevant doc
+      const findRes = await fetch('/api/docs/find-relevant', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ query: messageContent, documents }),
+      });
+      if (!findRes.ok) {
+        const errorBody = await findRes.json().catch(() => ({ error: findRes.statusText }));
+        throw new Error(`Failed to find relevant doc: ${errorBody.error || findRes.statusText}`);
+      }
+      const { filename } = await findRes.json();
+
+      setIsSearchingDocs(false);
+
+      if (filename && typeof filename === 'string') {
+        setFoundDocName(filename);
+        const slug = filename.replace(/\.mdx?$/, "");
+        // Navigate with the original query
+        router.push(`/docs/${slug}?initialQuery=${encodeURIComponent(messageContent)}`);
+        return false; // Prevent current chat from processing this message
+      } else {
+        // No relevant doc found, proceed with current chat
+        return true;
+      }
+    } catch (error) {
+      console.error("Error during doc search:", error);
+      setSearchError(error instanceof Error ? error.message : "An unknown error occurred during search.");
+      setIsSearchingDocs(false);
+      return true; // Allow chat to proceed on error
+    }
+  };
+
+  // Function to reset search state when chat is cleared
+  const handleChatCleared = () => {
+    console.log("Chat cleared, resetting hasSearched state.");
+    setHasSearched(false); // Reset the flag
+    // Clear any lingering search hints
+    setIsSearchingDocs(false);
+    setFoundDocName(null);
+    setSearchError(null);
+  };
+
   // Determine text direction and container variant based on props
   const textDirection = frontmatter.lang === 'he' ? 'rtl' : 'ltr';
   const containerVariant = 'bright';
@@ -212,14 +306,25 @@ export default function DocClientLayout({
                {charError}
              </Container>
            ) : characterData ? (
-             <ChatInterface
-               character={characterData}
-               showStarters={true}
-               className="flex-grow"
-               height="h-full"
-               dir="rtl"
-               initialContext={rawSource}
-             />
+             <>
+               {/* UI Hints Area */}
+               <div className="text-center text-sm text-gray-400 mb-2 h-6">
+                 {isSearchingDocs && <span>בודק את התיעוד שלנו...</span>}
+                 {foundDocName && <span>מצאתי את המסמך הרלוונטי: {foundDocName}. מנווט לשם...</span>}
+                 {searchError && <span className="text-red-400">שגיאה בחיפוש: {searchError}</span>}
+               </div>
+               <ChatInterface
+                 ref={chatRef} // Add ref
+                 character={characterData}
+                 showStarters={true}
+                 onBeforeSendMessage={handleBeforeSendMessage} // Add message interceptor
+                 onChatCleared={handleChatCleared} // Pass the clear handler
+                 className="flex-grow"
+                 height="h-[calc(100%-2rem)]" // Adjust height for hints
+                 dir="rtl"
+                 initialContext={rawSource}
+               />
+             </>
            ) : (
              <Container variant="default" className="h-full flex items-center justify-center">
                Chat unavailable. Character data could not be loaded.

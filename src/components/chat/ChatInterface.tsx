@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef, FormEvent, KeyboardEvent, ReactNode } from "react";
+import React, { useState, useEffect, useRef, FormEvent, KeyboardEvent, ReactNode, forwardRef, useImperativeHandle } from "react"; // Added forwardRef, useImperativeHandle
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { Trash2 } from 'lucide-react';
@@ -39,9 +39,17 @@ interface ChatInterfaceProps {
     height?: string;
     dir?: 'ltr' | 'rtl';
     initialContext?: string;
+    onBeforeSendMessage?: (messageContent: string) => Promise<boolean>;
+    onChatCleared?: () => void; // Add the new prop type
 }
 
-export const ChatInterface: React.FC<ChatInterfaceProps> = ({
+// Define the handle type that will be exposed via the ref
+export interface ChatInterfaceHandle {
+  sendMessage: (message: string) => void;
+}
+
+// Wrap the component with forwardRef
+export const ChatInterface = forwardRef<ChatInterfaceHandle, ChatInterfaceProps>(({
     character,
     initialMessages = [],
     showStarters = true,
@@ -49,8 +57,10 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
     onMessagesUpdate,
     height = "h-full",
     dir = 'ltr',
-    initialContext
-}) => {
+    initialContext,
+    onBeforeSendMessage,
+    onChatCleared // Destructure the new prop
+}, ref) => { // Add ref parameter
     const [messages, setMessages] = useState<Message[]>(initialMessages);
     const [input, setInput] = useState<string>("");
     const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -94,18 +104,29 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
         return lastAssistantMessage?.response_id || null;
     };
 
-    // Send Message Function
-    const sendMessage = async (messageContent: string) => {
+    // Send Message Function (internal logic)
+    const internalSendMessage = async (messageContent: string) => {
         if (!messageContent.trim() || isLoading || !character) return;
+
+        // Call the interceptor if provided
+        if (onBeforeSendMessage) {
+            const shouldProceed = await onBeforeSendMessage(messageContent);
+            if (!shouldProceed) {
+                setInput(""); // Clear input even if message is intercepted
+                return; // Stop processing if interceptor returns false
+            }
+        }
+
         const newUserMessage: Message = { id: generateId(), role: 'user', content: messageContent };
         setMessages(prev => [...prev, newUserMessage]);
+        setInput(""); // Clear input after adding user message
         setIsLoading(true);
         setError(null);
         const lastAssistantId = getLastAssistantResponseId();
-        const isFirstMessage = messages.length === 0;
-        const messagesToSend = [...messages, newUserMessage];
+        const isFirstMessage = messages.length === 0; // Check before adding the new user message
+        const messagesToSend = [...messages, newUserMessage]; // Include the new message for context
         const requestBody = {
-            messages: messagesToSend,
+            messages: messagesToSend, // Send history including the new user message
             body: {
                 characterId: character.id,
                 previous_response_id: lastAssistantId,
@@ -142,23 +163,34 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
         }
     };
 
+    // Expose sendMessage via ref
+    useImperativeHandle(ref, () => ({
+        sendMessage: (message: string) => {
+            internalSendMessage(message);
+        }
+    }));
+
     // Form Submission Handler
     const handleFormSubmit = async (event?: FormEvent<HTMLFormElement>) => {
         if (event) event.preventDefault();
         if (!input.trim()) return;
-        sendMessage(input);
-        setInput("");
+        internalSendMessage(input); // Use internal function
+        // Input is cleared within internalSendMessage now
     };
 
     // Starter Click Handler
     const handleStarterClick = (starterText: string) => {
-        sendMessage(starterText);
+        internalSendMessage(starterText); // Use internal function
     };
 
     // Clear Chat Handler
     const handleClearChat = () => {
         setMessages([]);
         setError(null);
+        // Call the callback prop if it exists
+        if (onChatCleared) {
+            onChatCleared();
+        }
     };
 
     // Key Press Handler
@@ -307,4 +339,7 @@ export const ChatInterface: React.FC<ChatInterfaceProps> = ({
             </form>
         </Container>
     );
-};
+});
+
+// Add display name for debugging
+ChatInterface.displayName = 'ChatInterface';
