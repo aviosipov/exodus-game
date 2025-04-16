@@ -1,141 +1,147 @@
-# Space Invaders: Guarding Hope - Game Documentation
+---
+title: תיעוד משחק - פולשים מהחלל שמירה על התקווה
+description: תיעוד טכני לגרסת Space Invaders המותאמת למשחק יציאת מצרים
+lang: he
+---
 
-## Overview
-This themed Space Invaders variant combines classic arcade mechanics with meaningful Hebrew vocabulary. Players defend against descending \"negative\" concepts while collecting \"positive\" ones, aligned with the theme of maintaining hope (\"שמירה על התקווה\"). Built with React/TypeScript and Canvas API.
+# תיעוד משחק - פולשים מהחלל: שמירה על התקווה
 
-## File Structure
+## סקירה כללית
+גרסה מותאמת זו של Space Invaders משלבת מכניקת ארקייד קלאסית עם אוצר מילים עברי משמעותי. שחקנים מגנים מפני מושגים "שליליים" יורדים תוך איסוף מושגים "חיוביים", בהתאם לנושא של שמירה על התקווה. נבנה באמצעות React/TypeScript ו-Canvas API.
+
+## מבנה קבצים
 
 ### `page.tsx`
 ```typescript
-// Example page component
+// קומפוננטת עמוד לדוגמה
 ```
-- **Purpose**: Entry point that renders game component
-- **Key Features**:
-  - Sets up responsive container layout
-  - Displays game title above canvas
+- **מטרה**: נקודת כניסה המרנדרת את קומפוננטת המשחק
+- **תכונות מרכזיות**:
+  - מגדירה פריסת מיכל רספונסיבית
+  - מציגה את כותרת המשחק מעל הקנבס
 
 ### `SpaceInvadersGame.tsx`
 ```typescript
-// Core game component example
+// קומפוננטת משחק מרכזית לדוגמה
 ```
-- **Purpose**: Manages game loop, input, and rendering
-- **Key Features**:
-  - Uses React hooks (\`useState\`, \`useRef\`) for game state
-  - Implements keyboard input handling
-  - Coordinates game loop with \`requestAnimationFrame\`
-  - Handles canvas rendering lifecycle
+- **מטרה**: מנהלת את לולאת המשחק, הקלט והרינדור
+- **תכונות מרכזיות**:
+  - משתמשת ב-hooks של React (`useState`, `useRef`) לניהול מצב המשחק
+  - מממשת טיפול בקלט מקלדת
+  - מתאמת את לולאת המשחק עם `requestAnimationFrame`
+  - מטפלת במחזור החיים של רינדור הקנבס
 
 ### `config.ts`
 ```typescript
 export const CANVAS_WIDTH = 800;
 ```
-- **Purpose**: Central configuration store
-- **Key Sections**:
-  - Canvas dimensions and styling
-  - Player/Enemy visual parameters
-  - Game balance settings (scoring, speeds)
-  - Localized UI text (Hebrew/English)
+- **מטרה**: מאגר תצורה מרכזי
+- **חלקים מרכזיים**:
+  - מידות ועיצוב הקנבס
+  - פרמטרים ויזואליים של שחקן/אויב
+  - הגדרות איזון משחק (ניקוד, מהירויות)
+  - טקסט ממשק משתמש מתורגם (עברית/אנגלית)
 
 ### `gameLogic.ts`
 ```typescript
-function collides(rect1, rect2) { /* collision logic */ }
+function collides(rect1, rect2) { /* לוגיקת התנגשות */ }
 ```
-- **Purpose**: Core game rules and state management
-- **Key Systems**:
-  - Collision detection (Axis-Aligned Bounding Box)
-  - Score/lives calculation
-  - Enemy spawning logic
-  - Game over conditions
+- **מטרה**: חוקי משחק מרכזיים וניהול מצב
+- **מערכות מרכזיות**:
+  - זיהוי התנגשויות (Axis-Aligned Bounding Box)
+  - חישוב ניקוד/חיים
+  - לוגיקת יצירת אויבים
+  - תנאי סיום משחק
 
-### Class Files (player.ts, bullet.ts, enemy.ts)
-{/* Removed problematic code block example due to persistent MDX parsing errors */}
-- **Purpose**: Object-oriented entity management
-- **Key Patterns**:
-  - Separation of state (properties) and behavior (methods)
-  - \`update()\` for position calculations
-  - \`draw()\` for canvas rendering
+### קבצי מחלקות (player.ts, bullet.ts, enemy.ts)
+{/* קטע קוד לדוגמה הוסר עקב שגיאות ניתוח MDX חוזרות */}
+- **מטרה**: ניהול ישויות מונחה עצמים
+- **תבניות מרכזיות**:
+  - הפרדת מצב (מאפיינים) והתנהגות (מתודות)
+  - `update()` לחישובי מיקום
+  - `draw()` לרינדור על הקנבס
 
-## Key Concepts
+## מושגים מרכזיים
 
-### Game Loop Architecture
-{/* Code block removed due to MDX parsing issues */}
-- **Implementation**:
-  1. Input processing
-  2. State update via \`updateGameLogic\`
-  3. Canvas redraw
-  4. Repeat with \`requestAnimationFrame\`
+### ארכיטקטורת לולאת המשחק
+{/* קטע קוד הוסר עקב בעיות פוטנציאליות בניתוח MDX */}
+- **מימוש**:
+  1. עיבוד קלט
+  2. עדכון מצב באמצעות `updateGameLogic`
+  3. ציור מחדש של הקנבס
+  4. חזרה באמצעות `requestAnimationFrame`
 
-- **Optimizations**:
-  - Uses \`useRef\` for input state to avoid render dependencies
-  - Batches state updates with React's setState
+- **אופטימיזציות**:
+  - שימוש ב-`useRef` למצב קלט כדי למנוע תלויות רינדור
+  - אצווה (batching) של עדכוני מצב עם setState של React
 
-### State Management
-{/* Code block removed due to MDX parsing issues */}
-- **Strategy**:
-  - Single source of truth in React state
-  - Immutable updates via spread operator
-  - Derived state calculated each frame
+### ניהול מצב
+{/* קטע קוד הוסר עקב בעיות פוטנציאליות בניתוח MDX */}
+- **אסטרטגיה**:
+  - מקור אמת יחיד במצב React
+  - עדכונים בלתי משתנים (immutable) באמצעות אופרטור הפיזור (spread operator)
+  - מצב נגזר מחושב בכל פריים
 
-### Rendering Pipeline
-{/* Code block removed due to MDX parsing issues */}
-- **Process**:
-  1. Clear canvas with background color
-  2. Draw player, bullets, and boxes
-  3. Render UI overlays (score, lives)
-  4. Handle game over screen
+### צינור הרינדור (Rendering Pipeline)
+{/* קטע קוד הוסר עקב בעיות פוטנציאליות בניתוח MDX */}
+- **תהליך**:
+  1. ניקוי הקנבס עם צבע רקע
+  2. ציור שחקן, קליעים ותיבות
+  3. רינדור שכבות ממשק משתמש (ניקוד, חיים)
+  4. טיפול במסך סיום משחק
 
-### Input Handling
-{/* Code block removed due to MDX parsing issues */}
-- **Mechanics**:
-  - Keyboard event listeners
-  - State stored in \`useRef\` for frame-accurate access
-  - Prevent default spacebar behavior
+### טיפול בקלט
+{/* קטע קוד הוסר עקב בעיות פוטנציאליות בניתוח MDX */}
+- **מכניקה**:
+  - מאזיני אירועי מקלדת
+  - מצב מאוחסן ב-`useRef` לגישה מדויקת לפריים
+  - מניעת התנהגות ברירת מחדל של מקש הרווח
 
-### Collision System
-{/* Code block removed due to MDX parsing issues */}
-- **Detection Types**:
-  1. Bullet vs Box
-  2. Player vs Box
-  3. Screen edge checks
+### מערכת התנגשויות
+{/* קטע קוד הוסר עקב בעיות פוטנציאליות בניתוח MDX */}
+- **סוגי זיהוי**:
+  1. קליע מול תיבה
+  2. שחקן מול תיבה
+  3. בדיקות קצה מסך
 
-### Entity Classes
-**Player**:
-- Movement constrained to canvas bounds
-- Shooting cooldown system
-- Lives management
+### מחלקות ישויות
+**שחקן (Player)**:
+- תנועה מוגבלת לגבולות הקנבס
+- מערכת השהיית ירי (cooldown)
+- ניהול חיים
 
-**Bullet**:
-- Time-to-live (TTL) system (Note: TTL logic seems removed in provided code, relies on off-screen check)
-- Vertical movement only
-- Pool management (active/inactive)
+**קליע (Bullet)**:
+- מערכת זמן חיים (TTL) (הערה: נראה שהלוגיקה של TTL הוסרה בקוד שסופק, מסתמך על בדיקת יציאה מהמסך)
+- תנועה אנכית בלבד
+- ניהול מאגר (פעיל/לא פעיל)
 
-**Box (Enemy)**:
-- Random spawning with type ratios
-- Themed word display
-- Differential scoring by type
+**תיבה (Box/Enemy)**:
+- יצירה אקראית עם יחסי סוגים
+- הצגת מילה מותאמת לנושא
+- ניקוד דיפרנציאלי לפי סוג
 
-## Configuration Guide
+## מדריך תצורה
 ```typescript
-// Difficulty Tuning
-export const BOX_SPAWN_RATE = 120; // Lower = more frequent
-export const POSITIVE_BOX_RATIO = 0.35; // 35% positive boxes
+// כוונון קושי
+export const BOX_SPAWN_RATE = 120; // נמוך יותר = תדירות גבוהה יותר
+export const POSITIVE_BOX_RATIO = 0.35; // 35% תיבות חיוביות
 
-// Visual Customization
+// התאמה אישית ויזואלית
 export const POSITIVE_BOX_COLOR = '#2ecc71';
 export const NEGATIVE_WORDS = ['עבודת פרך', 'שעבוד'];
 ```
-**Common Adjustments**:
-- \`BOX_DESCENT_SPEED\`: Increase for harder difficulty
-- \`SCORE_PENALTY_HIT_POSITIVE\`: Balance risk/reward
-- \`POSITIVE_WORDS\`: Add new vocabulary terms
+**התאמות נפוצות**:
+- `BOX_DESCENT_SPEED`: הגדלה לקושי גבוה יותר
+- `SCORE_PENALTY_HIT_POSITIVE`: איזון סיכון/תגמול
+- `POSITIVE_WORDS`: הוספת מונחי אוצר מילים חדשים
 
-## Extension Ideas
-1. **Power-Up System**: Add temporary shields/speed boosts
-2. **Wave System**: Progressive difficulty levels
-3. **Audio Feedback**: Sound effects for hits/misses
-4. **Local Storage**: High score persistence
-5. **Mobile Support**: Touch input handling
+## רעיונות להרחבה
+1. **מערכת Power-Ups**: הוספת מגנים/הגברות מהירות זמניים
+2. **מערכת גלים**: רמות קושי מתקדמות
+3. **משוב שמע**: אפקטים קוליים לפגיעות/החמצות
+4. **אחסון מקומי**: שמירת שיאים
+5. **תמיכה במובייל**: טיפול בקלט מגע
 
-{/* Code block removed due to MDX parsing issues */}
+{/* קטע קוד הוסר עקב בעיות פוטנציאליות בניתוח MDX */}
 
-This architecture demonstrates modern React patterns combined with classic game development techniques. The separation of concerns between React components and game logic makes it maintainable while keeping performance-sensitive operations in the canvas rendering loop.
+ארכיטקטורה זו מדגימה תבניות React מודרניות בשילוב עם טכניקות פיתוח משחקים קלאסיות. הפרדת התחומיות בין קומפוננטות React ללוגיקת המשחק הופכת אותו קל לתחזוקה תוך שמירה על פעולות רגישות לביצועים בלולאת רינדור הקנבס.

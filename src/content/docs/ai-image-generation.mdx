@@ -1,0 +1,134 @@
+---
+title: מדריך יצירת תמונות באמצעות AI
+description: הסבר על התהליך ששימש ליצירת תמונות רקע ודמויות למשחק "יציאת מצרים" באמצעות Replicate ושרת mcp-replicate
+lang: he
+---
+
+# מדריך: יצירת נכסי תמונה למשחק "יציאת מצרים"
+
+מדריך זה מתאר את התהליך ששימש ליצירת תמונות רקע ודמויות למשחק "יציאת מצרים" באמצעות פלטפורמת Replicate AI דרך שרת ה-MCP `mcp-replicate`.
+
+## דרישות קדם
+
+1.  **שרת `mcp-replicate` מותקן**: ודאו ששרת `mcp-replicate` מותקן גלובלית (`npm install -g mcp-replicate`) ומוגדר בהגדרות לקוח ה-MCP שלכם (למשל, Cline, Claude Desktop) עם טוקן ה-API שלכם מ-Replicate. ראו שלבי התקנה למטה במידת הצורך.
+2.  **לקוח MCP**: לקוח MCP (כמו Cline) המסוגל לתקשר עם השרת.
+
+## התקנה (אם טרם בוצעה)
+
+1.  **התקנת Node.js**: ודאו ש-Node.js מותקן אצלכם.
+2.  **התקנת שרת MCP**:
+    ```bash
+    npm install -g mcp-replicate
+    ```
+3.  **הגדרת לקוח MCP**: הוסיפו את השרת לקובץ התצורה של הלקוח שלכם (למשל, `cline_mcp_settings.json`), וספקו את טוקן ה-API שלכם מ-Replicate:
+    ```json
+    {
+      "mcpServers": {
+        "mcp-replicate": {
+          "command": "mcp-replicate",
+          "env": {
+            "REPLICATE_API_TOKEN": "YOUR_REPLICATE_API_TOKEN_HERE"
+          },
+          "disabled": false,
+          "autoApprove": []
+        }
+        // ... שרתים אחרים
+      }
+    }
+    ```
+
+## תהליך יצירת התמונה
+
+אנו משתמשים בכלי `create_prediction` ו-`get_prediction` של שרת `mcp-replicate`.
+
+### 1. יצירת התמונה הבסיסית
+
+*   **מודל**: `black-forest-labs/flux-1.1-pro`
+*   **כלי**: `create_prediction`
+
+**דוגמה (תמונת רקע):**
+
+```json
+// ארגומנטים לכלי create_prediction
+{
+  "model": "black-forest-labs/flux-1.1-pro",
+  "input": {
+    "prompt": "Panoramic view of the fertile Nile delta in ancient Egypt during a time of prosperity. Shows a mix of grand Hebrew estates and Egyptian dwellings, lush fields, livestock grazing. Egyptians and Hebrews interact respectfully in daily activities. The overall mood is peaceful and prosperous, under a clear blue sky with the sun shining. Style: Epic historical landscape painting.",
+    "aspect_ratio": "16:9" // או יחס גובה-רוחב רצוי אחר כמו "9:16" לפורטרטים
+  }
+}
+```
+
+*   **הנדסת פרומפטים (Prompt Engineering)**: נסחו פרומפט מפורט המתאר את הסצנה, הדמויות, האווירה והסגנון הרצוי.
+*   **יחס גובה-רוחב (Aspect Ratio)**: ציינו את יחס הגובה-רוחב הרצוי (למשל, "16:9" לרקעים, "9:16" לפורטרטים של דמויות).
+
+### 2. בדיקת סטטוס החיזוי (Prediction)
+
+*   הכלי `create_prediction` מחזיר מזהה חיזוי (prediction ID).
+*   השתמשו בכלי `get_prediction` שוב ושוב עם המזהה עד שהשדה `status` יהיה `succeeded`.
+
+**דוגמה:**
+
+```json
+// ארגומנטים לכלי get_prediction
+{
+  "prediction_id": "PREDICTION_ID_FROM_STEP_1"
+}
+```
+
+*   התוצאה תכיל את כתובת ה-URL של התמונה שנוצרה בשדה `output`.
+
+### 3. הסרת רקע (אופציונלי - לדמויות/אובייקטים)
+
+*   **מודל**: `lucataco/remove-bg` (גרסה: `95fcc2a26d3899cd6c2691c900465aaeff466285a65c14638cc5f36f34befaf1`)
+*   **כלי**: `create_prediction`
+
+**דוגמה (הסרת רקע מאווטאר של דמות):**
+
+```json
+// ארגומנטים לכלי create_prediction
+{
+  "version": "95fcc2a26d3899cd6c2691c900465aaeff466285a65c14638cc5f36f34befaf1",
+  "input": {
+    "image": "URL_OF_IMAGE_FROM_STEP_2" // השתמשו בכתובת ה-URL מהפלט של שלב יצירת התמונה
+  }
+}
+```
+
+*   בדקו את הסטטוס באמצעות `get_prediction` כמו בשלב 2. כתובת ה-URL בפלט תצביע על התמונה עם הרקע שהוסר (בדרך כלל קובץ PNG עם שקיפות).
+
+### 4. הורדת התמונה
+
+*   השתמשו בכלי שורת פקודה כמו `curl` כדי להוריד את כתובת ה-URL הסופית של התמונה שהתקבלה משלב 2 או שלב 3.
+
+**דוגמה:**
+
+```bash
+# צור תיקייה אם אינה קיימת
+mkdir -p public/images
+
+# הורד את התמונה (החלף URL ושם קובץ)
+curl -o public/images/your_image_name.webp "IMAGE_URL_HERE"
+# או עבור PNG:
+curl -o public/images/your_image_name.png "IMAGE_URL_HERE"
+
+```
+
+### 5. מיקום ושימוש בתמונה
+
+*   מקמו את התמונות שהורדתם בתיקייה `public/images/` בפרויקט ה-Next.js.
+*   התייחסו אליהן בקומפוננטות שלכם באמצעות נתיבים יחסיים מהשורש (לדוגמה, `src="/images/your_image_name.png"`).
+
+## סיכום הנכסים שנוצרו
+
+*   **רקע**: `public/images/ancient_egypt_prosperity_bg.webp`
+    *   נוצר באמצעות `black-forest-labs/flux-1.1-pro` עם יחס 16:9.
+*   **אווטאר דמות (אוהד)**: `public/images/ohad_avatar_nobg.png`
+    *   נוצר באמצעות `black-forest-labs/flux-1.1-pro` עם יחס 9:16.
+    *   הרקע הוסר באמצעות `lucataco/remove-bg`.
+*   **אווטאר דמות (אוזיריס)**: `public/images/oziris_avatar_nobg.png`
+    *   נוצר באמצעות `black-forest-labs/flux-1.1-pro` עם יחס 9:16.
+    *   הרקע הוסר באמצעות `lucataco/remove-bg`.
+*   **אווטאר דמות (יששכר)**: `public/images/yishachar_avatar_nobg.png`
+    *   נוצר באמצעות `black-forest-labs/flux-1.1-pro` עם יחס 9:16.
+    *   הרקע הוסר באמצעות `lucataco/remove-bg`.

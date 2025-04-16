@@ -155,18 +155,12 @@ const MainMenu: React.FC = () => {
           </Link>
           <span className="text-gray-400">|</span>
           <Link
-            href="/docs/content-editing"
+            href="/docs/index" // Link to the main docs index page
             className="hover:text-white cursor-pointer"
           >
-            <Typography variant="small" color="accent" className="text-amber-100">עריכת תוכן</Typography> {/* Keep specific color if needed */}
+            <Typography variant="small" color="accent" className="text-amber-100">מדריכים</Typography> {/* Changed text to "Guides" */}
           </Link>
-          <span className="text-gray-400">|</span>
-          <Link
-            href="/docs/dev-guide"
-            className="hover:text-white cursor-pointer"
-          >
-            <Typography variant="small" color="accent" className="text-amber-100">מדריכים למפתחים</Typography> {/* Keep specific color if needed */}
-          </Link>
+          {/* Removed the link to dev-guide as it's linked from the main docs page */}
         </Container> {/* Closing Secondary Actions Container */}
       </div> {/* Closing Content container */}
     </div> /* Closing Main Div */

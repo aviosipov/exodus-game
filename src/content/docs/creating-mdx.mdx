@@ -1,108 +1,105 @@
 ---
-title: Creating MDX Documentation Pages
-description: A guide on how to create and structure MDX files for this project's documentation.
+title: יצירת דפי תיעוד MDX
+description: מדריך כיצד ליצור ולבנות קבצי MDX עבור התיעוד של פרויקט זה.
+lang: he
 ---
 
-import { Steps } from '@astrojs/starlight/components';
+MDX מאפשר לכתוב מסמכי Markdown ולשלב בתוכם קומפוננטות JSX אינטראקטיביות. מדריך זה מסביר כיצד ליצור דפי תיעוד חדשים באמצעות MDX עבור פרויקט זה.
 
-MDX allows you to write Markdown documents and embed interactive JSX components within them. This guide explains how to create new documentation pages using MDX for this project.
+## מבנה קבצים
 
-## File Structure
+כל דפי התיעוד צריכים להימצא בתוך התיקייה `src/content/docs/`. ניתן לארגן דפים בתיקיות משנה לפי הצורך.
 
-All documentation pages should reside within the `src/content/docs/` directory. You can organize pages into subdirectories as needed.
+## מבנה בסיסי
 
-## Basic Structure
-
-An MDX file typically starts with **frontmatter**, followed by the main content written in Markdown.
+קובץ MDX מתחיל בדרך כלל עם **frontmatter**, ולאחריו התוכן הראשי שנכתב ב-Markdown.
 
 ### Frontmatter
 
-Frontmatter is written in YAML format between triple-dashed lines (`---`) at the very top of the file. It provides metadata about the page.
+Frontmatter נכתב בפורמט YAML בין קווים משולשים (`---`) בראש הקובץ. הוא מספק מטא-דאטה על הדף.
 
-Key frontmatter properties used in this project (based on Starlight defaults):
+מאפייני frontmatter מרכזיים המשמשים בפרויקט זה:
 
--   `title`: (Required) The main title of the page, displayed prominently.
--   `description`: (Optional) A brief description of the page content, often used for SEO and previews.
--   `editUrl`: (Optional) Set to `false` to disable the "Edit page" link if needed.
--   `sidebar`: (Optional) Customize sidebar behavior (e.g., `label`, `order`, `hidden`). See [Starlight Sidebar Docs](https://starlight.astro.build/guides/sidebar/) for details.
+-   `title`: (חובה) הכותרת הראשית של הדף, המוצגת באופן בולט.
+-   `description`: (אופציונלי) תיאור קצר של תוכן הדף, משמש לעתים קרובות ל-SEO ותצוגות מקדימות.
+-   `lang`: (מומלץ לדפים בעברית) הגדרת שפת הדף, למשל `he` לעברית, כדי לסייע בכיווניות (RTL).
+-   `sidebar`: (אופציונלי) התאמה אישית של התנהגות סרגל הצד (למשל, `label` לכותרת בתפריט, `order` לסדר).
 
-**Example Frontmatter:**
+**דוגמה ל-Frontmatter:**
 
 ```yaml
 ---
-title: My Awesome Documentation Page
-description: Learn all about the awesome features.
+title: דף התיעוד המדהים שלי
+description: למדו הכל על התכונות המדהימות.
+lang: he
 sidebar:
-  label: Awesome Features
+  label: תכונות מדהימות
   order: 3
 ---
 ```
 
-### Content
+### תוכן
 
-Below the frontmatter, write your content using standard Markdown syntax.
+מתחת ל-frontmatter, כתבו את התוכן שלכם באמצעות תחביר Markdown סטנדרטי.
 
 ```markdown
 ---
-title: Example Page
-description: This is an example MDX page.
+title: דף לדוגמה
+description: זהו דף MDX לדוגמה.
+lang: he
 ---
 
-# Heading 1
+# כותרת רמה 1
 
-This is standard Markdown text. You can use **bold**, *italic*, `code`, and [links](https://example.com).
+זהו טקסט Markdown סטנדרטי. ניתן להשתמש ב**הדגשה**, *כתב נטוי*, `קוד`, ו[קישורים](https://example.com).
 
-## Heading 2
+## כותרת רמה 2
 
-- Create lists
-- Like this one
+- צרו רשימות
+- כמו זו
 
-> Blockquotes are also supported.
+> ציטוטים נתמכים גם כן.
 
-Code blocks:
+בלוקים של קוד:
 ```javascript
 function greet() {
-  console.log('Hello from MDX!');
+  console.log('שלום מ-MDX!');
 }
 ```
 ```
 
-## Using Components
+## שימוש בקומפוננטות
 
-MDX shines when you embed interactive components written in frameworks like React, Vue, Svelte, or Astro.
+MDX מאפשר לשלב קומפוננטות אינטראקטיביות שנכתבו ב-React ישירות במסמך.
 
-<Steps>
-1.  **Import the Component:**
-    Use standard JavaScript/TypeScript import syntax at the top of your file (after frontmatter). See the code example below the steps for syntax.
+1.  **ייבוא הקומפוננטה:**
+    השתמשו בתחביר ייבוא סטנדרטי של JavaScript/TypeScript בראש הקובץ (אחרי ה-frontmatter).
 
-2.  **Use the Component:**
-    Embed the component using JSX syntax directly within your Markdown where needed. See the code example below the steps for syntax.
+2.  **שימוש בקומפוננטה:**
+    שלבו את הקומפוננטה באמצעות תחביר JSX ישירות בתוך ה-Markdown היכן שנדרש.
 
-</Steps>
+להלן דוגמאות המציגות את ה*קוד* לייבוא ושימוש בקומפוננטות בתוך MDX:
 
-Here are examples showing the *code* for importing and using components within MDX:
-
-**Importing:**
+**ייבוא:**
 ```jsx
-import MyComponent from '../../components/MyComponent.astro';
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import MyComponent from '../../components/MyComponent'; // ייבוא קומפוננטה מותאמת אישית
+// ייתכן שתרצו לייבא קומפוננטות UI מהפרויקט עצמו, למשל:
+// import { Button } from '@/components/ui/button';
 ```
 
-**Using:**
+**שימוש:**
 
 ```jsx
-<Card title="Important Note">
-  Remember to import components before using them!
-</Card>
-
-{/* Example of a custom component */}
+{/* דוגמה לקומפוננטה מותאמת אישית */}
 {/* <MyComponent prop1="value" /> */}
+
+{/* דוגמה לקומפוננטת UI מהפרויקט */}
+{/* <Button>לחץ כאן</Button> */}
 ```
 
-## Best Practices
+## שיטות עבודה מומלצות
 
--   Keep frontmatter concise and accurate.
--   Use semantic Markdown (correct heading levels, lists, etc.).
--   Organize content logically with clear headings.
--   Leverage Starlight's built-in components (`Card`, `CardGrid`, `Tabs`, `Aside`, etc.) for enhanced documentation formatting. Refer to the [Starlight Components Guide](https://starlight.astro.build/guides/components/).
--   If creating custom components, ensure they are well-documented and placed in an appropriate project directory (e.g., `src/components/`).
+-   שמרו על frontmatter תמציתי ומדויק.
+-   השתמשו ב-Markdown סמנטי (רמות כותרת נכונות, רשימות וכו').
+-   ארגנו את התוכן באופן הגיוני עם כותרות ברורות.
+-   אם אתם יוצרים קומפוננטות מותאמות אישית, ודאו שהן מתועדות היטב וממוקמות בתיקייה מתאימה בפרויקט (למשל, `src/components/`).

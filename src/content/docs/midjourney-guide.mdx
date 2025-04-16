@@ -1,47 +1,48 @@
 ---
-title: Midjourney Image Generation Guide
-description: Guidelines for creating consistent background images for the Exodus game adventures using Midjourney.
+title: מדריך ליצירת תמונות באמצעות Midjourney
+description: הנחיות ליצירת תמונות רקע עקביות להרפתקאות במשחק "יציאת מצרים" באמצעות Midjourney.
 sidebar:
-  label: Midjourney Guide
-  order: 4
+  label: מדריך Midjourney
+  order: 16 # Updated order based on index.mdx
+lang: he
 ---
 
 import { Card } from '@astrojs/starlight/components';
 
-This guide outlines the specific style and parameters to use when generating background images for the Exodus game adventures using Midjourney. Following these guidelines ensures visual consistency across the game.
+מדריך זה מתאר את הסגנון והפרמטרים הספציפיים שיש להשתמש בהם בעת יצירת תמונות רקע להרפתקאות במשחק "יציאת מצרים" באמצעות Midjourney. הקפדה על הנחיות אלו מבטיחה עקביות ויזואלית לאורך המשחק.
 
-## Core Style Parameters
+## פרמטרים מרכזיים לסגנון
 
-When generating images, please adhere to the following core parameters:
+בעת יצירת תמונות, אנא הקפידו על הפרמטרים המרכזיים הבאים:
 
--   **Style:** The primary style should be `Hand-drawn illustration`. This provides a consistent artistic feel.
--   **Aspect Ratio:** Always use `--ar 16:9`. This ensures the images fit the game's background display area correctly.
--   **View:** Aim for a `Panoramic view`. This gives a wide perspective suitable for background scenes.
+-   **סגנון (Style):** הסגנון העיקרי צריך להיות `Hand-drawn illustration` (איור מצויר ביד). זה מספק תחושה אמנותית עקבית.
+-   **יחס גובה-רוחב (Aspect Ratio):** השתמשו תמיד ב-`--ar 16:9`. זה מבטיח שהתמונות יתאימו כראוי לאזור תצוגת הרקע במשחק.
+-   **תצוגה (View):** כוונו ל-`Panoramic view` (תצוגה פנורמית). זה נותן פרספקטיבה רחבה המתאימה לסצנות רקע.
 
-## Prompt Content Guidelines
+## הנחיות לתוכן הפרומפטים
 
-Your prompts should clearly describe:
+הפרומפטים שלכם צריכים לתאר בבירור:
 
-1.  **Setting:** Where does the scene take place? (e.g., ancient Egyptian construction site, village street, Nile riverbank, Israelite camp).
-2.  **Atmosphere/Mood:** What is the feeling of the scene? (e.g., oppressive, chaotic, prosperous, somber, tense, hopeful, respite).
-3.  **Key Elements:** What important objects or figures should be visible? (e.g., Hebrew slaves working, frogs swarming, Egyptians looking horrified, piles of bricks, taskmasters overseeing).
-4.  **Time of Day/Lighting:** (If relevant) Is it day, evening, night? Is the sun harsh or setting? Is it dimly lit?
+1.  **מיקום (Setting):** היכן מתרחשת הסצנה? (למשל, אתר בנייה מצרי עתיק, רחוב בכפר, גדת הנילוס, מחנה בני ישראל).
+2.  **אווירה/מצב רוח (Atmosphere/Mood):** מהי התחושה של הסצנה? (למשל, מדכאת, כאוטית, משגשגת, קודרת, מתוחה, מלאת תקווה, הפוגה).
+3.  **אלמנטים מרכזיים (Key Elements):** אילו אובייקטים או דמויות חשובים צריכים להיראות? (למשל, עבדים עבריים עובדים, צפרדעים שורצות, מצרים מביטים באימה, ערימות לבנים, נוגשים משגיחים).
+4.  **שעה ביום/תאורה (Time of Day/Lighting):** (אם רלוונטי) האם זה יום, ערב, לילה? האם השמש קופחת או שוקעת? האם התאורה עמומה?
 
-**Example Prompt Structure:**
+**מבנה פרומפט לדוגמה:**
 
-Panoramic view of (Setting Description) showing (Key Elements). The atmosphere is (Atmosphere/Mood). Style: Hand-drawn illustration. --ar 16:9
+`Panoramic view of (תיאור המיקום) showing (אלמנטים מרכזיים). The atmosphere is (אווירה/מצב רוח). Style: Hand-drawn illustration. --ar 16:9`
 
-## Example Prompts (Based on Previous Adventures)
+## דוגמאות לפרומפטים (מבוסס על הרפתקאות קודמות)
 
--   **Changing Atmosphere:** `Panoramic view of ancient Egypt, perhaps showing subtle signs of change. Maybe slightly less vibrant than prosperity, or a view of the palace/city suggesting a new, sterner regime. The atmosphere hints at unease beneath the surface. Style: Hand-drawn illustration. --ar 16:9`
--   **Oppressive Construction:** `Panoramic view of the ancient Egyptian construction site, now clearly oppressive. Israelites are exhausted, working under harsh conditions (heat, dust). Taskmasters are actively overseeing with severity, perhaps using whips or showing clear authority. Atmosphere of dawning realization of servitude. Style: Hand-drawn illustration. --ar 16:9`
--   **Nile Blood Plague:** `Panoramic view of the Nile river turned into thick, viscous blood under a dramatic sky. Show Egyptians looking on in horror and disbelief from the banks, while Israelites might show a mix of shock and perhaps a glimmer of hope or awe. The scene should feel ominous and unnatural. Style: Hand-drawn illustration. --ar 16:9`
--   **Lush Wheat Fields:** `Panoramic view of lush golden ripe wheat fields in ancient Egypt. The atmosphere is one of abundance before the looting. Style: Hand-drawn illustration. --ar 16:9`
+-   **אווירה משתנה:** `Panoramic view of ancient Egypt, perhaps showing subtle signs of change. Maybe slightly less vibrant than prosperity, or a view of the palace/city suggesting a new, sterner regime. The atmosphere hints at unease beneath the surface. Style: Hand-drawn illustration. --ar 16:9`
+-   **בנייה מדכאת:** `Panoramic view of the ancient Egyptian construction site, now clearly oppressive. Israelites are exhausted, working under harsh conditions (heat, dust). Taskmasters are actively overseeing with severity, perhaps using whips or showing clear authority. Atmosphere of dawning realization of servitude. Style: Hand-drawn illustration. --ar 16:9`
+-   **מכת דם בנילוס:** `Panoramic view of the Nile river turned into thick, viscous blood under a dramatic sky. Show Egyptians looking on in horror and disbelief from the banks, while Israelites might show a mix of shock and perhaps a glimmer of hope or awe. The scene should feel ominous and unnatural. Style: Hand-drawn illustration. --ar 16:9`
+-   **שדות חיטה שופעים:** `Panoramic view of lush golden ripe wheat fields in ancient Egypt. The atmosphere is one of abundance before the looting. Style: Hand-drawn illustration. --ar 16:9`
 
-## Workflow
+## תהליך עבודה
 
-1.  Generate the required image(s) using Midjourney based on the prompts derived from the adventure scene descriptions and these guidelines.
-2.  Ensure the generated image file is placed in your `Downloads` folder.
-3.  Inform the AI assistant (Cline) that the image(s) are ready in the Downloads folder. The AI will then handle copying, renaming, and updating the relevant adventure JSON file.
+1.  צרו את התמונה/ות הנדרשות באמצעות Midjourney בהתבסס על הפרומפטים הנגזרים מתיאורי סצנות ההרפתקה ומהנחיות אלו.
+2.  ודאו שקובץ התמונה שנוצר ממוקם בתיקיית ה-`Downloads` שלכם.
+3.  ידעו את העוזר ה-AI (Cline) שהתמונה/ות מוכנות בתיקיית ה-Downloads. העוזר ה-AI יטפל בהעתקה, שינוי השם ועדכון קובץ ה-JSON הרלוונטי של ההרפתקה.
 
-*(Note: The AI uses a standard naming convention like `[scene_description]_1.png` within the appropriate `public/images/adventures/[adventure_name]/` directory.)*
+*(הערה: ה-AI משתמש במוסכמת שמות סטנדרטית כמו `[scene_description]_1.png` בתוך התיקייה המתאימה `public/images/adventures/[adventure_name]/`.)*

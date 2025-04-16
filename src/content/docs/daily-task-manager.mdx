@@ -1,112 +1,118 @@
-# Daily Task Manager Game Documentation
+---
+title: תיעוד משחק - מנהל משימות יומי
+description: תיעוד טכני למשחק הסימולציה לניהול משאבים "מנהל משימות יומי
+lang: he
+---
 
-## Overview
-A resource management simulation game where players assign tasks to workers while balancing individual needs and shared resources. Built with React/TypeScript using custom hooks for clean separation of concerns.
+# תיעוד משחק - מנהל משימות יומי
 
-## Key File Structure
+## סקירה כללית
+משחק סימולציה לניהול משאבים שבו שחקנים מקצים משימות לעובדים תוך איזון בין צרכים אישיים ומשאבים משותפים. נבנה באמצעות React/TypeScript תוך שימוש ב-hooks מותאמים אישית להפרדה ברורה של תחומי אחריות (separation of concerns).
+
+## מבנה קבצים מרכזי
 ```markdown
 src/components/mini-games/daily-task-manager/
-├── types.ts          # Core data structures and interfaces
-├── taskSets.ts       # Scenario definitions and preset configurations
-├── hooks/            # Custom hook implementations
-│   ├── useGameLogic.ts       # Main game flow controller
-│   ├── useWorkerManagement.ts # Worker state and task execution
-│   └── useGameTimer.ts       # Global timer system
-├── utils.tsx         # Helper functions and UI utilities
-└── WorkerTaskManagerGame.tsx # Main component & UI composition
+├── types.ts          # מבני נתונים וממשקים מרכזיים
+├── taskSets.ts       # הגדרות תרחישים ותצורות קבועות מראש
+├── hooks/            # מימושי hooks מותאמים אישית
+│   ├── useGameLogic.ts       # בקר זרימת המשחק הראשי
+│   ├── useWorkerManagement.ts # ניהול מצב עובדים וביצוע משימות
+│   └── useGameTimer.ts       # מערכת טיימר גלובלית
+├── utils.tsx         # פונקציות עזר וכלי עזר לממשק משתמש
+└── WorkerTaskManagerGame.tsx # קומפוננטה ראשית והרכבת ממשק המשתמש
 ```
 
-## Scenario System (\`taskSets.ts\`)
-### Scenario Structure
-{/* Code block removed due to MDX parsing issues */}
+## מערכת תרחישים (`taskSets.ts`)
+### מבנה תרחיש
+{/* קטע קוד הוסר עקב בעיות פוטנציאליות בניתוח MDX */}
 
-### Example Scenarios
-1. **Brick Making**
-   - Workers start with limited straw/clay
-   - Goal: Produce 25 bricks
-   - Tasks: Gather materials, eat, rest
+### תרחישים לדוגמה
+1. **ייצור לבנים**
+   - עובדים מתחילים עם כמות מוגבלת של קש/חימר
+   - מטרה: לייצר 25 לבנים
+   - משימות: איסוף חומרים, אכילה, מנוחה
 
-2. **Pyramid Construction**
-   - Focus on stone hauling/placement
-   - Complex resource chain (water → energy → stones)
-   - Team management challenge with 4 workers
+2. **בניית פירמידה**
+   - התמקדות בגרירת/הנחת אבנים
+   - שרשרת משאבים מורכבת (מים ← אנרגיה ← אבנים)
+   - אתגר ניהול צוות עם 4 עובדים
 
-### Task Definition
-{/* Code block removed due to MDX parsing issues */}
+### הגדרת משימה
+{/* קטע קוד הוסר עקב בעיות פוטנציאליות בניתוח MDX */}
 
-## Custom Hook Architecture
-### \`useGameLogic\` (Central Controller)
-- Manages game state transitions (start/end)
-- Coordinates worker/resource updates
-- Handles task validation/execution flow
-- Exposes core game state to UI components
+## ארכיטקטורת Hooks מותאמים אישית
+### `useGameLogic` (בקר מרכזי)
+- מנהל מעברי מצב משחק (התחלה/סיום)
+- מתאם עדכוני עובדים/משאבים
+- מטפל באימות/ביצוע זרימת משימות
+- חושף מצב משחק מרכזי לקומפוננטות ממשק המשתמש
 
-### \`useWorkerManagement\` (Worker System)
-{/* Code block removed due to potential MDX parsing issues */}
-- **Key Features**:
-  1. Worker state management
-  2. Automatic needs depletion (hunger/morale)
-  3. Task timer handling
-  4. Bulk state updates
-  5. Task completion effects
-- **Core Methods**: \`startWorkerTaskTimer()\`, \`completeWorkerTask()\`, \`updateWorkerState()\`
+### `useWorkerManagement` (מערכת עובדים)
+{/* קטע קוד הוסר עקב בעיות פוטנציאליות בניתוח MDX */}
+- **תכונות מרכזיות**:
+  1. ניהול מצב עובדים
+  2. דלדול צרכים אוטומטי (רעב/מורל)
+  3. טיפול בטיימר משימות
+  4. עדכוני מצב בכמות גדולה (bulk)
+  5. השפעות השלמת משימה
+- **מתודות ליבה**: `startWorkerTaskTimer()`, `completeWorkerTask()`, `updateWorkerState()`
 
-### \`useGameTimer\` (Time Management)
-- Tracks global countdown
-- Handles timer start/stop/reset
-- Triggers game end on timeout
-- Syncs with UI refresh rate
+### `useGameTimer` (ניהול זמן)
+- עוקב אחר ספירה לאחור גלובלית
+- מטפל בהתחלה/עצירה/איפוס של הטיימר
+- מפעיל סיום משחק בזמן קצוב
+- מסתנכרן עם קצב רענון ממשק המשתמש
 
-## State Management Patterns
-### Modular Hook-based State
-*(Imagine: Hook-specific state containers with controlled interactions)*
+## תבניות ניהול מצב (State Management Patterns)
+### מצב מבוסס Hooks מודולרי
+*(דמיינו: מיכלי מצב ספציפיים ל-Hook עם אינטראקציות מבוקרות)*
 
-### Key State Containers
-1. **Worker State**
-   - Managed in \`useWorkerManagement\`
-   - Individual worker stats and statuses
+### מיכלי מצב מרכזיים
+1. **מצב עובד (Worker State)**
+   - מנוהל ב-`useWorkerManagement`
+   - נתונים וסטטוסים אישיים של עובדים
 
-2. **Shared Resources**
-   - Managed in \`useGameLogic\` via useState
-   - Centralized material storage
+2. **משאבים משותפים (Shared Resources)**
+   - מנוהל ב-`useGameLogic` באמצעות useState
+   - מאגר חומרים מרכזי
 
-3. **Goal Progress**
-   - Tracked in \`useGameLogic\`
-   - Compared against dailyGoal requirements
+3. **התקדמות מטרה (Goal Progress)**
+   - מעקב ב-`useGameLogic`
+   - השוואה מול דרישות `dailyGoal`
 
-## Task Execution Flow
-1. Player selects worker → task
-2. System checks affordability (\`canAffordTask()\`)
-3. If valid: Starts task timer (\`startWorkerTaskTimer\`)
-4. On timer completion (\`completeWorkerTask\`):
-   - Applies outcomes to worker/resources
-   - Updates goal progress
-   - Refreshes UI state
+## זרימת ביצוע משימה
+1. שחקן בוחר עובד ← משימה
+2. מערכת בודקת יכולת תשלום (`canAffordTask()`)
+3. אם תקין: מתחיל טיימר משימה (`startWorkerTaskTimer`)
+4. בסיום הטיימר (`completeWorkerTask`):
+   - מחיל תוצאות על עובד/משאבים
+   - מעדכן התקדמות מטרה
+   - מרענן מצב ממשק המשתמש
 
-## Worker Stats & Resource System
-### Stat Effects Example
-{/* Code block removed due to MDX parsing issues */}
-**Translation:** Worker spends 25 energy, becomes 8% hungrier, loses 2 morale. Consumes 3 straw & 2 clay → produces 5 bricks.
+## מערכת נתוני עובדים ומשאבים
+### דוגמה להשפעות נתונים
+{/* קטע קוד הוסר עקב בעיות פוטנציאליות בניתוח MDX */}
+**תרגום:** עובד מוציא 25 אנרגיה, נהיה רעב ב-8% יותר, מאבד 2 מורל. צורך 3 קש ו-2 חימר ← מייצר 5 לבנים.
 
-### Resource Types
-| Category       | Examples            | Management              |
+### סוגי משאבים
+| קטגוריה       | דוגמאות            | ניהול              |
 |----------------|---------------------|-------------------------|
-| Materials      | Straw, Clay, Bricks | Shared pool             |
-| Worker Needs   | Energy, Morale      | Individual per worker   |
-| Consumables    | Food, Water         | Shared but replenishable |
+| חומרים      | קש, חימר, לבנים | מאגר משותף             |
+| צרכי עובד   | אנרגיה, מורל      | אישי לכל עובד   |
+| מתכלים    | מזון, מים         | משותף אך ניתן למילוי |
 
-## AI Tool Integration (Cline Example)
-**Prompt Suggestions:**
+## אינטגרציה עם כלי AI (דוגמת Cline)
+**הצעות לפרומפטים:**
 ```markdown
-"Create a new maintenance task that lets workers repair tools. Cost: 2 bricks, 1 straw. Outcome: +10 morale, +5 energy. Duration: 20 seconds."
+"צור משימת תחזוקה חדשה המאפשרת לעובדים לתקן כלים. עלות: 2 לבנים, 1 קש. תוצאה: +10 מורל, +5 אנרגיה. משך: 20 שניות."
 
-"Generate a crisis scenario where food is scarce and workers need to prioritize foraging over construction."
+"צור תרחיש משבר שבו המזון נדיר והעובדים צריכים לתעדף ליקוט על פני בנייה."
 ```
 
-**Suggested Code Structure:**
-{/* Code block removed due to MDX parsing issues */}
+**מבנה קוד מוצע:**
+{/* קטע קוד הוסר עקב בעיות פוטנציאליות בניתוח MDX */}
 
-## Best Practices for Modding
-1. **Balance Tasks**: Keep cost/outcome ratios proportional to duration.
-2. **Scenario Design**: Create competing priorities (e.g., food vs. materials).
-3. **UI Considerations**: Match resource colors, use clear icons.
+## שיטות עבודה מומלצות למודינג (Modding)
+1. **איזון משימות**: שמרו על יחסי עלות/תוצאה פרופורציונליים למשך הזמן.
+2. **עיצוב תרחישים**: צרו סדרי עדיפויות מתחרים (למשל, מזון מול חומרים).
+3. **שיקולי ממשק משתמש**: התאימו צבעי משאבים, השתמשו באייקונים ברורים.
